@@ -5,13 +5,13 @@ A simple Xamarin app named *Acquaint*. The app is a simple list of contacts, eac
 <img src="https://github.com/xamarinhq/app-acquaint/blob/master/Screenshots/AllScreens_AllPlatforms.jpg" />
 
 ##Build Status
-| Project                 | Status                                                                                                     |
-|-------------------------|------------------------------------------------------------------------------------------------------------|
-| Acquaint.XForms.Android | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/7/badge" /> |
-| Acquaint.XForms.iOS     | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/6/badge" /> |
-| Acquaint.XForms.UWP     | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/5/badge" /> |
-| Acquaint.Native.Android | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/9/badge" /> |
-| Acquaint.Native.iOS     | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/8/badge" /> |
+| Project               | master branch                                                                                              |
+|-----------------------|------------------------------------------------------------------------------------------------------------|
+| Acquaint.XForms.Droid | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/7/badge" /> |
+| Acquaint.XForms.iOS   | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/6/badge" /> |
+| Acquaint.XForms.UWP   | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/5/badge" /> |
+| Acquaint.Native.Droid | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/9/badge" /> |
+| Acquaint.Native.iOS   | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/8/badge" /> |
 
 ##Cross-platform and native
 The app is implemented in two ways in order to demonstrate the two different approaches to Xamarin app development:
@@ -25,6 +25,13 @@ The app targets three platforms:
 * Universal Windows Platform (UWP)
     * UWP currently only in Forms version of app
     * UWP supported only in Visual Studio, not Xamarin Studio
+
+##Code sharing
+#####~90% code shared across platforms in Acquaint.XForms
+![](https://github.com/xamarinhq/app-acquaint/blob/master/Screenshots/Acquaint.XForms_CodeSharing.png)
+
+#####~40% code shared across platforms in Acquaint.Native
+![](https://github.com/xamarinhq/app-acquaint/blob/master/Screenshots/Acquaint.Native_CodeSharing.png)
 
 ##Integrations
 Includes integrations such as:
