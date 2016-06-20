@@ -1023,32 +1023,32 @@ namespace Acquaint.Native.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f07005a
-			public const int abc_background_cache_hint_selector_material_dark = 2131165274;
+			// aapt resource value: 0x7f070064
+			public const int abc_background_cache_hint_selector_material_dark = 2131165284;
 			
-			// aapt resource value: 0x7f07005b
-			public const int abc_background_cache_hint_selector_material_light = 2131165275;
+			// aapt resource value: 0x7f070065
+			public const int abc_background_cache_hint_selector_material_light = 2131165285;
 			
-			// aapt resource value: 0x7f07005c
-			public const int abc_color_highlight_material = 2131165276;
+			// aapt resource value: 0x7f070066
+			public const int abc_color_highlight_material = 2131165286;
 			
 			// aapt resource value: 0x7f07001a
 			public const int abc_input_method_navigation_guard = 2131165210;
 			
-			// aapt resource value: 0x7f07005d
-			public const int abc_primary_text_disable_only_material_dark = 2131165277;
+			// aapt resource value: 0x7f070067
+			public const int abc_primary_text_disable_only_material_dark = 2131165287;
 			
-			// aapt resource value: 0x7f07005e
-			public const int abc_primary_text_disable_only_material_light = 2131165278;
+			// aapt resource value: 0x7f070068
+			public const int abc_primary_text_disable_only_material_light = 2131165288;
 			
-			// aapt resource value: 0x7f07005f
-			public const int abc_primary_text_material_dark = 2131165279;
+			// aapt resource value: 0x7f070069
+			public const int abc_primary_text_material_dark = 2131165289;
 			
-			// aapt resource value: 0x7f070060
-			public const int abc_primary_text_material_light = 2131165280;
+			// aapt resource value: 0x7f07006a
+			public const int abc_primary_text_material_light = 2131165290;
 			
-			// aapt resource value: 0x7f070061
-			public const int abc_search_url_text = 2131165281;
+			// aapt resource value: 0x7f07006b
+			public const int abc_search_url_text = 2131165291;
 			
 			// aapt resource value: 0x7f07001b
 			public const int abc_search_url_text_normal = 2131165211;
@@ -1059,14 +1059,14 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f07001d
 			public const int abc_search_url_text_selected = 2131165213;
 			
-			// aapt resource value: 0x7f070062
-			public const int abc_secondary_text_material_dark = 2131165282;
+			// aapt resource value: 0x7f07006c
+			public const int abc_secondary_text_material_dark = 2131165292;
 			
-			// aapt resource value: 0x7f070063
-			public const int abc_secondary_text_material_light = 2131165283;
+			// aapt resource value: 0x7f07006d
+			public const int abc_secondary_text_material_light = 2131165293;
 			
-			// aapt resource value: 0x7f070056
-			public const int accent = 2131165270;
+			// aapt resource value: 0x7f070060
+			public const int accent = 2131165280;
 			
 			// aapt resource value: 0x7f07001e
 			public const int accent_material_dark = 2131165214;
@@ -1113,8 +1113,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f070008
 			public const int common_action_bar_splitter = 2131165192;
 			
-			// aapt resource value: 0x7f070064
-			public const int common_google_signin_btn_text_dark = 2131165284;
+			// aapt resource value: 0x7f07006e
+			public const int common_google_signin_btn_text_dark = 2131165294;
 			
 			// aapt resource value: 0x7f070009
 			public const int common_google_signin_btn_text_dark_default = 2131165193;
@@ -1128,8 +1128,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f07000a
 			public const int common_google_signin_btn_text_dark_pressed = 2131165194;
 			
-			// aapt resource value: 0x7f070065
-			public const int common_google_signin_btn_text_light = 2131165285;
+			// aapt resource value: 0x7f07006f
+			public const int common_google_signin_btn_text_light = 2131165295;
 			
 			// aapt resource value: 0x7f07000d
 			public const int common_google_signin_btn_text_light_default = 2131165197;
@@ -1143,8 +1143,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f07000e
 			public const int common_google_signin_btn_text_light_pressed = 2131165198;
 			
-			// aapt resource value: 0x7f070066
-			public const int common_plus_signin_btn_text_dark = 2131165286;
+			// aapt resource value: 0x7f070070
+			public const int common_plus_signin_btn_text_dark = 2131165296;
 			
 			// aapt resource value: 0x7f070000
 			public const int common_plus_signin_btn_text_dark_default = 2131165184;
@@ -1158,8 +1158,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f070001
 			public const int common_plus_signin_btn_text_dark_pressed = 2131165185;
 			
-			// aapt resource value: 0x7f070067
-			public const int common_plus_signin_btn_text_light = 2131165287;
+			// aapt resource value: 0x7f070071
+			public const int common_plus_signin_btn_text_light = 2131165297;
 			
 			// aapt resource value: 0x7f070004
 			public const int common_plus_signin_btn_text_light_default = 2131165188;
@@ -1230,8 +1230,38 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f070035
 			public const int hint_foreground_material_light = 2131165237;
 			
+			// aapt resource value: 0x7f070054
+			public const int hockeyapp_background_header = 2131165268;
+			
+			// aapt resource value: 0x7f070055
+			public const int hockeyapp_background_light = 2131165269;
+			
+			// aapt resource value: 0x7f070056
+			public const int hockeyapp_background_white = 2131165270;
+			
 			// aapt resource value: 0x7f070057
-			public const int launchStatusBar = 2131165271;
+			public const int hockeyapp_button_background = 2131165271;
+			
+			// aapt resource value: 0x7f070058
+			public const int hockeyapp_button_background_pressed = 2131165272;
+			
+			// aapt resource value: 0x7f070059
+			public const int hockeyapp_button_background_selected = 2131165273;
+			
+			// aapt resource value: 0x7f07005a
+			public const int hockeyapp_text_black = 2131165274;
+			
+			// aapt resource value: 0x7f07005b
+			public const int hockeyapp_text_light = 2131165275;
+			
+			// aapt resource value: 0x7f07005c
+			public const int hockeyapp_text_normal = 2131165276;
+			
+			// aapt resource value: 0x7f07005d
+			public const int hockeyapp_text_white = 2131165277;
+			
+			// aapt resource value: 0x7f070061
+			public const int launchStatusBar = 2131165281;
 			
 			// aapt resource value: 0x7f070036
 			public const int material_blue_grey_800 = 2131165238;
@@ -1269,11 +1299,11 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f070041
 			public const int material_grey_900 = 2131165249;
 			
-			// aapt resource value: 0x7f070054
-			public const int primary = 2131165268;
+			// aapt resource value: 0x7f07005e
+			public const int primary = 2131165278;
 			
-			// aapt resource value: 0x7f070055
-			public const int primaryDark = 2131165269;
+			// aapt resource value: 0x7f07005f
+			public const int primaryDark = 2131165279;
 			
 			// aapt resource value: 0x7f070042
 			public const int primary_dark_material_dark = 2131165250;
@@ -1323,11 +1353,11 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f070051
 			public const int switch_thumb_disabled_material_light = 2131165265;
 			
-			// aapt resource value: 0x7f070068
-			public const int switch_thumb_material_dark = 2131165288;
+			// aapt resource value: 0x7f070072
+			public const int switch_thumb_material_dark = 2131165298;
 			
-			// aapt resource value: 0x7f070069
-			public const int switch_thumb_material_light = 2131165289;
+			// aapt resource value: 0x7f070073
+			public const int switch_thumb_material_light = 2131165299;
 			
 			// aapt resource value: 0x7f070052
 			public const int switch_thumb_normal_material_dark = 2131165266;
@@ -1335,11 +1365,11 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f070053
 			public const int switch_thumb_normal_material_light = 2131165267;
 			
-			// aapt resource value: 0x7f070059
-			public const int tableSectionHeaderText = 2131165273;
+			// aapt resource value: 0x7f070063
+			public const int tableSectionHeaderText = 2131165283;
 			
-			// aapt resource value: 0x7f070058
-			public const int window_background = 2131165272;
+			// aapt resource value: 0x7f070062
+			public const int window_background = 2131165282;
 			
 			static Color()
 			{
@@ -2022,7 +2052,10 @@ namespace Acquaint.Native.Droid
 			public const int design_snackbar_background = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int notification_template_icon_bg = 2130837618;
+			public const int hockeyapp_btn_background = 2130837618;
+			
+			// aapt resource value: 0x7f020073
+			public const int notification_template_icon_bg = 2130837619;
 			
 			static Drawable()
 			{
@@ -2040,8 +2073,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0075
 			public const int acquaintanceDetailContentLayout = 2131492981;
 			
-			// aapt resource value: 0x7f0c00b7
-			public const int acquaintanceEditButton = 2131493047;
+			// aapt resource value: 0x7f0c00d3
+			public const int acquaintanceEditButton = 2131493075;
 			
 			// aapt resource value: 0x7f0c0087
 			public const int acquaintanceEditContentLayout = 2131492999;
@@ -2052,11 +2085,11 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c00a1
 			public const int acquaintanceRow = 2131493025;
 			
-			// aapt resource value: 0x7f0c00b8
-			public const int acquaintanceSaveButton = 2131493048;
+			// aapt resource value: 0x7f0c00d4
+			public const int acquaintanceSaveButton = 2131493076;
 			
-			// aapt resource value: 0x7f0c00aa
-			public const int action0 = 2131493034;
+			// aapt resource value: 0x7f0c00c6
+			public const int action0 = 2131493062;
 			
 			// aapt resource value: 0x7f0c0065
 			public const int action_bar = 2131492965;
@@ -2082,8 +2115,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0066
 			public const int action_context_bar = 2131492966;
 			
-			// aapt resource value: 0x7f0c00ae
-			public const int action_divider = 2131493038;
+			// aapt resource value: 0x7f0c00ca
+			public const int action_divider = 2131493066;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int action_menu_divider = 2131492868;
@@ -2136,8 +2169,26 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c004f
 			public const int buttonPanel = 2131492943;
 			
-			// aapt resource value: 0x7f0c00ab
-			public const int cancel_action = 2131493035;
+			// aapt resource value: 0x7f0c00b7
+			public const int button_add_response = 2131493047;
+			
+			// aapt resource value: 0x7f0c00b2
+			public const int button_attachment = 2131493042;
+			
+			// aapt resource value: 0x7f0c00bc
+			public const int button_login = 2131493052;
+			
+			// aapt resource value: 0x7f0c00b8
+			public const int button_refresh = 2131493048;
+			
+			// aapt resource value: 0x7f0c00b3
+			public const int button_send = 2131493043;
+			
+			// aapt resource value: 0x7f0c00c0
+			public const int button_update = 2131493056;
+			
+			// aapt resource value: 0x7f0c00c7
+			public const int cancel_action = 2131493063;
 			
 			// aapt resource value: 0x7f0c0020
 			public const int center = 2131492896;
@@ -2151,8 +2202,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c005d
 			public const int checkbox = 2131492957;
 			
-			// aapt resource value: 0x7f0c00b1
-			public const int chronometer = 2131493041;
+			// aapt resource value: 0x7f0c00cd
+			public const int chronometer = 2131493069;
 			
 			// aapt resource value: 0x7f0c009b
 			public const int cityField = 2131493019;
@@ -2241,8 +2292,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0023
 			public const int end = 2131492899;
 			
-			// aapt resource value: 0x7f0c00b6
-			public const int end_padder = 2131493046;
+			// aapt resource value: 0x7f0c00d2
+			public const int end_padder = 2131493074;
 			
 			// aapt resource value: 0x7f0c0018
 			public const int enterAlways = 2131492888;
@@ -2301,8 +2352,23 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c004a
 			public const int image = 2131492938;
 			
-			// aapt resource value: 0x7f0c00b5
-			public const int info = 2131493045;
+			// aapt resource value: 0x7f0c00d1
+			public const int info = 2131493073;
+			
+			// aapt resource value: 0x7f0c00ae
+			public const int input_email = 2131493038;
+			
+			// aapt resource value: 0x7f0c00b0
+			public const int input_message = 2131493040;
+			
+			// aapt resource value: 0x7f0c00ad
+			public const int input_name = 2131493037;
+			
+			// aapt resource value: 0x7f0c00bb
+			public const int input_password = 2131493051;
+			
+			// aapt resource value: 0x7f0c00af
+			public const int input_subject = 2131493039;
 			
 			// aapt resource value: 0x7f0c0001
 			public const int item_touch_helper_previous_elevation = 2131492865;
@@ -2316,6 +2382,27 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0078
 			public const int jobTitleTextView = 2131492984;
 			
+			// aapt resource value: 0x7f0c00c2
+			public const int label_author = 2131493058;
+			
+			// aapt resource value: 0x7f0c00c3
+			public const int label_date = 2131493059;
+			
+			// aapt resource value: 0x7f0c00b5
+			public const int label_last_updated = 2131493045;
+			
+			// aapt resource value: 0x7f0c00aa
+			public const int label_message = 2131493034;
+			
+			// aapt resource value: 0x7f0c00c4
+			public const int label_text = 2131493060;
+			
+			// aapt resource value: 0x7f0c00be
+			public const int label_title = 2131493054;
+			
+			// aapt resource value: 0x7f0c00bf
+			public const int label_version = 2131493055;
+			
 			// aapt resource value: 0x7f0c008c
 			public const int lastNameField = 2131493004;
 			
@@ -2328,14 +2415,20 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0015
 			public const int light = 2131492885;
 			
-			// aapt resource value: 0x7f0c00af
-			public const int line1 = 2131493039;
+			// aapt resource value: 0x7f0c00cb
+			public const int line1 = 2131493067;
 			
-			// aapt resource value: 0x7f0c00b3
-			public const int line3 = 2131493043;
+			// aapt resource value: 0x7f0c00cf
+			public const int line3 = 2131493071;
 			
 			// aapt resource value: 0x7f0c0030
 			public const int listMode = 2131492912;
+			
+			// aapt resource value: 0x7f0c00c5
+			public const int list_attachments = 2131493061;
+			
+			// aapt resource value: 0x7f0c00b9
+			public const int list_feedback_messages = 2131493049;
 			
 			// aapt resource value: 0x7f0c004c
 			public const int list_item = 2131492940;
@@ -2343,8 +2436,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0086
 			public const int map = 2131492998;
 			
-			// aapt resource value: 0x7f0c00ad
-			public const int media_actions = 2131493037;
+			// aapt resource value: 0x7f0c00c9
+			public const int media_actions = 2131493065;
 			
 			// aapt resource value: 0x7f0c0080
 			public const int messageActionImageView = 2131492992;
@@ -2520,8 +2613,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c007e
 			public const int statePostalTextView = 2131492990;
 			
-			// aapt resource value: 0x7f0c00ac
-			public const int status_bar_latest_event_content = 2131493036;
+			// aapt resource value: 0x7f0c00c8
+			public const int status_bar_latest_event_content = 2131493064;
 			
 			// aapt resource value: 0x7f0c007c
 			public const int streetAddressTextView = 2131492988;
@@ -2541,17 +2634,20 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c000f
 			public const int terrain = 2131492879;
 			
-			// aapt resource value: 0x7f0c00b4
-			public const int text = 2131493044;
+			// aapt resource value: 0x7f0c00d0
+			public const int text = 2131493072;
 			
-			// aapt resource value: 0x7f0c00b2
-			public const int text2 = 2131493042;
+			// aapt resource value: 0x7f0c00ce
+			public const int text2 = 2131493070;
 			
 			// aapt resource value: 0x7f0c0058
 			public const int textSpacerNoButtons = 2131492952;
 			
-			// aapt resource value: 0x7f0c00b0
-			public const int time = 2131493040;
+			// aapt resource value: 0x7f0c00ba
+			public const int text_headline = 2131493050;
+			
+			// aapt resource value: 0x7f0c00cc
+			public const int time = 2131493068;
 			
 			// aapt resource value: 0x7f0c004e
 			public const int title = 2131492942;
@@ -2574,8 +2670,14 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0037
 			public const int useLogo = 2131492919;
 			
+			// aapt resource value: 0x7f0c00bd
+			public const int view_header = 2131493053;
+			
 			// aapt resource value: 0x7f0c0000
 			public const int view_offset_helper = 2131492864;
+			
+			// aapt resource value: 0x7f0c00c1
+			public const int web_update_details = 2131493057;
 			
 			// aapt resource value: 0x7f0c0012
 			public const int wide = 2131492882;
@@ -2585,6 +2687,21 @@ namespace Acquaint.Native.Droid
 			
 			// aapt resource value: 0x7f0c0044
 			public const int wrap_content = 2131492932;
+			
+			// aapt resource value: 0x7f0c00b1
+			public const int wrapper_attachments = 2131493041;
+			
+			// aapt resource value: 0x7f0c00ac
+			public const int wrapper_feedback = 2131493036;
+			
+			// aapt resource value: 0x7f0c00ab
+			public const int wrapper_feedback_scroll = 2131493035;
+			
+			// aapt resource value: 0x7f0c00b4
+			public const int wrapper_messages = 2131493044;
+			
+			// aapt resource value: 0x7f0c00b6
+			public const int wrapper_messages_buttons = 2131493046;
 			
 			// aapt resource value: 0x7f0c009f
 			public const int zipField = 2131493023;
@@ -2760,43 +2877,61 @@ namespace Acquaint.Native.Droid
 			public const int design_navigation_menu_item = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int notification_media_action = 2130968616;
+			public const int hockeyapp_activity_expiry_info = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int notification_media_cancel_action = 2130968617;
+			public const int hockeyapp_activity_feedback = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int notification_template_big_media = 2130968618;
+			public const int hockeyapp_activity_login = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int notification_template_big_media_narrow = 2130968619;
+			public const int hockeyapp_activity_update = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int notification_template_lines = 2130968620;
+			public const int hockeyapp_fragment_update = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int notification_template_media = 2130968621;
+			public const int hockeyapp_view_feedback_message = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int notification_template_part_chronometer = 2130968622;
+			public const int notification_media_action = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int notification_template_part_time = 2130968623;
+			public const int notification_media_cancel_action = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int select_dialog_item_material = 2130968624;
+			public const int notification_template_big_media = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int select_dialog_multichoice_material = 2130968625;
+			public const int notification_template_big_media_narrow = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int select_dialog_singlechoice_material = 2130968626;
+			public const int notification_template_lines = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int support_simple_spinner_dropdown_item = 2130968627;
+			public const int notification_template_media = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int toolbar = 2130968628;
+			public const int notification_template_part_chronometer = 2130968628;
+			
+			// aapt resource value: 0x7f040035
+			public const int notification_template_part_time = 2130968629;
+			
+			// aapt resource value: 0x7f040036
+			public const int select_dialog_item_material = 2130968630;
+			
+			// aapt resource value: 0x7f040037
+			public const int select_dialog_multichoice_material = 2130968631;
+			
+			// aapt resource value: 0x7f040038
+			public const int select_dialog_singlechoice_material = 2130968632;
+			
+			// aapt resource value: 0x7f040039
+			public const int support_simple_spinner_dropdown_item = 2130968633;
+			
+			// aapt resource value: 0x7f04003a
+			public const int toolbar = 2130968634;
 			
 			static Layout()
 			{
@@ -2873,11 +3008,11 @@ namespace Acquaint.Native.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f080036
-			public const int ApplicationName = 2131230774;
+			// aapt resource value: 0x7f08007d
+			public const int ApplicationName = 2131230845;
 			
-			// aapt resource value: 0x7f080035
-			public const int Hello = 2131230773;
+			// aapt resource value: 0x7f08007c
+			public const int Hello = 2131230844;
 			
 			// aapt resource value: 0x7f080021
 			public const int abc_action_bar_home_description = 2131230753;
@@ -2936,14 +3071,14 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f080033
 			public const int abc_toolbar_collapse_description = 2131230771;
 			
-			// aapt resource value: 0x7f080039
-			public const int acquaintanceDetailIntentKey = 2131230777;
+			// aapt resource value: 0x7f080080
+			public const int acquaintanceDetailIntentKey = 2131230848;
 			
-			// aapt resource value: 0x7f08003a
-			public const int acquaintanceEditIntentKey = 2131230778;
+			// aapt resource value: 0x7f080081
+			public const int acquaintanceEditIntentKey = 2131230849;
 			
-			// aapt resource value: 0x7f080037
-			public const int app_name = 2131230775;
+			// aapt resource value: 0x7f08007e
+			public const int app_name = 2131230846;
 			
 			// aapt resource value: 0x7f08001f
 			public const int appbar_scrolling_view_behavior = 2131230751;
@@ -3044,8 +3179,221 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f08001b
 			public const int common_signin_button_text_long = 2131230747;
 			
+			// aapt resource value: 0x7f080035
+			public const int hockeyapp_crash_dialog_app_name_fallback = 2131230773;
+			
+			// aapt resource value: 0x7f080036
+			public const int hockeyapp_crash_dialog_message = 2131230774;
+			
+			// aapt resource value: 0x7f080037
+			public const int hockeyapp_crash_dialog_negative_button = 2131230775;
+			
 			// aapt resource value: 0x7f080038
-			public const int profilePhotoTransition = 2131230776;
+			public const int hockeyapp_crash_dialog_neutral_button = 2131230776;
+			
+			// aapt resource value: 0x7f080039
+			public const int hockeyapp_crash_dialog_positive_button = 2131230777;
+			
+			// aapt resource value: 0x7f08003a
+			public const int hockeyapp_crash_dialog_title = 2131230778;
+			
+			// aapt resource value: 0x7f08003b
+			public const int hockeyapp_dialog_error_message = 2131230779;
+			
+			// aapt resource value: 0x7f08003c
+			public const int hockeyapp_dialog_error_title = 2131230780;
+			
+			// aapt resource value: 0x7f08003d
+			public const int hockeyapp_dialog_negative_button = 2131230781;
+			
+			// aapt resource value: 0x7f08003e
+			public const int hockeyapp_dialog_positive_button = 2131230782;
+			
+			// aapt resource value: 0x7f08003f
+			public const int hockeyapp_download_failed_dialog_message = 2131230783;
+			
+			// aapt resource value: 0x7f080040
+			public const int hockeyapp_download_failed_dialog_negative_button = 2131230784;
+			
+			// aapt resource value: 0x7f080041
+			public const int hockeyapp_download_failed_dialog_positive_button = 2131230785;
+			
+			// aapt resource value: 0x7f080042
+			public const int hockeyapp_download_failed_dialog_title = 2131230786;
+			
+			// aapt resource value: 0x7f080043
+			public const int hockeyapp_error_no_network_message = 2131230787;
+			
+			// aapt resource value: 0x7f080044
+			public const int hockeyapp_expiry_info_text = 2131230788;
+			
+			// aapt resource value: 0x7f080045
+			public const int hockeyapp_expiry_info_title = 2131230789;
+			
+			// aapt resource value: 0x7f080046
+			public const int hockeyapp_feedback_attach_file = 2131230790;
+			
+			// aapt resource value: 0x7f080047
+			public const int hockeyapp_feedback_attach_picture = 2131230791;
+			
+			// aapt resource value: 0x7f080048
+			public const int hockeyapp_feedback_attachment_button_text = 2131230792;
+			
+			// aapt resource value: 0x7f080049
+			public const int hockeyapp_feedback_attachment_error = 2131230793;
+			
+			// aapt resource value: 0x7f08004a
+			public const int hockeyapp_feedback_attachment_loading = 2131230794;
+			
+			// aapt resource value: 0x7f08004b
+			public const int hockeyapp_feedback_email_hint = 2131230795;
+			
+			// aapt resource value: 0x7f08004c
+			public const int hockeyapp_feedback_failed_text = 2131230796;
+			
+			// aapt resource value: 0x7f08004d
+			public const int hockeyapp_feedback_failed_title = 2131230797;
+			
+			// aapt resource value: 0x7f08004e
+			public const int hockeyapp_feedback_fetching_feedback_text = 2131230798;
+			
+			// aapt resource value: 0x7f08004f
+			public const int hockeyapp_feedback_generic_error = 2131230799;
+			
+			// aapt resource value: 0x7f080050
+			public const int hockeyapp_feedback_last_updated_text = 2131230800;
+			
+			// aapt resource value: 0x7f080051
+			public const int hockeyapp_feedback_max_attachments_allowed = 2131230801;
+			
+			// aapt resource value: 0x7f080052
+			public const int hockeyapp_feedback_message_hint = 2131230802;
+			
+			// aapt resource value: 0x7f080053
+			public const int hockeyapp_feedback_name_hint = 2131230803;
+			
+			// aapt resource value: 0x7f080054
+			public const int hockeyapp_feedback_refresh_button_text = 2131230804;
+			
+			// aapt resource value: 0x7f080055
+			public const int hockeyapp_feedback_response_button_text = 2131230805;
+			
+			// aapt resource value: 0x7f080056
+			public const int hockeyapp_feedback_select_file = 2131230806;
+			
+			// aapt resource value: 0x7f080057
+			public const int hockeyapp_feedback_select_picture = 2131230807;
+			
+			// aapt resource value: 0x7f080058
+			public const int hockeyapp_feedback_send_button_text = 2131230808;
+			
+			// aapt resource value: 0x7f080059
+			public const int hockeyapp_feedback_send_generic_error = 2131230809;
+			
+			// aapt resource value: 0x7f08005a
+			public const int hockeyapp_feedback_send_network_error = 2131230810;
+			
+			// aapt resource value: 0x7f08005b
+			public const int hockeyapp_feedback_sending_feedback_text = 2131230811;
+			
+			// aapt resource value: 0x7f08005c
+			public const int hockeyapp_feedback_subject_hint = 2131230812;
+			
+			// aapt resource value: 0x7f08005d
+			public const int hockeyapp_feedback_title = 2131230813;
+			
+			// aapt resource value: 0x7f08005e
+			public const int hockeyapp_feedback_validate_email_empty = 2131230814;
+			
+			// aapt resource value: 0x7f08005f
+			public const int hockeyapp_feedback_validate_email_error = 2131230815;
+			
+			// aapt resource value: 0x7f080060
+			public const int hockeyapp_feedback_validate_name_error = 2131230816;
+			
+			// aapt resource value: 0x7f080061
+			public const int hockeyapp_feedback_validate_subject_error = 2131230817;
+			
+			// aapt resource value: 0x7f080062
+			public const int hockeyapp_feedback_validate_text_error = 2131230818;
+			
+			// aapt resource value: 0x7f080063
+			public const int hockeyapp_login_email_hint = 2131230819;
+			
+			// aapt resource value: 0x7f080064
+			public const int hockeyapp_login_headline_text = 2131230820;
+			
+			// aapt resource value: 0x7f080065
+			public const int hockeyapp_login_headline_text_email_only = 2131230821;
+			
+			// aapt resource value: 0x7f080066
+			public const int hockeyapp_login_login_button_text = 2131230822;
+			
+			// aapt resource value: 0x7f080067
+			public const int hockeyapp_login_missing_credentials_toast = 2131230823;
+			
+			// aapt resource value: 0x7f080068
+			public const int hockeyapp_login_password_hint = 2131230824;
+			
+			// aapt resource value: 0x7f080069
+			public const int hockeyapp_paint_dialog_message = 2131230825;
+			
+			// aapt resource value: 0x7f08006a
+			public const int hockeyapp_paint_dialog_negative_button = 2131230826;
+			
+			// aapt resource value: 0x7f08006b
+			public const int hockeyapp_paint_dialog_neutral_button = 2131230827;
+			
+			// aapt resource value: 0x7f08006c
+			public const int hockeyapp_paint_dialog_positive_button = 2131230828;
+			
+			// aapt resource value: 0x7f08006d
+			public const int hockeyapp_paint_indicator_toast = 2131230829;
+			
+			// aapt resource value: 0x7f08006e
+			public const int hockeyapp_paint_menu_clear = 2131230830;
+			
+			// aapt resource value: 0x7f08006f
+			public const int hockeyapp_paint_menu_save = 2131230831;
+			
+			// aapt resource value: 0x7f080070
+			public const int hockeyapp_paint_menu_undo = 2131230832;
+			
+			// aapt resource value: 0x7f080071
+			public const int hockeyapp_permission_dialog_negative_button = 2131230833;
+			
+			// aapt resource value: 0x7f080072
+			public const int hockeyapp_permission_dialog_positive_button = 2131230834;
+			
+			// aapt resource value: 0x7f080073
+			public const int hockeyapp_permission_update_message = 2131230835;
+			
+			// aapt resource value: 0x7f080074
+			public const int hockeyapp_permission_update_title = 2131230836;
+			
+			// aapt resource value: 0x7f080075
+			public const int hockeyapp_update_button = 2131230837;
+			
+			// aapt resource value: 0x7f080076
+			public const int hockeyapp_update_dialog_message = 2131230838;
+			
+			// aapt resource value: 0x7f080077
+			public const int hockeyapp_update_dialog_negative_button = 2131230839;
+			
+			// aapt resource value: 0x7f080078
+			public const int hockeyapp_update_dialog_positive_button = 2131230840;
+			
+			// aapt resource value: 0x7f080079
+			public const int hockeyapp_update_dialog_title = 2131230841;
+			
+			// aapt resource value: 0x7f08007a
+			public const int hockeyapp_update_mandatory_toast = 2131230842;
+			
+			// aapt resource value: 0x7f08007b
+			public const int hockeyapp_update_version_details_label = 2131230843;
+			
+			// aapt resource value: 0x7f08007f
+			public const int profilePhotoTransition = 2131230847;
 			
 			// aapt resource value: 0x7f080034
 			public const int status_bar_notification_info_overflow = 2131230772;
@@ -3063,14 +3411,14 @@ namespace Acquaint.Native.Droid
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f0a0144
-			public const int AcquaintTheme = 2131362116;
+			// aapt resource value: 0x7f0a0147
+			public const int AcquaintTheme = 2131362119;
 			
-			// aapt resource value: 0x7f0a0145
-			public const int AcquaintTheme_Base = 2131362117;
+			// aapt resource value: 0x7f0a0148
+			public const int AcquaintTheme_Base = 2131362120;
 			
-			// aapt resource value: 0x7f0a0146
-			public const int AcquaintTheme_Splash = 2131362118;
+			// aapt resource value: 0x7f0a0149
+			public const int AcquaintTheme_Splash = 2131362121;
 			
 			// aapt resource value: 0x7f0a008e
 			public const int AlertDialog_AppCompat = 2131361934;
@@ -3506,6 +3854,15 @@ namespace Acquaint.Native.Droid
 			
 			// aapt resource value: 0x7f0a0001
 			public const int Base_Widget_Design_TabLayout = 2131361793;
+			
+			// aapt resource value: 0x7f0a0144
+			public const int HockeyApp_ButtonStyle = 2131362116;
+			
+			// aapt resource value: 0x7f0a0145
+			public const int HockeyApp_EditTextStyle = 2131362117;
+			
+			// aapt resource value: 0x7f0a0146
+			public const int HockeyApp_SingleLineInputStyle = 2131362118;
 			
 			// aapt resource value: 0x7f0a0021
 			public const int Platform_AppCompat = 2131361825;
