@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Xamarin;
 using ImageCircle.Forms.Plugin.iOS;
+using HockeyApp;
 
 namespace Acquaint.XForms.iOS
 {
@@ -12,6 +13,11 @@ namespace Acquaint.XForms.iOS
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+			var manager = BITHockeyManager.SharedHockeyManager;
+			// Set the HockeyApp App Id here:
+			manager.Configure("11111111222222223333333344444444");
+			manager.StartManager();
+
 			#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();
 			#endif

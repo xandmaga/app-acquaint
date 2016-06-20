@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using HockeyApp;
 using UIKit;
 
 namespace Acquaint.Native.iOS
@@ -17,6 +18,11 @@ namespace Acquaint.Native.iOS
 		// Method invoked after the application has launched to configure the main window and view controller.
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
+			var manager = BITHockeyManager.SharedHockeyManager;
+			// Set the HockeyApp App Id here:
+			manager.Configure("11111111222222223333333344444444");
+			manager.StartManager();
+
 		    #if ENABLE_TEST_CLOUD
 		    Xamarin.Calabash.Start();
 		    #endif

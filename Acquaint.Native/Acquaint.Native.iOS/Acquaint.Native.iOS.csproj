@@ -128,6 +128,9 @@
     <Reference Include="Calabash">
       <HintPath>..\..\packages\Xamarin.TestCloud.Agent.0.19.1\lib\Xamarin.iOS10\Calabash.dll</HintPath>
     </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\..\Components\hockeyappios-4.1.0.1\lib\ios-unified\HockeySDK.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json">
@@ -241,5 +244,11 @@
       <Project>{5A3530AB-4053-4CF3-BEDE-A3E04C45D255}</Project>
       <Name>Acquaint.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="hockeyappios">
+      <Version>4.1.0.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>
