@@ -4,6 +4,7 @@ using Android.OS;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using Xamarin;
+using HockeyApp;
 
 namespace Acquaint.XForms.Droid
 {
@@ -13,6 +14,8 @@ namespace Acquaint.XForms.Droid
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
+			CrashManager.Register(this, "HOCKEYAPP_APPID");
+
 			// this line is essential to wiring up the toolbar styles defined in ~/Resources/layout/toolbar.axml
 			FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
 			base.OnCreate (bundle);
