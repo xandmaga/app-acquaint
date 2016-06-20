@@ -67,7 +67,7 @@ namespace Acquaint.Native.iOS
 				SetupSendEmailAction();
 
 				// use FFImageLoading library to asynchronously:
-				await ImageService
+				await ImageService.Instance
 					.LoadFileFromApplicationBundle(String.Format(Acquaintance.PhotoUrl)) 	// get the image from the app bundle
 					.LoadingPlaceholder("placeholderProfileImage.png") 						// specify a placeholder image
 					.Transform(new CircleTransformation()) 									// transform the image to a circle

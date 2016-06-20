@@ -21,7 +21,7 @@ namespace Acquaint.Native.iOS
 		public void Update(Acquaintance acquaintance)
 		{
 			// use FFImageLoading library to:
-			ImageService
+			ImageService.Instance
 				.LoadFileFromApplicationBundle(String.Format(acquaintance.PhotoUrl)) 	// get the image from the app bundle
 				.LoadingPlaceholder("placeholderProfileImage.png") 						// specify a placeholder image
 				.Transform(new CircleTransformation()) 									// transform the image to a circle

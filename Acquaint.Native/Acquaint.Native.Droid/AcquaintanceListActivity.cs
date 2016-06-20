@@ -153,7 +153,7 @@ namespace Acquaint.Native.Droid
 		    viewHolder.JobTitleTextView.Text = acquaintance.JobTitle;
 
 		    // use FFImageLoading library to load an android asset image into the imageview
-		    ImageService.LoadFileFromApplicationBundle(acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(viewHolder.ProfilePhotoImageView);
+			ImageService.Instance.LoadFileFromApplicationBundle(acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(viewHolder.ProfilePhotoImageView);
 
 		    // use FFImageLoading library to asynchonously load the image into the imageview
 		    // ImageService.LoadUrl(a.SmallPhotoUrl).Transform(new CircleTransformation()).Into(viewHolder.ProfilePhotoImageView);

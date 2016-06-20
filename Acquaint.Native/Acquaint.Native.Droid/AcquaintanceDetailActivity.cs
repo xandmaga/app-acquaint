@@ -90,7 +90,7 @@ namespace Acquaint.Native.Droid
 			if (profilePhotoImageView != null)
 			{
 				// use FFImageLoading library to load an android asset image into the imageview
-				ImageService.LoadFileFromApplicationBundle(_Acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(profilePhotoImageView);
+				ImageService.Instance.LoadFileFromApplicationBundle(_Acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(profilePhotoImageView);
 
 				// use FFImageLoading library to asynchonously load the image into the imageview
 				// ImageService.LoadUrl(_Acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(profilePhotoImageView);

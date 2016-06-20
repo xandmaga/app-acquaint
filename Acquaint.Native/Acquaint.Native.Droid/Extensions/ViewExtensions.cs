@@ -52,7 +52,7 @@ namespace Acquaint.Native.Droid
 
 				if (imageView != null)
 				{
-					ImageService.LoadUrl(imageUrl).Transform(new CircleTransformation()).Into(imageView);
+					ImageService.Instance.LoadUrl(imageUrl).Transform(new CircleTransformation()).Into(imageView);
 				}
 			}
 
