@@ -15,7 +15,7 @@ namespace Acquaint.Native.iOS
 		AcquaintanceDetailViewController _DetailViewController;
 		AcquaintanceTableViewController _ListViewController;
 
-		public void SetAcquaintance (Acquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
+		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
 		{
 			Acquaintance = acquaintance;
 			if (detailViewController != null)
@@ -24,14 +24,14 @@ namespace Acquaint.Native.iOS
 				_ListViewController = listViewController;
 		}
 
-		public AcquaintanceEditViewController (IntPtr handle) : base (handle)
+		public AcquaintanceEditViewController(IntPtr handle) : base(handle)
 		{
 
 		}
 
-		public override void ViewWillAppear (bool animated)
+		public override void ViewWillAppear(bool animated)
 		{
-			base.ViewWillAppear (animated);
+			base.ViewWillAppear(animated);
 
 			_FirstNameField.Text = Acquaintance.FirstName;
 			_LastNameField.Text = Acquaintance.LastName;
@@ -45,45 +45,52 @@ namespace Acquaint.Native.iOS
 			_ZipField.Text = Acquaintance.PostalCode;
 
 			_DeleteButton.TouchUpInside += (sender, e) => {
-				UIAlertController alert = UIAlertController.Create ("Delete?", $"Are you sure you want to delete {Acquaintance.FirstName} {Acquaintance.LastName}?", UIAlertControllerStyle.Alert);
+				UIAlertController alert = UIAlertController.Create("Delete?", $"Are you sure you want to delete {Acquaintance.FirstName} {Acquaintance.LastName}?", UIAlertControllerStyle.Alert);
 
 				// cancel button
-				alert.AddAction (UIAlertAction.Create ("Cancel", UIAlertActionStyle.Cancel, null));
+				alert.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, null));
 
 				// delete button
-				alert.AddAction (UIAlertAction.Create ("Delete", UIAlertActionStyle.Destructive, (action) => {
-					if (action != null) {
-						if (_DetailViewController != null) {
-							NavigationController.PopViewController (false); // skipping animation in order to not show the detail screen for the acquaintance we just deleted
-							_DetailViewController.DeleteAcquaintance ();
+				alert.AddAction(UIAlertAction.Create("Delete", UIAlertActionStyle.Destructive, async (action) => {
+					if (action != null)
+					{
+						if (_DetailViewController != null)
+						{
+							NavigationController.PopViewController(false); // skipping animation in order to not show the detail screen for the acquaintance we just deleted
+							_DetailViewController.DeleteAcquaintance();
 						}
-						if (_ListViewController != null) {
-							_ListViewController.DeleteAcquaintance (Acquaintance);
+						if (_ListViewController != null)
+						{
+							await _ListViewController.DeleteAcquaintance(Acquaintance);
 						};
 					}
 				}));
 
-				UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController (alert, true, null);
+				UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
 			};
 
-			NavigationItem.RightBarButtonItem.Clicked += (sender, e) => {
+			NavigationItem.RightBarButtonItem.Clicked += async (sender, e) => {
 
-				if (string.IsNullOrWhiteSpace (Acquaintance.LastName) || string.IsNullOrWhiteSpace (Acquaintance.FirstName)) {
-					
-					UIAlertController alert = UIAlertController.Create ("Invalid name!", "A acquaintance must have both a first and last name.", UIAlertControllerStyle.Alert);
+				if (string.IsNullOrWhiteSpace(Acquaintance.LastName) || string.IsNullOrWhiteSpace(Acquaintance.FirstName))
+				{
 
-					// cancel button
-					alert.AddAction (UIAlertAction.Create ("OK", UIAlertActionStyle.Cancel, null));
-
-					UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController (alert, true, null);
-
-				} else if (!RequiredAddressFieldCombinationIsFilled) {
-
-					UIAlertController alert = UIAlertController.Create ("Invalid address!", "You must enter either a street, city, and state combination, or a postal code.", UIAlertControllerStyle.Alert);
+					UIAlertController alert = UIAlertController.Create("Invalid name!", "A acquaintance must have both a first and last name.", UIAlertControllerStyle.Alert);
 
 					// cancel button
-					alert.AddAction (UIAlertAction.Create ("OK", UIAlertActionStyle.Cancel, null));
-				} else {
+					alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Cancel, null));
+
+					UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+
+				}
+				else if (!RequiredAddressFieldCombinationIsFilled)
+				{
+
+					UIAlertController alert = UIAlertController.Create("Invalid address!", "You must enter either a street, city, and state combination, or a postal code.", UIAlertControllerStyle.Alert);
+
+					// cancel button
+					alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Cancel, null));
+				}
+				else {
 
 					Acquaintance.FirstName = _FirstNameField.Text;
 					Acquaintance.LastName = _LastNameField.Text;
@@ -96,28 +103,35 @@ namespace Acquaint.Native.iOS
 					Acquaintance.State = _StateField.Text;
 					Acquaintance.PostalCode = _ZipField.Text;
 
-					if (_DetailViewController != null) {
-						_DetailViewController.SetAcquaintance (Acquaintance);
+					if (_DetailViewController != null)
+					{
+						_DetailViewController.SetAcquaintance(Acquaintance);
 					};
 
-					if (_ListViewController != null) {
-						_ListViewController.SaveAcquaintance (Acquaintance);
+					if (_ListViewController != null)
+					{
+						await _ListViewController.SaveAcquaintance(Acquaintance);
 					};
 
-					NavigationController.PopViewController (true);
+					NavigationController.PopViewController(true);
 				}
 			};
 		}
 
-		bool RequiredAddressFieldCombinationIsFilled {
-			get {
-				if (String.IsNullOrWhiteSpace(AddressString)) {
+		bool RequiredAddressFieldCombinationIsFilled
+		{
+			get
+			{
+				if (String.IsNullOrWhiteSpace(AddressString))
+				{
 					return true;
 				}
-				if (!String.IsNullOrWhiteSpace(_StreetField.Text) && !String.IsNullOrWhiteSpace(_CityField.Text) && !String.IsNullOrWhiteSpace(_StateField.Text)) {
+				if (!String.IsNullOrWhiteSpace(_StreetField.Text) && !String.IsNullOrWhiteSpace(_CityField.Text) && !String.IsNullOrWhiteSpace(_StateField.Text))
+				{
 					return true;
 				}
-				if (!String.IsNullOrWhiteSpace(_ZipField.Text) && (String.IsNullOrWhiteSpace(_StreetField.Text) || String.IsNullOrWhiteSpace(_CityField.Text) || String.IsNullOrWhiteSpace(_StateField.Text) )) {
+				if (!String.IsNullOrWhiteSpace(_ZipField.Text) && (String.IsNullOrWhiteSpace(_StreetField.Text) || String.IsNullOrWhiteSpace(_CityField.Text) || String.IsNullOrWhiteSpace(_StateField.Text)))
+				{
 					return true;
 				}
 
@@ -125,31 +139,31 @@ namespace Acquaint.Native.iOS
 			}
 		}
 
-		public override void ViewDidAppear (bool animated)
+		public override void ViewDidAppear(bool animated)
 		{
-			base.ViewDidAppear (animated);
+			base.ViewDidAppear(animated);
 		}
 
-		public override void ViewDidLoad ()
+		public override void ViewDidLoad()
 		{
-			base.ViewDidLoad ();
+			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		public override void DidReceiveMemoryWarning()
 		{
-			base.DidReceiveMemoryWarning ();
+			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-		string AddressString 
+		string AddressString
 		{
-			get 
+			get
 			{
-				return string.Format (
+				return string.Format(
 					"{0} {1} {2} {3}",
 					_StreetField.Text,
-					!string.IsNullOrWhiteSpace (_CityField.Text) ? _CityField.Text + "," : "",
+					!string.IsNullOrWhiteSpace(_CityField.Text) ? _CityField.Text + "," : "",
 					_StateField.Text,
 					_ZipField.Text);
 			}
