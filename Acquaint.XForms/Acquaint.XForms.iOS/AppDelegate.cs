@@ -14,7 +14,8 @@ namespace Acquaint.XForms.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
 			var manager = BITHockeyManager.SharedHockeyManager;
-			manager.Configure("HOCKEYAPP_APPID");
+			// Set the HockeyApp App Id here:
+			manager.Configure("11111111222222223333333344444444");
 			manager.StartManager();
 
 			#if ENABLE_TEST_CLOUD

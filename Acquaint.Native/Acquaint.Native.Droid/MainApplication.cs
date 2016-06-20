@@ -21,7 +21,8 @@ namespace Acquaint.Native.Droid
 
         public override void OnCreate()
         {
-			CrashManager.Register(this, "HOCKEYAPP_APPID");
+			// Set the HockeyApp App Id here:
+			CrashManager.Register(this, "11111111222222223333333344444444");
 
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);

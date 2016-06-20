@@ -19,7 +19,8 @@ namespace Acquaint.Native.iOS
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 			var manager = BITHockeyManager.SharedHockeyManager;
-			manager.Configure("HOCKEYAPP_APPID");
+			// Set the HockeyApp App Id here:
+			manager.Configure("11111111222222223333333344444444");
 			manager.StartManager();
 
 		    #if ENABLE_TEST_CLOUD

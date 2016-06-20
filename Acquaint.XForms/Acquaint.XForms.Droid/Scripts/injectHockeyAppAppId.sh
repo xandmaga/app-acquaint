@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sed -i '' "s/HOCKEYAPP_APPID/$2/g" "$1/MainActivity.cs"
+sed -i '' "s/11111111222222223333333344444444/$2/g" "$1/MainActivity.cs"

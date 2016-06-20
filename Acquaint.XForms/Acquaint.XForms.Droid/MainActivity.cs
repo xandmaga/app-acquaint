@@ -14,7 +14,8 @@ namespace Acquaint.XForms.Droid
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
-			CrashManager.Register(this, "HOCKEYAPP_APPID");
+			// Set the HockeyApp App Id here:
+			CrashManager.Register(this, "11111111222222223333333344444444");
 
 			// this line is essential to wiring up the toolbar styles defined in ~/Resources/layout/toolbar.axml
 			FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
