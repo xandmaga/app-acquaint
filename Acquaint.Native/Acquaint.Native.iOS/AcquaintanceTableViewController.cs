@@ -60,7 +60,8 @@ namespace Acquaint.Native.iOS
 		// The PrepareForSegue() override is called when a segue has been activated, but before it executes.
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
 		{
-			// determine segue action by segue identifier
+			// Determine segue action by segue identifier.
+			// Note that these segues are defined in Main.storyboard.
 			switch (segue.Identifier) 
 			{
 			case "NewAcquaintanceSegue":
@@ -148,18 +149,18 @@ namespace Acquaint.Native.iOS
 			ShowViewController(viewControllerToCommit, this);
 		}
 
-		public void SaveAcquaintance (Acquaintance acquaintance)
+		public async Task SaveAcquaintance (Acquaintance acquaintance)
 		{
-			_AcquaintanceTableViewSource.SaveAcquaintance (acquaintance);
+			await _AcquaintanceTableViewSource.SaveAcquaintance (acquaintance);
 
-			_AcquaintanceTableViewSource.LoadAcquaintances ();
+			await _AcquaintanceTableViewSource.LoadAcquaintances ();
 		}
 
-		public void DeleteAcquaintance (Acquaintance acquaintance)
+		public async Task DeleteAcquaintance (Acquaintance acquaintance)
 		{
-			_AcquaintanceTableViewSource.DeleteAcquaintance (acquaintance);
+			await _AcquaintanceTableViewSource.DeleteAcquaintance (acquaintance);
 
-			_AcquaintanceTableViewSource.LoadAcquaintances ();
+			await _AcquaintanceTableViewSource.LoadAcquaintances ();
 		}
 	}
 }
