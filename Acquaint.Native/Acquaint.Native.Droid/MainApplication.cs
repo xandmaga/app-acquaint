@@ -3,6 +3,7 @@ using Acquaint.Data;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
+using HockeyApp;
 using Plugin.CurrentActivity;
 
 namespace Acquaint.Native.Droid
@@ -20,6 +21,8 @@ namespace Acquaint.Native.Droid
 
         public override void OnCreate()
         {
+			CrashManager.Register(this, "HOCKEYAPP_APPID");
+
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
 			//A great place to initialize Xamarin.Insights and Dependency Services!
