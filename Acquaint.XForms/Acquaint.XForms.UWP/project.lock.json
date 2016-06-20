@@ -1848,7 +1848,7 @@
           "lib/UAP10/Plugin.Messaging.dll": {}
         }
       },
-      "Xamarin.Forms/2.2.0.45": {
+      "Xamarin.Forms/2.3.0.49": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
@@ -1862,9 +1862,9 @@
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       },
-      "Xamarin.Forms.Maps/2.2.0.45": {
+      "Xamarin.Forms.Maps/2.3.0.49": {
         "dependencies": {
-          "Xamarin.Forms": "2.2.0.45"
+          "Xamarin.Forms": "2.3.0.49"
         },
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Maps.UWP.dll": {},
@@ -3583,7 +3583,7 @@
           "lib/UAP10/Plugin.Messaging.dll": {}
         }
       },
-      "Xamarin.Forms/2.2.0.45": {
+      "Xamarin.Forms/2.3.0.49": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
@@ -3597,9 +3597,9 @@
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       },
-      "Xamarin.Forms.Maps/2.2.0.45": {
+      "Xamarin.Forms.Maps/2.3.0.49": {
         "dependencies": {
-          "Xamarin.Forms": "2.2.0.45"
+          "Xamarin.Forms": "2.3.0.49"
         },
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Maps.UWP.dll": {},
@@ -5276,7 +5276,7 @@
           "lib/UAP10/Plugin.Messaging.dll": {}
         }
       },
-      "Xamarin.Forms/2.2.0.45": {
+      "Xamarin.Forms/2.3.0.49": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
@@ -5290,9 +5290,9 @@
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       },
-      "Xamarin.Forms.Maps/2.2.0.45": {
+      "Xamarin.Forms.Maps/2.3.0.49": {
         "dependencies": {
-          "Xamarin.Forms": "2.2.0.45"
+          "Xamarin.Forms": "2.3.0.49"
         },
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Maps.UWP.dll": {},
@@ -7019,7 +7019,7 @@
           "lib/UAP10/Plugin.Messaging.dll": {}
         }
       },
-      "Xamarin.Forms/2.2.0.45": {
+      "Xamarin.Forms/2.3.0.49": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
@@ -7033,9 +7033,9 @@
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       },
-      "Xamarin.Forms.Maps/2.2.0.45": {
+      "Xamarin.Forms.Maps/2.3.0.49": {
         "dependencies": {
-          "Xamarin.Forms": "2.2.0.45"
+          "Xamarin.Forms": "2.3.0.49"
         },
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Maps.UWP.dll": {},
@@ -8712,7 +8712,7 @@
           "lib/UAP10/Plugin.Messaging.dll": {}
         }
       },
-      "Xamarin.Forms/2.2.0.45": {
+      "Xamarin.Forms/2.3.0.49": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
@@ -8726,9 +8726,9 @@
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       },
-      "Xamarin.Forms.Maps/2.2.0.45": {
+      "Xamarin.Forms.Maps/2.3.0.49": {
         "dependencies": {
-          "Xamarin.Forms": "2.2.0.45"
+          "Xamarin.Forms": "2.3.0.49"
         },
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Maps.UWP.dll": {},
@@ -10455,7 +10455,7 @@
           "lib/UAP10/Plugin.Messaging.dll": {}
         }
       },
-      "Xamarin.Forms/2.2.0.45": {
+      "Xamarin.Forms/2.3.0.49": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
@@ -10469,9 +10469,9 @@
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       },
-      "Xamarin.Forms.Maps/2.2.0.45": {
+      "Xamarin.Forms.Maps/2.3.0.49": {
         "dependencies": {
-          "Xamarin.Forms": "2.2.0.45"
+          "Xamarin.Forms": "2.3.0.49"
         },
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Maps.UWP.dll": {},
@@ -12148,7 +12148,7 @@
           "lib/UAP10/Plugin.Messaging.dll": {}
         }
       },
-      "Xamarin.Forms/2.2.0.45": {
+      "Xamarin.Forms/2.3.0.49": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
@@ -12162,9 +12162,9 @@
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       },
-      "Xamarin.Forms.Maps/2.2.0.45": {
+      "Xamarin.Forms.Maps/2.3.0.49": {
         "dependencies": {
-          "Xamarin.Forms": "2.2.0.45"
+          "Xamarin.Forms": "2.3.0.49"
         },
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Maps.UWP.dll": {},
@@ -15692,11 +15692,11 @@
         "lib/wpa81/Plugin.Messaging.xml"
       ]
     },
-    "Xamarin.Forms/2.2.0.45": {
-      "sha512": "OIdhBp3ilSRayDWNhES7qAdF8jPn/lg5IowrD2/wEVOwmjrJH4qN9FytcuAUQqgk0++PAO6zJEkqq3BGpNw7IQ==",
+    "Xamarin.Forms/2.3.0.49": {
+      "sha512": "fcOiRJS4zK+mPODTWQRNgHCs6N/7usjkGU1GyBr8284wQXY3GSx4WPJE0Wa4Eo/23TrByiqGDi0Nw0ptQA0a7Q==",
       "type": "package",
       "files": [
-        "Xamarin.Forms.2.2.0.45.nupkg.sha512",
+        "Xamarin.Forms.2.3.0.49.nupkg.sha512",
         "Xamarin.Forms.nuspec",
         "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.Decompiler.dll",
         "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.NRefactory.CSharp.dll",
@@ -15887,11 +15887,11 @@
         "lib/wpa81/Xamarin.Forms.Xaml.xml"
       ]
     },
-    "Xamarin.Forms.Maps/2.2.0.45": {
-      "sha512": "lL1y0ehKzskWPDfr8kxDQ1sEkEI53mul6PxxVrFKqQIHkJ/JrmuVnvWOHP6/IheOiojrD2luH5pJpz/zPhhQNQ==",
+    "Xamarin.Forms.Maps/2.3.0.49": {
+      "sha512": "9GCu/vwjCoKJsGUvQ1Rjudrx9kqZzHQkDcXzzrgI1kjN9vwwfH5N+HzXpO46vuWsFkWWuGKJ+cNEWXAdCo398g==",
       "type": "package",
       "files": [
-        "Xamarin.Forms.Maps.2.2.0.45.nupkg.sha512",
+        "Xamarin.Forms.Maps.2.3.0.49.nupkg.sha512",
         "Xamarin.Forms.Maps.nuspec",
         "build/win81/ARM/Xamarin.Forms.Maps.WinRT.Tablet.dll",
         "build/win81/ARM/Xamarin.Forms.Maps.WinRT.Tablet.pri",
@@ -15962,8 +15962,8 @@
       "Xam.Plugin.ExternalMaps >= 3.0.0",
       "Xam.Plugins.Forms.ImageCircle >= 1.4.1",
       "Xam.Plugins.Messaging >= 3.2.1",
-      "Xamarin.Forms >= 2.2.0.45",
-      "Xamarin.Forms.Maps >= 2.2.0.45"
+      "Xamarin.Forms >= 2.3.0.49",
+      "Xamarin.Forms.Maps >= 2.3.0.49"
     ],
     "UAP,Version=v10.0": []
   }
