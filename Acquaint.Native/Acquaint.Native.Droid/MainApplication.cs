@@ -26,7 +26,7 @@ namespace Acquaint.Native.Droid
 			CrashManager.Register(this, "11111111222222223333333344444444");
 
 			// Initialize Insights
-			// Replace Insights.DebugModeKey with "[your Insights API key]
+			// Replace Insights.DebugModeKey with "[your Insights API key]"
 			Insights.Initialize(Insights.DebugModeKey, this);
 
             base.OnCreate();
