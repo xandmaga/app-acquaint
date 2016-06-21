@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using HockeyApp;
 using Plugin.CurrentActivity;
+using Xamarin;
 
 namespace Acquaint.Native.Droid
 {
@@ -23,6 +24,10 @@ namespace Acquaint.Native.Droid
         {
 			// Set the HockeyApp App Id here:
 			CrashManager.Register(this, "11111111222222223333333344444444");
+
+			// Initialize Insights
+			// Replace Insights.DebugModeKey with "[your Insights API key]"
+			Insights.Initialize(Insights.DebugModeKey, this);
 
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
