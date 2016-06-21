@@ -17,6 +17,10 @@ namespace Acquaint.XForms.Droid
 			// Set the HockeyApp App Id here:
 			CrashManager.Register(this, "11111111222222223333333344444444");
 
+			// Initialize Insight
+			// Replace Insights.DebugModeKey with "[your Insights API key]
+			Insights.Initialize(Insights.DebugModeKey, this);
+
 			// this line is essential to wiring up the toolbar styles defined in ~/Resources/layout/toolbar.axml
 			FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
 			base.OnCreate (bundle);
