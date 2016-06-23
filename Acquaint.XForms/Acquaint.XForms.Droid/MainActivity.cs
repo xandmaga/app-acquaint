@@ -15,7 +15,7 @@ namespace Acquaint.XForms.Droid
 		protected override void OnCreate (Bundle bundle)
 		{
 			// Set the HockeyApp App Id here:
-			CrashManager.Register(this, "11111111222222223333333344444444");
+			CrashManager.Register(this, "11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
 
 			// Initialize Insight
 			// Replace Insights.DebugModeKey with "[your Insights API key]

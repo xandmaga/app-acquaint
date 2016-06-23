@@ -45,6 +45,8 @@
     <MtouchI18n>other</MtouchI18n>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>Acquaint-Forms</IpaPackageName>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchUseThumb>true</MtouchUseThumb>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -58,6 +60,7 @@
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchUseSGen>true</MtouchUseSGen>
+    <MtouchI18n>other</MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,11 +89,13 @@
     <OutputPath>bin\AppStore</OutputPath>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <MtouchI18n>other</MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AppStore|iPhone'">
     <OutputPath>bin\AppStore</OutputPath>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <MtouchI18n>other</MtouchI18n>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

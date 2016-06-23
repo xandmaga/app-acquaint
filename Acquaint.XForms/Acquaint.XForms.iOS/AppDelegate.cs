@@ -15,7 +15,7 @@ namespace Acquaint.XForms.iOS
         {
 			var manager = BITHockeyManager.SharedHockeyManager;
 			// Set the HockeyApp App Id here:
-			manager.Configure("11111111222222223333333344444444");
+			manager.Configure("11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
 			manager.StartManager();
 
 			#if ENABLE_TEST_CLOUD
