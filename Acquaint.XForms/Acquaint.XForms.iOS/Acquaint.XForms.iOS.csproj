@@ -45,6 +45,8 @@
     <MtouchI18n>other</MtouchI18n>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>Acquaint-Forms</IpaPackageName>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchUseThumb>true</MtouchUseThumb>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
