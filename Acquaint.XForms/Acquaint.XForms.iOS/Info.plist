@@ -5,9 +5,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.xamarin.acquaint-forms</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.22</string>
+	<string>1.23</string>
 	<key>CFBundleVersion</key>
-	<string>1.22</string>
+	<string>1.23</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
