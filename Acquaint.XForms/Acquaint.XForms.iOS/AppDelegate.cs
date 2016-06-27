@@ -13,10 +13,12 @@ namespace Acquaint.XForms.iOS
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-			var manager = BITHockeyManager.SharedHockeyManager;
-			// Set the HockeyApp App Id here:
-			manager.Configure("11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
-			manager.StartManager();
+			//var manager = BITHockeyManager.SharedHockeyManager;
+			//// Set the HockeyApp App Id here:
+			//manager.Configure("11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
+			//manager.StartManager();
+
+			// If you would like to collect crash reports with Xamarin Insights, see Main.cs
 
 			#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();

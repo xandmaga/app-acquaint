@@ -8,7 +8,7 @@ namespace Acquaint.XForms.iOS
 		// This is the main entry point of the application.
 		static void Main (string[] args)
 		{
-			// Initialize Insights
+			// If you would like to collect crash reports with Xamarin Insights, do so here
 			// Replace Insights.DebugModeKey with "[your Insights API key]"
 			Insights.Initialize(Insights.DebugModeKey);
 

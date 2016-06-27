@@ -22,10 +22,10 @@ namespace Acquaint.Native.Droid
 
         public override void OnCreate()
         {
-			// Set the HockeyApp App Id here:
-			CrashManager.Register(this, "11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
+			// If you would like to collect crash reports with HockeyApp, do so heree
+			// CrashManager.Register(this, "11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
 
-			// Initialize Insights
+			// If you would like to collect crash reports with Xamarin Insights, do so here
 			// Replace Insights.DebugModeKey with "[your Insights API key]"
 			Insights.Initialize(Insights.DebugModeKey, this);
 

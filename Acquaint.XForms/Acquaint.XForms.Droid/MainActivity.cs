@@ -14,11 +14,11 @@ namespace Acquaint.XForms.Droid
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
-			// Set the HockeyApp App Id here:
-			CrashManager.Register(this, "11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
+			// If you would like to collect crash reports with HockeyApp, do so here
+			// CrashManager.Register(this, "11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
 
-			// Initialize Insight
-			// Replace Insights.DebugModeKey with "[your Insights API key]
+			// If you would like to collect crash reports with Xamarin Insights, do so here
+			// Replace Insights.DebugModeKey with "[your Insights API key]"
 			Insights.Initialize(Insights.DebugModeKey, this);
 
 			// this line is essential to wiring up the toolbar styles defined in ~/Resources/layout/toolbar.axml
