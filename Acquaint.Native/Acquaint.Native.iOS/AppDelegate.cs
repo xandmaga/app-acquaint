@@ -18,10 +18,15 @@ namespace Acquaint.Native.iOS
 		// Method invoked after the application has launched to configure the main window and view controller.
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
+			// If you would like to collect crash reports with HockeyApp, do so here
+			/*
 			var manager = BITHockeyManager.SharedHockeyManager;
 			// Set the HockeyApp App Id here:
 			manager.Configure("11111111222222223333333344444444"); // This is just a dummy value. Replace with your real HockeyApp App ID
 			manager.StartManager();
+			*/
+
+			// If you would like to collect crash reports with Xamarin Insights, see Main.cs
 
 		    #if ENABLE_TEST_CLOUD
 		    Xamarin.Calabash.Start();
