@@ -171,23 +171,6 @@
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.4.2.1\lib\portable-net45+win+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections" />
-    <Reference Include="System.Collections.Concurrent" />
-    <Reference Include="System.ComponentModel" />
-    <Reference Include="System.Dynamic.Runtime" />
-    <Reference Include="System.Runtime" />
-    <Reference Include="System.Globalization" />
-    <Reference Include="System.Linq" />
-    <Reference Include="System.Linq.Expressions" />
-    <Reference Include="System.Linq.Queryable" />
-    <Reference Include="System.Text.RegularExpressions" />
-    <Reference Include="System.Reflection" />
-    <Reference Include="System.Reflection.Extensions" />
-    <Reference Include="System.Diagnostics.Debug" />
-    <Reference Include="System.ObjectModel" />
-    <Reference Include="System.Runtime.Extensions" />
-    <Reference Include="System.Threading" />
-    <Reference Include="System.Threading.Tasks" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Calabash">
       <HintPath>..\..\packages\Xamarin.TestCloud.Agent.0.19.1\lib\Xamarin.iOS10\Calabash.dll</HintPath>
@@ -292,6 +275,10 @@
     <ProjectReference Include="..\Acquaint.XForms\Acquaint.XForms.csproj">
       <Project>{55CEDCD6-E2D6-48EB-B9C6-A0E74016DCE0}</Project>
       <Name>Acquaint.XForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
+      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
+      <Name>Acquaint.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

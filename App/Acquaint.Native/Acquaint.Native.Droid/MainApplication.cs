@@ -1,5 +1,6 @@
 using System;
 using Acquaint.Data;
+using Acquaint.Models;
 using Android.App;
 using Android.OS;
 using Android.Runtime;

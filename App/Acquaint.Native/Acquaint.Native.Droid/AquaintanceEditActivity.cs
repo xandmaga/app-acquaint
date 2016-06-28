@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Acquaint.Data;
+﻿using Acquaint.Models;
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;

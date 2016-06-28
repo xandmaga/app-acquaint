@@ -1,5 +1,5 @@
 ﻿using System;
-using Acquaint.Data;
+using Acquaint.Models;
 using UIKit;
 
 namespace Acquaint.Native.iOS

@@ -1,5 +1,6 @@
 using System;
 using Acquaint.Data;
+using Acquaint.Models;
 using FFImageLoading;
 using FFImageLoading.Transformations;
 using UIKit;

@@ -43,7 +43,6 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <Debugger>Xamarin</Debugger>
     <DebugSymbols>False</DebugSymbols>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>armeabi-v7a;armeabi;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
@@ -122,16 +121,6 @@
     <Reference Include="HockeySDK">
       <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0-beta2\lib\MonoAndroid403\HockeySDK.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Acquaint.Data\Acquaint.Data.csproj">
-      <Project>{5A3530AB-4053-4CF3-BEDE-A3E04C45D255}</Project>
-      <Name>Acquaint.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Acquaint.Util\Acquaint.Util.csproj">
-      <Project>{1D18D929-1B53-4AF9-9499-14ABB26D257F}</Project>
-      <Name>Acquaint.Util</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -269,5 +258,19 @@
     <AndroidAsset Include="Assets\thomaswhite.jpg" />
     <AndroidAsset Include="Assets\vanessathornton.jpg" />
     <AndroidAsset Include="Assets\wilmawoolley.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Acquaint.Data\Acquaint.Data.csproj">
+      <Project>{5A3530AB-4053-4CF3-BEDE-A3E04C45D255}</Project>
+      <Name>Acquaint.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Acquaint.Util\Acquaint.Util.csproj">
+      <Project>{1D18D929-1B53-4AF9-9499-14ABB26D257F}</Project>
+      <Name>Acquaint.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
+      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
+      <Name>Acquaint.Models</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

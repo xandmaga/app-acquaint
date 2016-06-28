@@ -4,6 +4,7 @@ using PCLStorage;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Acquaint.Models;
 
 namespace Acquaint.Data
 {

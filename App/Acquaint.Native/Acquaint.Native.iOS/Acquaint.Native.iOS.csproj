@@ -249,9 +249,13 @@
     <ITunesArtwork Include="iTunesArtwork" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Acquaint.Data\Acquaint.Data.csproj">
+    <ProjectReference Include="..\..\Common\Acquaint.Data\Acquaint.Data.csproj">
       <Project>{5A3530AB-4053-4CF3-BEDE-A3E04C45D255}</Project>
       <Name>Acquaint.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
+      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
+      <Name>Acquaint.Models</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

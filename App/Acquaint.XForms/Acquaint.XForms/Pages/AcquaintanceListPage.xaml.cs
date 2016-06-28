@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Acquaint.Data;
+using Acquaint.Models;
 
 namespace Acquaint.XForms
 {

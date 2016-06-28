@@ -13,6 +13,7 @@ using FFImageLoading.Transformations;
 using FFImageLoading.Views;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Acquaint.Data;
+using Acquaint.Models;
 
 namespace Acquaint.Native.Droid
 {

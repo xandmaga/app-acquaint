@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Acquaint.Data;
 using Acquaint.Util;
 using FormsToolkit;
 using Xamarin.Forms;
 using AutoMapper;
+using Acquaint.Models;
 
 namespace Acquaint.XForms
 {

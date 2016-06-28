@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using FormsToolkit;
 using MvvmHelpers;

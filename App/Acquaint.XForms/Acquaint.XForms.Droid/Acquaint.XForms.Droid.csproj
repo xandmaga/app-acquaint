@@ -162,23 +162,6 @@
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.4.2.1\lib\portable-net45+win+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections" />
-    <Reference Include="System.Collections.Concurrent" />
-    <Reference Include="System.ComponentModel" />
-    <Reference Include="System.Dynamic.Runtime" />
-    <Reference Include="System.Runtime" />
-    <Reference Include="System.Globalization" />
-    <Reference Include="System.Linq" />
-    <Reference Include="System.Linq.Expressions" />
-    <Reference Include="System.Linq.Queryable" />
-    <Reference Include="System.Text.RegularExpressions" />
-    <Reference Include="System.Reflection" />
-    <Reference Include="System.Reflection.Extensions" />
-    <Reference Include="System.Diagnostics.Debug" />
-    <Reference Include="System.ObjectModel" />
-    <Reference Include="System.Runtime.Extensions" />
-    <Reference Include="System.Threading" />
-    <Reference Include="System.Threading.Tasks" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Xamarin.Insights">
       <HintPath>..\..\packages\Xamarin.Insights.1.12.3\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>

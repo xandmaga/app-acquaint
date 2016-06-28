@@ -2,7 +2,7 @@
 using MvvmHelpers;
 using Newtonsoft.Json;  
 
-namespace Acquaint.Data
+namespace Acquaint.Models
 {
     public class Acquaintance : ObservableObject
     {

@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Acquaint.Data;
+using Acquaint.Models;
 using Foundation;
 using UIKit;
 
