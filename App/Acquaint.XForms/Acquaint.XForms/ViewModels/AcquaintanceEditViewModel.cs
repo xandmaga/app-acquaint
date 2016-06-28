@@ -10,7 +10,7 @@ namespace Acquaint.XForms
 {
 	public class AcquaintanceEditViewModel : BaseNavigationViewModel
 	{
-		public AcquaintanceEditViewModel(Acquaintance acquaintance = null)
+		public AcquaintanceEditViewModel(IAcquaintance acquaintance = null)
 		{
 			if (acquaintance == null)
 			{
@@ -32,7 +32,7 @@ namespace Acquaint.XForms
 			}
 		}
 
-		public Acquaintance Acquaintance { private set; get; }
+		public IAcquaintance Acquaintance { private set; get; }
 
 		Command _SaveAcquaintanceCommand;
 
@@ -66,7 +66,7 @@ namespace Acquaint.XForms
 			}
 			else
 			{
-				MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.SaveAcquaintance, Acquaintance);
+				MessagingService.Current.SendMessage<IAcquaintance>(MessageKeys.SaveAcquaintance, Acquaintance);
 
 				await PopAsync();
 			}
@@ -89,7 +89,7 @@ namespace Acquaint.XForms
 							if (!result) return;
 
 							// send a message that we want the given acquaintance to be deleted
-							MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.DeleteAcquaintance, Acquaintance);
+							MessagingService.Current.SendMessage<IAcquaintance>(MessageKeys.DeleteAcquaintance, Acquaintance);
 
 							// pop the navigation stack twice so we get back to the list
 							await PopAsync(false);

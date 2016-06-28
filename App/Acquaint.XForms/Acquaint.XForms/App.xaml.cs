@@ -1,4 +1,6 @@
-﻿using FormsToolkit;
+﻿using Acquaint.Models;
+using AutoMapper;
+using FormsToolkit;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +13,8 @@ namespace Acquaint.XForms
         public App()
         {
             InitializeComponent();
+
+			Mapper.Initialize(cfg => cfg.CreateMap<IAcquaintance, Acquaintance>());
 
             SubscribeToDisplayAlertMessages();
 

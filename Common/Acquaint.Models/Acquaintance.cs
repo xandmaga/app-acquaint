@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Acquaint.Models
 {
-    public class Acquaintance : ObservableObject
+	public class Acquaintance : ObservableObject, IAcquaintance
     {
         public string Id { get; set; }
 
@@ -147,6 +147,8 @@ namespace Acquaint.Models
 
         [JsonIgnore]
         public string StatePostal => State + " " + PostalCode;
+
+		public string DataPartitionId { get; set; }
 
 		public override string ToString() => $"{FirstName} {LastName}";
     }

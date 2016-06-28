@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Acquaint.Models;
+using AutoMapper;
 
 namespace Acquaint.Data
 {
-	public class AcquaintanceDataSource : IDataSource<Acquaintance>
+	public class AcquaintanceDataSource : IDataSource<IAcquaintance>
 	{
 		public AcquaintanceDataSource(bool simulateNetworkLatency = true)
 		{
@@ -20,7 +21,7 @@ namespace Acquaint.Data
 
 		#region IDataSource implementation
 
-		public async Task SaveItem(Acquaintance item)
+		public async Task SaveItem(IAcquaintance item)
 		{
 			await EnsureInitialized().ConfigureAwait(false);
 
@@ -28,11 +29,11 @@ namespace Acquaint.Data
 
 			if (i < 0)
 			{
-				_Acquaintances.Add(item);
+				_Acquaintances.Add(Mapper.Map<Acquaintance>(item));
 			}
 			else
 			{
-				_Acquaintances[i] = item;
+				_Acquaintances[i] = Mapper.Map<Acquaintance>(item);
 			}
 
 			await WriteFile(_RootFolder, _FileName, JsonConvert.SerializeObject(_Acquaintances)).ConfigureAwait(false);
@@ -47,14 +48,14 @@ namespace Acquaint.Data
 			await WriteFile(_RootFolder, _FileName, JsonConvert.SerializeObject(_Acquaintances)).ConfigureAwait(false);
 		}
 
-		public async Task<Acquaintance> GetItem(string id)
+		public async Task<IAcquaintance> GetItem(string id)
 		{
 			await EnsureInitialized().ConfigureAwait(false);
 
 			return await Task.FromResult(_Acquaintances.SingleOrDefault(x => x.Id == id)).ConfigureAwait(false);
 		}
 
-		public async Task<ICollection<Acquaintance>> GetItems(int start = 0, int count = 100, string query = "")
+		public async Task<ICollection<IAcquaintance>> GetItems(int start = 0, int count = 100, string query = "")
 		{
 			await EnsureInitialized().ConfigureAwait(false);
 
@@ -191,7 +192,7 @@ namespace Acquaint.Data
 
 	public static class AcquaintanceDataSourceHelper
 	{
-		static int MatchScore(Acquaintance c, string query)
+		static int MatchScore(IAcquaintance c, string query)
 		{
 			return new[]
 			{
@@ -220,7 +221,7 @@ namespace Acquaint.Data
 			return score;
 		}
 
-		public static IEnumerable<Acquaintance> BasicQueryFilter(IEnumerable<Acquaintance> source, string query)
+		public static IEnumerable<IAcquaintance> BasicQueryFilter(IEnumerable<IAcquaintance> source, string query)
 		{
 			if (string.IsNullOrEmpty(query))
 			{

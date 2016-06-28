@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
+using AutoMapper;
 using FormsToolkit;
 using MvvmHelpers;
 using Plugin.Messaging;
@@ -10,272 +11,278 @@ using Xamarin.Forms;
 
 namespace Acquaint.XForms
 {
-    public class AcquaintanceListViewModel : BaseNavigationViewModel
-    {
-        public AcquaintanceListViewModel()
-        {
-            _CapabilityService = DependencyService.Get<ICapabilityService>();
+	public class AcquaintanceListViewModel : BaseNavigationViewModel
+	{
+		public AcquaintanceListViewModel()
+		{
+			_CapabilityService = DependencyService.Get<ICapabilityService>();
 
-            DataSource = new AcquaintanceDataSource();
+			DataSource = new AcquaintanceDataSource();
 
-            SubscribeToSaveAcquaintanceMessages();
+			SubscribeToSaveAcquaintanceMessages();
 
-            SubscribeToDeleteAcquaintanceMessages();
-        }
+			SubscribeToDeleteAcquaintanceMessages();
+		}
 
-        // this is just a utility service that we're using in this demo app to mitigate some limitations of the iOS simulator
-        readonly ICapabilityService _CapabilityService;
+		// this is just a utility service that we're using in this demo app to mitigate some limitations of the iOS simulator
+		readonly ICapabilityService _CapabilityService;
 
-        readonly IDataSource<Acquaintance> DataSource;
+		readonly IDataSource<IAcquaintance> DataSource;
 
 		ObservableRangeCollection<Acquaintance> _Acquaintances;
 
-        Command _LoadAcquaintancesCommand;
+		Command _LoadAcquaintancesCommand;
 
-        Command _RefreshAcquaintancesCommand;
+		Command _RefreshAcquaintancesCommand;
 
-        Command _NewAcquaintanceCommand;
+		Command _NewAcquaintanceCommand;
 
 		public ObservableRangeCollection<Acquaintance> Acquaintances
-        {
-            get { return _Acquaintances ?? (_Acquaintances = new ObservableRangeCollection<Acquaintance>()); }
-		    set
-            {
-                _Acquaintances = value;
-                OnPropertyChanged("Acquaintances");
-            }
-        }
+		{
+			get { return _Acquaintances ?? (_Acquaintances = new ObservableRangeCollection<Acquaintance>()); }
+			set
+			{
+				_Acquaintances = value;
+				OnPropertyChanged("Acquaintances");
+			}
+		}
 
-        /// <summary>
-        /// Command to load acquaintances
-        /// </summary>
-        public Command LoadAcquaintancesCommand
-        {
-            get { return _LoadAcquaintancesCommand ?? (_LoadAcquaintancesCommand = new Command(async () => await ExecuteLoadAcquaintancesCommand())); }
-        }
+		/// <summary>
+		/// Command to load acquaintances
+		/// </summary>
+		public Command LoadAcquaintancesCommand
+		{
+			get { return _LoadAcquaintancesCommand ?? (_LoadAcquaintancesCommand = new Command(async () => await ExecuteLoadAcquaintancesCommand())); }
+		}
 
-        async Task ExecuteLoadAcquaintancesCommand()
-        {
+		async Task ExecuteLoadAcquaintancesCommand()
+		{
 			if (Acquaintances.Count < 1)
-            {
-                LoadAcquaintancesCommand.ChangeCanExecute();
+			{
+				LoadAcquaintancesCommand.ChangeCanExecute();
 
-                await FetchAcquaintances();
+				await FetchAcquaintances();
 
-                LoadAcquaintancesCommand.ChangeCanExecute();
-            }
-        }
+				LoadAcquaintancesCommand.ChangeCanExecute();
+			}
+		}
 
-        public Command RefreshAcquaintancesCommand
-        {
-            get { 
-                return _RefreshAcquaintancesCommand ?? (_RefreshAcquaintancesCommand = new Command(async () => await ExecuteRefreshAcquaintancesCommandCommand())); 
-            }
-        }
+		public Command RefreshAcquaintancesCommand
+		{
+			get
+			{
+				return _RefreshAcquaintancesCommand ?? (_RefreshAcquaintancesCommand = new Command(async () => await ExecuteRefreshAcquaintancesCommandCommand()));
+			}
+		}
 
-        async Task ExecuteRefreshAcquaintancesCommandCommand()
-        {
-            RefreshAcquaintancesCommand.ChangeCanExecute();
+		async Task ExecuteRefreshAcquaintancesCommandCommand()
+		{
+			RefreshAcquaintancesCommand.ChangeCanExecute();
 
-            await FetchAcquaintances();
+			await FetchAcquaintances();
 
-            RefreshAcquaintancesCommand.ChangeCanExecute();
-        }
+			RefreshAcquaintancesCommand.ChangeCanExecute();
+		}
 
-        async Task FetchAcquaintances()
-        {
-            IsBusy = true;
+		async Task FetchAcquaintances()
+		{
+			IsBusy = true;
 
-			var acquaintances = await DataSource.GetItems (0, 1000);
+			var acquaintances = await DataSource.GetItems(0, 1000);
 
 			Acquaintances.Clear();
 
 			if (acquaintances.Count != 0)
-				Acquaintances.AddRange(acquaintances);
+			{
+				Mapper.Initialize(cfg => cfg.CreateMap<IAcquaintance, Acquaintance>());
 
-            IsBusy = false;
-        }
+				foreach (var a in acquaintances)
+				{
+					Acquaintances.Add(Mapper.Map<Acquaintance>(a));
+				}
+			}
 
-        /// <summary>
-        /// Command to create new acquaintance
-        /// </summary>
-        public Command NewAcquaintanceCommand
-        {
-            get
-            {
-                return _NewAcquaintanceCommand ??
-                    (_NewAcquaintanceCommand = new Command(async () => await ExecuteNewAcquaintanceCommand()));
-            }
-        }
+			IsBusy = false;
+		}
 
-        async Task ExecuteNewAcquaintanceCommand()
-        {
-            await PushAsync(new AcquaintanceEditPage() { BindingContext = new AcquaintanceEditViewModel() });
-        }
+		/// <summary>
+		/// Command to create new acquaintance
+		/// </summary>
+		public Command NewAcquaintanceCommand
+		{
+			get
+			{
+				return _NewAcquaintanceCommand ??
+					(_NewAcquaintanceCommand = new Command(async () => await ExecuteNewAcquaintanceCommand()));
+			}
+		}
 
-        Command _DialNumberCommand;
+		async Task ExecuteNewAcquaintanceCommand()
+		{
+			await PushAsync(new AcquaintanceEditPage() { BindingContext = new AcquaintanceEditViewModel() });
+		}
 
-        /// <summary>
-        /// Command to dial acquaintance phone number
-        /// </summary>
-        public Command DialNumberCommand
-        {
-            get
-            {
-                return _DialNumberCommand ??
-                (_DialNumberCommand = new Command((parameter) =>
-                        ExecuteDialNumberCommand((string)parameter)));
-            }
-        }
+		Command _DialNumberCommand;
 
-        void ExecuteDialNumberCommand(string acquaintanceId)
-        {
-            if (string.IsNullOrWhiteSpace(acquaintanceId))
-                return;
+		/// <summary>
+		/// Command to dial acquaintance phone number
+		/// </summary>
+		public Command DialNumberCommand
+		{
+			get
+			{
+				return _DialNumberCommand ??
+				(_DialNumberCommand = new Command((parameter) =>
+						ExecuteDialNumberCommand((string)parameter)));
+			}
+		}
 
-            var acquaintance = _Acquaintances.SingleOrDefault(c => c.Id == acquaintanceId);
+		void ExecuteDialNumberCommand(string acquaintanceId)
+		{
+			if (string.IsNullOrWhiteSpace(acquaintanceId))
+				return;
 
-            if (acquaintance == null)
-                return;
+			var acquaintance = _Acquaintances.SingleOrDefault(c => c.Id == acquaintanceId);
 
-            if (_CapabilityService.CanMakeCalls)
-            {
-                var phoneCallTask = MessagingPlugin.PhoneDialer;
-                if (phoneCallTask.CanMakePhoneCall)
-                    phoneCallTask.MakePhoneCall(acquaintance.Phone.SanitizePhoneNumber());
-            }
-            else
-            {
-                MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
-                    { 
-                        Title = "Simulator Not Supported",
-                        Message = "Phone calls are not supported in the iOS simulator.",
-                        Cancel = "OK"
-                    });
-            }
-        }
+			if (acquaintance == null)
+				return;
 
-        Command _MessageNumberCommand;
+			if (_CapabilityService.CanMakeCalls)
+			{
+				var phoneCallTask = MessagingPlugin.PhoneDialer;
+				if (phoneCallTask.CanMakePhoneCall)
+					phoneCallTask.MakePhoneCall(acquaintance.Phone.SanitizePhoneNumber());
+			}
+			else
+			{
+				MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
+				{
+					Title = "Simulator Not Supported",
+					Message = "Phone calls are not supported in the iOS simulator.",
+					Cancel = "OK"
+				});
+			}
+		}
 
-        /// <summary>
-        /// Command to message acquaintance phone number
-        /// </summary>
-        public Command MessageNumberCommand
-        {
-            get
-            {
-                return _MessageNumberCommand ??
-                (_MessageNumberCommand = new Command((parameter) =>
-                        ExecuteMessageNumberCommand((string)parameter)));
-            }
-        }
+		Command _MessageNumberCommand;
 
-        void ExecuteMessageNumberCommand(string acquaintanceId)
-        {
-            if (string.IsNullOrWhiteSpace(acquaintanceId))
-                return;
+		/// <summary>
+		/// Command to message acquaintance phone number
+		/// </summary>
+		public Command MessageNumberCommand
+		{
+			get
+			{
+				return _MessageNumberCommand ??
+				(_MessageNumberCommand = new Command((parameter) =>
+						ExecuteMessageNumberCommand((string)parameter)));
+			}
+		}
 
-            var acquaintance = _Acquaintances.SingleOrDefault(c => c.Id == acquaintanceId);
+		void ExecuteMessageNumberCommand(string acquaintanceId)
+		{
+			if (string.IsNullOrWhiteSpace(acquaintanceId))
+				return;
 
-            if (acquaintance == null)
-                return;     
+			var acquaintance = _Acquaintances.SingleOrDefault(c => c.Id == acquaintanceId);
 
-            if (_CapabilityService.CanSendMessages)
-            {
-                var messageTask = MessagingPlugin.SmsMessenger;
-                if (messageTask.CanSendSms)
-                    messageTask.SendSms(acquaintance.Phone.SanitizePhoneNumber());
-            }
-            else
-            {
-                MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
-                    { 
-                        Title = "Simulator Not Supported",
-                        Message = "Messaging is not supported in the iOS simulator.",
-                        Cancel = "OK"
-                    });
-            }
-        }
+			if (acquaintance == null)
+				return;
 
-        Command _EmailCommand;
+			if (_CapabilityService.CanSendMessages)
+			{
+				var messageTask = MessagingPlugin.SmsMessenger;
+				if (messageTask.CanSendSms)
+					messageTask.SendSms(acquaintance.Phone.SanitizePhoneNumber());
+			}
+			else
+			{
+				MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
+				{
+					Title = "Simulator Not Supported",
+					Message = "Messaging is not supported in the iOS simulator.",
+					Cancel = "OK"
+				});
+			}
+		}
 
-        /// <summary>
-        /// Command to email acquaintance
-        /// </summary>
-        public Command EmailCommand
-        {
-            get
-            {
-                return _EmailCommand ??
-                (_EmailCommand = new Command((parameter) =>
-                        ExecuteEmailCommandCommand((string)parameter)));
-            }
-        }
+		Command _EmailCommand;
 
-        void ExecuteEmailCommandCommand(string acquaintanceId)
-        {
-            if (string.IsNullOrWhiteSpace(acquaintanceId))
-                return;
+		/// <summary>
+		/// Command to email acquaintance
+		/// </summary>
+		public Command EmailCommand
+		{
+			get
+			{
+				return _EmailCommand ??
+				(_EmailCommand = new Command((parameter) =>
+						ExecuteEmailCommandCommand((string)parameter)));
+			}
+		}
 
-            var acquaintance = _Acquaintances.SingleOrDefault(c => c.Id == acquaintanceId);
+		void ExecuteEmailCommandCommand(string acquaintanceId)
+		{
+			if (string.IsNullOrWhiteSpace(acquaintanceId))
+				return;
 
-            if (acquaintance == null)
-                return;
+			var acquaintance = _Acquaintances.SingleOrDefault(c => c.Id == acquaintanceId);
 
-            if (_CapabilityService.CanSendEmail)
-            {
-                var emailTask = MessagingPlugin.EmailMessenger;
-                if (emailTask.CanSendEmail)
-                    emailTask.SendEmail(acquaintance.Email);
-            }
-            else
-            {
-                MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
-                    { 
-                        Title = "Simulator Not Supported",
-                        Message = "Email composition is not supported in the iOS simulator.",
-                        Cancel = "OK"
-                    });
-            }
-        }
+			if (acquaintance == null)
+				return;
 
-        /// <summary>
-        /// Subscribes to "SaveAcquaintance" messages
-        /// </summary>
-        void SubscribeToSaveAcquaintanceMessages()
-        {
-            // This subscribes to the "SaveAcquaintance" message, and then inserts or updates the clisnts accordingly
-            MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.SaveAcquaintance, async (service, acquaintance) =>
-                {
-                    IsBusy = true;
+			if (_CapabilityService.CanSendEmail)
+			{
+				var emailTask = MessagingPlugin.EmailMessenger;
+				if (emailTask.CanSendEmail)
+					emailTask.SendEmail(acquaintance.Email);
+			}
+			else
+			{
+				MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
+				{
+					Title = "Simulator Not Supported",
+					Message = "Email composition is not supported in the iOS simulator.",
+					Cancel = "OK"
+				});
+			}
+		}
 
-                    await DataSource.SaveItem(acquaintance);
+		/// <summary>
+		/// Subscribes to "SaveAcquaintance" messages
+		/// </summary>
+		void SubscribeToSaveAcquaintanceMessages()
+		{
+			// This subscribes to the "SaveAcquaintance" message, and then inserts or updates the clisnts accordingly
+			MessagingService.Current.Subscribe<IAcquaintance>(MessageKeys.SaveAcquaintance, async (service, acquaintance) => {
+				IsBusy = true;
 
-                    await FetchAcquaintances();
+				await DataSource.SaveItem(acquaintance as Acquaintance);
 
-                    IsBusy = false;
+				await FetchAcquaintances();
 
-					OnPropertyChanged("Acquaintances");
-                });
-        }
+				IsBusy = false;
 
-        /// <summary>
-        /// Subscribes to "DeleteAcquaintance" messages
-        /// </summary>
-        void SubscribeToDeleteAcquaintanceMessages()
-        {
-            // This subscribes to the "DeleteAcquaintance" message, and then deletes the acquaintance accordingly
-            MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.DeleteAcquaintance, async (service, acquaintance) =>
-                {
-                    IsBusy = true;
+				OnPropertyChanged("Acquaintances");
+			});
+		}
 
-                    await DataSource.DeleteItem(acquaintance.Id);
+		/// <summary>
+		/// Subscribes to "DeleteAcquaintance" messages
+		/// </summary>
+		void SubscribeToDeleteAcquaintanceMessages()
+		{
+			// This subscribes to the "DeleteAcquaintance" message, and then deletes the acquaintance accordingly
+			MessagingService.Current.Subscribe<IAcquaintance>(MessageKeys.DeleteAcquaintance, async (service, acquaintance) => {
+				IsBusy = true;
 
-                    await FetchAcquaintances();
+				await DataSource.DeleteItem(acquaintance.Id);
 
-                    IsBusy = false;
-                });
-        }
-    }
+				await FetchAcquaintances();
+
+				IsBusy = false;
+			});
+		}
+	}
 }
 

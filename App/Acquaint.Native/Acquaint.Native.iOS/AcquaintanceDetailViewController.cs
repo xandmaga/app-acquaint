@@ -24,11 +24,11 @@ namespace Acquaint.Native.iOS
 		/// Gets or sets the acquaintance.
 		/// </summary>
 		/// <value>The acquaintance.</value>
-		public Acquaintance Acquaintance { get; private set; }
+		public IAcquaintance Acquaintance { get; private set; }
 
 		AcquaintanceTableViewController _ListViewController;
 
-		public void SetAcquaintance (Acquaintance acquaintance, AcquaintanceTableViewController listViewController = null)
+		public void SetAcquaintance (IAcquaintance acquaintance, AcquaintanceTableViewController listViewController = null)
 		{
 			Acquaintance = acquaintance;
 
@@ -261,7 +261,7 @@ namespace Acquaint.Native.iOS
 
 		bool IsRealDevice => Runtime.Arch == Arch.DEVICE;
 
-		public void SaveAcquaintance (Acquaintance acquaintance)
+		public void SaveAcquaintance (IAcquaintance acquaintance)
 		{
 			Acquaintance = acquaintance;
 		}

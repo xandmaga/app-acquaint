@@ -14,13 +14,13 @@ namespace Acquaint.Native.iOS
 		/// <summary>
 		/// The acquaintance data source.
 		/// </summary>
-		readonly IDataSource<Acquaintance> _AcquaintanceDataSource;
+		readonly IDataSource<IAcquaintance> _AcquaintanceDataSource;
 
 		/// <summary>
 		/// Gets the acquaintances.
 		/// </summary>
 		/// <value>The acquaintances.</value>
-		public List<Acquaintance> Acquaintances { get; private set; }
+		public List<IAcquaintance> Acquaintances { get; private set; }
 
 		public AcquaintanceTableViewSource()
         {
@@ -36,12 +36,12 @@ namespace Acquaint.Native.iOS
 			Acquaintances = (await _AcquaintanceDataSource.GetItems()).ToList();
 		}
 
-		public async Task SaveAcquaintance (Acquaintance acquaintance)
+		public async Task SaveAcquaintance (IAcquaintance acquaintance)
 		{
 			await _AcquaintanceDataSource.SaveItem (acquaintance);
 		}
 
-		public async Task DeleteAcquaintance (Acquaintance acquaintance)
+		public async Task DeleteAcquaintance (IAcquaintance acquaintance)
 		{
 			await _AcquaintanceDataSource.DeleteItem (acquaintance.Id);
 		}

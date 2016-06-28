@@ -149,14 +149,14 @@ namespace Acquaint.Native.iOS
 			ShowViewController(viewControllerToCommit, this);
 		}
 
-		public async Task SaveAcquaintance (Acquaintance acquaintance)
+		public async Task SaveAcquaintance (IAcquaintance acquaintance)
 		{
 			await _AcquaintanceTableViewSource.SaveAcquaintance (acquaintance);
 
 			await _AcquaintanceTableViewSource.LoadAcquaintances ();
 		}
 
-		public async Task DeleteAcquaintance (Acquaintance acquaintance)
+		public async Task DeleteAcquaintance (IAcquaintance acquaintance)
 		{
 			await _AcquaintanceTableViewSource.DeleteAcquaintance (acquaintance);
 

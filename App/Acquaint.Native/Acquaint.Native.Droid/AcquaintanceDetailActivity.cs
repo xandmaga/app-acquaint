@@ -30,7 +30,7 @@ namespace Acquaint.Native.Droid
 	[Activity]
 	public class AcquaintanceDetailActivity : AppCompatActivity, IOnMapReadyCallback
 	{
-		Acquaintance _Acquaintance;
+		IAcquaintance _Acquaintance;
 		string _AcquaintanceId;
 		ImageView _GetDirectionsActionImageView;
 		LatLng _GeocodedLocation;

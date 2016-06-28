@@ -10,7 +10,7 @@ namespace Acquaint.Native.iOS
 		/// Gets or sets the acquaintance.
 		/// </summary>
 		/// <value>The acquaintance.</value>
-		public Acquaintance Acquaintance { get; private set; }
+		public IAcquaintance Acquaintance { get; private set; }
 
 		AcquaintanceDetailViewController _DetailViewController;
 		AcquaintanceTableViewController _ListViewController;

@@ -14,7 +14,7 @@ namespace Acquaint.XForms
 {
     public class AcquaintanceDetailViewModel : BaseNavigationViewModel
     {
-		public AcquaintanceDetailViewModel(Acquaintance acquaintance)
+		public AcquaintanceDetailViewModel(IAcquaintance acquaintance)
 		{
 			_CapabilityService = DependencyService.Get<ICapabilityService>();
 
@@ -26,7 +26,7 @@ namespace Acquaint.XForms
 		}
 
 
-		public Acquaintance Acquaintance { private set; get; }
+		public IAcquaintance Acquaintance { private set; get; }
 
 		public bool HasEmailAddress => !string.IsNullOrWhiteSpace(Acquaintance?.Email);
 
@@ -207,12 +207,12 @@ namespace Acquaint.XForms
         void SubscribeToSaveAcquaintanceMessages()
         {
             // This subscribes to the "SaveAcquaintance" message
-            MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.SaveAcquaintance, (service, acquaintance) =>
+            MessagingService.Current.Subscribe<IAcquaintance>(MessageKeys.SaveAcquaintance, (service, acquaintance) =>
                 {
 					Acquaintance = acquaintance;
 					OnPropertyChanged("Acquaintance");
 
-                	MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.AcquaintanceLocationUpdated, Acquaintance);
+                	MessagingService.Current.SendMessage<IAcquaintance>(MessageKeys.AcquaintanceLocationUpdated, Acquaintance);
                 });
         }
 
