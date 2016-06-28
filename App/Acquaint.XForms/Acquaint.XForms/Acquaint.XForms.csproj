@@ -169,13 +169,13 @@
       <Project>{5A3530AB-4053-4CF3-BEDE-A3E04C45D255}</Project>
       <Name>Acquaint.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\Acquaint.Util\Acquaint.Util.csproj">
-      <Project>{1D18D929-1B53-4AF9-9499-14ABB26D257F}</Project>
-      <Name>Acquaint.Util</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
       <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
       <Name>Acquaint.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Acquaint.Util\Acquaint.Util.csproj">
+      <Project>{1D18D929-1B53-4AF9-9499-14ABB26D257F}</Project>
+      <Name>Acquaint.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

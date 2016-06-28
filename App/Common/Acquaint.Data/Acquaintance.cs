@@ -1,8 +1,9 @@
 ﻿using System;
+using Acquaint.Models;
 using MvvmHelpers;
-using Newtonsoft.Json;  
+using Newtonsoft.Json;
 
-namespace Acquaint.Models
+namespace Acquaint.Data
 {
 	public class Acquaintance : ObservableObject, IAcquaintance
     {

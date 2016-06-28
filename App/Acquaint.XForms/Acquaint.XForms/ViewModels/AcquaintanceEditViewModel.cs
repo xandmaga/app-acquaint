@@ -5,6 +5,7 @@ using FormsToolkit;
 using Xamarin.Forms;
 using AutoMapper;
 using Acquaint.Models;
+using Acquaint.Data;
 
 namespace Acquaint.XForms
 {
