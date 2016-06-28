@@ -1,9 +1,10 @@
+using Acquaint.Service;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(app_acquaintService.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
-namespace app_acquaintService
+namespace Acquaint.Service
 {
     public partial class Startup
     {

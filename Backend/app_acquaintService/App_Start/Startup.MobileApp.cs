@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.Entity;
 using System.Web.Http;
+using Acquaint.Service.Models;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
-using app_acquaintService.DataObjects;
-using app_acquaintService.Models;
 using Owin;
+using Newtonsoft.Json;
 
-namespace app_acquaintService
+namespace Acquaint.Service
 {
     public partial class Startup
     {
         public static void ConfigureMobileApp(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
+
+#if DEBUG
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+#endif
 
             //For more information on Web API tracing, see http://go.microsoft.com/fwlink/?LinkId=620686 
             config.EnableSystemDiagnosticsTracing();
@@ -26,7 +30,7 @@ namespace app_acquaintService
                 .ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
-            Database.SetInitializer(new app_acquaintInitializer());
+            Database.SetInitializer(new AcquaintServiceInitializer());
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
             // Database.SetInitializer<app_acquaintContext>(null);
@@ -49,23 +53,23 @@ namespace app_acquaintService
         }
     }
 
-    public class app_acquaintInitializer : CreateDatabaseIfNotExists<app_acquaintContext>
+    public class AcquaintServiceInitializer : CreateDatabaseIfNotExists<AcquaintDbContext>
     {
-        protected override void Seed(app_acquaintContext context)
-        {
-            List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
-            };
+        //protected override void Seed(app_acquaintContext context)
+        //{
+        //    List<Acquaintance> todoItems = new List<Acquaintance>
+        //    {
+        //        new Acquaintance { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
+        //        new Acquaintance { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
+        //    };
 
-            foreach (TodoItem todoItem in todoItems)
-            {
-                context.Set<TodoItem>().Add(todoItem);
-            }
+        //    foreach (Acquaintance todoItem in todoItems)
+        //    {
+        //        context.Set<Acquaintance>().Add(todoItem);
+        //    }
 
-            base.Seed(context);
-        }
+        //    base.Seed(context);
+        //}
     }
 }
 
