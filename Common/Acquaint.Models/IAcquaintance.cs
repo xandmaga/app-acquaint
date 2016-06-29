@@ -7,7 +7,7 @@ namespace Acquaint.Models
 	// the app and backend because they each need to inherit from different base 
 	// classes; specifically ObservableObject in the app, and EntityData in 
 	// the backend.
-	public interface IAcquaintance
+	public interface IAcquaintance 
 	{
 		string Id { get; set; }
 
