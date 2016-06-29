@@ -15,8 +15,6 @@ namespace Acquaint.XForms
         {
             InitializeComponent();
 
-			Mapper.Initialize(cfg => cfg.CreateMap<IAcquaintance, Acquaintance>());
-
             SubscribeToDisplayAlertMessages();
 
 			if (Device.OS == TargetPlatform.Android)

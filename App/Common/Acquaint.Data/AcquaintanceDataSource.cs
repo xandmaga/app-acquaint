@@ -24,13 +24,16 @@ namespace Acquaint.Data
 
 			int i = _Acquaintances.FindIndex(a => a.Id == item.Id);
 
+			// use AutoMapper to convert IAcquaintance to Acquaintance
+			var acquaintance = Mapper.Map<Acquaintance>(item);
+
 			if (i < 0)
 			{
-				_Acquaintances.Add(Mapper.Map<Acquaintance>(item));
+				_Acquaintances.Add(acquaintance);
 			}
 			else
 			{
-				_Acquaintances[i] = Mapper.Map<Acquaintance>(item);
+				_Acquaintances[i] = acquaintance;
 			}
 
 			await WriteFile(_RootFolder, _FileName, JsonConvert.SerializeObject(_Acquaintances)).ConfigureAwait(false);
