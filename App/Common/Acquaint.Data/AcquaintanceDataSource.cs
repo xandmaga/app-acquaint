@@ -71,10 +71,6 @@ namespace Acquaint.Data
 
 	    readonly IFolder _RootFolder;
 
-		// you can change this value to simulate network latency
-		static readonly int latencyInSeconds = 0;
-		readonly TimeSpan _LatencyTimeSpan = TimeSpan.FromSeconds(latencyInSeconds);
-
 		bool _IsInitialized;
 
 		List<Acquaintance> _Acquaintances;
