@@ -206,6 +206,12 @@
     <None Include="Properties\PublishProfiles\app-acquaint - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\app-acquaint - Web Deploy.pubxml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
+      <Project>{ed10b823-aa77-4142-919f-6a42c4d087a9}</Project>
+      <Name>Acquaint.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />

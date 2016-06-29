@@ -11,6 +11,10 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using Acquaint.Service.DataObjects;
 using Acquaint.Service.Models;
+using Acquaint.Models;
+using AutoMapper;
+using System.Net.Http;
+using System.Net;
 
 namespace Acquaint.Service.Controllers
 {
@@ -26,8 +30,10 @@ namespace Acquaint.Service.Controllers
         }
 
         // GET tables/Acquaintance/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public IQueryable<Acquaintance> GetAllAcquaintances(string dataPartitionId)
+        public IQueryable<Acquaintance> GetAllAcquaintances()
         {
+            var dataPartitionId = GetDataPartitionId();
+
             // get acquaintances for DataPartitionId
             var acquaintances = Query().Where(x => x.DataPartitionId == dataPartitionId);
 
@@ -103,6 +109,33 @@ namespace Acquaint.Service.Controllers
         public Task DeleteAcquaintance(string id)
         {
             return DeleteAsync(id);
+        }
+
+        string GetDataPartitionId()
+        {
+            IEnumerable<string> dataPartitionIdValues = new List<string>();
+
+            if (!Request.Headers.TryGetValues("DataPartitionId", out dataPartitionIdValues))
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        ReasonPhrase = "HTTP header missing: DataPartitionId"
+                    });
+            }
+
+            Guid dataPartitionId = Guid.Empty;
+
+            if (!Guid.TryParse(dataPartitionIdValues.First(), out dataPartitionId))
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        ReasonPhrase = "Value of HTTP header DataPartitionId is not a valid GUID"
+                    });
+            }
+
+            return dataPartitionId.ToString().TrimStart(new []{'{'}).TrimEnd(new[]{'}'});
         }
     }
 }

@@ -2,10 +2,12 @@
 using Microsoft.Azure.Mobile.Server.Tables;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using Acquaint.Models;
+using Newtonsoft.Json;
 
 namespace Acquaint.Service.DataObjects
 {
-    public class Acquaintance : EntityData
+    public class Acquaintance : EntityData, IAcquaintance
     {
         public string DataPartitionId { get; set; }
 
@@ -30,5 +32,42 @@ namespace Acquaint.Service.DataObjects
         public string State { get; set; }
 
         public string PhotoUrl { get; set; }
+
+        [JsonIgnore]
+        [NotMapped]
+        public string AddressString
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        [JsonIgnore]
+        [NotMapped]
+        public string DisplayName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        [JsonIgnore]
+        [NotMapped]
+        public string DisplayLastNameFirst
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        [JsonIgnore]
+        [NotMapped]
+        public string StatePostal
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
