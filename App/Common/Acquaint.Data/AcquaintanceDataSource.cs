@@ -11,11 +11,8 @@ namespace Acquaint.Data
 {
 	public class AcquaintanceDataSource : IDataSource<IAcquaintance>
 	{
-		public AcquaintanceDataSource(bool simulateNetworkLatency = true)
+		public AcquaintanceDataSource()
 		{
-			if (!simulateNetworkLatency)
-				_LatencyTimeSpan = TimeSpan.Zero;
-
 			_RootFolder = FileSystem.Current.LocalStorage;
 		}
 
@@ -58,8 +55,6 @@ namespace Acquaint.Data
 		public async Task<ICollection<IAcquaintance>> GetItems(int start = 0, int count = 100, string query = "")
 		{
 			await EnsureInitialized().ConfigureAwait(false);
-
-			await Latency;
 
 			var items = AcquaintanceDataSourceHelper
 				.BasicQueryFilter(_Acquaintances, query)
@@ -177,16 +172,6 @@ namespace Acquaint.Data
 		static async Task<string> GetFileContents(IFile file)
 		{
 			return await file.ReadAllTextAsync().ConfigureAwait(false);
-		}
-
-		Task Latency
-		{
-			get
-			{
-				var random = new Random();
-				var ms = random.Next((int)_LatencyTimeSpan.TotalMilliseconds);
-				return Task.Delay(ms);
-			}
 		}
 	}
 
