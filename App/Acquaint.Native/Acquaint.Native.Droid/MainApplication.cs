@@ -14,7 +14,7 @@ namespace Acquaint.Native.Droid
     [Application]
     public class MainApplication : Application, Application.IActivityLifecycleCallbacks
     {
-		public static IDataSource<Acquaintance> AcquaintanceDataSource { get; private set; }
+		public static IDataSource<IAcquaintance> AcquaintanceDataSource { get; private set; }
 
         public MainApplication(IntPtr handle, JniHandleOwnership transer)
           :base(handle, transer)

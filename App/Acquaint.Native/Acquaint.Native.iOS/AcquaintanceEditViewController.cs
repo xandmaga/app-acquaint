@@ -15,7 +15,7 @@ namespace Acquaint.Native.iOS
 		AcquaintanceDetailViewController _DetailViewController;
 		AcquaintanceTableViewController _ListViewController;
 
-		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
+		public void SetAcquaintance(IAcquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
 		{
 			Acquaintance = acquaintance;
 			if (detailViewController != null)

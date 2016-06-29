@@ -1,4 +1,5 @@
-﻿using Acquaint.Models;
+﻿using Acquaint.Data;
+using Acquaint.Models;
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
@@ -11,7 +12,7 @@ namespace Acquaint.Native.Droid
 	[Activity]
 	public class AquaintanceEditActivity : AppCompatActivity
 	{
-		Acquaintance _Acquaintance;
+		IAcquaintance _Acquaintance;
 		View _ContentLayout;
 
 		EditText _FirstNameField;
