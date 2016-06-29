@@ -11,11 +11,8 @@ namespace Acquaint.Data
 {
 	public class AcquaintanceDataSource : IDataSource<IAcquaintance>
 	{
-		public AcquaintanceDataSource(bool simulateNetworkLatency = true)
+		public AcquaintanceDataSource()
 		{
-			if (!simulateNetworkLatency)
-				_LatencyTimeSpan = TimeSpan.Zero;
-
 			_RootFolder = FileSystem.Current.LocalStorage;
 		}
 
@@ -27,13 +24,16 @@ namespace Acquaint.Data
 
 			int i = _Acquaintances.FindIndex(a => a.Id == item.Id);
 
+			// use AutoMapper to convert IAcquaintance to Acquaintance
+			var acquaintance = Mapper.Map<Acquaintance>(item);
+
 			if (i < 0)
 			{
-				_Acquaintances.Add(Mapper.Map<Acquaintance>(item));
+				_Acquaintances.Add(acquaintance);
 			}
 			else
 			{
-				_Acquaintances[i] = Mapper.Map<Acquaintance>(item);
+				_Acquaintances[i] = acquaintance;
 			}
 
 			await WriteFile(_RootFolder, _FileName, JsonConvert.SerializeObject(_Acquaintances)).ConfigureAwait(false);
@@ -59,8 +59,6 @@ namespace Acquaint.Data
 		{
 			await EnsureInitialized().ConfigureAwait(false);
 
-			await Latency;
-
 			var items = AcquaintanceDataSourceHelper
 				.BasicQueryFilter(_Acquaintances, query)
 				.Skip(start)
@@ -75,10 +73,6 @@ namespace Acquaint.Data
 		const string _FileName = "acquaintances.json";
 
 	    readonly IFolder _RootFolder;
-
-		// you can change this value to simulate network latency
-		static readonly int latencyInSeconds = 0;
-		readonly TimeSpan _LatencyTimeSpan = TimeSpan.FromSeconds(latencyInSeconds);
 
 		bool _IsInitialized;
 
@@ -177,16 +171,6 @@ namespace Acquaint.Data
 		static async Task<string> GetFileContents(IFile file)
 		{
 			return await file.ReadAllTextAsync().ConfigureAwait(false);
-		}
-
-		Task Latency
-		{
-			get
-			{
-				var random = new Random();
-				var ms = random.Next((int)_LatencyTimeSpan.TotalMilliseconds);
-				return Task.Delay(ms);
-			}
 		}
 	}
 
