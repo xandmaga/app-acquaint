@@ -14,7 +14,7 @@ namespace Acquaint.Native.iOS
 		/// <summary>
 		/// The acquaintance data source.
 		/// </summary>
-		readonly IDataSource<IAcquaintance> _AcquaintanceDataSource;
+		readonly IDataSource<IAcquaintance> _DataSource;
 
 		/// <summary>
 		/// Gets the acquaintances.
@@ -24,7 +24,7 @@ namespace Acquaint.Native.iOS
 
 		public AcquaintanceTableViewSource()
         {
-			_AcquaintanceDataSource = new AcquaintanceDataSource();
+			_DataSource = new AcquaintanceDataSource();
         }
 
 		// <summary>
@@ -33,17 +33,17 @@ namespace Acquaint.Native.iOS
 		// <returns>The acquaintances.</returns>
 		public async Task LoadAcquaintances()
 		{
-			Acquaintances = (await _AcquaintanceDataSource.GetItems()).ToList();
+			Acquaintances = (await _DataSource.GetItems()).ToList();
 		}
 
 		public async Task SaveAcquaintance (IAcquaintance acquaintance)
 		{
-			await _AcquaintanceDataSource.SaveItem (acquaintance);
+			await _DataSource.SaveItem (acquaintance);
 		}
 
 		public async Task DeleteAcquaintance (IAcquaintance acquaintance)
 		{
-			await _AcquaintanceDataSource.DeleteItem (acquaintance.Id);
+			await _DataSource.DeleteItem (acquaintance.Id);
 		}
 
 		#region implemented abstract members of UITableViewSource

@@ -152,6 +152,15 @@ namespace Acquaint.Data
 		public string DataPartitionId { get; set; }
 
 		public override string ToString() => $"{FirstName} {LastName}";
+
+
+		public DateTimeOffset? CreatedAt { get; set; }
+
+		public DateTimeOffset? UpdatedAt { get; set; }
+
+		public bool Deleted { get; set; }
+
+		public byte[] Version { get; set; }
     }
 }
 

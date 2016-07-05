@@ -41,6 +41,11 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+			<key>azurewebsites.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 		</dict>
 	</dict>
 	<key>CFBundleIconFiles</key>

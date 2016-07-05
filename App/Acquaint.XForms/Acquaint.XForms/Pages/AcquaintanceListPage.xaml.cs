@@ -44,11 +44,11 @@ namespace Acquaint.XForms
 			Navigation.PushAsync(new AcquaintanceEditPage() { BindingContext = new AcquaintanceEditViewModel() });
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            ViewModel.LoadAcquaintancesCommand.Execute(null);
+			await ViewModel.ExecuteLoadAcquaintancesCommand();
         }
     }
 }
