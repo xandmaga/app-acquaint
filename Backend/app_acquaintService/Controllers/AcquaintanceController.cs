@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
-using System.Data.Linq;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -11,16 +8,17 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using Acquaint.Service.DataObjects;
 using Acquaint.Service.Models;
-using Acquaint.Models;
-using AutoMapper;
 using System.Net.Http;
 using System.Net;
+using System.Web.Http.OData.Query;
 
 namespace Acquaint.Service.Controllers
 {
     public class AcquaintanceController : TableController<Acquaintance>
     {
         private AcquaintDbContext _context;
+
+        const string DataPartitionIdPropertyName = "DataPartitionId";
 
         protected override void Initialize(HttpControllerContext controllerContext)
         {
@@ -30,18 +28,100 @@ namespace Acquaint.Service.Controllers
         }
 
         // GET tables/Acquaintance/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public IQueryable<Acquaintance> GetAllAcquaintances()
+        public IQueryable<Acquaintance> GetAllAcquaintances(ODataQueryOptions<Acquaintance> queryOptions)
         {
-            var dataPartitionId = GetDataPartitionId();
+            var DataPartitionId = GetDataPartitionId(queryOptions);
 
             // get acquaintances for DataPartitionId
-            var acquaintances = Query().Where(x => x.DataPartitionId == dataPartitionId);
+            var acquaintances = Query().Where(x => x.DataPartitionId == DataPartitionId);
 
-            // if there are no acquaintances for this dataPartitionId
+            // if there are no acquaintances for this DataPartitionId
             if (!acquaintances.Any())
             {
-                // create new records
-                var newRecords = new List<Acquaintance>()
+                // seed acquaintances for this DataPartitionId
+                _context.Acquaintances.AddRange(GetSeedData(DataPartitionId));
+
+                // commit context updates
+                _context.SaveChanges();
+            }
+
+            // return acquaintances
+            return Query().Where(x => x.DataPartitionId == DataPartitionId);
+        }
+
+        // GET tables/Acquaintance/3BF73C70-1DEE-47DC-8150-3A9BF368F01E
+        public SingleResult<Acquaintance> GetAcquaintance(string id)
+        {
+            return Lookup(id);
+        }
+
+        // PATCH tables/Acquaintance/3BF73C70-1DEE-47DC-8150-3A9BF368F01E
+        public async Task<Acquaintance> PatchAcquaintance(string id, Delta<Acquaintance> patch)
+        {
+            return await UpdateAsync(id, patch);
+        }
+
+        // POST tables/Acquaintance
+        public async Task<IHttpActionResult> PostAcquaintance(Acquaintance item)
+        {
+            Acquaintance current = await InsertAsync(item);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+        }
+
+        // DELETE tables/Acquaintance/3BF73C70-1DEE-47DC-8150-3A9BF368F01E
+        public async Task DeleteAcquaintance(string id)
+        {
+            await DeleteAsync(id);
+        }
+
+        /// <summary>
+        /// Parses the DataPartitionId from the OData query.
+        /// </summary>
+        /// <param name="queryOptions">The OData query as a ODataQueryOptions instance</param>
+        /// <returns>The DataPartitionId string</returns>
+        string GetDataPartitionId(ODataQueryOptions<Acquaintance> queryOptions)
+        {
+            if (queryOptions.Filter == null)
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest) { ReasonPhrase = $"Bad Request: OData $filter not present in request" });
+            }
+
+            if (!queryOptions.Filter.RawValue.Contains($"{DataPartitionIdPropertyName}"))
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest) { ReasonPhrase = $"Bad Request: {DataPartitionIdPropertyName} must be present in the OData $filter" });
+            }
+
+            var pattern = $"{DataPartitionIdPropertyName} eq '";
+
+            var patternStart = queryOptions.Filter.RawValue.IndexOf(pattern);
+
+            var value = queryOptions.Filter.RawValue.Substring(patternStart + pattern.Length, 36);
+
+            Guid test;
+
+            if (!Guid.TryParse(value, out test))
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest) { ReasonPhrase = $"Bad Request: {DataPartitionIdPropertyName} value must be a valid GUID" });
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// Generates Acwuaintances that will be associated with the given DataPartitionId
+        /// </summary>
+        /// <param name="dataPartitionId">A</param>
+        /// <returns>A list of Acquaintances</returns>
+        List<Acquaintance> GetSeedData(string dataPartitionId)
+        {
+            Guid test;
+
+            if (!Guid.TryParse(dataPartitionId, out test))
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest) { ReasonPhrase = $"Bad Request: {DataPartitionIdPropertyName} value must be a valid GUID" });
+            }
+
+            return new List<Acquaintance>()
                 {
                     new Acquaintance() { DataPartitionId = dataPartitionId, Id = Guid.NewGuid().ToString(), FirstName = "Joseph", LastName = "Grimes", Company = "GG Mechanical", JobTitle = "Vice President", Email = "jgrimes@ggmechanical.com", Phone = "414-367-4348", Street = "2030 Judah St", City = "San Francisco", PostalCode = "94144", State = "CA", PhotoUrl = "josephgrimes.jpg" },
                     new Acquaintance() { DataPartitionId = dataPartitionId, Id = Guid.NewGuid().ToString(), FirstName = "Monica", LastName = "Green", Company = "Calcom Logistics", JobTitle = "Director", Email = "mgreen@calcomlogistics.com", Phone = "925-353-8029", Street = "230 3rd Ave", City = "San Francisco", PostalCode = "94118", State = "CA", PhotoUrl = "monicagreen.jpg" },
@@ -74,68 +154,6 @@ namespace Acquaint.Service.Controllers
                     new Acquaintance() { DataPartitionId = dataPartitionId, Id = Guid.NewGuid().ToString(), FirstName = "Margaret", LastName = "Kidd", Company = "Marin Cultural Center", JobTitle = "President", Email = "mkidd@marincultural.org", Phone = "406-784-0602", Street = "106 Throckmorton Ave", City = "Mill Valley", PostalCode = "94941", State = "CA", PhotoUrl = "margaretkidd.jpg" },
                     new Acquaintance() { DataPartitionId = dataPartitionId, Id = Guid.NewGuid().ToString(), FirstName = "Leo", LastName = "Parson", Company = "San Rafel Chamber of Commerce", JobTitle = "Board Member", Email = "leo.parson@sanrafaelcoc.org", Phone = "773-991-5214", Street = "199 Clorinda Ave", City = "San Rafael", PostalCode = "94901", State = "CA", PhotoUrl = "leoparson.jpg" },
                 };
-
-                // seed acquaintances for this DataPartitionId
-                _context.Acquaintances.AddRange(newRecords);
-
-                // commit context updates
-                _context.SaveChanges();
-            }
-
-            // return acquaintances
-            return Query().Where(x => x.DataPartitionId == dataPartitionId);
-        }
-
-        // GET tables/Acquaintance/3BF73C70-1DEE-47DC-8150-3A9BF368F01E
-        public SingleResult<Acquaintance> GetAcquaintance(string id)
-        {
-            return Lookup(id);
-        }
-
-        // PATCH tables/Acquaintance/3BF73C70-1DEE-47DC-8150-3A9BF368F01E
-        public Task<Acquaintance> PatchAcquaintance(string id, Delta<Acquaintance> patch)
-        {
-            return UpdateAsync(id, patch);
-        }
-
-        // POST tables/Acquaintance
-        public async Task<IHttpActionResult> PostAcquaintance(Acquaintance item)
-        {
-            Acquaintance current = await InsertAsync(item);
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
-        }
-
-        // DELETE tables/Acquaintance/3BF73C70-1DEE-47DC-8150-3A9BF368F01E
-        public Task DeleteAcquaintance(string id)
-        {
-            return DeleteAsync(id);
-        }
-
-        string GetDataPartitionId()
-        {
-            IEnumerable<string> dataPartitionIdValues = new List<string>();
-
-            if (!Request.Headers.TryGetValues("DataPartitionId", out dataPartitionIdValues))
-            {
-                throw new HttpResponseException(
-                    new HttpResponseMessage(HttpStatusCode.BadRequest)
-                    {
-                        ReasonPhrase = "HTTP header missing: DataPartitionId"
-                    });
-            }
-
-            Guid dataPartitionId = Guid.Empty;
-
-            if (!Guid.TryParse(dataPartitionIdValues.First(), out dataPartitionId))
-            {
-                throw new HttpResponseException(
-                    new HttpResponseMessage(HttpStatusCode.BadRequest)
-                    {
-                        ReasonPhrase = "Value of HTTP header DataPartitionId is not a valid GUID"
-                    });
-            }
-
-            return dataPartitionId.ToString().TrimStart(new []{'{'}).TrimEnd(new[]{'}'});
         }
     }
 }

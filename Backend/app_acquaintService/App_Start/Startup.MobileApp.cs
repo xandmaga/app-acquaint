@@ -55,21 +55,6 @@ namespace Acquaint.Service
 
     public class AcquaintServiceInitializer : CreateDatabaseIfNotExists<AcquaintDbContext>
     {
-        //protected override void Seed(app_acquaintContext context)
-        //{
-        //    List<Acquaintance> todoItems = new List<Acquaintance>
-        //    {
-        //        new Acquaintance { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-        //        new Acquaintance { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
-        //    };
-
-        //    foreach (Acquaintance todoItem in todoItems)
-        //    {
-        //        context.Set<Acquaintance>().Add(todoItem);
-        //    }
-
-        //    base.Seed(context);
-        //}
     }
 }
 

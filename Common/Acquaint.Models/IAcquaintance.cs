@@ -1,5 +1,4 @@
-﻿using System;
-namespace Acquaint.Models
+﻿namespace Acquaint.Models
 {
 	// The choice was made to use an interface as the model so that it can be 
 	// shared between the mobile app and backend, without having a separate 
