@@ -19,7 +19,6 @@ namespace Acquaint.Service.Models
 
         public AcquaintDbContext() : base(connectionStringName)
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AcquaintDbContext>());
         } 
 
         public DbSet<Acquaintance> Acquaintances { get; set; }
