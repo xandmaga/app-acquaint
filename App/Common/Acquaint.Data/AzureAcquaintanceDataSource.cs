@@ -71,12 +71,12 @@ namespace Acquaint.Data
 
 			if (handlerFactory != null)
 			{
-				client = new MobileServiceClient(_ServiceUrl, handlerFactory.GetHttpClientHandler()); // { SerializerSettings = new MobileServiceJsonSerializerSettings() { CamelCasePropertyNames = true } };
+				client = new MobileServiceClient(_ServiceUrl, handlerFactory.GetHttpClientHandler());
 			}
 			else
-				client = new MobileServiceClient(_ServiceUrl); // { SerializerSettings = new MobileServiceJsonSerializerSettings() { CamelCasePropertyNames = true } };
+				client = new MobileServiceClient(_ServiceUrl);
 #else
-			client = new MobileServiceClient(_ServiceUrl); // { SerializerSettings = new MobileServiceJsonSerializerSettings() { CamelCasePropertyNames = true } };
+			client = new MobileServiceClient(_ServiceUrl);
 #endif
 
 			return client;
