@@ -133,15 +133,13 @@ namespace Acquaint.Data
 				await DeltaSync().ConfigureAwait(false);
 				return (await _AcquaintanceTable.Where(acquaintance => acquaintance.Id == id).ToEnumerableAsync().ConfigureAwait(false)).SingleOrDefault();
 			}, null).ConfigureAwait(false);
-
-
 		}
 
 		public async Task<ICollection<Acquaintance>> GetItems(int start = 0, int count = 100, string query = "")
 		{
 			return await Execute<ICollection<Acquaintance>>(async () => {
 				await DeltaSync().ConfigureAwait(false);
-				return (await _AcquaintanceTable.Where(acquaintance => acquaintance.DataPartitionId == _DataPartitionId).OrderBy(b => b.Company).ToCollectionAsync().ConfigureAwait(false));
+				return (await _AcquaintanceTable.Where(acquaintance => acquaintance.DataPartitionId == _DataPartitionId).OrderBy(b => b.DisplayLastNameFirst).ToCollectionAsync().ConfigureAwait(false));
 			}, new Collection<Acquaintance>()).ConfigureAwait(false);
 		}
 
