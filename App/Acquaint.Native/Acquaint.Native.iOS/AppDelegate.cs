@@ -1,5 +1,10 @@
-﻿using Foundation;
+﻿using Acquaint.Acquaint.iOS;
+using Acquaint.Data;
+using Autofac;
+using Autofac.Extras.CommonServiceLocator;
+using Foundation;
 using HockeyApp;
+using Microsoft.Practices.ServiceLocation;
 using UIKit;
 
 namespace Acquaint.Native.iOS
@@ -9,6 +14,8 @@ namespace Acquaint.Native.iOS
 	[Register("AppDelegate")]
 	public class AppDelegate : UIApplicationDelegate
 	{
+		public static IContainer Container { get; set; }
+
 		// The Window property. The root of the app's UI hierarchy.
 		public override UIWindow Window { get; set; }
 
@@ -24,9 +31,15 @@ namespace Acquaint.Native.iOS
 			manager.Configure("11111111222222223333333344444444"); // This is just a placeholder value. Replace with your real HockeyApp App ID
 			manager.StartManager();
 
+			RegisterDependencies();
+
 		    #if ENABLE_TEST_CLOUD
 		    Xamarin.Calabash.Start();
 		    #endif
+
+			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+
+			SQLitePCL.CurrentPlatform.Init();
 
 			// intantiate a new instance of Window with the device's screen bounds
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
@@ -56,6 +69,20 @@ namespace Acquaint.Native.iOS
 			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(84, 119, 153);
 			UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes { ForegroundColor = UIColor.White };
 			UIBarButtonItem.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White }, UIControlState.Normal);
+		}
+
+		static void RegisterDependencies()
+		{
+			var builder = new ContainerBuilder();
+
+			#if DEBUG
+			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+			#endif
+
+			Container = builder.Build();
+
+			var csl = new AutofacServiceLocator(Container);
+			ServiceLocator.SetLocatorProvider(() => csl);
 		}
 
 		public override void OnResignActivation(UIApplication application)

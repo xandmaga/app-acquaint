@@ -1,4 +1,5 @@
 ﻿using System;
+using Acquaint.Data;
 using Acquaint.Models;
 using UIKit;
 
@@ -10,12 +11,12 @@ namespace Acquaint.Native.iOS
 		/// Gets or sets the acquaintance.
 		/// </summary>
 		/// <value>The acquaintance.</value>
-		public IAcquaintance Acquaintance { get; private set; }
+		public Acquaintance Acquaintance { get; private set; }
 
 		AcquaintanceDetailViewController _DetailViewController;
 		AcquaintanceTableViewController _ListViewController;
 
-		public void SetAcquaintance(IAcquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
+		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
 		{
 			Acquaintance = acquaintance;
 			if (detailViewController != null)
