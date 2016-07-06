@@ -1,5 +1,5 @@
-﻿using Acquaint.Acquaint.iOS;
-using Acquaint.Data;
+﻿using Acquaint.Data;
+using Acquaint.Native.iOS.Services;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using Foundation;

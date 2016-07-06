@@ -1,14 +1,15 @@
-﻿using Foundation;
+﻿using Acquaint.Data;
+using Acquaint.XForms.iOS.Services;
+using Autofac;
+using Autofac.Extras.CommonServiceLocator;
+using Foundation;
+using HockeyApp;
+using ImageCircle.Forms.Plugin.iOS;
+using Microsoft.Practices.ServiceLocation;
 using UIKit;
+using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using Xamarin;
-using ImageCircle.Forms.Plugin.iOS;
-using HockeyApp;
-using Autofac;
-using Acquaint.Data;
-using Microsoft.Practices.ServiceLocation;
-using Autofac.Extras.CommonServiceLocator;
 
 namespace Acquaint.XForms.iOS
 {
