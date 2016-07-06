@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
-using AutoMapper;
 using FormsToolkit;
 using MvvmHelpers;
 using Plugin.Messaging;
@@ -17,7 +16,7 @@ namespace Acquaint.XForms
 		{
 			_CapabilityService = DependencyService.Get<ICapabilityService>();
 
-			DataSource = new AcquaintanceDataSource();
+			DataSource = new AzureAcquaintanceDataSource();
 
 			SubscribeToSaveAcquaintanceMessages();
 
@@ -27,7 +26,7 @@ namespace Acquaint.XForms
 		// this is just a utility service that we're using in this demo app to mitigate some limitations of the iOS simulator
 		readonly ICapabilityService _CapabilityService;
 
-		readonly IDataSource<IAcquaintance> DataSource;
+		readonly IDataSource<Acquaintance> DataSource;
 
 		ObservableRangeCollection<Acquaintance> _Acquaintances;
 
@@ -55,7 +54,7 @@ namespace Acquaint.XForms
 			get { return _LoadAcquaintancesCommand ?? (_LoadAcquaintancesCommand = new Command(async () => await ExecuteLoadAcquaintancesCommand())); }
 		}
 
-		async Task ExecuteLoadAcquaintancesCommand()
+		public async Task ExecuteLoadAcquaintancesCommand()
 		{
 			if (Acquaintances.Count < 1)
 			{
@@ -94,11 +93,9 @@ namespace Acquaint.XForms
 
 			if (acquaintances.Count != 0)
 			{
-				Mapper.Initialize(cfg => cfg.CreateMap<IAcquaintance, Acquaintance>());
-
 				foreach (var a in acquaintances)
 				{
-					Acquaintances.Add(Mapper.Map<Acquaintance>(a));
+					Acquaintances.Add(a);
 				}
 			}
 

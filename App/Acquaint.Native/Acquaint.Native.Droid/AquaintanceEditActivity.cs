@@ -47,7 +47,7 @@ namespace Acquaint.Native.Droid
 			var acquaintanceId = Intent.GetStringExtra(GetString(Resource.String.acquaintanceEditIntentKey));
 
 			// fetch the acquaintance based on the id
-			_Acquaintance = await MainApplication.AcquaintanceDataSource.GetItem(acquaintanceId);
+			_Acquaintance = await MainApplication.DataSource.GetItem(acquaintanceId);
 
 			Title = SupportActionBar.Title = "";
 
@@ -137,7 +137,7 @@ namespace Acquaint.Native.Droid
 			_Acquaintance.State = _StateField.Text;
 			_Acquaintance.PostalCode = _ZipField.Text;
 
-			MainApplication.AcquaintanceDataSource.SaveItem(_Acquaintance);
+			MainApplication.DataSource.SaveItem(_Acquaintance);
 		}
 	}
 }

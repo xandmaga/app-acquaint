@@ -14,7 +14,7 @@ namespace Acquaint.Native.Droid
     [Application]
     public class MainApplication : Application, Application.IActivityLifecycleCallbacks
     {
-		public static IDataSource<IAcquaintance> AcquaintanceDataSource { get; private set; }
+		public static IDataSource<Acquaintance> DataSource { get; private set; }
 
         public MainApplication(IntPtr handle, JniHandleOwnership transer)
           :base(handle, transer)
@@ -30,7 +30,7 @@ namespace Acquaint.Native.Droid
             RegisterActivityLifecycleCallbacks(this);
 			//A great place to initialize Xamarin.Insights and Dependency Services!
 
-			AcquaintanceDataSource = new AcquaintanceDataSource();
+			DataSource = new AzureAcquaintanceDataSource();
         }
 
         public override void OnTerminate()

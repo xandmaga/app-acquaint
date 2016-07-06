@@ -116,7 +116,7 @@ namespace Acquaint.Native.Droid
 		/// <returns>Task.</returns>
 		public async Task LoadAcquaintances()
 		{
-			Acquaintances = (await MainApplication.AcquaintanceDataSource.GetItems()).ToList();
+			Acquaintances = (await MainApplication.DataSource.GetItems()).ToList();
 		}
 
 		public void Update()

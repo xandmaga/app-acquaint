@@ -66,7 +66,7 @@ namespace Acquaint.Native.Droid
 			base.OnResume();
 
 			// fetch the acquaintance based on the id
-			_Acquaintance = await MainApplication.AcquaintanceDataSource.GetItem(_AcquaintanceId);
+			_Acquaintance = await MainApplication.DataSource.GetItem(_AcquaintanceId);
 
 			// set the activity title and action bar title
 			Title = SupportActionBar.Title = _Acquaintance.DisplayName;

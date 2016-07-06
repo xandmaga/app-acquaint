@@ -1,11 +1,10 @@
 ﻿using System;
 using Xamarin.Forms;
 using Acquaint.Data;
-using Acquaint.Models;
 
 namespace Acquaint.XForms
 {
-    public partial class AcquaintanceListPage : ContentPage
+	public partial class AcquaintanceListPage : ContentPage
     {
         protected AcquaintanceListViewModel ViewModel => BindingContext as AcquaintanceListViewModel;
 
@@ -44,11 +43,11 @@ namespace Acquaint.XForms
 			Navigation.PushAsync(new AcquaintanceEditPage() { BindingContext = new AcquaintanceEditViewModel() });
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            ViewModel.LoadAcquaintancesCommand.Execute(null);
+			await ViewModel.ExecuteLoadAcquaintancesCommand();
         }
     }
 }
