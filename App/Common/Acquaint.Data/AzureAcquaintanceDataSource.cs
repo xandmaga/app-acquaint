@@ -17,7 +17,7 @@ namespace Acquaint.Data
 		// The base URL of the Azure App Service instance.
 		// Replace with your own, if you've decided to host your own instance.
 		// Otherwise, feel free to use the provided service instance while you evaluate the app.
-		static readonly string _ServiceUrl = "http://10.10.10.22/Acquaint.Service"; // "https://app-acquaint.azurewebsites.net";
+		static readonly string _ServiceUrl = "https://app-acquaint.azurewebsites.net";
 
 		// Specify a GUID value for the data partition id. 
 		// This makes your data in the service isolated from everyone else's.
