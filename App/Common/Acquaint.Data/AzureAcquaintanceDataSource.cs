@@ -41,7 +41,7 @@ namespace Acquaint.Data
 
 			try
 			{
-				await _MobileService.SyncContext.InitializeAsync(store);
+				await _MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
 			}
 			catch (Exception ex)
 			{
@@ -50,7 +50,7 @@ namespace Acquaint.Data
 
 			_AcquaintanceTable = _MobileService.GetSyncTable<Acquaintance>();
 
-			await Fullsync();
+			await Fullsync().ConfigureAwait(false);
 
 			_IsInitialized = true;
 		}
@@ -65,19 +65,19 @@ namespace Acquaint.Data
 		{
 			MobileServiceClient client;
 
-			#if DEBUG
+#if DEBUG
 			// using a special handler on iOS so that we can use Charles debugging proxy to inspect outbound HTTP traffic from the app
 			var handlerFactory = ServiceLocator.Current.GetInstance<IHttpClientHandlerFactory>();
 
 			if (handlerFactory != null)
 			{
-				client = new MobileServiceClient(_ServiceUrl, handlerFactory.GetHttpClientHandler());
+				client = new MobileServiceClient(_ServiceUrl, handlerFactory.GetHttpClientHandler()); // { SerializerSettings = new MobileServiceJsonSerializerSettings() { CamelCasePropertyNames = true } };
 			}
 			else
-				client = new MobileServiceClient(_ServiceUrl);
-			#else
-				client = new MobileServiceClient(_ServiceUrl);
-			#endif
+				client = new MobileServiceClient(_ServiceUrl); // { SerializerSettings = new MobileServiceJsonSerializerSettings() { CamelCasePropertyNames = true } };
+#else
+			client = new MobileServiceClient(_ServiceUrl); // { SerializerSettings = new MobileServiceJsonSerializerSettings() { CamelCasePropertyNames = true } };
+#endif
 
 			return client;
 		}
@@ -85,8 +85,8 @@ namespace Acquaint.Data
 		async Task Fullsync()
 		{
 			await Execute(async () => {
-				await _AcquaintanceTable.PullAsync(null, _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId));
-			});
+				await _AcquaintanceTable.PullAsync("fullSyncAcquaintances", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId)).ConfigureAwait(false);
+			}).ConfigureAwait(false);
 		}
 
 		async Task DeltaSync()
@@ -94,55 +94,55 @@ namespace Acquaint.Data
 			await Execute(async () => {
 				if (!_IsInitialized)
 				{
-					await Init();
+					await Init().ConfigureAwait(false);
 					return;
 				}
 
 				await Execute(async () => {
-					await _AcquaintanceTable.PullAsync("deltaSyncAcquaintances", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId));
+					await _AcquaintanceTable.PullAsync("deltaSyncAcquaintances", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId)).ConfigureAwait(false);
 				});
-			});
+			}).ConfigureAwait(false);
 		}
 
 		#region IDataSource implementation
 
 		public async Task SaveItem(Acquaintance item)
 		{
-			await Execute(async () => { 
-				await DeltaSync();
+			await Execute(async () => {
+				await DeltaSync().ConfigureAwait(false);
 				if (item.Id == null)
-					await _AcquaintanceTable.InsertAsync(item);
+					await _AcquaintanceTable.InsertAsync(item).ConfigureAwait(false);
 				else
-					await _AcquaintanceTable.UpdateAsync(item);
-			});
+					await _AcquaintanceTable.UpdateAsync(item).ConfigureAwait(false);
+			}).ConfigureAwait(false);
 		}
 
 		public async Task DeleteItem(string id)
 		{
-			await Execute(async () => { 
-				await DeltaSync();
-				var item = await GetItem(id);
+			await Execute(async () => {
+				await DeltaSync().ConfigureAwait(false);
+				var item = await GetItem(id).ConfigureAwait(false);
 				if (item != null)
-					await _AcquaintanceTable.DeleteAsync(item);
-			});
+					await _AcquaintanceTable.DeleteAsync(item).ConfigureAwait(false);
+			}).ConfigureAwait(false);
 		}
 
 		public async Task<Acquaintance> GetItem(string id)
 		{
-			return await Execute(async () => { 
-				await DeltaSync();
-				return (await _AcquaintanceTable.Where(acquaintance => acquaintance.Id == id).ToEnumerableAsync()).SingleOrDefault();
-			}, null);
+			return await Execute(async () => {
+				await DeltaSync().ConfigureAwait(false);
+				return (await _AcquaintanceTable.Where(acquaintance => acquaintance.Id == id).ToEnumerableAsync().ConfigureAwait(false)).SingleOrDefault();
+			}, null).ConfigureAwait(false);
 
 
 		}
 
 		public async Task<ICollection<Acquaintance>> GetItems(int start = 0, int count = 100, string query = "")
 		{
-			return await Execute<ICollection<Acquaintance>>(async () => { 
-				await DeltaSync();
-				return (await _AcquaintanceTable.Where(acquaintance => acquaintance.DataPartitionId == _DataPartitionId).OrderBy(b => b.Company).ToCollectionAsync());
-			}, new Collection<Acquaintance>());
+			return await Execute<ICollection<Acquaintance>>(async () => {
+				await DeltaSync().ConfigureAwait(false);
+				return (await _AcquaintanceTable.Where(acquaintance => acquaintance.DataPartitionId == _DataPartitionId).OrderBy(b => b.Company).ToCollectionAsync().ConfigureAwait(false));
+			}, new Collection<Acquaintance>()).ConfigureAwait(false);
 		}
 
 		#endregion
@@ -158,7 +158,7 @@ namespace Acquaint.Data
 		{
 			try
 			{
-				await execute();
+				await execute().ConfigureAwait(false);
 			}
 			// isolate mobile service errors
 			catch (MobileServiceInvalidOperationException ex)
@@ -182,7 +182,7 @@ namespace Acquaint.Data
 		{
 			try
 			{
-				return await execute();
+				return await execute().ConfigureAwait(false);
 			}
 			catch (MobileServiceInvalidOperationException ex) // isolate mobile service errors
 			{

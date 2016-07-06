@@ -9,6 +9,8 @@ namespace Acquaint.Data
     {
         public string Id { get; set; }
 
+		public string DataPartitionId { get; set; }
+
         string _FirstName;
         public string FirstName
         {
@@ -149,10 +151,7 @@ namespace Acquaint.Data
         [JsonIgnore]
         public string StatePostal => State + " " + PostalCode;
 
-		public string DataPartitionId { get; set; }
-
 		public override string ToString() => $"{FirstName} {LastName}";
-
 
 		public DateTimeOffset? CreatedAt { get; set; }
 
