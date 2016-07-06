@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
@@ -11,13 +12,19 @@ namespace Acquaint.Data
 {
 	public class AzureAcquaintanceDataSource : IDataSource<Acquaintance>
 	{
-		public MobileServiceClient _MobileService { get; set; }
+		MobileServiceClient _MobileService;
+
+		// The base URL of the Azure App Service instance.
+		// Replace with your own, if you've decided to host your own instance.
+		// Otherwise, feel free to use the provided service instance while you evaluate the app.
+		static readonly string _ServiceUrl = "http://10.10.10.22/Acquaint.Service"; // "https://app-acquaint.azurewebsites.net";
+
+		// Specify a GUID value for the data partition id. 
+		// This makes your data in the service isolated from everyone else's.
+		// Prevents data from being seen across different groups who are using this app for evaluation.
+		readonly string _DataPartitionId = "01d676fd-789a-4488-b519-1840e080936e";
 
 		IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
-
-		readonly string _ServiceUrl = "https://app-acquaint.azurewebsites.net";
-
-		readonly string _DataPartitionId = "01d676fd-789a-4488-b519-1840e080936e";
 
 		bool _IsInitialized;
 
@@ -26,7 +33,7 @@ namespace Acquaint.Data
 			if (_IsInitialized)
 				return;
 
-			_MobileService = new MobileServiceClient(_ServiceUrl, null);
+			_MobileService = GetMobileServiceInstance();
 
 			var store = new MobileServiceSQLiteStore("acquaintances.db");
 
@@ -48,10 +55,36 @@ namespace Acquaint.Data
 			_IsInitialized = true;
 		}
 
+		/// <summary>
+		/// Gets a MobileServiceClient instance. This particular method is for developer convenience, 
+		/// because it implements a special handler for iOS, enabling the sniffing of outbound HTTP traffic 
+		/// with tools such as Charles Deugging Proxy (in debug builds only).
+		/// </summary>
+		/// <returns>The MobileServiceClient instance.</returns>
+		MobileServiceClient GetMobileServiceInstance()
+		{
+			MobileServiceClient client;
+
+			#if DEBUG
+			// using a special handler on iOS so that we can use Charles debugging proxy to inspect outbound HTTP traffic from the app
+			var handlerFactory = ServiceLocator.Current.GetInstance<IHttpClientHandlerFactory>();
+
+			if (handlerFactory != null)
+			{
+				client = new MobileServiceClient(_ServiceUrl, handlerFactory.GetHttpClientHandler());
+			}
+			else
+				client = new MobileServiceClient(_ServiceUrl);
+			#else
+				client = new MobileServiceClient(_ServiceUrl);
+			#endif
+
+			return client;
+		}
+
 		async Task Fullsync()
 		{
 			await Execute(async () => {
-				await _MobileService.SyncContext.PushAsync();
 				await _AcquaintanceTable.PullAsync(null, _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId));
 			});
 		}
@@ -66,7 +99,6 @@ namespace Acquaint.Data
 				}
 
 				await Execute(async () => {
-					await _MobileService.SyncContext.PushAsync();
 					await _AcquaintanceTable.PullAsync("deltaSyncAcquaintances", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId));
 				});
 			});
@@ -118,6 +150,10 @@ namespace Acquaint.Data
 
 		#region some nifty helpers
 
+		/// <summary>
+		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
+		/// </summary>
+		/// <param name="execute">A Func that contains the async work you'd like to do.</param>
 		static async Task Execute(Func<Task> execute)
 		{
 			try
@@ -136,6 +172,12 @@ namespace Acquaint.Data
 			}
 		}
 
+		/// <summary>
+		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
+		/// </summary>
+		/// <param name="execute">A Func that contains the async work you'd like to do, and will return some value.</param>
+		/// <param name="defaultReturnObject">A default return object, which will be returned in the event that an operation in the Func throws an exception.</param>
+		/// <typeparam name="T">The type of the return value that the Func will returns, and also the type of the default return object. </typeparam>
 		static async Task<T> Execute<T>(Func<Task<T>> execute, T defaultReturnObject)
 		{
 			try

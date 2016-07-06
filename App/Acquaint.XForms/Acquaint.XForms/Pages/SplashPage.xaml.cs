@@ -10,8 +10,9 @@ namespace Acquaint.XForms
     {
         public SplashPage()
         {
-            InitializeComponent();
+			InitializeComponent();
         }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();

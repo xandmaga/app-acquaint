@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
-using AutoMapper;
 using FormsToolkit;
 using MvvmHelpers;
 using Plugin.Messaging;
