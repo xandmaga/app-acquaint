@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using Acquaint.Models;
-using Microsoft.Azure.Mobile.Server.Tables;
 using Newtonsoft.Json;
 
 namespace Acquaint.Service.DataObjects

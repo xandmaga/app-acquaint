@@ -19,6 +19,7 @@ namespace Acquaint.Service.Models
 
         public AcquaintDbContext() : base(connectionStringName)
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<AcquaintDbContext>());
         } 
 
         public DbSet<Acquaintance> Acquaintances { get; set; }
