@@ -33,7 +33,7 @@ namespace Acquaint.Data
 
 			store.DefineTable<Acquaintance>();
 
-			await MobileService.SyncContext.InitializeAsync(store);
+			await MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
 
 			_IsInitialized = true;
 
@@ -44,66 +44,133 @@ namespace Acquaint.Data
 
 		public async Task<Acquaintance> GetItem(string id)
 		{
-			await SyncItems();
-			return await MobileService.GetSyncTable<Acquaintance>().LookupAsync(id);
+			return await Execute<Acquaintance>(async () => 
+			{ 
+				await SyncItems().ConfigureAwait(false);
+				return await MobileService.GetSyncTable<Acquaintance>().LookupAsync(id).ConfigureAwait(false);
+			}, null).ConfigureAwait(false);
 		}
 
 		public async Task<IEnumerable<Acquaintance>> GetItems()
 		{
-			await SyncItems();
-			return await MobileService.GetSyncTable<Acquaintance>().Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync();
+			return await Execute<IEnumerable<Acquaintance>>(async () => 
+			{
+				await SyncItems().ConfigureAwait(false);
+				return await MobileService.GetSyncTable<Acquaintance>().Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false);
+			}, new List<Acquaintance>()).ConfigureAwait(false);
 		}
 
 		public async Task<bool> AddItem(Acquaintance item)
 		{
-			await Initialize();
-			await MobileService.GetSyncTable<Acquaintance>().InsertAsync(item);
-			await SyncItems();
-			return true;
+			return await Execute<bool>(async () => 
+			{ 
+				await Initialize().ConfigureAwait(false);
+				await MobileService.GetSyncTable<Acquaintance>().InsertAsync(item).ConfigureAwait(false);
+				await SyncItems().ConfigureAwait(false);
+				return true;
+			}, false).ConfigureAwait(false);
 		}
 
 		public async Task<bool> UpdateItem(Acquaintance item)
 		{
-			await Initialize();
-			await MobileService.GetSyncTable<Acquaintance>().UpdateAsync(item);
-			await SyncItems();
-			return true;
+			return await Execute<bool>(async () => 
+			{ 
+				await Initialize().ConfigureAwait(false);
+				await MobileService.GetSyncTable<Acquaintance>().UpdateAsync(item).ConfigureAwait(false);
+				await SyncItems().ConfigureAwait(false);
+				return true;
+			}, false).ConfigureAwait(false);
 		}
 
 		public async Task<bool> RemoveItem(Acquaintance item)
 		{
-			await Initialize();
-			await MobileService.GetSyncTable<Acquaintance>().DeleteAsync(item);
-			await SyncItems();
-			return true;
+			return await Execute<bool>(async () => 
+			{
+				await Initialize().ConfigureAwait(false);
+				await MobileService.GetSyncTable<Acquaintance>().DeleteAsync(item).ConfigureAwait(false);
+				await SyncItems().ConfigureAwait(false);
+				return true;
+			}, false).ConfigureAwait(false);
 		}
 
 		public async Task<bool> SyncItems()
 		{
-			await Initialize();
+			return await Execute(async () => 
+			{
+				await Initialize().ConfigureAwait(false);
 
-			try
-			{
-				await EnsureDataIsSeededForPartitionId(_DataPartitionId);
-				await MobileService.SyncContext.PushAsync();
-				await MobileService.GetSyncTable<Acquaintance>().PullAsync($"all{typeof(Acquaintance).Name}", MobileService.GetSyncTable<Acquaintance>().CreateQuery());
-				return true;
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.WriteLine($"Error during Sync occurred: {ex.Message}");
-				return false;
-			}
+				try
+				{
+					await EnsureDataIsSeededForPartitionIdAsync(_DataPartitionId).ConfigureAwait(false);
+					await MobileService.SyncContext.PushAsync().ConfigureAwait(false);
+					await MobileService.GetSyncTable<Acquaintance>().PullAsync($"all{typeof(Acquaintance).Name}", MobileService.GetSyncTable<Acquaintance>().CreateQuery()).ConfigureAwait(false);
+					return true;
+				}
+				catch (Exception ex)
+				{
+					System.Diagnostics.Debug.WriteLine($"Error during Sync occurred: {ex.Message}");
+					return false;
+				}
+			}, false);
 		}
 		#endregion
 
-		async Task EnsureDataIsSeededForPartitionId(string dataPartitionId)
+		#region some nifty helpers
+
+		/// <summary>
+		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
+		/// </summary>
+		/// <param name="execute">A Func that contains the async work you'd like to do.</param>
+		static async Task Execute(Func<Task> execute)
+		{
+			try
+			{
+				await execute().ConfigureAwait(false);
+			}
+			// isolate mobile service errors
+			catch (MobileServiceInvalidOperationException ex)
+			{
+				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
+			}
+			// catch all other errors
+			catch (Exception ex2)
+			{
+				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex2.Message);
+			}
+		}
+
+		/// <summary>
+		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
+		/// </summary>
+		/// <param name="execute">A Func that contains the async work you'd like to do, and will return some value.</param>
+		/// <param name="defaultReturnObject">A default return object, which will be returned in the event that an operation in the Func throws an exception.</param>
+		/// <typeparam name="T">The type of the return value that the Func will returns, and also the type of the default return object. </typeparam>
+		static async Task<T> Execute<T>(Func<Task<T>> execute, T defaultReturnObject)
+		{
+			try
+			{
+				return await execute().ConfigureAwait(false);
+			}
+			catch (MobileServiceInvalidOperationException ex) // isolate mobile service errors
+			{
+				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
+			}
+			catch (Exception ex2) // catch all other errors
+			{
+				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex2.Message);
+			}
+			return defaultReturnObject;
+		}
+
+		#endregion
+
+		async Task EnsureDataIsSeededForPartitionIdAsync(string dataPartitionId)
 		{
 			if (Settings.DataIsSeeded)
 				return;
 
-			await MobileService.GetSyncTable<Acquaintance>().PullAsync($"all{typeof(Acquaintance).Name}", MobileService.GetSyncTable<Acquaintance>().CreateQuery());
-			var any = (await MobileService.GetSyncTable<Acquaintance>().Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync()).Any();
+			await MobileService.GetSyncTable<Acquaintance>().PullAsync($"all{typeof(Acquaintance).Name}", MobileService.GetSyncTable<Acquaintance>().CreateQuery()).ConfigureAwait(false);
+			var any = (await MobileService.GetSyncTable<Acquaintance>().Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false)).Any();
 
 			if (any)
 				Settings.DataIsSeeded = true;
