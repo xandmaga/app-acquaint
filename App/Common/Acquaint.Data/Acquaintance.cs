@@ -5,10 +5,8 @@ using Newtonsoft.Json;
 
 namespace Acquaint.Data
 {
-	public class Acquaintance : ObservableObject, IAcquaintance
+	public class Acquaintance : ObservableEntityData, IAcquaintance
     {
-        public string Id { get; set; }
-
 		public string DataPartitionId { get; set; }
 
         string _FirstName;
@@ -152,14 +150,6 @@ namespace Acquaint.Data
         public string StatePostal => State + " " + PostalCode;
 
 		public override string ToString() => $"{FirstName} {LastName}";
-
-		public DateTimeOffset? CreatedAt { get; set; }
-
-		public DateTimeOffset? UpdatedAt { get; set; }
-
-		public bool Deleted { get; set; }
-
-		public byte[] Version { get; set; }
     }
 }
 

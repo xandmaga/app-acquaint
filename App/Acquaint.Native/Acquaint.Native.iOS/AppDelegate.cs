@@ -20,7 +20,7 @@ namespace Acquaint.Native.iOS
 		public override UIWindow Window { get; set; }
 
 		// A reference to the Main.storyboard
-	    private static readonly UIStoryboard Storyboard = UIStoryboard.FromName("Main", null);
+		private static readonly UIStoryboard Storyboard = UIStoryboard.FromName("Main", null);
 
 		// Method invoked after the application has launched to configure the main window and view controller.
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
@@ -33,9 +33,9 @@ namespace Acquaint.Native.iOS
 
 			RegisterDependencies();
 
-		    #if ENABLE_TEST_CLOUD
-		    Xamarin.Calabash.Start();
-		    #endif
+#if ENABLE_TEST_CLOUD
+			Xamarin.Calabash.Start();
+#endif
 
 			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
@@ -75,9 +75,11 @@ namespace Acquaint.Native.iOS
 		{
 			var builder = new ContainerBuilder();
 
-			#if DEBUG
-			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
-			#endif
+#if DEBUG
+			builder.RegisterInstance(new ProxyingHttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+#else
+			builder.RegisterInstance(new ProxyingHttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+#endif
 
 			Container = builder.Build();
 

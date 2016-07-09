@@ -108,7 +108,7 @@ namespace Acquaint.Native.Droid
 	internal class AcquaintanceCollectionAdapter : RecyclerView.Adapter, View.IOnClickListener
 	{
 		// the list of items that this adapter uses
-		public List<IAcquaintance> Acquaintances { get; private set; }
+		public List<Acquaintance> Acquaintances { get; private set; }
 
 		/// <summary>
 		/// Loads the acquaintances.

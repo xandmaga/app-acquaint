@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Data;
-using Acquaint.Models;
 using Foundation;
 using UIKit;
 
@@ -23,9 +22,9 @@ namespace Acquaint.Native.iOS
 		public List<Acquaintance> Acquaintances { get; private set; }
 
 		public AcquaintanceTableViewSource()
-        {
-			_DataSource = new AzureAcquaintanceDataSource();
-        }
+		{
+			_DataSource = new AzureAcquaintanceSource();
+		}
 
 		// <summary>
 		// Loads the acquaintances.
@@ -36,14 +35,14 @@ namespace Acquaint.Native.iOS
 			Acquaintances = (await _DataSource.GetItems()).ToList();
 		}
 
-		public async Task SaveAcquaintance (Acquaintance acquaintance)
+		public async Task SaveAcquaintance(Acquaintance acquaintance)
 		{
-			await _DataSource.SaveItem (acquaintance);
+			await _DataSource.AddItem(acquaintance);
 		}
 
-		public async Task DeleteAcquaintance (Acquaintance acquaintance)
+		public async Task DeleteAcquaintance(Acquaintance acquaintance)
 		{
-			await _DataSource.DeleteItem (acquaintance.Id);
+			await _DataSource.RemoveItem(acquaintance);
 		}
 
 		#region implemented abstract members of UITableViewSource

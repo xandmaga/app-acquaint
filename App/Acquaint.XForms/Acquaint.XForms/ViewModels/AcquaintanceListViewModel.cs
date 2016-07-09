@@ -16,7 +16,7 @@ namespace Acquaint.XForms
 		{
 			_CapabilityService = DependencyService.Get<ICapabilityService>();
 
-			DataSource = new AzureAcquaintanceDataSource();
+			DataSource = new AzureAcquaintanceSource();
 
 			SubscribeToSaveAcquaintanceMessages();
 
@@ -87,11 +87,11 @@ namespace Acquaint.XForms
 		{
 			IsBusy = true;
 
-			var acquaintances = await DataSource.GetItems(0, 1000);
+			var acquaintances = await DataSource.GetItems();
 
 			Acquaintances.Clear();
 
-			if (acquaintances.Count != 0)
+			if (acquaintances.Count() != 0)
 			{
 				foreach (var a in acquaintances)
 				{
@@ -251,10 +251,10 @@ namespace Acquaint.XForms
 		void SubscribeToSaveAcquaintanceMessages()
 		{
 			// This subscribes to the "SaveAcquaintance" message, and then inserts or updates the clisnts accordingly
-			MessagingService.Current.Subscribe<IAcquaintance>(MessageKeys.SaveAcquaintance, async (service, acquaintance) => {
+			MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.SaveAcquaintance, async (service, acquaintance) => {
 				IsBusy = true;
 
-				await DataSource.SaveItem(acquaintance as Acquaintance);
+				await DataSource.AddItem(acquaintance);
 
 				await FetchAcquaintances();
 
@@ -270,10 +270,10 @@ namespace Acquaint.XForms
 		void SubscribeToDeleteAcquaintanceMessages()
 		{
 			// This subscribes to the "DeleteAcquaintance" message, and then deletes the acquaintance accordingly
-			MessagingService.Current.Subscribe<IAcquaintance>(MessageKeys.DeleteAcquaintance, async (service, acquaintance) => {
+			MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.DeleteAcquaintance, async (service, acquaintance) => {
 				IsBusy = true;
 
-				await DataSource.DeleteItem(acquaintance.Id);
+				await DataSource.RemoveItem(acquaintance);
 
 				await FetchAcquaintances();
 

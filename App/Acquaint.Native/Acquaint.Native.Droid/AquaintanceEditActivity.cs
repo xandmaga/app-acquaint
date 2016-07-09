@@ -12,7 +12,7 @@ namespace Acquaint.Native.Droid
 	[Activity]
 	public class AquaintanceEditActivity : AppCompatActivity
 	{
-		IAcquaintance _Acquaintance;
+		Acquaintance _Acquaintance;
 		View _ContentLayout;
 
 		EditText _FirstNameField;
@@ -137,7 +137,7 @@ namespace Acquaint.Native.Droid
 			_Acquaintance.State = _StateField.Text;
 			_Acquaintance.PostalCode = _ZipField.Text;
 
-			MainApplication.DataSource.SaveItem(_Acquaintance);
+			MainApplication.DataSource.AddItem(_Acquaintance);
 		}
 	}
 }
