@@ -19,7 +19,7 @@ namespace Acquaint.Native.iOS
 		/// Update the cell's child views' values and presentation.
 		/// </summary>
 		/// <param name="acquaintance">Acquaintance.</param>
-		public void Update(IAcquaintance acquaintance)
+		public void Update(Acquaintance acquaintance)
 		{
 			// use FFImageLoading library to:
 			ImageService.Instance

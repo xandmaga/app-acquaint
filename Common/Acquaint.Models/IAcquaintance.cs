@@ -1,11 +1,6 @@
 ﻿namespace Acquaint.Models
 {
-	// The choice was made to use an interface as the model so that it can be 
-	// shared between the mobile app and backend, without having a separate 
-	// DTO class. There are different implemetnations of IAcquaintance in 
-	// the app and backend because they each need to inherit from different base 
-	// classes; specifically ObservableObject in the app, and EntityData in 
-	// the backend.
+	// This interface is shared between the backend and the client code to enforce the model contract.
 	public interface IAcquaintance 
 	{
 		string Id { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
 using Android.App;
@@ -30,7 +31,7 @@ namespace Acquaint.Native.Droid
 	[Activity]
 	public class AcquaintanceDetailActivity : AppCompatActivity, IOnMapReadyCallback
 	{
-		IAcquaintance _Acquaintance;
+		Acquaintance _Acquaintance;
 		string _AcquaintanceId;
 		ImageView _GetDirectionsActionImageView;
 		LatLng _GeocodedLocation;

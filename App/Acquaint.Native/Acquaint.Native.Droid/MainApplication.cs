@@ -1,6 +1,5 @@
 using System;
 using Acquaint.Data;
-using Acquaint.Models;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
@@ -9,12 +8,11 @@ using Autofac.Extras.CommonServiceLocator;
 using HockeyApp;
 using Microsoft.Practices.ServiceLocation;
 using Plugin.CurrentActivity;
-using Xamarin;
 
 namespace Acquaint.Native.Droid
 {
 	//You can specify additional application information in this attribute
-    [Application]
+	[Application]
     public class MainApplication : Application, Application.IActivityLifecycleCallbacks
     {
 		public static IContainer Container { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
 using FormsToolkit;
@@ -14,7 +15,7 @@ namespace Acquaint.XForms
 {
     public class AcquaintanceDetailViewModel : BaseNavigationViewModel
     {
-		public AcquaintanceDetailViewModel(IAcquaintance acquaintance)
+		public AcquaintanceDetailViewModel(Acquaintance acquaintance)
 		{
 			_CapabilityService = DependencyService.Get<ICapabilityService>();
 
@@ -26,7 +27,7 @@ namespace Acquaint.XForms
 		}
 
 
-		public IAcquaintance Acquaintance { private set; get; }
+		public Acquaintance Acquaintance { private set; get; }
 
 		public bool HasEmailAddress => !string.IsNullOrWhiteSpace(Acquaintance?.Email);
 
@@ -207,12 +208,12 @@ namespace Acquaint.XForms
         void SubscribeToSaveAcquaintanceMessages()
         {
             // This subscribes to the "SaveAcquaintance" message
-            MessagingService.Current.Subscribe<IAcquaintance>(MessageKeys.SaveAcquaintance, (service, acquaintance) =>
+            MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.SaveAcquaintance, (service, acquaintance) =>
                 {
 					Acquaintance = acquaintance;
 					OnPropertyChanged("Acquaintance");
 
-                	MessagingService.Current.SendMessage<IAcquaintance>(MessageKeys.AcquaintanceLocationUpdated, Acquaintance);
+                	MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.AcquaintanceLocationUpdated, Acquaintance);
                 });
         }
 

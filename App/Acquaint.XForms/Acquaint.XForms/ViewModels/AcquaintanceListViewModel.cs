@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Data;
-using Acquaint.Models;
 using Acquaint.Util;
 using FormsToolkit;
 using MvvmHelpers;
@@ -254,7 +253,7 @@ namespace Acquaint.XForms
 			MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.SaveAcquaintance, async (service, acquaintance) => {
 				IsBusy = true;
 
-				await DataSource.AddItem(acquaintance);
+				await DataSource.UpdateItem(acquaintance);
 
 				await FetchAcquaintances();
 

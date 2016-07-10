@@ -137,7 +137,7 @@ namespace Acquaint.Native.Droid
 			_Acquaintance.State = _StateField.Text;
 			_Acquaintance.PostalCode = _ZipField.Text;
 
-			MainApplication.DataSource.AddItem(_Acquaintance);
+			MainApplication.DataSource.UpdateItem(_Acquaintance);
 		}
 	}
 }
