@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -7,9 +6,6 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using Acquaint.Service.DataObjects;
 using Acquaint.Service.Models;
-using System.Net.Http;
-using System.Net;
-using System.Web.Http.OData.Query;
 
 namespace Acquaint.Service.Controllers
 {

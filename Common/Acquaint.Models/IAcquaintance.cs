@@ -41,10 +41,6 @@
 		string DisplayLastNameFirst { get; }
 
 		string StatePostal { get; }
-
-		string ToString();
-
-
 	}
 }
 
