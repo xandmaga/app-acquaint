@@ -6,7 +6,6 @@ using Autofac.Extras.CommonServiceLocator;
 using FFImageLoading.Forms.Touch;
 using Foundation;
 using HockeyApp.iOS;
-using ImageCircle.Forms.Plugin.iOS;
 using Microsoft.Practices.ServiceLocation;
 using UIKit;
 using Xamarin;
@@ -43,8 +42,6 @@ namespace Acquaint.XForms.iOS
             LoadApplication(new App());
 
             ConfigureTheming();
-
-            ImageCircleRenderer.Init();
 
             return base.FinishedLaunching(app, options);
         }

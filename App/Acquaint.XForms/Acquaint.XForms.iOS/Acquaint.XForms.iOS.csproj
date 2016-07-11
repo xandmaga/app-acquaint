@@ -123,12 +123,6 @@
     <Reference Include="Plugin.ExternalMaps.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.ExternalMaps.3.0.0\lib\Xamarin.iOS10\Plugin.ExternalMaps.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="ImageCircle.Forms.Plugin.iOS">
-      <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.4.1\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="ImageCircle.Forms.Plugin.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.4.1\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="FormsToolkit, Version=1.1.14.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\FormsToolkit.1.1.14\lib\Xamarin.iOS10\FormsToolkit.dll</HintPath>
     </Reference>
