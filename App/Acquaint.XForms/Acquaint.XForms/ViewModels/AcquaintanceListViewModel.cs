@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Acquaint.Abstractions;
 using Acquaint.Data;
 using Acquaint.Util;
 using FormsToolkit;
@@ -17,7 +18,9 @@ namespace Acquaint.XForms
 
 			DataSource = new AzureAcquaintanceSource();
 
-			SubscribeToSaveAcquaintanceMessages();
+			SubscribeToAddAcquaintanceMessages();
+
+			SubscribeToUpdateAcquaintanceMessages();
 
 			SubscribeToDeleteAcquaintanceMessages();
 		}
@@ -245,12 +248,29 @@ namespace Acquaint.XForms
 		}
 
 		/// <summary>
-		/// Subscribes to "SaveAcquaintance" messages
+		/// Subscribes to "AddAcquaintance" messages
 		/// </summary>
-		void SubscribeToSaveAcquaintanceMessages()
+		void SubscribeToAddAcquaintanceMessages()
 		{
-			// This subscribes to the "SaveAcquaintance" message, and then inserts or updates the clisnts accordingly
-			MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.SaveAcquaintance, async (service, acquaintance) => {
+			MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.AddAcquaintance, async (service, acquaintance) => {
+				IsBusy = true;
+
+				await DataSource.AddItem(acquaintance);
+
+				await FetchAcquaintances();
+
+				IsBusy = false;
+
+				OnPropertyChanged("Acquaintances");
+			});
+		}
+
+		/// <summary>
+		/// Subscribes to "UpdateAcquaintance" messages
+		/// </summary>
+		void SubscribeToUpdateAcquaintanceMessages()
+		{
+			MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.UpdateAcquaintance, async (service, acquaintance) => {
 				IsBusy = true;
 
 				await DataSource.UpdateItem(acquaintance);
@@ -268,7 +288,6 @@ namespace Acquaint.XForms
 		/// </summary>
 		void SubscribeToDeleteAcquaintanceMessages()
 		{
-			// This subscribes to the "DeleteAcquaintance" message, and then deletes the acquaintance accordingly
 			MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.DeleteAcquaintance, async (service, acquaintance) => {
 				IsBusy = true;
 

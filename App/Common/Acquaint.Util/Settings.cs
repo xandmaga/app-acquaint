@@ -20,6 +20,9 @@ namespace Acquaint.Util
 		private const string DataPartitionIdKey = "DataPartitionId_key";
 		private static readonly string DataPartitionIdDefault = "01D676FD-789A-4488-B519-1840E080936E";
 
+		private const string HockeyAppIdKey = "HockeyAppId_key";
+		private static readonly string HovkeyAppIdDefault = "11111111222222223333333344444444"; // This is just a placeholder value. Replace with your real HockeyApp App ID.
+
 		public static bool DataIsSeeded
 		{
 			get { return AppSettings.GetValueOrDefault<bool>(DataIsSeededKey, DataIsSeededDefault); }
@@ -36,6 +39,12 @@ namespace Acquaint.Util
 		{
 			get { return AppSettings.GetValueOrDefault<string>(DataPartitionIdKey, DataPartitionIdDefault); }
 			set { AppSettings.AddOrUpdateValue<string>(DataPartitionIdKey, value); }
+		}
+
+		public static string HockeyAppId
+		{
+			get { return AppSettings.GetValueOrDefault<string>(HockeyAppIdKey, HovkeyAppIdDefault); }
+			set { AppSettings.AddOrUpdateValue<string>(HockeyAppIdKey, value); }
 		}
 	}
 }

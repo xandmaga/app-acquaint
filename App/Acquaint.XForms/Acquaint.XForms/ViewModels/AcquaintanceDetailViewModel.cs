@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Acquaint.Abstractions;
 using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
@@ -25,7 +26,6 @@ namespace Acquaint.XForms
 
 			SubscribeToSaveAcquaintanceMessages();
 		}
-
 
 		public Acquaintance Acquaintance { private set; get; }
 
@@ -208,7 +208,7 @@ namespace Acquaint.XForms
         void SubscribeToSaveAcquaintanceMessages()
         {
             // This subscribes to the "SaveAcquaintance" message
-            MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.SaveAcquaintance, (service, acquaintance) =>
+            MessagingService.Current.Subscribe<Acquaintance>(MessageKeys.UpdateAcquaintance, (service, acquaintance) =>
                 {
 					Acquaintance = acquaintance;
 					OnPropertyChanged("Acquaintance");

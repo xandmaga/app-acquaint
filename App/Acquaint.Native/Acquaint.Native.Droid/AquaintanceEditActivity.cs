@@ -13,6 +13,9 @@ namespace Acquaint.Native.Droid
 	public class AquaintanceEditActivity : AppCompatActivity
 	{
 		Acquaintance _Acquaintance;
+
+		bool _IsNewAcquaintance;
+
 		View _ContentLayout;
 
 		EditText _FirstNameField;
@@ -46,8 +49,16 @@ namespace Acquaint.Native.Droid
 			// extract the acquaintance id from the intent
 			var acquaintanceId = Intent.GetStringExtra(GetString(Resource.String.acquaintanceEditIntentKey));
 
-			// fetch the acquaintance based on the id
-			_Acquaintance = await MainApplication.DataSource.GetItem(acquaintanceId);
+			if (acquaintanceId == null)
+			{
+				_Acquaintance = new Acquaintance();
+				_IsNewAcquaintance = true;
+			}
+			else
+			{
+				// fetch the acquaintance based on the id
+				_Acquaintance = await MainApplication.DataSource.GetItem(acquaintanceId);
+			}
 
 			Title = SupportActionBar.Title = "";
 
@@ -137,7 +148,14 @@ namespace Acquaint.Native.Droid
 			_Acquaintance.State = _StateField.Text;
 			_Acquaintance.PostalCode = _ZipField.Text;
 
-			MainApplication.DataSource.UpdateItem(_Acquaintance);
+			if (_IsNewAcquaintance)
+			{
+				MainApplication.DataSource.AddItem(_Acquaintance);
+			}
+			else
+			{
+				MainApplication.DataSource.UpdateItem(_Acquaintance);
+			}
 		}
 	}
 }

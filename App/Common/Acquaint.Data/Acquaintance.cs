@@ -7,6 +7,11 @@ namespace Acquaint.Data
 {
 	public class Acquaintance : ObservableEntityData, IAcquaintance
     {
+		public Acquaintance()
+		{
+			PhotoUrl = "placeholderProfileImage.png";
+		}
+
 		public string DataPartitionId { get; set; }
 
         string _FirstName;

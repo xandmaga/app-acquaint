@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Acquaint.Abstractions;
 using Acquaint.Util;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.WindowsAzure.MobileServices;
@@ -22,22 +23,23 @@ namespace Acquaint.Data
 
 		public async Task<bool> Initialize()
 		{
-			if (_IsInitialized)
-				return true;
+			return await Execute<bool>(async () => 
+			{
+				if (_IsInitialized)
+					return true;
 
-			// MobileServiceClient handles communication with our backend, auth, and more for us.
-			MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
+				MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
 
-			// Configure online/offline sync.
-			var store = new MobileServiceSQLiteStore("app.db");
+				var store = new MobileServiceSQLiteStore("app.db");
 
-			store.DefineTable<Acquaintance>();
+				store.DefineTable<Acquaintance>();
 
-			await MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
+				await MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
 
-			_IsInitialized = true;
+				_IsInitialized = true;
 
-			return _IsInitialized;
+				return _IsInitialized;
+			}, false).ConfigureAwait(false);
 		}
 
 		#region Data Access
@@ -63,7 +65,9 @@ namespace Acquaint.Data
 		public async Task<bool> AddItem(Acquaintance item)
 		{
 			return await Execute<bool>(async () => 
-			{ 
+			{
+				item.DataPartitionId = _DataPartitionId;
+
 				await Initialize().ConfigureAwait(false);
 				await MobileService.GetSyncTable<Acquaintance>().InsertAsync(item).ConfigureAwait(false);
 				await SyncItems().ConfigureAwait(false);
@@ -82,7 +86,7 @@ namespace Acquaint.Data
 			}, false).ConfigureAwait(false);
 		}
 
-		public async Task<bool> RemoveItem(Acquaintance item)
+		public async Task<bool> RemoveItem(Acquaintance item, bool softDelete = true)
 		{
 			return await Execute<bool>(async () => 
 			{
@@ -101,7 +105,7 @@ namespace Acquaint.Data
 
 				try
 				{
-					await EnsureDataIsSeededForPartitionIdAsync(_DataPartitionId).ConfigureAwait(false);
+					await EnsureDataIsSeededAsync(_DataPartitionId).ConfigureAwait(false);
 					await MobileService.SyncContext.PushAsync().ConfigureAwait(false);
 					await MobileService.GetSyncTable<Acquaintance>().PullAsync($"all{typeof(Acquaintance).Name}", MobileService.GetSyncTable<Acquaintance>().CreateQuery()).ConfigureAwait(false);
 					return true;
@@ -115,7 +119,7 @@ namespace Acquaint.Data
 		}
 		#endregion
 
-		#region some nifty helpers
+		#region some nifty exception helpers
 
 		/// <summary>
 		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
@@ -130,11 +134,13 @@ namespace Acquaint.Data
 			// isolate mobile service errors
 			catch (MobileServiceInvalidOperationException ex)
 			{
+				// TODO: report with HockeyApp
 				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
 			}
 			// catch all other errors
 			catch (Exception ex2)
 			{
+				// TODO: report with HockeyApp
 				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex2.Message);
 			}
 		}
@@ -153,10 +159,12 @@ namespace Acquaint.Data
 			}
 			catch (MobileServiceInvalidOperationException ex) // isolate mobile service errors
 			{
+				// TODO: report with HockeyApp
 				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
 			}
 			catch (Exception ex2) // catch all other errors
 			{
+				// TODO: report with HockeyApp
 				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex2.Message);
 			}
 			return defaultReturnObject;
@@ -164,7 +172,7 @@ namespace Acquaint.Data
 
 		#endregion
 
-		async Task EnsureDataIsSeededForPartitionIdAsync(string dataPartitionId)
+		async Task EnsureDataIsSeededAsync(string dataPartitionId)
 		{
 			if (Settings.DataIsSeeded)
 				return;
@@ -195,8 +203,9 @@ namespace Acquaint.Data
 		HttpClientHandler GetHttpClientHandler()
 		{
 			return ServiceLocator.Current.GetInstance<IHttpClientHandlerFactory>().GetHttpClientHandler();
-
 		}
+
+
 	}
 }
 

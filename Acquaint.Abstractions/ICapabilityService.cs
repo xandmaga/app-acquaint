@@ -1,5 +1,4 @@
-﻿
-namespace Acquaint.XForms
+﻿namespace Acquaint.Abstractions
 {
     public interface ICapabilityService
     {

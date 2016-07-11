@@ -13,11 +13,20 @@ namespace Acquaint.Native.iOS
 		/// <value>The acquaintance.</value>
 		public Acquaintance Acquaintance { get; private set; }
 
+		bool _IsNewAcquaintance;
+
 		AcquaintanceDetailViewController _DetailViewController;
 		AcquaintanceTableViewController _ListViewController;
 
 		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
 		{
+			if (acquaintance == null)
+			{
+				Acquaintance = new Acquaintance();
+				_IsNewAcquaintance = true;
+			}
+
+
 			Acquaintance = acquaintance;
 			if (detailViewController != null)
 				_DetailViewController = detailViewController;
@@ -25,10 +34,7 @@ namespace Acquaint.Native.iOS
 				_ListViewController = listViewController;
 		}
 
-		public AcquaintanceEditViewController(IntPtr handle) : base(handle)
-		{
-
-		}
+		public AcquaintanceEditViewController(IntPtr handle) : base(handle) { }
 
 		public override void ViewWillAppear(bool animated)
 		{
@@ -111,7 +117,14 @@ namespace Acquaint.Native.iOS
 
 					if (_ListViewController != null)
 					{
-						await _ListViewController.SaveAcquaintance(Acquaintance);
+						if (_IsNewAcquaintance)
+						{
+							await _ListViewController.AddAcquaintance(Acquaintance);
+						}
+						else
+						{
+							await _ListViewController.UpdateAcquaintance(Acquaintance);
+						}
 					};
 
 					NavigationController.PopViewController(true);

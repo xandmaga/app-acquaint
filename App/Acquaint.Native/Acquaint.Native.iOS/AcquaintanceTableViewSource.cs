@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Acquaint.Abstractions;
 using Acquaint.Data;
 using Foundation;
 using UIKit;
@@ -35,9 +36,14 @@ namespace Acquaint.Native.iOS
 			Acquaintances = (await _DataSource.GetItems()).ToList();
 		}
 
-		public async Task SaveAcquaintance(Acquaintance acquaintance)
+		public async Task AddAcquaintance(Acquaintance acquaintance)
 		{
 			await _DataSource.AddItem(acquaintance);
+		}
+
+		public async Task UpdateAcquaintance(Acquaintance acquaintance)
+		{ 
+			await _DataSource.UpdateItem(acquaintance);
 		}
 
 		public async Task DeleteAcquaintance(Acquaintance acquaintance)

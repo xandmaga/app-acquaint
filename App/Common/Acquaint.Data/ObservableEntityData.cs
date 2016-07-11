@@ -1,15 +1,19 @@
 ﻿using System;
+using Acquaint.Abstractions;
 using Microsoft.WindowsAzure.MobileServices;
 using MvvmHelpers;
 using Newtonsoft.Json;
 
 namespace Acquaint.Data
 {
-	public class ObservableEntityData : ObservableObject
+	/// <summary>
+	/// A type that mirrors the properties of Microsoft.Azure.Mobile.Server.EntityData, and is also observable.
+	/// </summary>
+	public class ObservableEntityData : ObservableObject, IObservableEntityData
 	{
 		public ObservableEntityData()
 		{
-			Id = Guid.NewGuid().ToString();
+			Id = Guid.NewGuid().ToString().ToUpper();
 		}
 
 		[JsonProperty(PropertyName = "id")]
@@ -22,7 +26,7 @@ namespace Acquaint.Data
 		public DateTimeOffset UpdatedAt { get; set; }
 
 		[Version]
-		public string AzureVersion { get; set; }
+		public string Version { get; set; }
 	}
 }
 

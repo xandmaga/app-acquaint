@@ -1,13 +1,12 @@
-﻿using ObjCRuntime;
-using Acquaint.XForms.iOS;
+﻿using Acquaint.Abstractions;
+using ObjCRuntime;
 
-[assembly: Xamarin.Forms.Dependency (typeof (EnvironmentService))]
-
-namespace Acquaint.XForms.iOS
+namespace Acquaint.Common.iOS
 {
     public class EnvironmentService : IEnvironmentService
     {
         #region IEnvironmentService implementation
+
         public bool IsRealDevice => Runtime.Arch == Arch.DEVICE;
 
         #endregion

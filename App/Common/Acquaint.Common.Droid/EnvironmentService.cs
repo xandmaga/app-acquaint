@@ -1,9 +1,7 @@
-﻿using Android.OS;
-using Acquaint.XForms.Droid;
+﻿using Acquaint.Abstractions;
+using Android.OS;
 
-[assembly: Xamarin.Forms.Dependency (typeof (EnvironmentService))]
-
-namespace Acquaint.XForms.Droid
+namespace Acquaint.Common.Droid
 {
     public class EnvironmentService : IEnvironmentService
     {

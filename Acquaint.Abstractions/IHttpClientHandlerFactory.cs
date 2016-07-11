@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Acquaint.Data
+namespace Acquaint.Abstractions
 {
 	public interface IHttpClientHandlerFactory
 	{

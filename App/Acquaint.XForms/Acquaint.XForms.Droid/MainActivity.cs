@@ -1,14 +1,16 @@
+using Acquaint.Abstractions;
+using Acquaint.Common.Droid;
+using Acquaint.Util;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Xamarin.Forms.Platform.Android;
-using Xamarin.Forms;
-using Xamarin;
-using HockeyApp;
-using Microsoft.Practices.ServiceLocation;
-using Autofac.Extras.CommonServiceLocator;
 using Autofac;
-using Acquaint.Data;
+using Autofac.Extras.CommonServiceLocator;
+using HockeyApp.Android;
+using Microsoft.Practices.ServiceLocation;
+using Xamarin;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace Acquaint.XForms.Droid
 {
@@ -16,12 +18,10 @@ namespace Acquaint.XForms.Droid
 	public class MainActivity : FormsAppCompatActivity
 	// inhertiting from FormsAppCompatActivity is imperative to taking advantage of Android AppCompat libraries
 	{
-		public static IContainer Container { get; set; }
-
 		protected override void OnCreate (Bundle bundle)
 		{
-			// If you would like to collect crash reports with HockeyApp, do so here
-			CrashManager.Register(this, "11111111222222223333333344444444"); // This is just a placeholder value. Replace with your real HockeyApp App ID
+			// register HockeyApp as the crash reporter
+			CrashManager.Register(this, Settings.HockeyAppId);
 
 			RegisterDependencies();
 
@@ -40,15 +40,24 @@ namespace Acquaint.XForms.Droid
 			LoadApplication (new App ());
 		}
 
+		/// <summary>
+		/// Registers dependencies with an IoC container.
+		/// </summary>
+		/// <remarks>
+		/// Since some of our libraries are shared between the Forms and Native versions 
+		/// of this app, we're using an IoC/DI framework to provide access across implementations.
+		/// </remarks>
 		static void RegisterDependencies()
 		{
 			var builder = new ContainerBuilder();
 
-			builder.RegisterInstance(new NullHttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+			builder.RegisterInstance(new GuidUtility()).As<IGuidUtility>();
+			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
 
-			Container = builder.Build();
+			var container = builder.Build();
 
-			var csl = new AutofacServiceLocator(Container);
+			var csl = new AutofacServiceLocator(container);
 			ServiceLocator.SetLocatorProvider(() => csl);
 		}
 	}

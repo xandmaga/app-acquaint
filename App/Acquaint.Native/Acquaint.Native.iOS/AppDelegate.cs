@@ -1,9 +1,10 @@
-﻿using Acquaint.Data;
-using Acquaint.Native.iOS.Services;
+﻿using Acquaint.Abstractions;
+using Acquaint.Common.iOS;
+using Acquaint.Util;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using Foundation;
-using HockeyApp;
+using HockeyApp.iOS;
 using Microsoft.Practices.ServiceLocation;
 using UIKit;
 
@@ -25,10 +26,8 @@ namespace Acquaint.Native.iOS
 		// Method invoked after the application has launched to configure the main window and view controller.
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			// If you would like to collect crash reports with HockeyApp, do so here
 			var manager = BITHockeyManager.SharedHockeyManager;
-			// Set the HockeyApp App Id here:
-			manager.Configure("11111111222222223333333344444444"); // This is just a placeholder value. Replace with your real HockeyApp App ID
+			manager.Configure(Settings.HockeyAppId);
 			manager.StartManager();
 
 			RegisterDependencies();
@@ -71,19 +70,24 @@ namespace Acquaint.Native.iOS
 			UIBarButtonItem.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White }, UIControlState.Normal);
 		}
 
-		static void RegisterDependencies()
+		/// <summary>
+		/// Registers dependencies with an IoC container.
+		/// </summary>
+		/// <remarks>
+		/// Since some of our libraries are shared between the Forms and Native versions 
+		/// of this app, we're using an IoC/DI framework to provide access across implementations.
+		/// </remarks>
+		void RegisterDependencies()
 		{
 			var builder = new ContainerBuilder();
 
-#if DEBUG
-			builder.RegisterInstance(new ProxyingHttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
-#else
-			builder.RegisterInstance(new ProxyingHttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
-#endif
+			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+			builder.RegisterInstance(new GuidUtility()).As<IGuidUtility>();
+			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
 
-			Container = builder.Build();
+			var container = builder.Build();
 
-			var csl = new AutofacServiceLocator(Container);
+			var csl = new AutofacServiceLocator(container);
 			ServiceLocator.SetLocatorProvider(() => csl);
 		}
 

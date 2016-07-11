@@ -1,5 +1,7 @@
 ﻿using Xamarin.Forms;
 using Acquaint.XForms;
+using Acquaint.Abstractions;
+using Microsoft.Practices.ServiceLocation;
 
 [assembly: Dependency (typeof (CapabilityService))]
 
@@ -11,7 +13,7 @@ namespace Acquaint.XForms
 
         public CapabilityService()
         {
-            _EnvironmentService = DependencyService.Get<IEnvironmentService>();
+			_EnvironmentService = ServiceLocator.Current.GetInstance<IEnvironmentService>();
         }
 
         #region ICapabilityService implementation

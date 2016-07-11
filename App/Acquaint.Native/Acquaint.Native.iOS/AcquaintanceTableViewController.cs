@@ -69,7 +69,7 @@ namespace Acquaint.Native.iOS
 				// get the destination viewcontroller from the segue
 				var acquaintanceEditViewController = segue.DestinationViewController as AcquaintanceEditViewController;
 				// instantiate new Acquaintance and assign to viewcontroller
-				acquaintanceEditViewController.SetAcquaintance(new Acquaintance () { Id = Guid.NewGuid ().ToString (), PhotoUrl = "placeholderProfileImage.png" }, null, this);
+				acquaintanceEditViewController.SetAcquaintance(null, null, this);
 				break;
 			case "AcquaintanceDetailSegue":
 				// the selected index path
@@ -150,9 +150,16 @@ namespace Acquaint.Native.iOS
 			ShowViewController(viewControllerToCommit, this);
 		}
 
-		public async Task SaveAcquaintance (Acquaintance acquaintance)
+		public async Task AddAcquaintance(Acquaintance acquaintance)
 		{
-			await _AcquaintanceTableViewSource.SaveAcquaintance (acquaintance);
+			await _AcquaintanceTableViewSource.AddAcquaintance(acquaintance);
+
+			await _AcquaintanceTableViewSource.LoadAcquaintances();
+		}
+
+		public async Task UpdateAcquaintance (Acquaintance acquaintance)
+		{
+			await _AcquaintanceTableViewSource.UpdateAcquaintance (acquaintance);
 
 			await _AcquaintanceTableViewSource.LoadAcquaintances ();
 		}

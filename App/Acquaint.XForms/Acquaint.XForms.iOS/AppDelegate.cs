@@ -1,9 +1,10 @@
-﻿using Acquaint.Data;
-using Acquaint.XForms.iOS.Services;
+﻿using Acquaint.Abstractions;
+using Acquaint.Common.iOS;
+using Acquaint.Util;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using Foundation;
-using HockeyApp;
+using HockeyApp.iOS;
 using ImageCircle.Forms.Plugin.iOS;
 using Microsoft.Practices.ServiceLocation;
 using UIKit;
@@ -13,16 +14,13 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace Acquaint.XForms.iOS
 {
-    [Register("AppDelegate")]
+	[Register("AppDelegate")]
     public partial class AppDelegate : FormsApplicationDelegate
     {
-		public static IContainer Container { get; set; }
-
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
 			var manager = BITHockeyManager.SharedHockeyManager;
-			// Set the HockeyApp App Id here:
-			manager.Configure("11111111222222223333333344444444"); // This is just a placeholder value. Replace with your real HockeyApp App ID
+			manager.Configure(Settings.HockeyAppId);
 			manager.StartManager();
 
 			RegisterDependencies();
@@ -56,17 +54,24 @@ namespace Acquaint.XForms.iOS
             UIBarButtonItem.Appearance.SetTitleTextAttributes (new UITextAttributes { TextColor = UIColor.White }, UIControlState.Normal);
         }
 
-		static void RegisterDependencies()
+		/// <summary>
+		/// Registers dependencies with an IoC container.
+		/// </summary>
+		/// <remarks>
+		/// Since some of our libraries are shared between the Forms and Native versions 
+		/// of this app, we're using an IoC/DI framework to provide access across implementations.
+		/// </remarks>
+		void RegisterDependencies()
 		{
 			var builder = new ContainerBuilder();
 
-			#if DEBUG
+			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+			builder.RegisterInstance(new GuidUtility()).As<IGuidUtility>();
 			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
-			#endif
 
-			Container = builder.Build();
+			var container = builder.Build();
 
-			var csl = new AutofacServiceLocator(Container);
+			var csl = new AutofacServiceLocator(container);
 			ServiceLocator.SetLocatorProvider(() => csl);
 		}
     }

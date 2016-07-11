@@ -1,11 +1,14 @@
 using System;
+using Acquaint.Abstractions;
+using Acquaint.Common.Droid;
 using Acquaint.Data;
+using Acquaint.Util;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
-using HockeyApp;
+using HockeyApp.Android;
 using Microsoft.Practices.ServiceLocation;
 using Plugin.CurrentActivity;
 
@@ -23,8 +26,7 @@ namespace Acquaint.Native.Droid
 
         public override void OnCreate()
         {
-			// If you would like to collect crash reports with HockeyApp, do so here
-			CrashManager.Register(this, "11111111222222223333333344444444"); // This is just a placeholder value. Replace with your real HockeyApp App ID
+			CrashManager.Register(this, Settings.HockeyAppId);
 
 			RegisterDependencies();
 
@@ -38,15 +40,24 @@ namespace Acquaint.Native.Droid
 			DataSource = new AzureAcquaintanceSource();
         }
 
-		static void RegisterDependencies()
+		/// <summary>
+		/// Registers dependencies with an IoC container.
+		/// </summary>
+		/// <remarks>
+		/// Since some of our libraries are shared between the Forms and Native versions 
+		/// of this app, we're using an IoC/DI framework to provide access across implementations.
+		/// </remarks>
+		void RegisterDependencies()
 		{
 			var builder = new ContainerBuilder();
 
-			builder.RegisterInstance(new NullHttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+			builder.RegisterInstance(new GuidUtility()).As<IGuidUtility>();
+			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
 
-			Container = builder.Build();
+			var container = builder.Build();
 
-			var csl = new AutofacServiceLocator(Container);
+			var csl = new AutofacServiceLocator(container);
 			ServiceLocator.SetLocatorProvider(() => csl);
 		}
 

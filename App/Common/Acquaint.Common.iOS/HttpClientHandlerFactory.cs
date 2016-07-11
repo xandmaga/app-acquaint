@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
-using Acquaint.Data;
+using Acquaint.Abstractions;
 
-namespace Acquaint.XForms.iOS.Services
+namespace Acquaint.Common.iOS
 {
 	/// <summary>
 	/// Http client handler factory for iOS. Allows the simulator to use the host operating systems's (OS X) proxy settings in order to allow debugging of HTTP requests with tools such as Charles.
@@ -12,6 +12,10 @@ namespace Acquaint.XForms.iOS.Services
 
 		HttpClientHandler IHttpClientHandlerFactory.GetHttpClientHandler()
 		{
+#if DEBUG
+			return null;
+#endif
+
 			return new HttpClientHandler
 			{
 				Proxy = CoreFoundation.CFNetwork.GetDefaultProxy(),

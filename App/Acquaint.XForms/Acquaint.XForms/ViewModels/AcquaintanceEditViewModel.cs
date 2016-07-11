@@ -11,15 +11,14 @@ namespace Acquaint.XForms
 {
 	public class AcquaintanceEditViewModel : BaseNavigationViewModel
 	{
+		bool _IsNewAcquaintance;
+
 		public AcquaintanceEditViewModel(Acquaintance acquaintance = null)
 		{
 			if (acquaintance == null)
 			{
-				Acquaintance = new Acquaintance()
-				{ 
-					Id = Guid.NewGuid().ToString(),
-					PhotoUrl = "placeholderProfileImage.png"
-				};
+				Acquaintance = new Acquaintance();
+				_IsNewAcquaintance = true;
 			}
 			else
 			{
@@ -67,8 +66,14 @@ namespace Acquaint.XForms
 			}
 			else
 			{
-				MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.SaveAcquaintance, Acquaintance);
-
+				if (_IsNewAcquaintance)
+				{
+					MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.AddAcquaintance, Acquaintance);
+				}
+				else 
+				{
+					MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.UpdateAcquaintance, Acquaintance);
+				}
 				await PopAsync();
 			}
 		}
