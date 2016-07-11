@@ -57,6 +57,13 @@ Insert it in the Android project: `~/Properties/AndroidManifest.xml`:
       ...
     </application>
 
+## Enabling SQLite for UWP
+
+The UWP app requires that you install the SQLite for UWP extension for Visual Studio. You can find the latest version here:
+https://visualstudiogallery.msdn.microsoft.com/4913e7d5-96c9-4dde-a1a1-69820d615936
+
+The steps that were taken to implement it in the UWP project can be found in steps 1-3 here:
+https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-windows-store-dotnet-get-started-offline-data/#_update-the-client-app-to-support-offline-features
 
 ## Platform-specific UI Features (in native version only)
 | 3D Touch Previewing (iOS) | Shared View Transitions (Android) |
