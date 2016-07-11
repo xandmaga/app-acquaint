@@ -266,38 +266,6 @@
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <ItemGroup />
   <ItemGroup>
-    <AndroidAsset Include="Assets\alvingray.jpg" />
-    <AndroidAsset Include="Assets\anntemple.jpg" />
-    <AndroidAsset Include="Assets\benjaminjones.jpg" />
-    <AndroidAsset Include="Assets\brentmason.jpg" />
-    <AndroidAsset Include="Assets\danielgranville.jpg" />
-    <AndroidAsset Include="Assets\danieljones.jpg" />
-    <AndroidAsset Include="Assets\douglasgreenly.jpg" />
-    <AndroidAsset Include="Assets\ericgrant.jpg" />
-    <AndroidAsset Include="Assets\evanarmstead.jpg" />
-    <AndroidAsset Include="Assets\floydbell.jpg" />
-    <AndroidAsset Include="Assets\ivandiaz.jpg" />
-    <AndroidAsset Include="Assets\jamesjones.jpg" />
-    <AndroidAsset Include="Assets\jennifergillespie.jpg" />
-    <AndroidAsset Include="Assets\jesuscardell.jpg" />
-    <AndroidAsset Include="Assets\joanmancum.jpg" />
-    <AndroidAsset Include="Assets\johnboone.jpg" />
-    <AndroidAsset Include="Assets\josephgrimes.jpg" />
-    <AndroidAsset Include="Assets\josephmeeks.jpg" />
-    <AndroidAsset Include="Assets\leonmuks.jpg" />
-    <AndroidAsset Include="Assets\leoparson.jpg" />
-    <AndroidAsset Include="Assets\margaretcargill.jpg" />
-    <AndroidAsset Include="Assets\margaretkidd.jpg" />
-    <AndroidAsset Include="Assets\michelleherring.jpg" />
-    <AndroidAsset Include="Assets\michellewilson.jpg" />
-    <AndroidAsset Include="Assets\monicagreen.jpg" />
-    <AndroidAsset Include="Assets\richardhogan.jpg" />
-    <AndroidAsset Include="Assets\staceyvaldovinos.jpg" />
-    <AndroidAsset Include="Assets\thomaswhite.jpg" />
-    <AndroidAsset Include="Assets\vanessathornton.jpg" />
-    <AndroidAsset Include="Assets\wilmawoolley.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Common\Acquaint.Data\Acquaint.Data.csproj">
       <Project>{5A3530AB-4053-4CF3-BEDE-A3E04C45D255}</Project>
       <Name>Acquaint.Data</Name>

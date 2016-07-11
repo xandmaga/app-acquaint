@@ -1,6 +1,7 @@
 using System;
 using Acquaint.Data;
 using Acquaint.Models;
+using Acquaint.Util;
 using FFImageLoading;
 using FFImageLoading.Transformations;
 using UIKit;
@@ -21,35 +22,28 @@ namespace Acquaint.Native.iOS
 		/// <param name="acquaintance">Acquaintance.</param>
 		public void Update(Acquaintance acquaintance)
 		{
-			// use FFImageLoading library to:
-			ImageService.Instance
-				.LoadFileFromApplicationBundle(String.Format(acquaintance.PhotoUrl)) 	// get the image from the app bundle
-				.LoadingPlaceholder("placeholderProfileImage.png") 						// specify a placeholder image
-				.Transform(new CircleTransformation()) 									// transform the image to a circle
-				.Into(ProfilePhotoImageView); 											// load the image into the UIImageView
+			NameLabel.Text = acquaintance.DisplayLastNameFirst;
+			CompanyLabel.Text = acquaintance.Company;
+			JobTitleLabel.Text = acquaintance.JobTitle;
 
 			// use FFImageLoading library to asynchronously:
-			//	ImageService
-			//		.LoadUrl(acquaintance.SmallPhotoUrl) 				// get the image from a URL
-			//		.LoadingPlaceholder("placeholderProfileImage.png") 	// specify a placeholder image
-			//		.Transform(new CircleTransformation()) 				// transform the image to a circle
-			//		.IntoAsync(ProfilePhotoImageView); 					// load the image into the UIImageView
+			ImageService.Instance
+				.LoadUrl(acquaintance.SmallPhotoUrl, Settings.ImageCacheDuration)   // get the image from a URL
+				.LoadingPlaceholder("placeholderProfileImage.png")                  // specify a placeholder image
+				.Transform(new CircleTransformation())                              // transform the image to a circle
+				.IntoAsync(ProfilePhotoImageView);                                  // load the image into the UIImageView
 
-				NameLabel.Text = acquaintance.DisplayLastNameFirst;
-				CompanyLabel.Text = acquaintance.Company;
-				JobTitleLabel.Text = acquaintance.JobTitle;
+			// set disclousure indicator accessory for the cell
+			Accessory = UITableViewCellAccessory.DisclosureIndicator;
 
-				// set disclousure indicator accessory for the cell
-				Accessory = UITableViewCellAccessory.DisclosureIndicator;
-
-				// add the colored border to the image
-				double min = Math.Min(ProfilePhotoImageView.Frame.Height, ProfilePhotoImageView.Frame.Height);
-				ProfilePhotoImageView.Layer.CornerRadius = (float)(min / 2.0);
-				ProfilePhotoImageView.Layer.MasksToBounds = false;
-				ProfilePhotoImageView.Layer.BorderColor = UIColor.FromRGB(84, 119, 153).CGColor;
-				ProfilePhotoImageView.Layer.BorderWidth = 3;
-				ProfilePhotoImageView.BackgroundColor = UIColor.Clear;
-				ProfilePhotoImageView.ClipsToBounds = true;
+			// add the colored border to the image
+			double min = Math.Min(ProfilePhotoImageView.Frame.Height, ProfilePhotoImageView.Frame.Height);
+			ProfilePhotoImageView.Layer.CornerRadius = (float)(min / 2.0);
+			ProfilePhotoImageView.Layer.MasksToBounds = false;
+			ProfilePhotoImageView.Layer.BorderColor = UIColor.FromRGB(84, 119, 153).CGColor;
+			ProfilePhotoImageView.Layer.BorderWidth = 3;
+			ProfilePhotoImageView.BackgroundColor = UIColor.Clear;
+			ProfilePhotoImageView.ClipsToBounds = true;
 		}
 	}
 }

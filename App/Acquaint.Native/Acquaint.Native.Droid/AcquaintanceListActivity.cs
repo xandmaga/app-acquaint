@@ -14,6 +14,7 @@ using FFImageLoading.Views;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Acquaint.Data;
 using Acquaint.Models;
+using Acquaint.Util;
 
 namespace Acquaint.Native.Droid
 {
@@ -153,14 +154,15 @@ namespace Acquaint.Native.Droid
 		    viewHolder.CompanyTextView.Text = acquaintance.Company;
 		    viewHolder.JobTitleTextView.Text = acquaintance.JobTitle;
 
-		    // use FFImageLoading library to load an android asset image into the imageview
-			ImageService.Instance.LoadFileFromApplicationBundle(acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(viewHolder.ProfilePhotoImageView);
+			// use FFImageLoading library to asynchronously:
+			ImageService.Instance
+	            .LoadUrl(acquaintance.SmallPhotoUrl, Settings.ImageCacheDuration)	// get the image from a URL
+				.LoadingPlaceholder("placeholderProfileImage.png")  				// specify a placeholder image
+				.Transform(new CircleTransformation())              				// transform the image to a circle
+				.IntoAsync(viewHolder.ProfilePhotoImageView);            			// load the image into the ImageView
 
-		    // use FFImageLoading library to asynchonously load the image into the imageview
-		    // ImageService.LoadUrl(a.SmallPhotoUrl).Transform(new CircleTransformation()).Into(viewHolder.ProfilePhotoImageView);
-
-		    // set the Tag property of the AcquaintanceRow view to the position (index) of the item that is currently being bound. We'll need it later in the OnLick() implementation.
-		    viewHolder.AcquaintanceRow.Tag = position;
+			// set the Tag property of the AcquaintanceRow view to the position (index) of the item that is currently being bound. We'll need it later in the OnLick() implementation.
+			viewHolder.AcquaintanceRow.Tag = position;
 
 		    // set OnClickListener of AcquaintanceRow
 		    viewHolder.AcquaintanceRow.SetOnClickListener(this);

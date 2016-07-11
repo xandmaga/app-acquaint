@@ -11,7 +11,7 @@ namespace Acquaint.Util
 			get { return CrossSettings.Current; }
 		}
 
-		private const string DataIsSeededKey = "firstSyncIsComplete_key";
+		private const string DataIsSeededKey = "DataIsSeeded_key";
 		private static readonly bool DataIsSeededDefault = false;
 
 		private const string AzureAppServiceUrlKey = "AzureAppServiceUrl_key";
@@ -21,7 +21,10 @@ namespace Acquaint.Util
 		private static readonly string DataPartitionIdDefault = "01D676FD-789A-4488-B519-1840E080936E";
 
 		private const string HockeyAppIdKey = "HockeyAppId_key";
-		private static readonly string HovkeyAppIdDefault = "11111111222222223333333344444444"; // This is just a placeholder value. Replace with your real HockeyApp App ID.
+		private static readonly string HockeyAppIdDefault = "11111111222222223333333344444444"; // This is just a placeholder value. Replace with your real HockeyApp App ID.
+
+		private const string ImageCacheDurationKey = "ImageCacheDuration_key";
+		private static readonly TimeSpan ImageCacheDurationDefault = TimeSpan.FromHours(1); // default image cache timeout
 
 		public static bool DataIsSeeded
 		{
@@ -43,8 +46,14 @@ namespace Acquaint.Util
 
 		public static string HockeyAppId
 		{
-			get { return AppSettings.GetValueOrDefault<string>(HockeyAppIdKey, HovkeyAppIdDefault); }
+			get { return AppSettings.GetValueOrDefault<string>(HockeyAppIdKey, HockeyAppIdDefault); }
 			set { AppSettings.AddOrUpdateValue<string>(HockeyAppIdKey, value); }
+		}
+
+		public static TimeSpan ImageCacheDuration
+		{
+			get { return AppSettings.GetValueOrDefault<TimeSpan>(ImageCacheDurationKey, ImageCacheDurationDefault); }
+			set { AppSettings.AddOrUpdateValue<TimeSpan>(ImageCacheDurationKey, value); }
 		}
 	}
 }
