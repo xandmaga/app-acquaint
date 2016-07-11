@@ -14,8 +14,9 @@ namespace Acquaint.XForms
 
             // on Android, we use a floating action button, so clear the ToolBarItems collection
             if (Device.OS == TargetPlatform.Android)
-            {
-                ToolbarItems.Clear();
+			{
+
+				ToolbarItems.RemoveAt(1); // Remove the add toolbar item, because on Android we have a floating action button instead.
 
                 fab.Clicked = AndroidAddButtonClicked;
             }

@@ -2718,8 +2718,8 @@ namespace Acquaint.XForms.Droid
 			// aapt resource value: 0x7f0200d2
 			public const int mr_ic_play_light = 2130837714;
 			
-			// aapt resource value: 0x7f0200d7
-			public const int notification_template_icon_bg = 2130837719;
+			// aapt resource value: 0x7f0200d8
+			public const int notification_template_icon_bg = 2130837720;
 			
 			// aapt resource value: 0x7f0200d3
 			public const int phone = 2130837715;
@@ -2731,7 +2731,10 @@ namespace Acquaint.XForms.Droid
 			public const int save = 2130837717;
 			
 			// aapt resource value: 0x7f0200d6
-			public const int splash = 2130837718;
+			public const int settings = 2130837718;
+			
+			// aapt resource value: 0x7f0200d7
+			public const int splash = 2130837719;
 			
 			static Drawable()
 			{

@@ -282,6 +282,9 @@
     <BundleResource Include="Resources\Icon-Small.png" />
     <BundleResource Include="Resources\placeholderProfileImage%402x.png" />
     <BundleResource Include="Resources\placeholderProfileImage%403x.png" />
+    <BundleResource Include="Resources\settings.png" />
+    <BundleResource Include="Resources\settings%402x.png" />
+    <BundleResource Include="Resources\settings%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\edit.png" />

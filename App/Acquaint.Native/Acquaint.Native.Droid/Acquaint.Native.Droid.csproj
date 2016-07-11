@@ -261,6 +261,7 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\fab_add.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\save.png" />
     <AndroidResource Include="Resources\menu\AcquaintanceEditMenu.axml" />
+    <AndroidResource Include="Resources\mipmap\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

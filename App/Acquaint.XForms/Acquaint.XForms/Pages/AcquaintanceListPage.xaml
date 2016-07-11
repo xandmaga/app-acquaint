@@ -6,7 +6,8 @@
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Icon="add.png" Text="New" Command="{Binding NewAcquaintanceCommand}" />
+		<ToolbarItem x:Name="settingsToolbarItem" Icon="settings.png" Text="Settings" Command="{Binding ShowSettings}"  />
+		<ToolbarItem x:Name="addAcquaintanceToolbarItem" Icon="add.png" Text="New" Command="{Binding NewAcquaintanceCommand}" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<OnPlatform x:TypeArguments="View">
