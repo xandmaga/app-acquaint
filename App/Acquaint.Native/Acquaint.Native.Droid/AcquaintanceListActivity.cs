@@ -15,6 +15,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
+using System;
 
 namespace Acquaint.Native.Droid
 {
@@ -156,7 +157,7 @@ namespace Acquaint.Native.Droid
 
 			// use FFImageLoading library to asynchronously:
 			ImageService.Instance
-	            .LoadUrl(acquaintance.SmallPhotoUrl, Settings.ImageCacheDuration)	// get the image from a URL
+				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromSeconds(Settings.ImageCacheDurationSeconds))	// get the image from a URL
 				.LoadingPlaceholder("placeholderProfileImage.png")  				// specify a placeholder image
 				.Transform(new CircleTransformation())              				// transform the image to a circle
 				.IntoAsync(viewHolder.ProfilePhotoImageView);            			// load the image into the ImageView

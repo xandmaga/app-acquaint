@@ -248,6 +248,8 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon.png" />
     <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\placeholderProfileImage%402x.png" />
+    <BundleResource Include="Resources\placeholderProfileImage%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork%402x" />

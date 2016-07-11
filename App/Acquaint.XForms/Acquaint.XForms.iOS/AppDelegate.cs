@@ -3,6 +3,7 @@ using Acquaint.Common.iOS;
 using Acquaint.Util;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
+using FFImageLoading.Forms.Touch;
 using Foundation;
 using HockeyApp.iOS;
 using ImageCircle.Forms.Plugin.iOS;
@@ -36,6 +37,8 @@ namespace Acquaint.XForms.iOS
 			SQLitePCL.CurrentPlatform.Init();
 
             FormsMaps.Init();
+
+			CachedImageRenderer.Init();
 
             LoadApplication(new App());
 

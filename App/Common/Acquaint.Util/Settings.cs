@@ -23,8 +23,8 @@ namespace Acquaint.Util
 		private const string HockeyAppIdKey = "HockeyAppId_key";
 		private static readonly string HockeyAppIdDefault = "11111111222222223333333344444444"; // This is just a placeholder value. Replace with your real HockeyApp App ID.
 
-		private const string ImageCacheDurationKey = "ImageCacheDuration_key";
-		private static readonly TimeSpan ImageCacheDurationDefault = TimeSpan.FromHours(1); // default image cache timeout
+		private const string ImageCacheDurationSecondsKey = "ImageCacheDurationSeconds_key";
+		private static readonly int ImageCacheDurationSecondsDefault = 3600; // default image cache timeout
 
         private const string BingMapsKeyKey = "BingMapsKey_key";
         private static readonly string BingMapsKeyDefault = "UW0peICp3gljJyhqQKFZ~R3XF1I5BvWmWmkD4ujytTA~AoUOqpk2nJB-Wh7wH-9S-zaG-w6sygLitXugNOqm71wx_nc6WHIt6Lb29gyTU04X";
@@ -53,10 +53,10 @@ namespace Acquaint.Util
 			set { AppSettings.AddOrUpdateValue<string>(HockeyAppIdKey, value); }
 		}
 
-		public static TimeSpan ImageCacheDuration
+		public static int ImageCacheDurationSeconds
 		{
-			get { return AppSettings.GetValueOrDefault<TimeSpan>(ImageCacheDurationKey, ImageCacheDurationDefault); }
-			set { AppSettings.AddOrUpdateValue<TimeSpan>(ImageCacheDurationKey, value); }
+			get { return AppSettings.GetValueOrDefault<int>(ImageCacheDurationSecondsKey, ImageCacheDurationSecondsDefault); }
+			set { AppSettings.AddOrUpdateValue<int>(ImageCacheDurationSecondsKey, value); }
 		}
 
         public static string BingMapsKey

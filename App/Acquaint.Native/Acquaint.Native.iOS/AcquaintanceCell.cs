@@ -28,22 +28,13 @@ namespace Acquaint.Native.iOS
 
 			// use FFImageLoading library to asynchronously:
 			ImageService.Instance
-				.LoadUrl(acquaintance.SmallPhotoUrl, Settings.ImageCacheDuration)   // get the image from a URL
+				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromSeconds(Settings.ImageCacheDurationSeconds))   // get the image from a URL
 				.LoadingPlaceholder("placeholderProfileImage.png")                  // specify a placeholder image
 				.Transform(new CircleTransformation())                              // transform the image to a circle
 				.IntoAsync(ProfilePhotoImageView);                                  // load the image into the UIImageView
 
 			// set disclousure indicator accessory for the cell
 			Accessory = UITableViewCellAccessory.DisclosureIndicator;
-
-			// add the colored border to the image
-			double min = Math.Min(ProfilePhotoImageView.Frame.Height, ProfilePhotoImageView.Frame.Height);
-			ProfilePhotoImageView.Layer.CornerRadius = (float)(min / 2.0);
-			ProfilePhotoImageView.Layer.MasksToBounds = false;
-			ProfilePhotoImageView.Layer.BorderColor = UIColor.FromRGB(84, 119, 153).CGColor;
-			ProfilePhotoImageView.Layer.BorderWidth = 3;
-			ProfilePhotoImageView.BackgroundColor = UIColor.Clear;
-			ProfilePhotoImageView.ClipsToBounds = true;
 		}
 	}
 }
