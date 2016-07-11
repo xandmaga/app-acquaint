@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Acquaint.Abstractions;
 using Acquaint.Common.UWP;
+using Acquaint.Util;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using Microsoft.Practices.ServiceLocation;
@@ -60,7 +61,7 @@ namespace Acquaint.XForms.UWP
 
                 Xamarin.Forms.Forms.Init(e);
 
-                Xamarin.FormsMaps.Init("UW0peICp3gljJyhqQKFZ~R3XF1I5BvWmWmkD4ujytTA~AoUOqpk2nJB-Wh7wH-9S-zaG-w6sygLitXugNOqm71wx_nc6WHIt6Lb29gyTU04X");
+                Xamarin.FormsMaps.Init(Settings.BingMapsKey);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

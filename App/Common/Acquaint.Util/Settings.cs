@@ -26,7 +26,10 @@ namespace Acquaint.Util
 		private const string ImageCacheDurationKey = "ImageCacheDuration_key";
 		private static readonly TimeSpan ImageCacheDurationDefault = TimeSpan.FromHours(1); // default image cache timeout
 
-		public static bool DataIsSeeded
+        private const string BingMapsKeyKey = "BingMapsKey_key";
+        private static readonly string BingMapsKeyDefault = "UW0peICp3gljJyhqQKFZ~R3XF1I5BvWmWmkD4ujytTA~AoUOqpk2nJB-Wh7wH-9S-zaG-w6sygLitXugNOqm71wx_nc6WHIt6Lb29gyTU04X";
+
+        public static bool DataIsSeeded
 		{
 			get { return AppSettings.GetValueOrDefault<bool>(DataIsSeededKey, DataIsSeededDefault); }
 			set { AppSettings.AddOrUpdateValue<bool>(DataIsSeededKey, value); }
@@ -55,6 +58,12 @@ namespace Acquaint.Util
 			get { return AppSettings.GetValueOrDefault<TimeSpan>(ImageCacheDurationKey, ImageCacheDurationDefault); }
 			set { AppSettings.AddOrUpdateValue<TimeSpan>(ImageCacheDurationKey, value); }
 		}
-	}
+
+        public static string BingMapsKey
+        {
+            get { return AppSettings.GetValueOrDefault<string>(BingMapsKeyKey, BingMapsKeyDefault); }
+            set { AppSettings.AddOrUpdateValue<string>(BingMapsKeyKey, value); }
+        }
+    }
 }
 
