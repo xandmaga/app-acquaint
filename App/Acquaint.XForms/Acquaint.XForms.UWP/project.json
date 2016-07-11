@@ -12,9 +12,11 @@
     "PCLStorage": "1.0.2",
     "Refractored.MvvmHelpers": "1.0.1",
     "Xam.Plugin.ExternalMaps": "3.0.0",
-    "Xam.Plugins.Forms.ImageCircle": "1.4.1",
     "Xam.Plugins.Messaging": "3.2.1",
     "Xam.Plugins.Settings": "2.1.0",
+    "Xamarin.FFImageLoading": "2.1.6",
+    "Xamarin.FFImageLoading.Forms": "2.1.6",
+    "Xamarin.FFImageLoading.Transformations": "2.1.6",
     "Xamarin.Forms": "2.3.0.107",
     "Xamarin.Forms.Maps": "2.3.0.107"
   },

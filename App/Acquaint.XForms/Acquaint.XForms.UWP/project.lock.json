@@ -1927,19 +1927,6 @@
           "lib/UAP10/Plugin.ExternalMaps.dll": {}
         }
       },
-      "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-        "dependencies": {
-          "Xamarin.Forms": "2.0.1.6505"
-        },
-        "compile": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        },
-        "runtime": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        }
-      },
       "Xam.Plugins.Messaging/3.2.1": {
         "compile": {
           "lib/UAP10/Plugin.Messaging.Abstractions.dll": {},
@@ -1958,6 +1945,44 @@
         "runtime": {
           "lib/UAP10/Plugin.Settings.Abstractions.dll": {},
           "lib/UAP10/Plugin.Settings.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading/2.1.6": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.29"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Forms/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6",
+          "Xamarin.Forms": "1.4.4.6392"
+        },
+        "compile": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Transformations/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
         }
       },
       "Xamarin.Forms/2.3.0.107": {
@@ -3774,19 +3799,6 @@
           "lib/UAP10/Plugin.ExternalMaps.dll": {}
         }
       },
-      "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-        "dependencies": {
-          "Xamarin.Forms": "2.0.1.6505"
-        },
-        "compile": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        },
-        "runtime": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        }
-      },
       "Xam.Plugins.Messaging/3.2.1": {
         "compile": {
           "lib/UAP10/Plugin.Messaging.Abstractions.dll": {},
@@ -3805,6 +3817,44 @@
         "runtime": {
           "lib/UAP10/Plugin.Settings.Abstractions.dll": {},
           "lib/UAP10/Plugin.Settings.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading/2.1.6": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.29"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Forms/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6",
+          "Xamarin.Forms": "1.4.4.6392"
+        },
+        "compile": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Transformations/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
         }
       },
       "Xamarin.Forms/2.3.0.107": {
@@ -5579,19 +5629,6 @@
           "lib/UAP10/Plugin.ExternalMaps.dll": {}
         }
       },
-      "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-        "dependencies": {
-          "Xamarin.Forms": "2.0.1.6505"
-        },
-        "compile": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        },
-        "runtime": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        }
-      },
       "Xam.Plugins.Messaging/3.2.1": {
         "compile": {
           "lib/UAP10/Plugin.Messaging.Abstractions.dll": {},
@@ -5610,6 +5647,44 @@
         "runtime": {
           "lib/UAP10/Plugin.Settings.Abstractions.dll": {},
           "lib/UAP10/Plugin.Settings.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading/2.1.6": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.29"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Forms/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6",
+          "Xamarin.Forms": "1.4.4.6392"
+        },
+        "compile": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Transformations/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
         }
       },
       "Xamarin.Forms/2.3.0.107": {
@@ -7434,19 +7509,6 @@
           "lib/UAP10/Plugin.ExternalMaps.dll": {}
         }
       },
-      "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-        "dependencies": {
-          "Xamarin.Forms": "2.0.1.6505"
-        },
-        "compile": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        },
-        "runtime": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        }
-      },
       "Xam.Plugins.Messaging/3.2.1": {
         "compile": {
           "lib/UAP10/Plugin.Messaging.Abstractions.dll": {},
@@ -7465,6 +7527,44 @@
         "runtime": {
           "lib/UAP10/Plugin.Settings.Abstractions.dll": {},
           "lib/UAP10/Plugin.Settings.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading/2.1.6": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.29"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Forms/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6",
+          "Xamarin.Forms": "1.4.4.6392"
+        },
+        "compile": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Transformations/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
         }
       },
       "Xamarin.Forms/2.3.0.107": {
@@ -9239,19 +9339,6 @@
           "lib/UAP10/Plugin.ExternalMaps.dll": {}
         }
       },
-      "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-        "dependencies": {
-          "Xamarin.Forms": "2.0.1.6505"
-        },
-        "compile": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        },
-        "runtime": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        }
-      },
       "Xam.Plugins.Messaging/3.2.1": {
         "compile": {
           "lib/UAP10/Plugin.Messaging.Abstractions.dll": {},
@@ -9270,6 +9357,44 @@
         "runtime": {
           "lib/UAP10/Plugin.Settings.Abstractions.dll": {},
           "lib/UAP10/Plugin.Settings.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading/2.1.6": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.29"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Forms/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6",
+          "Xamarin.Forms": "1.4.4.6392"
+        },
+        "compile": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Transformations/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
         }
       },
       "Xamarin.Forms/2.3.0.107": {
@@ -11094,19 +11219,6 @@
           "lib/UAP10/Plugin.ExternalMaps.dll": {}
         }
       },
-      "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-        "dependencies": {
-          "Xamarin.Forms": "2.0.1.6505"
-        },
-        "compile": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        },
-        "runtime": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        }
-      },
       "Xam.Plugins.Messaging/3.2.1": {
         "compile": {
           "lib/UAP10/Plugin.Messaging.Abstractions.dll": {},
@@ -11125,6 +11237,44 @@
         "runtime": {
           "lib/UAP10/Plugin.Settings.Abstractions.dll": {},
           "lib/UAP10/Plugin.Settings.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading/2.1.6": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.29"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Forms/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6",
+          "Xamarin.Forms": "1.4.4.6392"
+        },
+        "compile": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Transformations/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
         }
       },
       "Xamarin.Forms/2.3.0.107": {
@@ -12899,19 +13049,6 @@
           "lib/UAP10/Plugin.ExternalMaps.dll": {}
         }
       },
-      "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-        "dependencies": {
-          "Xamarin.Forms": "2.0.1.6505"
-        },
-        "compile": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        },
-        "runtime": {
-          "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll": {},
-          "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll": {}
-        }
-      },
       "Xam.Plugins.Messaging/3.2.1": {
         "compile": {
           "lib/UAP10/Plugin.Messaging.Abstractions.dll": {},
@@ -12930,6 +13067,44 @@
         "runtime": {
           "lib/UAP10/Plugin.Settings.Abstractions.dll": {},
           "lib/UAP10/Plugin.Settings.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading/2.1.6": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.29"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll": {},
+          "lib/portable-netcore45+wpa81/FFImageLoading.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Forms/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6",
+          "Xamarin.Forms": "1.4.4.6392"
+        },
+        "compile": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll": {},
+          "lib/uap10.0/FFImageLoading.Forms.dll": {}
+        }
+      },
+      "Xamarin.FFImageLoading.Transformations/2.1.6": {
+        "dependencies": {
+          "Xamarin.FFImageLoading": "2.1.6"
+        },
+        "compile": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
+        },
+        "runtime": {
+          "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll": {}
         }
       },
       "Xamarin.Forms/2.3.0.107": {
@@ -16715,55 +16890,6 @@
         "readme.txt"
       ]
     },
-    "Xam.Plugins.Forms.ImageCircle/1.4.1": {
-      "sha512": "VCaEXApcqlYzPMMQ5IQVlaHtdrcleD5mZXyWbJiwq273Ioul2JcaolecDDjZIoeiNyZT6XKa39JqcfeKDdCUuQ==",
-      "type": "package",
-      "files": [
-        "Xam.Plugins.Forms.ImageCircle.1.4.1.nupkg.sha512",
-        "Xam.Plugins.Forms.ImageCircle.nuspec",
-        "lib/MonoAndroid10/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/MonoAndroid10/ImageCircle.Forms.Plugin.Abstractions.pdb",
-        "lib/MonoAndroid10/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/MonoAndroid10/ImageCircle.Forms.Plugin.Android.dll",
-        "lib/MonoAndroid10/ImageCircle.Forms.Plugin.Android.pdb",
-        "lib/MonoAndroid10/ImageCircle.Forms.Plugin.Android.xml",
-        "lib/MonoTouch10/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/MonoTouch10/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/MonoTouch10/ImageCircle.Forms.Plugin.iOS.dll",
-        "lib/MonoTouch10/ImageCircle.Forms.Plugin.iOS.xml",
-        "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.pdb",
-        "lib/UAP10/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/UAP10/ImageCircle.Forms.Plugin.UWP.dll",
-        "lib/UAP10/ImageCircle.Forms.Plugin.UWP.pdb",
-        "lib/UAP10/ImageCircle.Forms.Plugin.UWP.xml",
-        "lib/Xamarin.iOS10/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/Xamarin.iOS10/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/Xamarin.iOS10/ImageCircle.Forms.Plugin.iOS.dll",
-        "lib/Xamarin.iOS10/ImageCircle.Forms.Plugin.iOS.xml",
-        "lib/portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10/ImageCircle.Forms.Plugin.Abstractions.pdb",
-        "lib/portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/win81/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/win81/ImageCircle.Forms.Plugin.Abstractions.pdb",
-        "lib/win81/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/win81/ImageCircle.Forms.Plugin.WindowsStore.dll",
-        "lib/win81/ImageCircle.Forms.Plugin.WindowsStore.pdb",
-        "lib/win81/ImageCircle.Forms.Plugin.WindowsStore.xml",
-        "lib/wp8/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/wp8/ImageCircle.Forms.Plugin.Abstractions.pdb",
-        "lib/wp8/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/wp8/ImageCircle.Forms.Plugin.WindowsPhone.dll",
-        "lib/wp8/ImageCircle.Forms.Plugin.WindowsPhone.pdb",
-        "lib/wp8/ImageCircle.Forms.Plugin.WindowsPhone.xml",
-        "lib/wpa81/ImageCircle.Forms.Plugin.Abstractions.dll",
-        "lib/wpa81/ImageCircle.Forms.Plugin.Abstractions.pdb",
-        "lib/wpa81/ImageCircle.Forms.Plugin.Abstractions.xml",
-        "lib/wpa81/ImageCircle.Forms.Plugin.WindowsPhoneRT.dll",
-        "lib/wpa81/ImageCircle.Forms.Plugin.WindowsPhoneRT.pdb",
-        "lib/wpa81/ImageCircle.Forms.Plugin.WindowsPhoneRT.xml"
-      ]
-    },
     "Xam.Plugins.Messaging/3.2.1": {
       "sha512": "Aq4dgXK4xNFLo+BG3T+oV/bjdUnpE5vt+hVFdABUIBDUhk3JHjrDAkeT+7OSZZRIcma1uCEb80A3tqAM7ceK/g==",
       "type": "package",
@@ -16868,6 +16994,81 @@
         "lib/wpa81/Plugin.Settings.dll",
         "lib/wpa81/Plugin.Settings.xml",
         "readme.txt"
+      ]
+    },
+    "Xamarin.FFImageLoading/2.1.6": {
+      "sha512": "FTPdYzvGCfg54suueH4mZ3xeuI5qbgvQ6Nx8jO5FFP3Xk3W+L0Rz6mbenBcIPDiQgQuSqwO/ixz/riCnUkpHhQ==",
+      "type": "package",
+      "files": [
+        "Xamarin.FFImageLoading.2.1.6.nupkg.sha512",
+        "Xamarin.FFImageLoading.nuspec",
+        "lib/MonoAndroid10/FFImageLoading.Platform.dll",
+        "lib/MonoAndroid10/FFImageLoading.Platform.xml",
+        "lib/MonoAndroid10/FFImageLoading.dll",
+        "lib/MonoAndroid10/FFImageLoading.xml",
+        "lib/Xamarin.iOS10/FFImageLoading.Platform.dll",
+        "lib/Xamarin.iOS10/FFImageLoading.Platform.xml",
+        "lib/Xamarin.iOS10/FFImageLoading.dll",
+        "lib/Xamarin.iOS10/FFImageLoading.xml",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.Platform.dll",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.Platform.xml",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.dll",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.xml",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Platform.dll",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Platform.xml",
+        "lib/portable-netcore45+wpa81/FFImageLoading.dll",
+        "lib/portable-netcore45+wpa81/FFImageLoading.xml",
+        "lib/portable-wp8/FFImageLoading.Platform.dll",
+        "lib/portable-wp8/FFImageLoading.Platform.xml",
+        "lib/portable-wp8/FFImageLoading.dll",
+        "lib/portable-wp8/FFImageLoading.xml"
+      ]
+    },
+    "Xamarin.FFImageLoading.Forms/2.1.6": {
+      "sha512": "FyuwQOZYnEeXhEaHP3wnyFqXnLCjpk7MbhAwhP7i6aArduoJgwSPRoXxqYGN779A0BN07tfrfgm48g4pvB+wJg==",
+      "type": "package",
+      "files": [
+        "Xamarin.FFImageLoading.Forms.2.1.6.nupkg.sha512",
+        "Xamarin.FFImageLoading.Forms.nuspec",
+        "lib/MonoAndroid10/FFImageLoading.Forms.Droid.dll",
+        "lib/MonoAndroid10/FFImageLoading.Forms.Droid.xml",
+        "lib/MonoAndroid10/FFImageLoading.Forms.dll",
+        "lib/MonoAndroid10/FFImageLoading.Forms.xml",
+        "lib/Xamarin.iOS10/FFImageLoading.Forms.Touch.dll",
+        "lib/Xamarin.iOS10/FFImageLoading.Forms.Touch.xml",
+        "lib/Xamarin.iOS10/FFImageLoading.Forms.dll",
+        "lib/Xamarin.iOS10/FFImageLoading.Forms.xml",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.Forms.dll",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.Forms.xml",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Forms.WinRT.dll",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Forms.WinRT.xml",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Forms.dll",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Forms.xml",
+        "lib/portable-wp8/FFImageLoading.Forms.WinSL.dll",
+        "lib/portable-wp8/FFImageLoading.Forms.WinSL.xml",
+        "lib/portable-wp8/FFImageLoading.Forms.dll",
+        "lib/portable-wp8/FFImageLoading.Forms.xml",
+        "lib/uap10.0/FFImageLoading.Forms.WinUWP.dll",
+        "lib/uap10.0/FFImageLoading.Forms.WinUWP.xml",
+        "lib/uap10.0/FFImageLoading.Forms.dll",
+        "lib/uap10.0/FFImageLoading.Forms.xml"
+      ]
+    },
+    "Xamarin.FFImageLoading.Transformations/2.1.6": {
+      "sha512": "PYRBFrkyx1XhwzhEUXTAg1wgPglel8ERG/t677uY66XD2gYwfjstoplBJgODqh8Zz2IfXyWN+GGIFMiQ13zxvA==",
+      "type": "package",
+      "files": [
+        "Xamarin.FFImageLoading.Transformations.2.1.6.nupkg.sha512",
+        "Xamarin.FFImageLoading.Transformations.nuspec",
+        "lib/MonoAndroid10/FFImageLoading.Transformations.dll",
+        "lib/MonoAndroid10/FFImageLoading.Transformations.xml",
+        "lib/Xamarin.iOS10/FFImageLoading.Transformations.dll",
+        "lib/Xamarin.iOS10/FFImageLoading.Transformations.xml",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.Transformations.dll",
+        "lib/portable-net45+win8+wpa81+wp8/FFImageLoading.Transformations.xml",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.dll",
+        "lib/portable-netcore45+wpa81/FFImageLoading.Transformations.xml",
+        "lib/portable-wp8/FFImageLoading.Transformations.dll"
       ]
     },
     "Xamarin.Forms/2.3.0.107": {
@@ -17144,9 +17345,11 @@
       "PCLStorage >= 1.0.2",
       "Refractored.MvvmHelpers >= 1.0.1",
       "Xam.Plugin.ExternalMaps >= 3.0.0",
-      "Xam.Plugins.Forms.ImageCircle >= 1.4.1",
       "Xam.Plugins.Messaging >= 3.2.1",
       "Xam.Plugins.Settings >= 2.1.0",
+      "Xamarin.FFImageLoading >= 2.1.6",
+      "Xamarin.FFImageLoading.Forms >= 2.1.6",
+      "Xamarin.FFImageLoading.Transformations >= 2.1.6",
       "Xamarin.Forms >= 2.3.0.107",
       "Xamarin.Forms.Maps >= 2.3.0.107"
     ],
