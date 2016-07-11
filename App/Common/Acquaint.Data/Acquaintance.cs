@@ -1,6 +1,4 @@
-﻿using System;
-using Acquaint.Models;
-using MvvmHelpers;
+﻿using Acquaint.Models;
 using Newtonsoft.Json;
 
 namespace Acquaint.Data

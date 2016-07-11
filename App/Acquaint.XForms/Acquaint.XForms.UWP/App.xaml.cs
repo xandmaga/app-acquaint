@@ -7,6 +7,11 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
+using Acquaint.Abstractions;
+using Acquaint.Common.UWP;
+using Autofac;
+using Autofac.Extras.CommonServiceLocator;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Acquaint.XForms.UWP
 {
@@ -21,6 +26,8 @@ namespace Acquaint.XForms.UWP
         /// </summary>
         public App()
         {
+            RegisterDependencies();
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -130,6 +137,20 @@ namespace Acquaint.XForms.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        void RegisterDependencies()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+            builder.RegisterInstance(new GuidUtility()).As<IGuidUtility>();
+            builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+
+            var container = builder.Build();
+
+            var csl = new AutofacServiceLocator(container);
+            ServiceLocator.SetLocatorProvider(() => csl);
         }
     }
 }

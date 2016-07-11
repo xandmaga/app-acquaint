@@ -1,7 +1,4 @@
-﻿using Acquaint.Data;
-using Acquaint.Models;
-using AutoMapper;
-using FormsToolkit;
+﻿using FormsToolkit;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

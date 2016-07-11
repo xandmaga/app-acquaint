@@ -30,11 +30,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <Debugger>Xamarin</Debugger>
     <DevInstrumentationEnabled>True</DevInstrumentationEnabled>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -43,7 +47,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-<AndroidSupportedAbis>armeabi-v7a;armeabi;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;armeabi;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -1,8 +1,6 @@
-using Acquaint.XForms.UWP;
+using Acquaint.Abstractions;
 
-[assembly: Xamarin.Forms.Dependency(typeof(EnvironmentService))]
-
-namespace Acquaint.XForms.UWP
+namespace Acquaint.Common.UWP
 {
     public class EnvironmentService : IEnvironmentService
     {
