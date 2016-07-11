@@ -1,4 +1,11 @@
+using System;
+using System.IO;
+using Android.Views;
+using Android.Widget;
+using com.refractored.fab;
 using Acquaint.XForms;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 using Acquaint.XForms.Droid;
 
 [assembly: ExportRenderer (typeof (FloatingActionButtonView), typeof (FloatingActionButtonViewRenderer))]

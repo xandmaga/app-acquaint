@@ -1,3 +1,17 @@
+using Acquaint.Abstractions;
+using Acquaint.Common.Droid;
+using Acquaint.Util;
+using Android.App;
+using Android.Content.PM;
+using Android.OS;
+using Autofac;
+using Autofac.Extras.CommonServiceLocator;
+using HockeyApp.Android;
+using Microsoft.Practices.ServiceLocation;
+using Xamarin;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+
 namespace Acquaint.XForms.Droid
 {
 	[Activity (Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
