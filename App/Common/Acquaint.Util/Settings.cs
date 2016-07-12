@@ -32,7 +32,7 @@ namespace Acquaint.Util
 		private const string AzureAppServiceUrlKey = "AzureAppServiceUrl_key";
 		private static readonly string AzureAppServiceUrlDefault = "https://app-acquaint.azurewebsites.net";
 
-		private const string DataPartitionPhraseKey = "DataSeedPhrase_key";
+		private const string DataPartitionPhraseKey = "DataPartitionPhrase_key";
 		private static readonly string DataSeedPhraseDefault = "";
 
 		private const string ImageCacheDurationHoursKey = "ImageCacheDurationHours_key";
@@ -76,14 +76,11 @@ namespace Acquaint.Util
         private const string BingMapsKeyKey = "BingMapsKey_key";
         private static readonly string BingMapsKeyDefault = "UW0peICp3gljJyhqQKFZ~R3XF1I5BvWmWmkD4ujytTA~AoUOqpk2nJB-Wh7wH-9S-zaG-w6sygLitXugNOqm71wx_nc6WHIt6Lb29gyTU04X";
 
-		const string DatabaseIdKey = "azure_database";
+		const string DatabaseIdKey = "DatabaseId_key";
 		static readonly int DatabaseIdDefault = 0;
 
-		public static int DatabaseId
-		{
-			get { return AppSettings.GetValueOrDefault<int>(DatabaseIdKey, DatabaseIdDefault); }
-			set { AppSettings.AddOrUpdateValue<int>(DatabaseIdKey, value); }
-		}
+		private const string SetupPageIsPresentedKey = "SetupPageIsPresented_key";
+		private static readonly bool SetupPageIsPresentedDefault = false;
 
 		public static bool LocalDataResetIsRequested
 		{
@@ -114,6 +111,12 @@ namespace Acquaint.Util
             get { return AppSettings.GetValueOrDefault<string>(BingMapsKeyKey, BingMapsKeyDefault); }
             set { AppSettings.AddOrUpdateValue<string>(BingMapsKeyKey, value); }
         }
+
+		public static int DatabaseId
+		{
+			get { return AppSettings.GetValueOrDefault<int>(DatabaseIdKey, DatabaseIdDefault); }
+			set { AppSettings.AddOrUpdateValue<int>(DatabaseIdKey, value); }
+		}
 
 		#endregion
 	}

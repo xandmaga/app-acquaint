@@ -25,8 +25,31 @@ namespace Acquaint.XForms
 			{
 				Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
 
-				await Navigation.PopModalAsync();
+				if (Device.OS != TargetPlatform.Android)
+				{
+					await Navigation.PopModalAsync();
+
+					var navPage = new NavigationPage(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
+
+					// on the main UI thread, set the MainPage to the navPage
+					Device.BeginInvokeOnMainThread(() => {
+						Application.Current.MainPage = navPage;
+					});
+				}
+				else
+				{
+					await Navigation.PopModalAsync();
+
+					await Navigation.PushAsync(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
+				}
+
 			}
+		}
+
+		protected override bool OnBackButtonPressed()
+		{
+			// disable back button, so that the user is forced to enter a DataPartitionPhrase
+			return true;
 		}
 	}
 }

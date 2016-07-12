@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
 using Acquaint.Data;
@@ -71,6 +72,11 @@ namespace Acquaint.XForms
 
 				LoadAcquaintancesCommand.ChangeCanExecute();
 			}
+		}
+
+		public async Task ExecuteShowSetupPageCommand()
+		{
+			await PushModalAsync(new NavigationPage(new SetupPage()));
 		}
 
 		public Command RefreshAcquaintancesCommand

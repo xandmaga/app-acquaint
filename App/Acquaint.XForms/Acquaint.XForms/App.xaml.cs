@@ -31,6 +31,10 @@ namespace Acquaint.XForms
 					BarTextColor = Color.White
 				};
 
+				// if this is iOS set the nav bar text color
+				if (Device.OS == TargetPlatform.iOS)
+					navPage.BarTextColor = Color.White;
+
 				MainPage = navPage;
 			}
         }
