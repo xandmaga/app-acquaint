@@ -5,7 +5,7 @@ using Plugin.Settings.Abstractions;
 namespace Acquaint.Util
 {
 	/// <summary>
-	/// This class uses the Xamarin settings plugin (Plugins.Settings) to implemnt cross-platform storing of settings.
+	/// This class uses the Xamarin settings plugin (Plugins.Settings) to implement cross-platform storing of settings.
 	/// </summary>
 	public class Settings
 	{
@@ -19,7 +19,6 @@ namespace Acquaint.Util
 			DataIsSeeded = DataIsSeededDefault;
 			LocalDataResetIsRequested = true;
 			AzureAppServiceUrl = AzureAppServiceUrlDefault;
-			DataSeedPhrase = DataSeedPhraseDefault;
 			ImageCacheDurationHours = ImageCacheDurationHoursDefault;
 		}
 

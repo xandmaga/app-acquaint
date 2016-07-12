@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Acquaint.Data;
+using Acquaint.Util;
 
 namespace Acquaint.XForms
 {
@@ -48,7 +49,14 @@ namespace Acquaint.XForms
         {
             base.OnAppearing();
 
-			await ViewModel.ExecuteLoadAcquaintancesCommand();
+			if (string.IsNullOrWhiteSpace(Settings.DataSeedPhrase))
+			{
+				await Navigation.PushModalAsync(new DataPartitionPhraseInitPage());
+			}
+			else
+			{
+				await ViewModel.ExecuteLoadAcquaintancesCommand();
+			}
         }
     }
 }

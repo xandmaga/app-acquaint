@@ -60,8 +60,8 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Views\SettingsTableView.xaml.cs">
-      <DependentUpon>SettingsTableView.xaml</DependentUpon>
+    <Compile Include="Pages\DataPartitionPhraseInitPage.xaml.cs">
+      <DependentUpon>DataPartitionPhraseInitPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -192,7 +192,7 @@
     <EmbeddedResource Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SettingsTableView.xaml">
+    <EmbeddedResource Include="Pages\DataPartitionPhraseInitPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

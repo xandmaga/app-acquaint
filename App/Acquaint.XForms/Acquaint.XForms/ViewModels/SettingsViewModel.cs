@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Acquaint.Util;
 using FFImageLoading;
@@ -13,7 +14,18 @@ namespace Acquaint.XForms
 		public string DataPartitionPhrase { get; set; }
 		public int ImageCacheDurationHours { get; set; }
 		public bool ClearImageCache { get; set; }
-		public bool ResetToDefaults { get; set; }
+
+		bool _ResetToDefaults;
+		public bool ResetToDefaults
+		{
+			get { return _ResetToDefaults; }
+			set
+			{
+				SetProperty(ref _ResetToDefaults, value);
+				ClearImageCache = value; // if the data is being refreshed, we should clear the image cache as well
+				OnPropertyChanged(nameof(ClearImageCache)); // notify that the ClearImageCache has been updated
+			}
+		}
 
 		public SettingsViewModel()
 		{
