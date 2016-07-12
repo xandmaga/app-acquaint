@@ -38,7 +38,7 @@ namespace Acquaint.XForms
 		}
 
 		/// <summary>
-		/// The action to take when the + button is clicked on Android.
+		/// The action to take when the + ToolbarItem is clicked on Android.
 		/// </summary>
 		/// <param name="sender">The sender.</param>
 		/// <param name="e">The EventArgs</param>
@@ -51,6 +51,7 @@ namespace Acquaint.XForms
 		{
 			base.OnAppearing();
 
+			// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
 			if (Device.OS != TargetPlatform.Android)
 			{
 				if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))

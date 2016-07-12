@@ -25,6 +25,7 @@ namespace Acquaint.XForms
 			{
 				Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
 
+				// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
 				if (Device.OS != TargetPlatform.Android)
 				{
 					await Navigation.PopModalAsync();

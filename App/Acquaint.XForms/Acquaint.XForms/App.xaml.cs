@@ -14,6 +14,7 @@ namespace Acquaint.XForms
 
             SubscribeToDisplayAlertMessages();
 
+			// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
 			if (Device.OS == TargetPlatform.Android)
 			{
 				MainPage = new SplashPage();
