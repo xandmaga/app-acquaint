@@ -5,7 +5,7 @@ namespace Acquaint.Common.Droid
 {
 	public class HttpClientHandlerFactory : IHttpClientHandlerFactory
 	{
-		HttpClientHandler IHttpClientHandlerFactory.GetHttpClientHandler()
+		public HttpClientHandler GetHttpClientHandler()
 		{
 			return null;
 		}

@@ -38,6 +38,8 @@ namespace Acquaint.XForms
 
 		Command _NewAcquaintanceCommand;
 
+		Command _ShowSettingsCommand;
+
 		public ObservableRangeCollection<Acquaintance> Acquaintances
 		{
 			get { return _Acquaintances ?? (_Acquaintances = new ObservableRangeCollection<Acquaintance>()); }
@@ -58,7 +60,10 @@ namespace Acquaint.XForms
 
 		public async Task ExecuteLoadAcquaintancesCommand()
 		{
-			if (Acquaintances.Count < 1)
+			if (Settings.LocalDataResetIsRequested)
+				_Acquaintances.Clear();
+
+			if (Acquaintances.Count < 1 || !Settings.DataIsSeeded || Settings.ClearImageCacheIsRequested)
 			{
 				LoadAcquaintancesCommand.ChangeCanExecute();
 
@@ -102,6 +107,8 @@ namespace Acquaint.XForms
 			}
 
 			IsBusy = false;
+
+			Settings.ClearImageCacheIsRequested = false;
 		}
 
 		/// <summary>
@@ -119,6 +126,23 @@ namespace Acquaint.XForms
 		async Task ExecuteNewAcquaintanceCommand()
 		{
 			await PushAsync(new AcquaintanceEditPage() { BindingContext = new AcquaintanceEditViewModel() });
+		}
+
+		/// <summary>
+		/// Command to show settings
+		/// </summary>
+		public Command ShowSettingsCommand
+		{
+			get
+			{
+				return _ShowSettingsCommand ??
+					(_ShowSettingsCommand = new Command(async () => await ExecuteShowSettingsCommand()));
+			}
+		}
+
+		async Task ExecuteShowSettingsCommand()
+		{
+			await PushModalAsync(new SettingsPage() { BindingContext = new SettingsViewModel() });
 		}
 
 		Command _DialNumberCommand;

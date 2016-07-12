@@ -10,17 +10,17 @@ namespace Acquaint.Common.iOS
 	public class HttpClientHandlerFactory : IHttpClientHandlerFactory
 	{
 
-		HttpClientHandler IHttpClientHandlerFactory.GetHttpClientHandler()
+		public HttpClientHandler GetHttpClientHandler()
 		{
 #if DEBUG
 			return null;
-#endif
-
+#else
 			return new HttpClientHandler
 			{
 				Proxy = CoreFoundation.CFNetwork.GetDefaultProxy(),
 				UseProxy = true
 			};
+#endif
 		}
 	}
 }

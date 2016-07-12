@@ -35,13 +35,7 @@ namespace Acquaint.XForms
 
 		Command _SaveAcquaintanceCommand;
 
-		public Command SaveAcquaintanceCommand
-		{
-			get
-			{
-				return _SaveAcquaintanceCommand ?? (_SaveAcquaintanceCommand = new Command(() => ExecuteSaveAcquaintanceCommand()));
-			}
-		}
+		public Command SaveAcquaintanceCommand => _SaveAcquaintanceCommand ?? (_SaveAcquaintanceCommand = new Command(async () => await ExecuteSaveAcquaintanceCommand()));
 
 		async Task ExecuteSaveAcquaintanceCommand()
 		{

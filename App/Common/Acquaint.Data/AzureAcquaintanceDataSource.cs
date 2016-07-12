@@ -2,22 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
 using Acquaint.Util;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace Acquaint.Data
 {
 	public class AzureAcquaintanceSource : IDataSource<Acquaintance>
 	{
-		static readonly string _ServiceUrl = Settings.AzureAppServiceUrl;
+		public AzureAcquaintanceSource()
+		{
+			_GuidUtility = ServiceLocator.Current.GetInstance<IGuidUtility>();
+		}
 
-		readonly string _DataPartitionId = Settings.DataPartitionId;
+		IGuidUtility _GuidUtility;
+
+		string _ServiceUrl
+		{
+			get { return Settings.AzureAppServiceUrl; }
+		}
+
+		string _DataPartitionId
+		{
+			get { return _GuidUtility.Create(Settings.DataSeedPhrase).ToString().ToUpper(); }
+		}
 
 		public MobileServiceClient MobileService { get; set; }
+
+		IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
 
 		bool _IsInitialized;
 
@@ -30,9 +47,11 @@ namespace Acquaint.Data
 
 				MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
 
-				var store = new MobileServiceSQLiteStore("app.db");
+				var store = new MobileServiceSQLiteStore($"syncstore{Settings.DatabaseId}.db");
 
 				store.DefineTable<Acquaintance>();
+
+				_AcquaintanceTable = MobileService.GetSyncTable<Acquaintance>();
 
 				await MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
 
@@ -49,7 +68,7 @@ namespace Acquaint.Data
 			return await Execute<Acquaintance>(async () => 
 			{ 
 				await SyncItems().ConfigureAwait(false);
-				return await MobileService.GetSyncTable<Acquaintance>().LookupAsync(id).ConfigureAwait(false);
+				return await _AcquaintanceTable.LookupAsync(id).ConfigureAwait(false);
 			}, null).ConfigureAwait(false);
 		}
 
@@ -58,7 +77,7 @@ namespace Acquaint.Data
 			return await Execute<IEnumerable<Acquaintance>>(async () => 
 			{
 				await SyncItems().ConfigureAwait(false);
-				return await MobileService.GetSyncTable<Acquaintance>().Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false);
+				return await _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false);
 			}, new List<Acquaintance>()).ConfigureAwait(false);
 		}
 
@@ -69,7 +88,7 @@ namespace Acquaint.Data
 				item.DataPartitionId = _DataPartitionId;
 
 				await Initialize().ConfigureAwait(false);
-				await MobileService.GetSyncTable<Acquaintance>().InsertAsync(item).ConfigureAwait(false);
+				await _AcquaintanceTable.InsertAsync(item).ConfigureAwait(false);
 				await SyncItems().ConfigureAwait(false);
 				return true;
 			}, false).ConfigureAwait(false);
@@ -80,7 +99,7 @@ namespace Acquaint.Data
 			return await Execute<bool>(async () => 
 			{ 
 				await Initialize().ConfigureAwait(false);
-				await MobileService.GetSyncTable<Acquaintance>().UpdateAsync(item).ConfigureAwait(false);
+				await _AcquaintanceTable.UpdateAsync(item).ConfigureAwait(false);
 				await SyncItems().ConfigureAwait(false);
 				return true;
 			}, false).ConfigureAwait(false);
@@ -91,7 +110,7 @@ namespace Acquaint.Data
 			return await Execute<bool>(async () => 
 			{
 				await Initialize().ConfigureAwait(false);
-				await MobileService.GetSyncTable<Acquaintance>().DeleteAsync(item).ConfigureAwait(false);
+				await _AcquaintanceTable.DeleteAsync(item).ConfigureAwait(false);
 				await SyncItems().ConfigureAwait(false);
 				return true;
 			}, false).ConfigureAwait(false);
@@ -101,22 +120,27 @@ namespace Acquaint.Data
 		{
 			return await Execute(async () => 
 			{
-				await Initialize().ConfigureAwait(false);
+				if (Settings.LocalDataResetIsRequested)
+					await ResetLocalStore();
 
-				try
-				{
-					await EnsureDataIsSeededAsync(_DataPartitionId).ConfigureAwait(false);
-					await MobileService.SyncContext.PushAsync().ConfigureAwait(false);
-					await MobileService.GetSyncTable<Acquaintance>().PullAsync($"all{typeof(Acquaintance).Name}", MobileService.GetSyncTable<Acquaintance>().CreateQuery()).ConfigureAwait(false);
-					return true;
-				}
-				catch (Exception ex)
-				{
-					System.Diagnostics.Debug.WriteLine($"Error during Sync occurred: {ex.Message}");
-					return false;
-				}
+				await Initialize().ConfigureAwait(false);
+				await EnsureDataIsSeededAsync(_DataPartitionId).ConfigureAwait(false);
+				await MobileService.SyncContext.PushAsync().ConfigureAwait(false);
+				await _AcquaintanceTable.PullAsync($"getAll{typeof(Acquaintance).Name}", _AcquaintanceTable.CreateQuery()).ConfigureAwait(false);
+				return true;
 			}, false);
 		}
+
+		async Task ResetLocalStore()
+		{
+			Settings.UpdateDatabaseId();
+			_AcquaintanceTable = null;
+			_IsInitialized = false;
+			Settings.LocalDataResetIsRequested = false;
+			Settings.DataIsSeeded = false;
+			await Task.FromResult(true);
+		}
+
 		#endregion
 
 		#region some nifty exception helpers
@@ -177,8 +201,8 @@ namespace Acquaint.Data
 			if (Settings.DataIsSeeded)
 				return;
 
-			await MobileService.GetSyncTable<Acquaintance>().PullAsync($"all{typeof(Acquaintance).Name}", MobileService.GetSyncTable<Acquaintance>().CreateQuery()).ConfigureAwait(false);
-			var any = (await MobileService.GetSyncTable<Acquaintance>().Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false)).Any();
+			await _AcquaintanceTable.PullAsync($"all{typeof(Acquaintance).Name}", _AcquaintanceTable.CreateQuery()).ConfigureAwait(false);
+			var any = (await _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false)).Any();
 
 			if (any)
 				Settings.DataIsSeeded = true;
@@ -192,7 +216,7 @@ namespace Acquaint.Data
 
 				foreach (var i in newItems)
 				{
-					insertTasks.Add(MobileService.GetSyncTable<Acquaintance>().InsertAsync(i));
+					insertTasks.Add(_AcquaintanceTable.InsertAsync(i));
 				}
 
 				await Task.WhenAll(insertTasks).ConfigureAwait(false);
