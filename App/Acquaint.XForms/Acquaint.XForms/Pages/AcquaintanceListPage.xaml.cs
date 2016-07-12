@@ -49,9 +49,9 @@ namespace Acquaint.XForms
         {
             base.OnAppearing();
 
-			if (string.IsNullOrWhiteSpace(Settings.DataSeedPhrase))
+			if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
 			{
-				await Navigation.PushModalAsync(new DataPartitionPhraseInitPage());
+				await Navigation.PushModalAsync(new NavigationPage(new SetupPage()));
 			}
 			else
 			{

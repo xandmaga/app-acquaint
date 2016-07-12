@@ -44,7 +44,7 @@ namespace Acquaint.Util
 			set { AppSettings.AddOrUpdateValue<string>(AzureAppServiceUrlKey, value); }
 		}
 
-		public static string DataSeedPhrase
+		public static string DataPartitionPhrase
 		{
 			get { return AppSettings.GetValueOrDefault<string>(DataPartitionPhraseKey, DataSeedPhraseDefault); }
 			set { AppSettings.AddOrUpdateValue<string>(DataPartitionPhraseKey, value); }

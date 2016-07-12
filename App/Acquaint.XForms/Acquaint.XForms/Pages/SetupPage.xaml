@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Acquaint.XForms.SetupPage" Title="Setup">
+	<ContentPage.Content>
+		<StackLayout Margin="10">
+			<TableView Intent="Menu" VerticalOptions="Start" HeightRequest="100" StyleId="NoSeparator">
+				<TableView.BackgroundColor>
+					<OnPlatform x:TypeArguments="Color" iOS="White" />
+				</TableView.BackgroundColor>
+				<TableView.Root>
+					<TableRoot>
+						<TableSection Title="Data Partition Phrase">
+							<ViewCell>
+								<Entry x:Name="DataPartitionPhraseEntry" FontSize="Micro" Placeholder="Choose a unique phrase" Keyboard="Text" />
+							</ViewCell>
+						</TableSection>
+					</TableRoot>
+				</TableView.Root>
+			</TableView>
+			<Label LineBreakMode="WordWrap" FontSize="Micro" Text="Choose a unique phrase and enter it in the Acquaint app on all your devices to sync data between them." />
+			<Label LineBreakMode="WordWrap" FontSize="Micro" Text="The phrase can be anything, but more unique is better. If someone else is using the same phrase as you, then you will be sharing data with them." />
+			<Label LineBreakMode="WordWrap" FontSize="Micro" Text="The phrase can be updated later in the app's settings." />
+			<Button Text="Continue" Command="{Binding ContinueCommand}" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

@@ -30,7 +30,7 @@ namespace Acquaint.XForms
 		public SettingsViewModel()
 		{
 			AzureAppServiceUrl = Settings.AzureAppServiceUrl;
-			DataPartitionPhrase = Settings.DataSeedPhrase;
+			DataPartitionPhrase = Settings.DataPartitionPhrase;
 			ImageCacheDurationHours = Settings.ImageCacheDurationHours;
 		}
 
@@ -49,6 +49,11 @@ namespace Acquaint.XForms
 
 		async Task ExecuteSaveCommand()
 		{
+			if (string.IsNullOrWhiteSpace(DataPartitionPhrase))
+			{
+				return;
+			}
+
 			if (ResetToDefaults)
 			{
 				Settings.ResetUserConfigurableSettingsToDefaults();
@@ -67,10 +72,10 @@ namespace Acquaint.XForms
 
 				Settings.AzureAppServiceUrl = AzureAppServiceUrl;
 
-				if (Settings.DataSeedPhrase.ToLower() != DataPartitionPhrase.ToLower())
+				if (Settings.DataPartitionPhrase.ToLower() != DataPartitionPhrase.ToLower())
 					localStoreResetConditions++;
 
-				Settings.DataSeedPhrase = DataPartitionPhrase;
+				Settings.DataPartitionPhrase = DataPartitionPhrase;
 
 				if (localStoreResetConditions > 0)
 					Settings.LocalDataResetIsRequested = true;

@@ -6,11 +6,11 @@ using Xamarin.Forms;
 
 namespace Acquaint.XForms
 {
-	public partial class DataPartitionPhraseInitPage : ContentPage
+	public partial class SetupPage : ContentPage
 	{
-		public DataPartitionPhraseInitPage()
+		public SetupPage()
 		{
-			BindingContext = this;
+			BindingContext = this; // No need for all the ceremony of a viewmodel in this case. Just bind to ourself.
 
 			InitializeComponent();
 		}
@@ -23,7 +23,7 @@ namespace Acquaint.XForms
 		{
 			if (!string.IsNullOrWhiteSpace(DataPartitionPhraseEntry.Text))
 			{
-				Settings.DataSeedPhrase = DataPartitionPhraseEntry.Text;
+				Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
 
 				await Navigation.PopModalAsync();
 			}

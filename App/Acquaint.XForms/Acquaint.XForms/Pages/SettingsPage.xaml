@@ -1,15 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Acquaint.XForms" x:Class="Acquaint.XForms.SettingsPage">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Icon="" Text="Cancel" Command="{Binding CancelCommand}" />
+		<ToolbarItem Icon="save.png" Text="Save" Command="{Binding SaveCommand}"  />
+	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<ContentView x:Name="TopContentView">
 			<ContentView.Content>
-				<TableView Intent="Menu" StyleId="NoSeparator" Margin="10">
+				<TableView Intent="Menu" StyleId="NoSeparator" Margin="10,0">
 					<TableView.BackgroundColor>
 						<OnPlatform x:TypeArguments="Color" iOS="White" />
 					</TableView.BackgroundColor>
 					<TableView.Root>
 						<TableRoot>
-							<TableSection Title="Data Partition Phrase">
+							<TableSection Title="Data Partition Phrase (Required)">
 								<ViewCell>
 									<StackLayout>
 										<Entry FontSize="Micro" Text="{Binding DataPartitionPhrase}" Placeholder="Choose a unique phrase" Keyboard="Text" />
@@ -17,7 +21,7 @@
 									</StackLayout>
 								</ViewCell>
 							</TableSection>
-							<TableSection Title="Backend Service URL">
+							<TableSection Title="Backend Service URL (Required)">
 								<ViewCell>
 									<StackLayout>
 										<Entry FontSize="Micro" Text="{Binding AzureAppServiceUrl}" Placeholder="ex: http://yourservice.azurewebsites.net" Keyboard="Text" />
@@ -25,25 +29,17 @@
 									</StackLayout>
 								</ViewCell>
 							</TableSection>
-							<TableSection Title="Image Cache Duration (Hours)">
+							<TableSection Title="Image Cache Duration">
 								<ViewCell>
 									<StackLayout>
 										<Entry FontSize="Micro" Text="{Binding ImageCacheDurationHours}" Keyboard="Numeric" />
-										<Label FontSize="Micro" TextColor="Silver" Text="Use this setting to adjust the image cache timeout" />
+										<Label FontSize="Micro" TextColor="Silver" Text="Use this setting to adjust the image cache timeout in hours" />
 									</StackLayout>
 								</ViewCell>
 							</TableSection>
 							<TableSection>
 								<SwitchCell Text="Clear image cache?" On="{Binding ClearImageCache}" />
-								<SwitchCell Text="Reset to defaults?" On="{Binding ResetToDefaults}" />
-							</TableSection>
-							<TableSection>
-								<ViewCell>
-									<StackLayout Orientation="Horizontal">
-										<Button Text="Cancel" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" />
-										<Button Text="Save" HorizontalOptions="FillAndExpand" Command="{Binding SaveCommand}" />
-									</StackLayout>
-								</ViewCell>
+								<SwitchCell Text="Reset URL &amp; cache length?" On="{Binding ResetToDefaults}" />
 							</TableSection>
 						</TableRoot>
 					</TableView.Root>

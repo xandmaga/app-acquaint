@@ -142,7 +142,7 @@ namespace Acquaint.XForms
 
 		async Task ExecuteShowSettingsCommand()
 		{
-			await PushModalAsync(new SettingsPage() { BindingContext = new SettingsViewModel() });
+			await PushModalAsync(new NavigationPage(new SettingsPage() { BindingContext = new SettingsViewModel() }));
 		}
 
 		Command _DialNumberCommand;

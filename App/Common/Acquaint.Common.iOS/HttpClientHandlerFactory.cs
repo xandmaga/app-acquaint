@@ -13,13 +13,13 @@ namespace Acquaint.Common.iOS
 		public HttpClientHandler GetHttpClientHandler()
 		{
 #if DEBUG
-			return null;
-#else
 			return new HttpClientHandler
 			{
 				Proxy = CoreFoundation.CFNetwork.GetDefaultProxy(),
 				UseProxy = true
 			};
+#else
+			return null;
 #endif
 		}
 	}

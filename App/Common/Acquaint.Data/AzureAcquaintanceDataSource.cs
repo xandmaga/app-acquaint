@@ -29,7 +29,7 @@ namespace Acquaint.Data
 
 		string _DataPartitionId
 		{
-			get { return _GuidUtility.Create(Settings.DataSeedPhrase).ToString().ToUpper(); }
+			get { return _GuidUtility.Create(Settings.DataPartitionPhrase).ToString().ToUpper(); }
 		}
 
 		public MobileServiceClient MobileService { get; set; }
@@ -121,17 +121,17 @@ namespace Acquaint.Data
 			return await Execute(async () => 
 			{
 				if (Settings.LocalDataResetIsRequested)
-					await ResetLocalStore();
+					await ResetLocalStoreAsync();
 
 				await Initialize().ConfigureAwait(false);
 				await EnsureDataIsSeededAsync(_DataPartitionId).ConfigureAwait(false);
 				await MobileService.SyncContext.PushAsync().ConfigureAwait(false);
-				await _AcquaintanceTable.PullAsync($"getAll{typeof(Acquaintance).Name}", _AcquaintanceTable.CreateQuery()).ConfigureAwait(false);
+				await _AcquaintanceTable.PullAsync($"getAll{typeof(Acquaintance).Name}", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId)).ConfigureAwait(false);
 				return true;
 			}, false);
 		}
 
-		async Task ResetLocalStore()
+		async Task ResetLocalStoreAsync()
 		{
 			Settings.UpdateDatabaseId();
 			_AcquaintanceTable = null;
@@ -156,7 +156,7 @@ namespace Acquaint.Data
 				await execute().ConfigureAwait(false);
 			}
 			// isolate mobile service errors
-			catch (MobileServiceInvalidOperationException ex)
+			catch (MobileServiceInvalidOperationException ex) // Isolate mobile service errors. This is the base exception type of the Azure client.
 			{
 				// TODO: report with HockeyApp
 				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
@@ -181,7 +181,7 @@ namespace Acquaint.Data
 			{
 				return await execute().ConfigureAwait(false);
 			}
-			catch (MobileServiceInvalidOperationException ex) // isolate mobile service errors
+			catch (MobileServiceInvalidOperationException ex) // Isolate mobile service errors. This is the base exception type of the Azure client.
 			{
 				// TODO: report with HockeyApp
 				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
@@ -201,7 +201,8 @@ namespace Acquaint.Data
 			if (Settings.DataIsSeeded)
 				return;
 
-			await _AcquaintanceTable.PullAsync($"all{typeof(Acquaintance).Name}", _AcquaintanceTable.CreateQuery()).ConfigureAwait(false);
+			await _AcquaintanceTable.PullAsync($"getAll{typeof(Acquaintance).Name}", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId)).ConfigureAwait(false);
+
 			var any = (await _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false)).Any();
 
 			if (any)
@@ -220,6 +221,7 @@ namespace Acquaint.Data
 				}
 
 				await Task.WhenAll(insertTasks).ConfigureAwait(false);
+
 				Settings.DataIsSeeded = true;
 			}
 		}
@@ -228,8 +230,6 @@ namespace Acquaint.Data
 		{
 			return ServiceLocator.Current.GetInstance<IHttpClientHandlerFactory>().GetHttpClientHandler();
 		}
-
-
 	}
 }
 
