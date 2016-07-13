@@ -9,6 +9,7 @@
     "Microsoft.Azure.Mobile.Client.SQLiteStore": "2.1.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Newtonsoft.Json": "9.0.1",
+    "PCLCrypto": "2.0.147",
     "PCLStorage": "1.0.2",
     "Refractored.MvvmHelpers": "1.0.1",
     "Xam.Plugin.ExternalMaps": "3.0.0",

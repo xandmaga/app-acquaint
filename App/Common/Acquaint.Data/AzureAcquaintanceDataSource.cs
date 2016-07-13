@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
 using Acquaint.Util;
@@ -15,24 +14,11 @@ namespace Acquaint.Data
 {
 	public class AzureAcquaintanceSource : IDataSource<Acquaintance>
 	{
-		public AzureAcquaintanceSource()
-		{
-			_GuidUtility = ServiceLocator.Current.GetInstance<IGuidUtility>();
-		}
+		string _ServiceUrl => Settings.AzureAppServiceUrl;
 
-		IGuidUtility _GuidUtility;
+	    string _DataPartitionId => GuidUtility.Create(Settings.DataPartitionPhrase).ToString().ToUpper();
 
-		string _ServiceUrl
-		{
-			get { return Settings.AzureAppServiceUrl; }
-		}
-
-		string _DataPartitionId
-		{
-			get { return _GuidUtility.Create(Settings.DataPartitionPhrase).ToString().ToUpper(); }
-		}
-
-		public MobileServiceClient MobileService { get; set; }
+	    public MobileServiceClient MobileService { get; set; }
 
 		IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
 

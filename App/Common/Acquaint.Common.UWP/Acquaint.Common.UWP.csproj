@@ -108,7 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnvironmentService.cs" />
-    <Compile Include="GuidUtility.cs" />
     <Compile Include="HttpClientHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Acquaint.Common.UWP.rd.xml" />

@@ -55,7 +55,6 @@ namespace Acquaint.XForms.Droid
 			var builder = new ContainerBuilder();
 
 			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
-			builder.RegisterInstance(new GuidUtility()).As<IGuidUtility>();
 			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
 
 			var container = builder.Build();

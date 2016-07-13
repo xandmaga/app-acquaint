@@ -1,23 +1,23 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
-using Windows.Security.Cryptography.Core;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Acquaint.Abstractions;
+using PCLCrypto;
+using static PCLCrypto.WinRTCrypto;
 
-namespace Acquaint.Common.UWP
+namespace Acquaint.Util
 {
     /// <summary>
     /// Utility for creating deterministic GUIDs from arbitrary strings.
     /// </summary>
-    public class GuidUtility : IGuidUtility
+    public static class GuidUtility
     {
         /// <summary>
 		/// Create a deterministic GUID for a given string.
 		/// </summary>
 		/// <param name="value">Any string value.</param>
-        public Guid Create(string value)
+        public static Guid Create(string value)
         {
-            return Create(DnsNamespace, value);
+            return Create(UrlNamespace, value);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Acquaint.Common.UWP
         /// <param name="namespaceId">The ID of the namespace.</param>
         /// <param name="name">The name (within that namespace).</param>
         /// <returns>A UUID derived from the namespace and name.</returns>
-        public Guid Create(Guid namespaceId, string name)
+        public static Guid Create(Guid namespaceId, string name)
         {
             return Create(namespaceId, name, 5);
         }
@@ -40,7 +40,7 @@ namespace Acquaint.Common.UWP
         /// 3 (for MD5 hashing) or 5 (for SHA-1 hashing).</param>
         /// <returns>A UUID derived from the namespace and name.</returns>
         /// <remarks>See <a href="http://code.logos.com/blog/2011/04/generating_a_deterministic_guid.html">Generating a deterministic GUID</a>.</remarks>
-        public Guid Create(Guid namespaceId, string name, int version)
+        public static Guid Create(Guid namespaceId, string name, int version)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -55,18 +55,12 @@ namespace Acquaint.Common.UWP
             byte[] namespaceBytes = namespaceId.ToByteArray();
             SwapByteOrder(namespaceBytes);
 
-            // comput the hash of the name space ID concatenated with the name (step 4)
-            var nameSpaceBuffer = new Windows.Storage.Streams.Buffer((uint) namespaceBytes.Length);
-            var nameBuffer = new Windows.Storage.Streams.Buffer((uint)nameBytes.Length);
-
-            namespaceBytes.CopyTo(nameSpaceBuffer);
-            nameBytes.CopyTo(nameBuffer);
-
-            var algorithmProvider = version == 3 ? HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5) : HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha1);
+            // compute the hash of the name space ID concatenated with the name (step 4)
+            var algorithmProvider = version == 3 ? HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Md5) : HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha1);
             var cryptoHash = algorithmProvider.CreateHash();
 
-            cryptoHash.Append(nameSpaceBuffer);
-            cryptoHash.Append(nameBuffer);
+            cryptoHash.Append(namespaceBytes);
+            cryptoHash.Append(nameBytes);
 
             var hash = cryptoHash.GetValueAndReset().ToArray();
 
@@ -88,17 +82,17 @@ namespace Acquaint.Common.UWP
         /// <summary>
         /// The namespace for fully-qualified domain names (from RFC 4122, Appendix C).
         /// </summary>
-        public Guid DnsNamespace => new Guid("6ba7b810-9dad-11d1-80b4-00c04fd430c8");
+        public static readonly Guid DnsNamespace = new Guid("6ba7b810-9dad-11d1-80b4-00c04fd430c8");
 
         /// <summary>
         /// The namespace for URLs (from RFC 4122, Appendix C).
         /// </summary>
-        public Guid UrlNamespace => new Guid("6ba7b812-9dad-11d1-80b4-00c04fd430c8");
+        public static readonly Guid UrlNamespace = new Guid("6ba7b812-9dad-11d1-80b4-00c04fd430c8");
 
         /// <summary>
         /// The namespace for ISO OIDs (from RFC 4122, Appendix C).
         /// </summary>
-        public Guid IsoOidNamespace => new Guid("6ba7b812-9dad-11d1-80b4-00c04fd430c8");
+        public static readonly Guid IsoOidNamespace = new Guid("6ba7b812-9dad-11d1-80b4-00c04fd430c8");
 
         // Converts a GUID (expressed as a byte array) to/from network order (MSB-first).
         internal static void SwapByteOrder(byte[] guid)
