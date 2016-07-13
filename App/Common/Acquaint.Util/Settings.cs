@@ -79,9 +79,6 @@ namespace Acquaint.Util
 		const string DatabaseIdKey = "DatabaseId_key";
 		static readonly int DatabaseIdDefault = 0;
 
-		private const string SetupPageIsPresentedKey = "SetupPageIsPresented_key";
-		private static readonly bool SetupPageIsPresentedDefault = false;
-
 		public static bool LocalDataResetIsRequested
 		{
 			get { return AppSettings.GetValueOrDefault<bool>(LocalDataResetIsRequestedKey, LocalDataResetIsRequestedDefault); }
