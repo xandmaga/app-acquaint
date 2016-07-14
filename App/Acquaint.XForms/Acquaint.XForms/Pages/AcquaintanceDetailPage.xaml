@@ -6,6 +6,7 @@
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Delete" Icon="delete.png" Command="{Binding DeleteAcquaintanceCommand}" />
 		<ToolbarItem Text="Edit" Icon="edit.png" Command="{Binding EditAcquaintanceCommand}" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>

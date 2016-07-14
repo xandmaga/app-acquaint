@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
 using Acquaint.Util;
@@ -9,6 +11,7 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
+using PCLStorage;
 
 namespace Acquaint.Data
 {
@@ -24,6 +27,8 @@ namespace Acquaint.Data
 
 		bool _IsInitialized;
 
+		const string _LocalDbName = "acquaintances.db";
+
 		public async Task<bool> Initialize()
 		{
 			return await Execute<bool>(async () => 
@@ -33,7 +38,7 @@ namespace Acquaint.Data
 
 				MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
 
-				var store = new MobileServiceSQLiteStore($"syncstore{Settings.DatabaseId}.db");
+				var store = new MobileServiceSQLiteStore(_LocalDbName) ;
 
 				store.DefineTable<Acquaintance>();
 
@@ -119,12 +124,24 @@ namespace Acquaint.Data
 
 		async Task ResetLocalStoreAsync()
 		{
-			Settings.UpdateDatabaseId();
 			_AcquaintanceTable = null;
+			await DeleteOldLocalDatabase();
 			_IsInitialized = false;
 			Settings.LocalDataResetIsRequested = false;
 			Settings.DataIsSeeded = false;
-			await Task.FromResult(true);
+		}
+
+		/// <summary>
+		/// Deletes the old local database.
+		/// </summary>
+		/// <returns>The old local database.</returns>
+		async Task DeleteOldLocalDatabase()
+		{
+			var databaseFolder = await FileSystem.Current.GetFolderFromPathAsync(ServiceLocator.Current.GetInstance<IDatastoreFolderPathProvider>().GetPath());
+			var dbFile = await databaseFolder.GetFileAsync(_LocalDbName, CancellationToken.None);
+
+			if (dbFile != null)
+				await dbFile.DeleteAsync();
 		}
 
 		#endregion

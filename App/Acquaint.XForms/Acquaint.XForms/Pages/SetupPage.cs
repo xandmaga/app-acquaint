@@ -15,35 +15,40 @@ namespace Acquaint.XForms
 			InitializeComponent();
 		}
 
-		Command _ContinuCommand;
+		Command _ContinueCommand;
 
-		public Command ContinueCommand => _ContinuCommand ?? (_ContinuCommand = new Command(async () => await ExecuteContinueCommand()));
+		public Command ContinueCommand => _ContinueCommand ?? (_ContinueCommand = new Command(async () => await ExecuteContinueCommand()));
 
 		async Task ExecuteContinueCommand()
 		{
-			if (!string.IsNullOrWhiteSpace(DataPartitionPhraseEntry.Text))
+			if (string.IsNullOrWhiteSpace(DataPartitionPhraseEntry.Text))
 			{
-				Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
+				DataPartitionPhraseEntry.PlaceholderColor = Color.Red;
 
-				// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
-				if (Device.OS != TargetPlatform.Android)
-				{
-					await Navigation.PopModalAsync();
+				DataPartitionPhraseEntry.Focus();
 
-					var navPage = new NavigationPage(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
+				return;
+			}
 
-					// on the main UI thread, set the MainPage to the navPage
-					Device.BeginInvokeOnMainThread(() => {
-						Application.Current.MainPage = navPage;
-					});
-				}
-				else
-				{
-					await Navigation.PopModalAsync();
+			Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
 
-					await Navigation.PushAsync(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
-				}
+			// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
+			if (Device.OS != TargetPlatform.Android)
+			{
+				await Navigation.PopModalAsync();
 
+				var navPage = new NavigationPage(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
+
+				// on the main UI thread, set the MainPage to the navPage
+				Device.BeginInvokeOnMainThread(() => {
+					Application.Current.MainPage = navPage;
+				});
+			}
+			else
+			{
+				await Navigation.PopModalAsync();
+
+				await Navigation.PushAsync(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
 			}
 		}
 

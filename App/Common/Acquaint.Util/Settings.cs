@@ -22,11 +22,6 @@ namespace Acquaint.Util
 			ImageCacheDurationHours = ImageCacheDurationHoursDefault;
 		}
 
-		public static int UpdateDatabaseId()
-		{
-			return DatabaseId++;
-		}
-
 		#region user-configurable
 
 		private const string AzureAppServiceUrlKey = "AzureAppServiceUrl_key";
@@ -76,9 +71,6 @@ namespace Acquaint.Util
         private const string BingMapsKeyKey = "BingMapsKey_key";
         private static readonly string BingMapsKeyDefault = "UW0peICp3gljJyhqQKFZ~R3XF1I5BvWmWmkD4ujytTA~AoUOqpk2nJB-Wh7wH-9S-zaG-w6sygLitXugNOqm71wx_nc6WHIt6Lb29gyTU04X";
 
-		const string DatabaseIdKey = "DatabaseId_key";
-		static readonly int DatabaseIdDefault = 0;
-
 		public static bool LocalDataResetIsRequested
 		{
 			get { return AppSettings.GetValueOrDefault<bool>(LocalDataResetIsRequestedKey, LocalDataResetIsRequestedDefault); }
@@ -108,12 +100,6 @@ namespace Acquaint.Util
             get { return AppSettings.GetValueOrDefault<string>(BingMapsKeyKey, BingMapsKeyDefault); }
             set { AppSettings.AddOrUpdateValue<string>(BingMapsKeyKey, value); }
         }
-
-		public static int DatabaseId
-		{
-			get { return AppSettings.GetValueOrDefault<int>(DatabaseIdKey, DatabaseIdDefault); }
-			set { AppSettings.AddOrUpdateValue<int>(DatabaseIdKey, value); }
-		}
 
 		#endregion
 	}

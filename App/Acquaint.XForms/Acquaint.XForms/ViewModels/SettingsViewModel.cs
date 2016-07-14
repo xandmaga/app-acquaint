@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Acquaint.Util;
 using FFImageLoading;
 using FFImageLoading.Cache;
+using FormsToolkit;
 using Xamarin.Forms;
 
 namespace Acquaint.XForms
@@ -22,8 +23,11 @@ namespace Acquaint.XForms
 			set
 			{
 				SetProperty(ref _ResetToDefaults, value);
-				ClearImageCache = value; // if the data is being refreshed, we should clear the image cache as well
-				OnPropertyChanged(nameof(ClearImageCache)); // notify that the ClearImageCache has been updated
+				if (value)
+				{
+					ClearImageCache = value; // if the data is being refreshed, we should clear the image cache as well
+					OnPropertyChanged(nameof(ClearImageCache)); // notify that ClearImageCache has been updated
+				}
 			}
 		}
 
@@ -51,6 +55,19 @@ namespace Acquaint.XForms
 		{
 			if (string.IsNullOrWhiteSpace(DataPartitionPhrase))
 			{
+				MessagingService.Current.SendMessage(MessageKeys.DataPartitionPhraseValidation);
+				return;
+			}
+
+			Uri testUri;
+
+			if (!Uri.TryCreate(AzureAppServiceUrl, UriKind.Absolute, out testUri))
+			{
+				MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
+				{ 
+					Title = "Invalid URL", 
+					Message = "Please enter a valid URL", 
+					Cancel = "OK" });
 				return;
 			}
 

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Acquaint.XForms" x:Class="Acquaint.XForms.SettingsPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Acquaint.XForms" x:Class="Acquaint.XForms.SettingsPage" Title="Settings">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Icon="" Text="Cancel" Command="{Binding CancelCommand}" />
-		<ToolbarItem Icon="save.png" Text="Save" Command="{Binding SaveCommand}"  />
+		<ToolbarItem Icon="cancel.png" Text="Cancel" Command="{Binding CancelCommand}" />
+		<ToolbarItem Icon="save.png" Text="Save" Command="{Binding SaveCommand}" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<ContentView x:Name="TopContentView">
@@ -13,27 +13,36 @@
 					</TableView.BackgroundColor>
 					<TableView.Root>
 						<TableRoot>
-							<TableSection Title="Data Partition Phrase (Required)">
+							<TableSection Title="Data Partition Phrase (required)">
 								<ViewCell>
 									<StackLayout>
-										<Entry FontSize="Micro" Text="{Binding DataPartitionPhrase}" Placeholder="Choose a unique phrase" Keyboard="Text" />
-										<Label FontSize="Micro" TextColor="Silver" Text="Choose a unique phrase and enter it on all your devices to sync data between them" />
+										<Entry x:Name="DataPartitionPhraseEntry" Text="{Binding DataPartitionPhrase}" Placeholder="Enter a unique phrase" Keyboard="Text">
+											<Entry.FontSize>
+												<OnPlatform x:TypeArguments="Font" iOS="Micro" />
+											</Entry.FontSize>
+										</Entry>
 									</StackLayout>
 								</ViewCell>
 							</TableSection>
-							<TableSection Title="Backend Service URL (Required)">
+							<TableSection Title="Backend URL (required valid URL)">
 								<ViewCell>
 									<StackLayout>
-										<Entry FontSize="Micro" Text="{Binding AzureAppServiceUrl}" Placeholder="ex: http://yourservice.azurewebsites.net" Keyboard="Text" />
-										<Label FontSize="Micro" TextColor="Silver" Text="If you've deployed your own instance of the Acquaint backend service, enter the URL" />
+										<Entry x:Name="BackendServiceUrlEntry" Text="{Binding AzureAppServiceUrl}" Placeholder="ex: http://yourservice.azurewebsites.net" Keyboard="Text">
+											<Entry.FontSize>
+												<OnPlatform x:TypeArguments="Font" iOS="Micro" />
+											</Entry.FontSize>
+										</Entry>
 									</StackLayout>
 								</ViewCell>
 							</TableSection>
 							<TableSection Title="Image Cache Duration">
 								<ViewCell>
 									<StackLayout>
-										<Entry FontSize="Micro" Text="{Binding ImageCacheDurationHours}" Keyboard="Numeric" />
-										<Label FontSize="Micro" TextColor="Silver" Text="Use this setting to adjust the image cache timeout in hours" />
+										<Entry Text="{Binding ImageCacheDurationHours}" Keyboard="Numeric">
+											<Entry.FontSize>
+												<OnPlatform x:TypeArguments="Font" iOS="Micro" />
+											</Entry.FontSize>
+										</Entry>
 									</StackLayout>
 								</ViewCell>
 							</TableSection>

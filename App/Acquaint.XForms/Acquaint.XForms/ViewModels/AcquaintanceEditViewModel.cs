@@ -71,32 +71,6 @@ namespace Acquaint.XForms
 			}
 		}
 
-		Command _DeleteAcquaintanceCommand;
-			
-		public Command DeleteAcquaintanceCommand => _DeleteAcquaintanceCommand ?? (_DeleteAcquaintanceCommand = new Command(ExecuteDeleteAcquaintanceCommand));
-
-		void ExecuteDeleteAcquaintanceCommand()
-		{
-			MessagingService.Current.SendMessage<MessagingServiceQuestion>(MessageKeys.DisplayQuestion, new MessagingServiceQuestion()
-				{
-					Title = string.Format("Delete {0}?", Acquaintance.DisplayName),
-					Question = null,
-					Positive = "Delete",
-					Negative = "Cancel",
-					OnCompleted = new Action<bool>(async result =>
-						{
-							if (!result) return;
-
-							// send a message that we want the given acquaintance to be deleted
-							MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.DeleteAcquaintance, Acquaintance);
-
-							// pop the navigation stack twice so we get back to the list
-							await PopAsync(false);
-							await PopAsync();
-						})
-				});
-		}
-
 		bool RequiredAddressFieldCombinationIsFilled
 		{
 			get

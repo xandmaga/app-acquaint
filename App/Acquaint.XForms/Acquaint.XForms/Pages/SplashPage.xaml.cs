@@ -26,7 +26,7 @@ namespace Acquaint.XForms
 
 			if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
 			{
-				await Navigation.PushModalAsync(new SetupPage());
+				await Navigation.PushModalAsync(new NavigationPage(new SetupPage()));
 				_ShouldDelayForSplash = false;
 			}
 			else

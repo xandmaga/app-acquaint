@@ -37,6 +37,7 @@
     <Compile Include="IDataSource.cs" />
     <Compile Include="ICapabilityService.cs" />
     <Compile Include="IEnvironmentService.cs" />
+    <Compile Include="IDatastoreFolderPathProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

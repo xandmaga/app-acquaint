@@ -9,6 +9,7 @@
         public const string DeleteAcquaintance = "DeleteAcquaintance";
         public const string AcquaintanceLocationUpdated = "AcquaintanceLocationUpdated";
         public const string SetupMap = "SetupMap";
-    }
+		public const string DataPartitionPhraseValidation = "DataPartitionPhraseValidation";
+	}
 }
 

@@ -305,6 +305,12 @@
     <BundleResource Include="Resources\settings.png" />
     <BundleResource Include="Resources\settings%402x.png" />
     <BundleResource Include="Resources\settings%403x.png" />
+    <BundleResource Include="Resources\delete.png" />
+    <BundleResource Include="Resources\delete%402x.png" />
+    <BundleResource Include="Resources\delete%403x.png" />
+    <BundleResource Include="Resources\cancel.png" />
+    <BundleResource Include="Resources\cancel%402x.png" />
+    <BundleResource Include="Resources\cancel%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\edit.png" />
