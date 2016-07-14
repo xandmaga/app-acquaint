@@ -13,12 +13,14 @@ namespace Acquaint.Common.iOS
 		public HttpClientHandler GetHttpClientHandler()
 		{
 #if DEBUG
+			// this handler allows Charles HTTP Proxy Debgger to report outbound requests from the iOS simulator
 			return new HttpClientHandler
 			{
 				Proxy = CoreFoundation.CFNetwork.GetDefaultProxy(),
 				UseProxy = true
 			};
 #else
+			// if we're not debugging, then we don't care about inspecitn outbound HTTP traffic
 			return null;
 #endif
 		}
