@@ -217,14 +217,10 @@ namespace Acquaint.Data
 			{
 				var newItems = SeedData.Get(_DataPartitionId);
 
-				var insertTasks = new List<Task>();
-
 				foreach (var i in newItems)
 				{
-					insertTasks.Add(_AcquaintanceTable.InsertAsync(i));
+					await _AcquaintanceTable.InsertAsync(i);
 				}
-
-				await Task.WhenAll(insertTasks).ConfigureAwait(false);
 
 				Settings.DataIsSeeded = true;
 			}
