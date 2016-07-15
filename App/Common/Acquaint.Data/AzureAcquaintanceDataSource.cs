@@ -36,6 +36,7 @@ namespace Acquaint.Data
 				if (_IsInitialized)
 					return true;
 
+				// We're passing in a handler here for the sole purpose of inspecting outbound HTTP requests with Charles Web Debugging Proxy on OS X. Only in debug builds.
 				MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
 
 				var store = new MobileServiceSQLiteStore(_LocalDbName) ;
@@ -229,6 +230,12 @@ namespace Acquaint.Data
 			}
 		}
 
+		/// <summary>
+		/// Gets an HttpClentHandler. The main purpose of which in this case is to 
+		/// be able to inspect outbound HTTP traffic from the iOS simulator with
+		/// Charles Web Debugging Proxy on OS X. Android and UWP will return a null handler.
+		/// </summary>
+		/// <returns>An HttpClentHandler</returns>
 		HttpClientHandler GetHttpClientHandler()
 		{
 			return ServiceLocator.Current.GetInstance<IHttpClientHandlerFactory>().GetHttpClientHandler();
