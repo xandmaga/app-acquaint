@@ -24,19 +24,20 @@ namespace Acquaint.XForms
 				// delay for a few seconds on the splash screen
 				await Task.Delay(3000);
 
+			// if a data partition phrase has not yet been set
 			if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
 			{
+				// modally push a new SetupPage (wrapped in a NavigationPage, just to be pretty)
 				await Navigation.PushModalAsync(new NavigationPage(new SetupPage()));
 				_ShouldDelayForSplash = false;
 			}
 			else
 			{
+				// create a new NavigationPage, with a new AcquaintanceListPage set as the Root
 				var navPage = new NavigationPage(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
 
-				// on the main UI thread, set the MainPage to the navPage
-				Device.BeginInvokeOnMainThread(() => {
-					Application.Current.MainPage = navPage;
-				});
+				// set the MainPage of the app to the navPage
+				Application.Current.MainPage = navPage;
 			}
 		}
 	}

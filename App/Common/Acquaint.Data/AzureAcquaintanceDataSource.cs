@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -28,30 +27,6 @@ namespace Acquaint.Data
 		bool _IsInitialized;
 
 		const string _LocalDbName = "acquaintances.db";
-
-		public async Task<bool> Initialize()
-		{
-			return await Execute<bool>(async () => 
-			{
-				if (_IsInitialized)
-					return true;
-
-				// We're passing in a handler here for the sole purpose of inspecting outbound HTTP requests with Charles Web Debugging Proxy on OS X. Only in debug builds.
-				MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
-
-				var store = new MobileServiceSQLiteStore(_LocalDbName) ;
-
-				store.DefineTable<Acquaintance>();
-
-				_AcquaintanceTable = MobileService.GetSyncTable<Acquaintance>();
-
-				await MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
-
-				_IsInitialized = true;
-
-				return _IsInitialized;
-			}, false).ConfigureAwait(false);
-		}
 
 		#region Data Access
 
@@ -108,10 +83,40 @@ namespace Acquaint.Data
 			}, false).ConfigureAwait(false);
 		}
 
-		public async Task<bool> SyncItems()
+		#endregion
+
+
+		#region helper methods for dealing with the state of the local store
+
+		/// <summary>
+		/// Initialize this instance.
+		/// </summary>
+		async Task<bool> Initialize()
 		{
-			return await Execute(async () => 
-			{
+			return await Execute<bool>(async () => {
+				if (_IsInitialized)
+					return true;
+
+				// We're passing in a handler here for the sole purpose of inspecting outbound HTTP requests with Charles Web Debugging Proxy on OS X. Only in debug builds.
+				MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
+
+				var store = new MobileServiceSQLiteStore(_LocalDbName);
+
+				store.DefineTable<Acquaintance>();
+
+				_AcquaintanceTable = MobileService.GetSyncTable<Acquaintance>();
+
+				await MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
+
+				_IsInitialized = true;
+
+				return _IsInitialized;
+			}, false).ConfigureAwait(false);
+		}
+
+		async Task<bool> SyncItems()
+		{
+			return await Execute(async () => {
 				if (Settings.LocalDataResetIsRequested)
 					await ResetLocalStoreAsync();
 
@@ -123,83 +128,11 @@ namespace Acquaint.Data
 			}, false);
 		}
 
-		async Task ResetLocalStoreAsync()
-		{
-			_AcquaintanceTable = null;
-			await DeleteOldLocalDatabase();
-			_IsInitialized = false;
-			Settings.LocalDataResetIsRequested = false;
-			Settings.DataIsSeeded = false;
-		}
-
 		/// <summary>
-		/// Deletes the old local database.
+		/// Ensures the data is seeded.
 		/// </summary>
-		/// <returns>The old local database.</returns>
-		async Task DeleteOldLocalDatabase()
-		{
-			var databaseFolder = await FileSystem.Current.GetFolderFromPathAsync(ServiceLocator.Current.GetInstance<IDatastoreFolderPathProvider>().GetPath());
-			var dbFile = await databaseFolder.GetFileAsync(_LocalDbName, CancellationToken.None);
-
-			if (dbFile != null)
-				await dbFile.DeleteAsync();
-		}
-
-		#endregion
-
-		#region some nifty exception helpers
-
-		/// <summary>
-		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
-		/// </summary>
-		/// <param name="execute">A Func that contains the async work you'd like to do.</param>
-		static async Task Execute(Func<Task> execute)
-		{
-			try
-			{
-				await execute().ConfigureAwait(false);
-			}
-			// isolate mobile service errors
-			catch (MobileServiceInvalidOperationException ex) // Isolate mobile service errors. This is the base exception type of the Azure client.
-			{
-				// TODO: report with HockeyApp
-				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
-			}
-			// catch all other errors
-			catch (Exception ex2)
-			{
-				// TODO: report with HockeyApp
-				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex2.Message);
-			}
-		}
-
-		/// <summary>
-		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
-		/// </summary>
-		/// <param name="execute">A Func that contains the async work you'd like to do, and will return some value.</param>
-		/// <param name="defaultReturnObject">A default return object, which will be returned in the event that an operation in the Func throws an exception.</param>
-		/// <typeparam name="T">The type of the return value that the Func will returns, and also the type of the default return object. </typeparam>
-		static async Task<T> Execute<T>(Func<Task<T>> execute, T defaultReturnObject)
-		{
-			try
-			{
-				return await execute().ConfigureAwait(false);
-			}
-			catch (MobileServiceInvalidOperationException ex) // Isolate mobile service errors. This is the base exception type of the Azure client.
-			{
-				// TODO: report with HockeyApp
-				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
-			}
-			catch (Exception ex2) // catch all other errors
-			{
-				// TODO: report with HockeyApp
-				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex2.Message);
-			}
-			return defaultReturnObject;
-		}
-
-		#endregion
-
+		/// <returns>The data is seeded.</returns>
+		/// <param name="dataPartitionId">Data partition identifier.</param>
 		async Task EnsureDataIsSeededAsync(string dataPartitionId)
 		{
 			if (Settings.DataIsSeeded)
@@ -225,6 +158,106 @@ namespace Acquaint.Data
 				Settings.DataIsSeeded = true;
 			}
 		}
+
+		/// <summary>
+		/// Resets the local store.
+		/// </summary>
+		/// <returns>The local store.</returns>
+		async Task ResetLocalStoreAsync()
+		{
+			_AcquaintanceTable = null;
+			await DeleteOldLocalDatabase();
+			_IsInitialized = false;
+			Settings.LocalDataResetIsRequested = false;
+			Settings.DataIsSeeded = false;
+		}
+
+		/// <summary>
+		/// Deletes the old local database.
+		/// </summary>
+		/// <returns>The old local database.</returns>
+		async Task DeleteOldLocalDatabase()
+		{
+			var databaseFolder = await FileSystem.Current.GetFolderFromPathAsync(ServiceLocator.Current.GetInstance<IDatastoreFolderPathProvider>().GetPath());
+			var dbFile = await databaseFolder.GetFileAsync(_LocalDbName, CancellationToken.None);
+
+			if (dbFile != null)
+				await dbFile.DeleteAsync();
+		}
+
+		#endregion
+
+
+		#region some nifty exception helpers
+
+		/// <summary>
+		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
+		/// </summary>
+		/// <param name="execute">A Func that contains the async work you'd like to do.</param>
+		static async Task Execute(Func<Task> execute)
+		{
+			try
+			{
+				await execute().ConfigureAwait(false);
+			}
+			catch (Exception ex)
+			{
+				HandleExceptions(ex);
+			}
+		}
+
+		/// <summary>
+		/// This method is intended for encapsulating the catching of exceptions related to the Azure MobileServiceClient.
+		/// </summary>
+		/// <param name="execute">A Func that contains the async work you'd like to do, and will return some value.</param>
+		/// <param name="defaultReturnObject">A default return object, which will be returned in the event that an operation in the Func throws an exception.</param>
+		/// <typeparam name="T">The type of the return value that the Func will returns, and also the type of the default return object. </typeparam>
+		static async Task<T> Execute<T>(Func<Task<T>> execute, T defaultReturnObject)
+		{
+			try
+			{
+				return await execute().ConfigureAwait(false);
+			}
+			catch (Exception ex)
+			{
+				HandleExceptions(ex);
+			}
+			return defaultReturnObject;
+		}
+
+		/// <summary>
+		/// Handles the exceptions.
+		/// </summary>
+		/// <returns>The exceptions.</returns>
+		/// <param name="ex">Ex.</param>
+		static void HandleExceptions(Exception ex)
+		{
+			if (ex is MobileServiceInvalidOperationException)
+			{
+				// TODO: report with HockeyApp
+				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
+				return;
+			}
+
+			if (ex is MobileServicePushFailedException)
+			{
+				var pushResult = (ex as MobileServicePushFailedException).PushResult;
+
+				foreach (var e in pushResult.Errors)
+				{
+					System.Diagnostics.Debug.WriteLine(@"ERROR {0}: {1}", pushResult.Status, e.RawResult);
+				}
+			}
+
+			else
+			{
+				// TODO: report with HockeyApp
+				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+		}
+
+		#endregion
+
 
 		/// <summary>
 		/// Gets an HttpClentHandler. The main purpose of which in this case is to 

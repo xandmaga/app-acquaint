@@ -17,10 +17,12 @@ namespace Acquaint.XForms
 			// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
 			if (Device.OS == TargetPlatform.Android)
 			{
+				// if this is an Android device, set the MainPage to a new SplashPage
 				MainPage = new SplashPage();
 			}
 			else
 			{
+				// create a new NavigationPage, with a new AcquaintanceListPage set as the Root
 				var navPage = 
 					new NavigationPage(
 						new AcquaintanceListPage() 
@@ -36,6 +38,7 @@ namespace Acquaint.XForms
 				if (Device.OS == TargetPlatform.iOS)
 					navPage.BarTextColor = Color.White;
 
+				// set the MainPage of the app to the navPage
 				MainPage = navPage;
 			}
         }

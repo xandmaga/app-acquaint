@@ -62,7 +62,7 @@
     <Compile Include="DatastoreFolderPathProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
+    <ProjectReference Include="..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
       <Project>{0B984675-688B-41C6-BEB7-D104DE9158C3}</Project>
       <Name>Acquaint.Abstractions</Name>
     </ProjectReference>
