@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acquaint.Common.Droid", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acquaint.Common.iOS", "Common\Acquaint.Common.iOS\Acquaint.Common.iOS.csproj", "{D480A440-318D-4CD2-A662-17D6179B14DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acquaint.Abstractions", "..\Acquaint.Abstractions\Acquaint.Abstractions.csproj", "{0B984675-688B-41C6-BEB7-D104DE9158C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acquaint.Abstractions", "Acquaint.Abstractions\Acquaint.Abstractions.csproj", "{0B984675-688B-41C6-BEB7-D104DE9158C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
