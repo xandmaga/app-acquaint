@@ -18,9 +18,9 @@ namespace Acquaint.Data
 	{
 		string _ServiceUrl => Settings.AzureAppServiceUrl;
 
-	    string _DataPartitionId => GuidUtility.Create(Settings.DataPartitionPhrase).ToString().ToUpper();
+		string _DataPartitionId => GuidUtility.Create(Settings.DataPartitionPhrase).ToString().ToUpper();
 
-	    public MobileServiceClient MobileService { get; set; }
+		public MobileServiceClient MobileService { get; set; }
 
 		IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
 
@@ -33,51 +33,47 @@ namespace Acquaint.Data
 		public async Task<IEnumerable<Acquaintance>> GetItems()
 		{
 			return await Execute<IEnumerable<Acquaintance>>(async () => {
-				await SyncItems().ConfigureAwait(false);
+				await SyncItemsAsync().ConfigureAwait(false);
 				return await _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false);
 			}, new List<Acquaintance>()).ConfigureAwait(false);
 		}
 
 		public async Task<Acquaintance> GetItem(string id)
 		{
-			return await Execute<Acquaintance>(async () => 
-			{ 
-				await SyncItems().ConfigureAwait(false);
+			return await Execute<Acquaintance>(async () => {
+				await SyncItemsAsync().ConfigureAwait(false);
 				return await _AcquaintanceTable.LookupAsync(id).ConfigureAwait(false);
 			}, null).ConfigureAwait(false);
 		}
 
 		public async Task<bool> AddItem(Acquaintance item)
 		{
-			return await Execute<bool>(async () => 
-			{
+			return await Execute<bool>(async () => {
 				item.DataPartitionId = _DataPartitionId;
 
 				await Initialize().ConfigureAwait(false);
 				await _AcquaintanceTable.InsertAsync(item).ConfigureAwait(false);
-				await SyncItems().ConfigureAwait(false);
+				await SyncItemsAsync().ConfigureAwait(false);
 				return true;
 			}, false).ConfigureAwait(false);
 		}
 
 		public async Task<bool> UpdateItem(Acquaintance item)
 		{
-			return await Execute<bool>(async () => 
-			{ 
+			return await Execute<bool>(async () => {
 				await Initialize().ConfigureAwait(false);
 				await _AcquaintanceTable.UpdateAsync(item).ConfigureAwait(false);
-				await SyncItems().ConfigureAwait(false);
+				await SyncItemsAsync().ConfigureAwait(false);
 				return true;
 			}, false).ConfigureAwait(false);
 		}
 
 		public async Task<bool> RemoveItem(Acquaintance item)
 		{
-			return await Execute<bool>(async () => 
-			{
+			return await Execute<bool>(async () => {
 				await Initialize().ConfigureAwait(false);
 				await _AcquaintanceTable.DeleteAsync(item).ConfigureAwait(false);
-				await SyncItems().ConfigureAwait(false);
+				await SyncItemsAsync().ConfigureAwait(false);
 				return true;
 			}, false).ConfigureAwait(false);
 		}
@@ -113,7 +109,7 @@ namespace Acquaint.Data
 			}, false).ConfigureAwait(false);
 		}
 
-		async Task<bool> SyncItems()
+		async Task<bool> SyncItemsAsync()
 		{
 			return await Execute(async () => {
 				if (Settings.LocalDataResetIsRequested)
@@ -121,7 +117,7 @@ namespace Acquaint.Data
 
 				await Initialize().ConfigureAwait(false);
 				await EnsureDataIsSeededAsync(_DataPartitionId).ConfigureAwait(false);
-				await MobileService.SyncContext.PushAsync().ConfigureAwait(false);
+				// PushAsync() has been omitted here because the MobileService.SyncContext automatically calls PushAsync() before PullAsync() if it sees pending changes in the queue.
 				await _AcquaintanceTable.PullAsync($"getAll{typeof(Acquaintance).Name}", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId)).ConfigureAwait(false);
 				return true;
 			}, false);
