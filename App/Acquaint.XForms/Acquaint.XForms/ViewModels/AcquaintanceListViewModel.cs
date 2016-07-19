@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
 using Acquaint.Data;
@@ -74,11 +73,6 @@ namespace Acquaint.XForms
 			}
 		}
 
-		public async Task ExecuteShowSetupPageCommand()
-		{
-			await PushModalAsync(new NavigationPage(new SetupPage()));
-		}
-
 		public Command RefreshAcquaintancesCommand
 		{
 			get
@@ -139,7 +133,12 @@ namespace Acquaint.XForms
 
 		async Task ExecuteShowSettingsCommand()
 		{
-			await PushModalAsync(new NavigationPage(new SettingsPage() { BindingContext = new SettingsViewModel() }));
+			await PushModalAsync(
+				new NavigationPage(
+					new SettingsPage() { BindingContext = new SettingsViewModel() })
+				{
+					BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+				});
 		}
 
 		Command _DialNumberCommand;

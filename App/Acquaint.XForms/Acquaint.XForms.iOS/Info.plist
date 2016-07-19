@@ -57,5 +57,7 @@
 		<string>Icon</string>
 		<string>Icon-Small</string>
 	</array>
+	<key>Custom Property</key>
+	<false/>
 </dict>
 </plist>

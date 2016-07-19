@@ -27,14 +27,22 @@ namespace Acquaint.XForms
 			// if a data partition phrase has not yet been set
 			if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
 			{
-				// modally push a new SetupPage (wrapped in a NavigationPage, just to be pretty)
+				// modally push a new SetupPage wrapped in a NavigationPage
 				await Navigation.PushModalAsync(new NavigationPage(new SetupPage()));
 				_ShouldDelayForSplash = false;
 			}
 			else
 			{
 				// create a new NavigationPage, with a new AcquaintanceListPage set as the Root
-				var navPage = new NavigationPage(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
+				var navPage = new NavigationPage(
+					new AcquaintanceListPage()
+					{
+						Title = "Acquaintances",
+						BindingContext = new AcquaintanceListViewModel()
+					})
+				{
+					BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+				};
 
 				// set the MainPage of the app to the navPage
 				Application.Current.MainPage = navPage;

@@ -55,7 +55,11 @@ namespace Acquaint.XForms
 			if (Device.OS != TargetPlatform.Android)
 			{
 				if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
-					await Navigation.PushModalAsync(new NavigationPage(new SetupPage()));
+					await Navigation.PushModalAsync(
+						new NavigationPage(new SetupPage()) 
+						{ 
+							BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+						});
 				else
 					await ViewModel.ExecuteLoadAcquaintancesCommand();
 			}

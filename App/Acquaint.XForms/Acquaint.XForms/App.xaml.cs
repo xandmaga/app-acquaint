@@ -6,13 +6,13 @@ using Xamarin.Forms.Xaml;
 
 namespace Acquaint.XForms
 {
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
+	public partial class App : Application
+	{
+		public App()
+		{
+			InitializeComponent();
 
-            SubscribeToDisplayAlertMessages();
+			SubscribeToDisplayAlertMessages();
 
 			// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
 			if (Device.OS == TargetPlatform.Android)
@@ -23,51 +23,46 @@ namespace Acquaint.XForms
 			else
 			{
 				// create a new NavigationPage, with a new AcquaintanceListPage set as the Root
-				var navPage = 
+				var navPage =
 					new NavigationPage(
-						new AcquaintanceListPage() 
-						{ 
-							BindingContext = new AcquaintanceListViewModel(), 
-							Title="Acquaintances" }) 
-				{ 
-					BarBackgroundColor = Color.FromHex("547799"),
-					BarTextColor = Color.White
-				};
-
-				// if this is iOS set the nav bar text color
-				if (Device.OS == TargetPlatform.iOS)
-					navPage.BarTextColor = Color.White;
+						new AcquaintanceListPage()
+						{
+							BindingContext = new AcquaintanceListViewModel(),
+							Title = "Acquaintances"
+						})
+					{
+						BarBackgroundColor = Color.FromHex("547799"),
+						BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+					};
 
 				// set the MainPage of the app to the navPage
 				MainPage = navPage;
 			}
-        }
+		}
 
-        /// <summary>
-        /// Subscribes to messages for displaying alerts.
-        /// </summary>
-        static void SubscribeToDisplayAlertMessages()
-        {
-            MessagingService.Current.Subscribe<MessagingServiceAlert>(MessageKeys.DisplayAlert, async (service, info) =>
-                {
-                    var task = Current?.MainPage?.DisplayAlert(info.Title, info.Message, info.Cancel);
-                    if (task != null)
-                    {
-                        await task;
-                        info?.OnCompleted?.Invoke();
-                    }
-                });
+		/// <summary>
+		/// Subscribes to messages for displaying alerts.
+		/// </summary>
+		static void SubscribeToDisplayAlertMessages()
+		{
+			MessagingService.Current.Subscribe<MessagingServiceAlert>(MessageKeys.DisplayAlert, async (service, info) => {
+				var task = Current?.MainPage?.DisplayAlert(info.Title, info.Message, info.Cancel);
+				if (task != null)
+				{
+					await task;
+					info?.OnCompleted?.Invoke();
+				}
+			});
 
-            MessagingService.Current.Subscribe<MessagingServiceQuestion>(MessageKeys.DisplayQuestion, async (service, info) =>
-                {
-                    var task = Current?.MainPage?.DisplayAlert(info.Title, info.Question, info.Positive, info.Negative);
-                    if (task != null)
-                    {
-                        var result = await task;
-                        info?.OnCompleted?.Invoke(result);
-                    }
-                });
-        }
-    }
+			MessagingService.Current.Subscribe<MessagingServiceQuestion>(MessageKeys.DisplayQuestion, async (service, info) => {
+				var task = Current?.MainPage?.DisplayAlert(info.Title, info.Question, info.Positive, info.Negative);
+				if (task != null)
+				{
+					var result = await task;
+					info?.OnCompleted?.Invoke(result);
+				}
+			});
+		}
+	}
 }
 

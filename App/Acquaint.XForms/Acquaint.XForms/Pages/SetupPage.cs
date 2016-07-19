@@ -37,7 +37,15 @@ namespace Acquaint.XForms
 			{
 				await Navigation.PopModalAsync();
 
-				var navPage = new NavigationPage(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
+				var navPage = new NavigationPage(
+					new AcquaintanceListPage()
+					{
+						Title = "Acquaintances",
+						BindingContext = new AcquaintanceListViewModel()
+					})
+				{
+					BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+				};
 
 				// on the main UI thread, set the MainPage to the navPage
 				Device.BeginInvokeOnMainThread(() => {
