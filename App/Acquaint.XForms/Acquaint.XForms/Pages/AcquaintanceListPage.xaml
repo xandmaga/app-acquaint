@@ -6,7 +6,7 @@
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ContentPage.ToolbarItems>
-    <ToolbarItem x:Name="refreshToolbarItem" Icon="refresh.png" Text="Refresh" Command="{Binding RefreshCommand}" />
+    <ToolbarItem x:Name="refreshToolbarItem" Icon="refresh.png" Text="Refresh" Command="{Binding RefreshAcquaintancesCommand}" />
 		<ToolbarItem x:Name="settingsToolbarItem" Icon="settings.png" Text="Settings" Command="{Binding ShowSettingsCommand}" />
 		<ToolbarItem x:Name="addAcquaintanceToolbarItem" Icon="add.png" Text="New" Command="{Binding NewAcquaintanceCommand}" />
 	</ContentPage.ToolbarItems>

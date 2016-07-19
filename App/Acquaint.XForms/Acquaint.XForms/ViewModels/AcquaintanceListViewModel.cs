@@ -60,18 +60,16 @@ namespace Acquaint.XForms
 
 		public async Task ExecuteLoadAcquaintancesCommand()
 		{
-			if (Settings.LocalDataResetIsRequested)
+            LoadAcquaintancesCommand.ChangeCanExecute();
+
+            if (Settings.LocalDataResetIsRequested)
 				_Acquaintances.Clear();
 
 			if (Acquaintances.Count < 1 || !Settings.DataIsSeeded || Settings.ClearImageCacheIsRequested)
-			{
-				LoadAcquaintancesCommand.ChangeCanExecute();
-
 				await FetchAcquaintances();
 
-				LoadAcquaintancesCommand.ChangeCanExecute();
-			}
-		}
+            LoadAcquaintancesCommand.ChangeCanExecute();
+        }
 
 		public Command RefreshAcquaintancesCommand
 		{
