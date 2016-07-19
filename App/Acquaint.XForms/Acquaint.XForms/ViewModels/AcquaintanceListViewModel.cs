@@ -100,21 +100,12 @@ namespace Acquaint.XForms
 		{
 			IsBusy = true;
 
-			var acquaintances = await DataSource.GetItems();
+			Acquaintances = new ObservableRangeCollection<Acquaintance>(await DataSource.GetItems());
 
-			Acquaintances.Clear();
-
-			if (acquaintances.Count() != 0)
-			{
-				foreach (var a in acquaintances)
-				{
-					Acquaintances.Add(a);
-				}
-			}
+			// ensuring that this flag is reset
+			Settings.ClearImageCacheIsRequested = false;
 
 			IsBusy = false;
-
-			Settings.ClearImageCacheIsRequested = false;
 		}
 
 		/// <summary>
@@ -290,8 +281,6 @@ namespace Acquaint.XForms
 				await FetchAcquaintances();
 
 				IsBusy = false;
-
-				OnPropertyChanged("Acquaintances");
 			});
 		}
 
@@ -308,8 +297,6 @@ namespace Acquaint.XForms
 				await FetchAcquaintances();
 
 				IsBusy = false;
-
-				OnPropertyChanged("Acquaintances");
 			});
 		}
 

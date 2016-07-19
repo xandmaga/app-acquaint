@@ -28,7 +28,7 @@
 						<OnPlatform x:TypeArguments="Font" iOS="Micro" />
 					</Label.FontSize>
 				</Label>
-				<Label LineBreakMode="WordWrap" Text="Enter this same phrase on any device that you'd like to sync data with.">
+				<Label LineBreakMode="WordWrap" Text="Enter this same phrase on any device running Acquaint that you'd like to sync data with.">
 					<Label.FontSize>
 						<OnPlatform x:TypeArguments="Font" iOS="Micro" />
 					</Label.FontSize>

@@ -18,19 +18,9 @@ namespace Acquaint.XForms
 				DataPartitionPhraseEntry.Focus();
 			});
 
-			BackendServiceUrlEntry.Focused += (o, e) => {
-				if (BackendServiceUrlEntry.Text.EndsWith(InvalidUrlFormatMessage))
-				{
-					BackendServiceUrlEntry.Text = BackendServiceUrlEntry.Text.Replace(InvalidUrlFormatMessage, string.Empty);
-				}
-			};
-		}
-
-		const string InvalidUrlFormatMessage = " (Invalid URL format!)";
-
-		void BackendServiceUrlEntry_Focused(object sender, FocusEventArgs e)
-		{
-			
+			MessagingService.Current.Subscribe(MessageKeys.BackendUrlValidation, (service) => {
+				BackendServiceUrlEntry.PlaceholderColor = Color.Red;
+			});
 		}
 	}
 }

@@ -35,7 +35,7 @@
 									</StackLayout>
 								</ViewCell>
 							</TableSection>
-							<TableSection Title="Image Cache Duration">
+							<TableSection Title="Image Cache Duration (in hours)">
 								<ViewCell>
 									<StackLayout>
 										<Entry Text="{Binding ImageCacheDurationHours}" Keyboard="Numeric">
@@ -48,7 +48,7 @@
 							</TableSection>
 							<TableSection>
 								<SwitchCell Text="Clear image cache?" On="{Binding ClearImageCache}" />
-								<SwitchCell Text="Reset URL &amp; cache length?" On="{Binding ResetToDefaults}" />
+								<SwitchCell Text="Reset to defaults?" On="{Binding ResetToDefaults}" />
 							</TableSection>
 						</TableRoot>
 					</TableView.Root>

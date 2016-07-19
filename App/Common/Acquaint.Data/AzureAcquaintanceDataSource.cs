@@ -30,6 +30,14 @@ namespace Acquaint.Data
 
 		#region Data Access
 
+		public async Task<IEnumerable<Acquaintance>> GetItems()
+		{
+			return await Execute<IEnumerable<Acquaintance>>(async () => {
+				await SyncItems().ConfigureAwait(false);
+				return await _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false);
+			}, new List<Acquaintance>()).ConfigureAwait(false);
+		}
+
 		public async Task<Acquaintance> GetItem(string id)
 		{
 			return await Execute<Acquaintance>(async () => 
@@ -37,15 +45,6 @@ namespace Acquaint.Data
 				await SyncItems().ConfigureAwait(false);
 				return await _AcquaintanceTable.LookupAsync(id).ConfigureAwait(false);
 			}, null).ConfigureAwait(false);
-		}
-
-		public async Task<IEnumerable<Acquaintance>> GetItems()
-		{
-			return await Execute<IEnumerable<Acquaintance>>(async () => 
-			{
-				await SyncItems().ConfigureAwait(false);
-				return await _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId).OrderBy(x => x.LastName).ToEnumerableAsync().ConfigureAwait(false);
-			}, new List<Acquaintance>()).ConfigureAwait(false);
 		}
 
 		public async Task<bool> AddItem(Acquaintance item)
@@ -72,7 +71,7 @@ namespace Acquaint.Data
 			}, false).ConfigureAwait(false);
 		}
 
-		public async Task<bool> RemoveItem(Acquaintance item, bool softDelete = true)
+		public async Task<bool> RemoveItem(Acquaintance item)
 		{
 			return await Execute<bool>(async () => 
 			{
