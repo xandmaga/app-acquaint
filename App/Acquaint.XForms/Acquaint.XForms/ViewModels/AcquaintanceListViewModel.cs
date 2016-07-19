@@ -133,12 +133,14 @@ namespace Acquaint.XForms
 
 		async Task ExecuteShowSettingsCommand()
 		{
-			await PushModalAsync(
-				new NavigationPage(
-					new SettingsPage() { BindingContext = new SettingsViewModel() })
-				{
-					BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
-				});
+		    var navPage = new NavigationPage(
+		        new SettingsPage() { BindingContext = new SettingsViewModel() });
+
+            // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+            if (Device.OS == TargetPlatform.iOS)
+                navPage.BarTextColor = Color.White;
+
+		    await PushModalAsync(navPage);
 		}
 
 		Command _DialNumberCommand;
@@ -236,11 +238,11 @@ namespace Acquaint.XForms
 			{
 				return _EmailCommand ??
 				(_EmailCommand = new Command((parameter) =>
-						ExecuteEmailCommandCommand((string)parameter)));
+						ExecuteEmailCommand((string)parameter)));
 			}
 		}
 
-		void ExecuteEmailCommandCommand(string acquaintanceId)
+		void ExecuteEmailCommand(string acquaintanceId)
 		{
 			if (string.IsNullOrWhiteSpace(acquaintanceId))
 				return;

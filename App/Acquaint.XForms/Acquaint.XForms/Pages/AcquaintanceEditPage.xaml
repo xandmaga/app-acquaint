@@ -28,16 +28,6 @@
 							<EntryCell Label="City" Text="{Binding Acquaintance.City}" Keyboard="Text" />
 							<EntryCell Label="State" Text="{Binding Acquaintance.State}" Keyboard="Text" PropertyChanged="StateEntry_PropertyChanged" />
 							<EntryCell Label="ZIP" Text="{Binding Acquaintance.PostalCode}" Keyboard="Numeric" PropertyChanged="PostalCode_PropertyChanged" />
-							<!--<ViewCell IsEnabled="{Binding IsExistingAcquaintance}">
-								<ContentView Padding="0,0" IsEnabled="{Binding IsExistingAcquaintance}" IsVisible="{Binding IsExistingAcquaintance}">
-									<ContentView.Padding>
-										<OnPlatform x:TypeArguments="Thickness" iOS="10,0" WinPhone="0,15,0,0" />
-									</ContentView.Padding>
-									<ContentView.Content>
-										<Button BackgroundColor="#fd6d6d" Text="{Binding Acquaintance.DisplayName, StringFormat='Delete {0}'}" TextColor="White" Command="{Binding DeleteAcquaintanceCommand}" />
-									</ContentView.Content>
-								</ContentView>
-							</ViewCell>-->
 						</TableSection>
 					</TableRoot>
 				</TableView>

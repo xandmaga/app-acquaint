@@ -146,6 +146,7 @@ namespace Acquaint.XForms.UWP
 
             builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
             builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+            builder.RegisterInstance(new DatastoreFolderPathProvider()).As<IDatastoreFolderPathProvider>();
 
             var container = builder.Build();
 

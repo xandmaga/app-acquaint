@@ -39,13 +39,14 @@ namespace Acquaint.XForms
 					{
 						Title = "Acquaintances",
 						BindingContext = new AcquaintanceListViewModel()
-					})
-				{
-					BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
-				};
+					});
 
-				// set the MainPage of the app to the navPage
-				Application.Current.MainPage = navPage;
+                // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+                if (Device.OS == TargetPlatform.iOS)
+                    navPage.BarTextColor = Color.White;
+
+                // set the MainPage of the app to the navPage
+                Application.Current.MainPage = navPage;
 			}
 		}
 	}

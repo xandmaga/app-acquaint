@@ -18,11 +18,15 @@ namespace Acquaint.XForms
 			// on Android, we use a floating action button, so clear the ToolBarItems collection
 			if (Device.OS == TargetPlatform.Android)
 			{
-
-				ToolbarItems.RemoveAt(1); // Remove the add toolbar item, because on Android we have a floating action button instead.
+			    ToolbarItems.Remove(addAcquaintanceToolbarItem);
 
 				fab.Clicked = AndroidAddButtonClicked;
 			}
+
+		    if (Device.OS != TargetPlatform.Windows)
+		    {
+		        ToolbarItems.Remove(refreshToolbarItem);
+		    }
 		}
 
 		/// <summary>
@@ -54,14 +58,18 @@ namespace Acquaint.XForms
 			// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
 			if (Device.OS != TargetPlatform.Android)
 			{
-				if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
-					await Navigation.PushModalAsync(
-						new NavigationPage(new SetupPage()) 
-						{ 
-							BarTextColor = Color.White // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
-						});
-				else
-					await ViewModel.ExecuteLoadAcquaintancesCommand();
+			    if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
+			    {
+			        var navPage = new NavigationPage(new SetupPage());
+
+                    // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
+                    if (Device.OS == TargetPlatform.iOS)
+                        navPage.BarTextColor = Color.White;
+
+                    await Navigation.PushModalAsync(navPage);
+			    }
+			    else
+			        await ViewModel.ExecuteLoadAcquaintancesCommand();
 			}
 			else
 			{ 

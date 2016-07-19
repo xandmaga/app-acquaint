@@ -181,7 +181,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
+    <ProjectReference Include="..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
       <Project>{0b984675-688b-41c6-beb7-d104de9158c3}</Project>
       <Name>Acquaint.Abstractions</Name>
     </ProjectReference>
