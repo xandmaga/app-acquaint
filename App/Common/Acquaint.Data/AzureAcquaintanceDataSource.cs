@@ -24,7 +24,9 @@ namespace Acquaint.Data
 
 		IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
 
-		bool _IsInitialized;
+	    private MobileServiceSQLiteStore _MobileServiceSQLiteStore;
+
+        bool _IsInitialized;
 
 		const string _LocalDbName = "acquaintances.db";
 
@@ -95,13 +97,13 @@ namespace Acquaint.Data
 				// We're passing in a handler here for the sole purpose of inspecting outbound HTTP requests with Charles Web Debugging Proxy on OS X. Only in debug builds.
 				MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
 
-				var store = new MobileServiceSQLiteStore(_LocalDbName);
+                _MobileServiceSQLiteStore = new MobileServiceSQLiteStore(_LocalDbName);
 
-				store.DefineTable<Acquaintance>();
+                _MobileServiceSQLiteStore.DefineTable<Acquaintance>();
 
 				_AcquaintanceTable = MobileService.GetSyncTable<Acquaintance>();
 
-				await MobileService.SyncContext.InitializeAsync(store).ConfigureAwait(false);
+				await MobileService.SyncContext.InitializeAsync(_MobileServiceSQLiteStore).ConfigureAwait(false);
 
 				_IsInitialized = true;
 
@@ -113,7 +115,7 @@ namespace Acquaint.Data
 		{
 			return await Execute(async () => {
 				if (Settings.LocalDataResetIsRequested)
-					await ResetLocalStoreAsync();
+					await ResetLocalStoreAsync().ConfigureAwait(false);
 
 				await Initialize().ConfigureAwait(false);
 				await EnsureDataIsSeededAsync(_DataPartitionId).ConfigureAwait(false);
@@ -161,7 +163,8 @@ namespace Acquaint.Data
 		async Task ResetLocalStoreAsync()
 		{
 			_AcquaintanceTable = null;
-			await DeleteOldLocalDatabase();
+		    _MobileServiceSQLiteStore?.Dispose(); // it's necessary on UWP to Dispose() the SQLite store, otherwise the database deletion will fail because of an open file handle.
+		    await DeleteOldLocalDatabase().ConfigureAwait(false);
 			_IsInitialized = false;
 			Settings.LocalDataResetIsRequested = false;
 			Settings.DataIsSeeded = false;
@@ -173,14 +176,14 @@ namespace Acquaint.Data
 		/// <returns>The old local database.</returns>
 		async Task DeleteOldLocalDatabase()
 		{
-			var databaseFolder = await FileSystem.Current.GetFolderFromPathAsync(ServiceLocator.Current.GetInstance<IDatastoreFolderPathProvider>().GetPath());
-			var dbFile = await databaseFolder.GetFileAsync(_LocalDbName, CancellationToken.None);
+			var databaseFolder = await FileSystem.Current.GetFolderFromPathAsync(ServiceLocator.Current.GetInstance<IDatastoreFolderPathProvider>().GetPath()).ConfigureAwait(false);
+			var dbFile = await databaseFolder.GetFileAsync(_LocalDbName, CancellationToken.None).ConfigureAwait(false);
 
-			if (dbFile != null)
-				await dbFile.DeleteAsync();
+            if (dbFile != null)
+		        await dbFile.DeleteAsync().ConfigureAwait(true);
 		}
 
-		#endregion
+	    #endregion
 
 
 		#region some nifty exception helpers
