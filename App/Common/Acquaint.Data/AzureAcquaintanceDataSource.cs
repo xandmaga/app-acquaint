@@ -233,24 +233,24 @@ namespace Acquaint.Data
 			if (ex is MobileServiceInvalidOperationException)
 			{
 				// TODO: report with HockeyApp
-				System.Diagnostics.Debug.WriteLine(@"MOBILE SERVICE ERROR {0}", ex.Message);
+			    System.Diagnostics.Debug.WriteLine($"MOBILE SERVICE ERROR {ex.Message}");
 				return;
 			}
 
 			if (ex is MobileServicePushFailedException)
 			{
-				var pushResult = (ex as MobileServicePushFailedException).PushResult;
+				var pushResult = ((MobileServicePushFailedException) ex).PushResult;
 
 				foreach (var e in pushResult.Errors)
 				{
-					System.Diagnostics.Debug.WriteLine(@"ERROR {0}: {1}", pushResult.Status, e.RawResult);
+				    System.Diagnostics.Debug.WriteLine($"ERROR {pushResult.Status}: {e.RawResult}");
 				}
 			}
 
 			else
 			{
 				// TODO: report with HockeyApp
-				System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex.Message);
+			    System.Diagnostics.Debug.WriteLine($"ERROR {ex.Message}");
 			}
 		}
 
