@@ -7,7 +7,7 @@
     "HockeySDK.Xamarin": "4.1.0-beta3",
     "Microsoft.Azure.Mobile.Client": "2.1.0",
     "Microsoft.Azure.Mobile.Client.SQLiteStore": "2.1.0",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "Newtonsoft.Json": "9.0.1",
     "PCLCrypto": "2.0.147",
     "PCLStorage": "1.0.2",
