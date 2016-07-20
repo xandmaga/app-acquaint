@@ -55,19 +55,25 @@ namespace Acquaint.XForms
 
                     return;
                 }
-                var pin = new Pin()
-                { 
-                    Type = PinType.Place, 
-                    Position = position,
-                    Label = ViewModel.Acquaintance.DisplayName, 
-                    Address = ViewModel.Acquaintance.AddressString 
-                };
 
-                AcquaintanceMap.Pins.Clear();
+                // Xamarin.Forms.Maps (2.3.107) currently has a bug that causes map pins to throw ExecutionEngineExceptions on UWP.
+                // Omitting pins on UWP for now.
+                if (Device.OS != TargetPlatform.WinPhone && Device.OS != TargetPlatform.Windows)
+                {
+                    var pin = new Pin()
+                    {
+                        Type = PinType.Place,
+                        Position = position,
+                        Label = ViewModel.Acquaintance.DisplayName,
+                        Address = ViewModel.Acquaintance.AddressString
+                    };
 
-                AcquaintanceMap.Pins.Add(pin);
+                    AcquaintanceMap.Pins.Clear();
 
-                AcquaintanceMap.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(10)));
+                    AcquaintanceMap.Pins.Add(pin);
+                }
+
+            AcquaintanceMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(10)));
 
                 AcquaintanceMap.IsVisible = true;
             }
