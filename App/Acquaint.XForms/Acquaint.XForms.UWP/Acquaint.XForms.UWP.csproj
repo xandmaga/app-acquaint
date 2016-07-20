@@ -156,6 +156,7 @@
     <Content Include="edit.png" />
     <Content Include="email.png" />
     <Content Include="message.png" />
+    <Content Include="refresh.png" />
     <Content Include="settings.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="phone.png" />

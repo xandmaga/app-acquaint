@@ -38,6 +38,7 @@ namespace Acquaint.XForms
 		{
 			Navigation.PushAsync(new AcquaintanceDetailPage() { BindingContext = new AcquaintanceDetailViewModel((Acquaintance)e.Item) });
 
+            // prevents the list from displaying the navigated item as selected when navigating back to the list
 			((ListView)sender).SelectedItem = null;
 		}
 
