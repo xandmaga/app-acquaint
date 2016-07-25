@@ -163,7 +163,14 @@ namespace Acquaint.Data
 		async Task ResetLocalStoreAsync()
 		{
 			_AcquaintanceTable = null;
-		    _MobileServiceSQLiteStore?.Dispose(); // it's necessary on UWP to Dispose() the SQLite store, otherwise the database deletion will fail because of an open file handle.
+
+            // On UWP, it's necessary to Dispose() and nullify the MobileServiceSQLiteStore before 
+            // trying to delete the database file, otherwise an access exception will occur
+            // because of an open file handle.
+            _MobileServiceSQLiteStore?.Dispose();
+		    _MobileServiceSQLiteStore = null;
+
+
 		    await DeleteOldLocalDatabase().ConfigureAwait(false);
 			_IsInitialized = false;
 			Settings.LocalDataResetIsRequested = false;
