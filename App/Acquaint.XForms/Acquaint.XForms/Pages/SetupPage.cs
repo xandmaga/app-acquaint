@@ -6,66 +6,63 @@ using Xamarin.Forms;
 
 namespace Acquaint.XForms
 {
-	public partial class SetupPage : ContentPage
-	{
-		public SetupPage()
-		{
-			BindingContext = this; // No need for all the ceremony of a viewmodel in this case. Just bind to ourself.
+    public partial class SetupPage : ContentPage
+    {
+        public SetupPage()
+        {
+            BindingContext = this; // No need for all the ceremony of a viewmodel in this case. Just bind to ourself.
 
-			InitializeComponent();
-		}
+            InitializeComponent();
+        }
 
-		Command _ContinueCommand;
+        Command _ContinueCommand;
 
-		public Command ContinueCommand => _ContinueCommand ?? (_ContinueCommand = new Command(async () => await ExecuteContinueCommand()));
+        public Command ContinueCommand => _ContinueCommand ?? (_ContinueCommand = new Command(async () => await ExecuteContinueCommand()));
 
-		async Task ExecuteContinueCommand()
-		{
-			if (string.IsNullOrWhiteSpace(DataPartitionPhraseEntry.Text))
-			{
-				DataPartitionPhraseEntry.PlaceholderColor = Color.Red;
+        async Task ExecuteContinueCommand()
+        {
+            if (string.IsNullOrWhiteSpace(DataPartitionPhraseEntry.Text))
+            {
+                DataPartitionPhraseEntry.PlaceholderColor = Color.Red;
 
-				DataPartitionPhraseEntry.Focus();
+                DataPartitionPhraseEntry.Focus();
 
-				return;
-			}
+                return;
+            }
 
-			Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
+            Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
 
-			// The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
-			if (Device.OS != TargetPlatform.Android)
-			{
-				await Navigation.PopModalAsync();
+            // The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
+            if (Device.OS != TargetPlatform.Android)
+            {
+                await Navigation.PopModalAsync();
 
-				var navPage = new NavigationPage(
-					new AcquaintanceListPage()
-					{
-						Title = "Acquaintances",
-						BindingContext = new AcquaintanceListViewModel()
-					});
+                var navPage = new NavigationPage(
+                    new AcquaintanceListPage()
+                    {
+                        Title = "Acquaintances",
+                        BindingContext = new AcquaintanceListViewModel()
+                    });
 
-                // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
-                if (Device.OS == TargetPlatform.iOS)
-                    navPage.BarTextColor = Color.White;
+                navPage.BarTextColor = Color.White;
 
                 // on the main UI thread, set the MainPage to the navPage
-                Device.BeginInvokeOnMainThread(() => {
-					Application.Current.MainPage = navPage;
-				});
-			}
-			else
-			{
-				await Navigation.PopModalAsync();
+                Device.BeginInvokeOnMainThread(() =>
+                    Application.Current.MainPage = navPage );
+            }
+            else
+            {
+                await Navigation.PopModalAsync();
 
-				await Navigation.PushAsync(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
-			}
-		}
+                await Navigation.PushAsync(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
+            }
+        }
 
-		protected override bool OnBackButtonPressed()
-		{
-			// disable back button, so that the user is forced to enter a DataPartitionPhrase
-			return true;
-		}
-	}
+        protected override bool OnBackButtonPressed()
+        {
+            // disable back button, so that the user is forced to enter a DataPartitionPhrase
+            return true;
+        }
+    }
 }
 

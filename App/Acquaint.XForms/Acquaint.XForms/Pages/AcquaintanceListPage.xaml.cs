@@ -63,9 +63,7 @@ namespace Acquaint.XForms
 			    {
 			        var navPage = new NavigationPage(new SetupPage());
 
-                    // Ensures statusbar text color on iOS is white. Also set "View controller-based status bar appearance" to "No" in Info.plist on iOS.
-                    if (Device.OS == TargetPlatform.iOS)
-                        navPage.BarTextColor = Color.White;
+                    navPage.BarTextColor = Color.White;
 
                     await Navigation.PushModalAsync(navPage);
 			    }
