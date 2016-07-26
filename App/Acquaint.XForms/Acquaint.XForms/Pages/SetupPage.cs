@@ -42,7 +42,10 @@ namespace Acquaint.XForms
                     {
                         Title = "Acquaintances",
                         BindingContext = new AcquaintanceListViewModel()
-                    });
+                    })
+                {
+                    BarBackgroundColor = Color.FromHex("547799")
+                };
 
                 navPage.BarTextColor = Color.White;
 

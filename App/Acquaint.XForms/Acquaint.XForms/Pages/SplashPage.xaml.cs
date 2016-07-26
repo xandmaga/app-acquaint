@@ -5,7 +5,7 @@ using Acquaint.Util;
 namespace Acquaint.XForms
 {
     /// <summary>
-    /// Splash Page that is used on Androd only. iOS splash characteristics are NOT defined here, ub tn the iOS prject settings.
+    /// Splash Page that is used on Android only. iOS splash characteristics are NOT defined here, ub tn the iOS prject settings.
     /// </summary>
     public partial class SplashPage : ContentPage
     {
@@ -28,7 +28,15 @@ namespace Acquaint.XForms
             if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
             {
                 // modally push a new SetupPage wrapped in a NavigationPage
-                await Navigation.PushModalAsync(new NavigationPage(new SetupPage()));
+                var navPage = new NavigationPage(new SetupPage())
+                {
+                    BarBackgroundColor = Color.FromHex("547799")
+                };
+
+                navPage.BarTextColor = Color.White;
+
+                await Navigation.PushModalAsync(navPage);
+
                 _ShouldDelayForSplash = false;
             }
             else

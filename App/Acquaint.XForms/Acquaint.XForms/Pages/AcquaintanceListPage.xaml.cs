@@ -61,7 +61,10 @@ namespace Acquaint.XForms
 			{
 			    if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
 			    {
-			        var navPage = new NavigationPage(new SetupPage());
+			        var navPage = new NavigationPage(new SetupPage())
+			        {
+                        BarBackgroundColor = Color.FromHex("547799")
+                    };
 
                     navPage.BarTextColor = Color.White;
 
