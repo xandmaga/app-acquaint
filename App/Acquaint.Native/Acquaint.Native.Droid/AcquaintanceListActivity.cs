@@ -157,7 +157,7 @@ namespace Acquaint.Native.Droid
 
 			// use FFImageLoading library to asynchronously:
 			ImageService.Instance
-				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromSeconds(Settings.ImageCacheDurationSeconds))	// get the image from a URL
+				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))	// get the image from a URL
 				.LoadingPlaceholder("placeholderProfileImage.png")  				// specify a placeholder image
 				.Transform(new CircleTransformation())              				// transform the image to a circle
 				.IntoAsync(viewHolder.ProfilePhotoImageView);            			// load the image into the ImageView
