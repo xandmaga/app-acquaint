@@ -192,12 +192,12 @@ namespace Acquaint.XForms
 
         public void DisplayGeocodingError()
         {
-            MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
-                {
-                    Title = "Geocoding Error", 
-                    Message = "Please make sure the address is valid, or that you have a network connection.",
-                    Cancel = "OK"
-                });
+            //MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
+            //    {
+            //        Title = "Geocoding Error", 
+            //        Message = "Please make sure the address is valid, or that you have a network connection.",
+            //        Cancel = "OK"
+            //    });
 
             IsBusy = false;
         }

@@ -101,6 +101,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Implementations\DatastoreFolderPathProvider.cs" />
+    <Compile Include="Implementations\EnvironmentService.cs" />
+    <Compile Include="Implementations\HttpClientHandlerFactory.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -188,10 +191,6 @@
     <ProjectReference Include="..\..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
       <Project>{ed10b823-aa77-4142-919f-6a42c4d087a9}</Project>
       <Name>Acquaint.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\Acquaint.Common.UWP\Acquaint.Common.UWP.csproj">
-      <Project>{b80f1a62-c7d0-429f-b940-e9abc9132abb}</Project>
-      <Name>Acquaint.Common.UWP</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Acquaint.Data\Acquaint.Data.csproj">
       <Project>{5a3530ab-4053-4cf3-bede-a3e04c45d255}</Project>

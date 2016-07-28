@@ -1,6 +1,6 @@
 using Acquaint.Abstractions;
 
-namespace Acquaint.Common.UWP
+namespace Acquaint.XForms.UWP
 {
     public class EnvironmentService : IEnvironmentService
     {

@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using Acquaint.Abstractions;
 
-namespace Acquaint.Common.UWP
+namespace Acquaint.XForms.UWP
 {
     public class HttpClientHandlerFactory : IHttpClientHandlerFactory
     {

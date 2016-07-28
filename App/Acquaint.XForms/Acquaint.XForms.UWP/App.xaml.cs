@@ -8,7 +8,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Acquaint.Abstractions;
-using Acquaint.Common.UWP;
 using Acquaint.Util;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
