@@ -280,6 +280,26 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\save.png" />
     <AndroidResource Include="Resources\menu\AcquaintanceEditMenu.axml" />
     <AndroidResource Include="Resources\mipmap\settings.png" />
+    <AndroidResource Include="Resources\mipmap\cancel.png" />
+    <AndroidResource Include="Resources\mipmap\delete.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\cancel.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\delete.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\settings.png" />
+    <AndroidResource Include="Resources\mipmap-ldpi\cancel.png" />
+    <AndroidResource Include="Resources\mipmap-ldpi\delete.png" />
+    <AndroidResource Include="Resources\mipmap-ldpi\settings.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\cancel.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\delete.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\settings.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\cancel.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\delete.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\settings.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\cancel.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\delete.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\settings.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\cancel.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\delete.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
