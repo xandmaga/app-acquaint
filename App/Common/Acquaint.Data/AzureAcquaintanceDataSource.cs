@@ -129,7 +129,7 @@ namespace Acquaint.Data
                     await ResetLocalStoreAsync().ConfigureAwait(false);
 
                 await Initialize().ConfigureAwait(false);
-                await EnsureDataIsSeededAsync(_DataPartitionId).ConfigureAwait(false);
+                await EnsureDataIsSeededAsync().ConfigureAwait(false);
                 // PushAsync() has been omitted here because the _MobileService.SyncContext automatically calls PushAsync() before PullAsync() if it sees pending changes in the queue.
                 await _AcquaintanceTable.PullAsync($"getAll{typeof(Acquaintance).Name}", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId)).ConfigureAwait(false);
                 return true;
@@ -140,8 +140,7 @@ namespace Acquaint.Data
         /// Ensures the data is seeded.
         /// </summary>
         /// <returns>The data is seeded.</returns>
-        /// <param name="dataPartitionId">Data partition identifier.</param>
-        async Task EnsureDataIsSeededAsync(string dataPartitionId)
+        async Task EnsureDataIsSeededAsync()
         {
             if (Settings.DataIsSeeded)
                 return;
