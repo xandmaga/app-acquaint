@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Acquaint.Data;
-using Acquaint.Models;
+using Acquaint.Util;
 using Foundation;
 using UIKit;
 
@@ -18,7 +18,7 @@ namespace Acquaint.Native.iOS
 		readonly AcquaintanceTableViewSource _AcquaintanceTableViewSource;
 
 		// This constructor signature is required, for marshalling between the managed and native instances of this class.
-		public AcquaintanceTableViewController(IntPtr handle) : base(handle) 
+		public AcquaintanceTableViewController(IntPtr handle) : base(handle)
 		{
 			_AcquaintanceTableViewSource = new AcquaintanceTableViewSource();
 		}
@@ -29,19 +29,26 @@ namespace Acquaint.Native.iOS
 		{
 			base.ViewDidLoad();
 
-			// tell the table view source to load the data
-			await _AcquaintanceTableViewSource.LoadAcquaintances();
-
 			SetTableViewProperties();
 
 			// override the back button text for AcquaintanceDetailViewController (the navigated-to view controller)
-			NavigationItem.BackBarButtonItem = new UIBarButtonItem ("List", UIBarButtonItemStyle.Plain, null);
+			NavigationItem.BackBarButtonItem = new UIBarButtonItem("List", UIBarButtonItemStyle.Plain, null);
 		}
 
 		// The ViewDidAppear() override is called after the view has appeared on the screen.
-		public override void ViewDidAppear(bool animated)
+		public override async void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear(animated);
+
+			if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
+			{
+				PerformSegue("PresentSetupViewControllerSegue", this);
+
+				return;
+			}
+
+			// tell the table view source to load the data
+			await _AcquaintanceTableViewSource.LoadAcquaintances();
 
 			TableView.ReloadData();
 		}
@@ -63,7 +70,7 @@ namespace Acquaint.Native.iOS
 		{
 			// Determine segue action by segue identifier.
 			// Note that these segues are defined in Main.storyboard.
-			switch (segue.Identifier) 
+			switch (segue.Identifier)
 			{
 			case "NewAcquaintanceSegue":
 				// get the destination viewcontroller from the segue
@@ -79,9 +86,10 @@ namespace Acquaint.Native.iOS
 				// get the destination viewcontroller from the segue
 				var acquaintanceDetailViewController = segue.DestinationViewController as AcquaintanceDetailViewController;
 				// if the detaination viewcontrolller is not null
-				if (acquaintanceDetailViewController != null && TableView.Source != null) {
+				if (acquaintanceDetailViewController != null && TableView.Source != null)
+				{
 					// set the acquaintance on the view controller
-					acquaintanceDetailViewController.SetAcquaintance (((AcquaintanceTableViewSource)TableView.Source).Acquaintances [itemIndex], this);
+					acquaintanceDetailViewController.SetAcquaintance(((AcquaintanceTableViewSource)TableView.Source).Acquaintances[itemIndex], this);
 				}
 				break;
 			}
@@ -100,7 +108,7 @@ namespace Acquaint.Native.iOS
 			if (TraitCollection.ForceTouchCapability == UIForceTouchCapability.Available)
 			{
 				RegisterForPreviewingWithDelegate(this, View);
-			}	
+			}
 		}
 
 		/// <summary>
@@ -130,7 +138,7 @@ namespace Acquaint.Native.iOS
 				return null;
 
 			// set the acquaintance on the view controller
-			detailViewController.SetAcquaintance (_AcquaintanceTableViewSource.Acquaintances [indexPath.Row], this);
+			detailViewController.SetAcquaintance(_AcquaintanceTableViewSource.Acquaintances[indexPath.Row], this);
 
 			// set the frame on the screen that will NOT be blurred out during the preview "peek"
 			previewingContext.SourceRect = cell.Frame;
@@ -157,18 +165,18 @@ namespace Acquaint.Native.iOS
 			await _AcquaintanceTableViewSource.LoadAcquaintances();
 		}
 
-		public async Task UpdateAcquaintance (Acquaintance acquaintance)
+		public async Task UpdateAcquaintance(Acquaintance acquaintance)
 		{
-			await _AcquaintanceTableViewSource.UpdateAcquaintance (acquaintance);
+			await _AcquaintanceTableViewSource.UpdateAcquaintance(acquaintance);
 
-			await _AcquaintanceTableViewSource.LoadAcquaintances ();
+			await _AcquaintanceTableViewSource.LoadAcquaintances();
 		}
 
-		public async Task DeleteAcquaintance (Acquaintance acquaintance)
+		public async Task DeleteAcquaintance(Acquaintance acquaintance)
 		{
-			await _AcquaintanceTableViewSource.DeleteAcquaintance (acquaintance);
+			await _AcquaintanceTableViewSource.DeleteAcquaintance(acquaintance);
 
-			await _AcquaintanceTableViewSource.LoadAcquaintances ();
+			await _AcquaintanceTableViewSource.LoadAcquaintances();
 		}
 	}
 }

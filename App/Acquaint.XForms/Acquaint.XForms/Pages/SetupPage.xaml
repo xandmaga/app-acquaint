@@ -23,6 +23,7 @@
 				</TableView>
 			</ContentView>
 			<StackLayout VerticalOptions="FillAndExpand">
+				<Button Text="Continue" Command="{Binding ContinueCommand}" />
 				<Label LineBreakMode="WordWrap" Text="The phrase is a key that will separate your data from everyone else's data. Make it unique.">
 					<Label.FontSize>
 						<OnPlatform x:TypeArguments="Font" iOS="Micro" />
@@ -33,7 +34,6 @@
 						<OnPlatform x:TypeArguments="Font" iOS="Micro" />
 					</Label.FontSize>
 				</Label>
-				<Button Text="Continue" Command="{Binding ContinueCommand}" />
 			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>

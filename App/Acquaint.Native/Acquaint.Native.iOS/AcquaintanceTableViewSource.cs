@@ -80,7 +80,10 @@ namespace Acquaint.Native.iOS
 		/// <param name="section">Section.</param>
 		public override nint RowsInSection(UITableView tableview, nint section)
 		{
-			return Acquaintances.Count;
+			if (Acquaintances != null)
+				return Acquaintances.Count;
+
+			return 0;
 		}
 
 		#endregion
