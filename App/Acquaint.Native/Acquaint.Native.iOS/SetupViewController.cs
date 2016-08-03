@@ -10,7 +10,7 @@ namespace Acquaint.Native.iOS
 	public partial class SetupViewController : UIViewController
 	{
 		UIColor ValidEntryColor;
-		UIColor InvalidEntryColor;
+		readonly UIColor InvalidEntryColor = UIColor.Red;
 
 		public SetupViewController(IntPtr handle) : base(handle) { }
 
@@ -20,8 +20,6 @@ namespace Acquaint.Native.iOS
 
 			ValidEntryColor = DataPartitionPhraseEntry.TextColor;
 
-			InvalidEntryColor = UIColor.Red;
-
 			DataPartitionPhraseEntry.TouchUpInside += HandleDataPartitionPhraseEntryTouchUpInside;
 
 			ContinueButton.TouchUpInside += HandleContinueButtonTouchUpInside;
@@ -30,6 +28,8 @@ namespace Acquaint.Native.iOS
 				"The phrase is a key that will separate your data from everyone else's data. Make it unique." +
 				"\n\n" +
 				"Enter this same phrase on any device running Acquaint that you'd like to sync data with.";
+
+			NavigationController.ApplyStyle();
 		}
 
 		void HandleDataPartitionPhraseEntryTouchUpInside(object sender, EventArgs ea)
@@ -48,7 +48,7 @@ namespace Acquaint.Native.iOS
 					new NSAttributedString(
 						DataPartitionPhraseEntry.Placeholder, 
 						UIFont.SystemFontOfSize(UIFont.SystemFontSize), 
-						UIColor.Red);
+						InvalidEntryColor);
 
 				DataPartitionPhraseEntry.BecomeFirstResponder();
 

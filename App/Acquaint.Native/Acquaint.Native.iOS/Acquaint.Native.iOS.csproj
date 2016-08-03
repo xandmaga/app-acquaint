@@ -239,6 +239,7 @@
     <Compile Include="SetupViewController.designer.cs">
       <DependentUpon>SetupViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\UINavigationControllerExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -311,5 +312,8 @@
       <Project>{D480A440-318D-4CD2-A662-17D6179B14DE}</Project>
       <Name>Acquaint.Common.iOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

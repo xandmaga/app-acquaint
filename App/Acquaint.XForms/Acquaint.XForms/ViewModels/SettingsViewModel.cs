@@ -93,10 +93,6 @@ namespace Acquaint.XForms
 						Cancel = "OK"
 					});
 
-					// Publish to the MessagingService, indicating that the backend URL is not valid.
-					// This message is subcribed to in the SettingsPage.xaml.cs code-behind.
-					MessagingService.Current.SendMessage(MessageKeys.BackendUrlValidation);
-
 					return;
 				}
 
@@ -121,8 +117,8 @@ namespace Acquaint.XForms
 					Settings.LocalDataResetIsRequested = true;
 
 				// we're enforcing a minimum image cache duration of one hour
-				if (ImageCacheDurationHours < 1)
-					ImageCacheDurationHours = 1;
+				if (ImageCacheDurationHours < Settings.ImageCacheDurationHoursDefault)
+					ImageCacheDurationHours = Settings.ImageCacheDurationHoursDefault;
 
 				// if either the image cache sureation has changed or local datastore reset is being requested, then clear the image cache
 				if (Settings.ImageCacheDurationHours != ImageCacheDurationHours || Settings.LocalDataResetIsRequested)

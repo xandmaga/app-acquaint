@@ -15,21 +15,18 @@ namespace Acquaint.Native.iOS
 
 		bool _IsNewAcquaintance;
 
-		AcquaintanceDetailViewController _DetailViewController;
 		AcquaintanceTableViewController _ListViewController;
 
-		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceDetailViewController detailViewController = null, AcquaintanceTableViewController listViewController = null)
+		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceTableViewController listViewController = null)
 		{
-			if (acquaintance == null)
+			Acquaintance = acquaintance;
+
+			if (Acquaintance == null)
 			{
 				Acquaintance = new Acquaintance();
 				_IsNewAcquaintance = true;
 			}
 
-
-			Acquaintance = acquaintance;
-			if (detailViewController != null)
-				_DetailViewController = detailViewController;
 			if (listViewController != null)
 				_ListViewController = listViewController;
 		}
@@ -50,31 +47,6 @@ namespace Acquaint.Native.iOS
 			_CityField.Text = Acquaintance.City;
 			_StateField.Text = Acquaintance.State;
 			_ZipField.Text = Acquaintance.PostalCode;
-
-			_DeleteButton.TouchUpInside += (sender, e) => {
-				UIAlertController alert = UIAlertController.Create("Delete?", $"Are you sure you want to delete {Acquaintance.FirstName} {Acquaintance.LastName}?", UIAlertControllerStyle.Alert);
-
-				// cancel button
-				alert.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, null));
-
-				// delete button
-				alert.AddAction(UIAlertAction.Create("Delete", UIAlertActionStyle.Destructive, async (action) => {
-					if (action != null)
-					{
-						if (_DetailViewController != null)
-						{
-							NavigationController.PopViewController(false); // skipping animation in order to not show the detail screen for the acquaintance we just deleted
-							_DetailViewController.DeleteAcquaintance();
-						}
-						if (_ListViewController != null)
-						{
-							await _ListViewController.DeleteAcquaintance(Acquaintance);
-						};
-					}
-				}));
-
-				UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
-			};
 
 			NavigationItem.RightBarButtonItem.Clicked += async (sender, e) => {
 
@@ -109,11 +81,6 @@ namespace Acquaint.Native.iOS
 					Acquaintance.City = _CityField.Text;
 					Acquaintance.State = _StateField.Text;
 					Acquaintance.PostalCode = _ZipField.Text;
-
-					if (_DetailViewController != null)
-					{
-						_DetailViewController.SetAcquaintance(Acquaintance);
-					};
 
 					if (_ListViewController != null)
 					{

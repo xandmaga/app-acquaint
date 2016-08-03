@@ -25,7 +25,7 @@ namespace Acquaint.Native.iOS
 
 		// The ViewDidLoad() method is called when the view is first requested by the application.
 		// The "async" keyword is added here to the override in order to allow other awaited async method calls inside the override to be called ascynchronously.
-		public override async void ViewDidLoad()
+		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
@@ -76,7 +76,7 @@ namespace Acquaint.Native.iOS
 				// get the destination viewcontroller from the segue
 				var acquaintanceEditViewController = segue.DestinationViewController as AcquaintanceEditViewController;
 				// instantiate new Acquaintance and assign to viewcontroller
-				acquaintanceEditViewController.SetAcquaintance(null, null, this);
+				acquaintanceEditViewController.SetAcquaintance(null, this);
 				break;
 			case "AcquaintanceDetailSegue":
 				// the selected index path

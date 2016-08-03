@@ -31,7 +31,7 @@ namespace Acquaint.Util
 		private static readonly string DataSeedPhraseDefault = "";
 
 		private const string ImageCacheDurationHoursKey = "ImageCacheDurationHours_key";
-		private static readonly int ImageCacheDurationHoursDefault = 1;
+		public static readonly int ImageCacheDurationHoursDefault = 1;
 
 		public static string AzureAppServiceUrl
 		{

@@ -28,7 +28,9 @@ namespace Acquaint.Native.iOS
 
 		AcquaintanceTableViewController _ListViewController;
 
-		public void SetAcquaintance (Acquaintance acquaintance, AcquaintanceTableViewController listViewController = null)
+		UIBarButtonItem DeleteBarButtonItem;
+
+		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceTableViewController listViewController = null)
 		{
 			Acquaintance = acquaintance;
 
@@ -36,12 +38,12 @@ namespace Acquaint.Native.iOS
 				_ListViewController = listViewController;
 		}
 
-	    readonly CLGeocoder _Geocoder;
+		readonly CLGeocoder _Geocoder;
 
 		// This constructor signature is required, for marshalling between the managed and native instances of this class.
-		public AcquaintanceDetailViewController(IntPtr handle) : base(handle) 
-		{ 
-			_Geocoder = new CLGeocoder(); 
+		public AcquaintanceDetailViewController(IntPtr handle) : base(handle)
+		{
+			_Geocoder = new CLGeocoder();
 		}
 
 		// This overridden method will be called after the AcquaintanceDetailViewController has been instantiated and loaded into memory,
@@ -69,10 +71,10 @@ namespace Acquaint.Native.iOS
 
 				// use FFImageLoading library to asynchronously:
 				await ImageService.Instance
-					.LoadFileFromApplicationBundle(String.Format(Acquaintance.PhotoUrl)) 	// get the image from the app bundle
-					.LoadingPlaceholder("placeholderProfileImage.png") 						// specify a placeholder image
-					.Transform(new CircleTransformation()) 									// transform the image to a circle
-					.IntoAsync(ProfilePhotoImageView); 										// load the image into the UIImageView
+					.LoadFileFromApplicationBundle(String.Format(Acquaintance.PhotoUrl))    // get the image from the app bundle
+					.LoadingPlaceholder("placeholderProfileImage.png")                      // specify a placeholder image
+					.Transform(new CircleTransformation())                                  // transform the image to a circle
+					.IntoAsync(ProfilePhotoImageView);                                      // load the image into the UIImageView
 
 				// use FFImageLoading library to asynchronously:
 				//	await ImageService
@@ -80,7 +82,7 @@ namespace Acquaint.Native.iOS
 				//		.LoadingPlaceholder("placeholderProfileImage.png") 	// specify a placeholder image
 				//		.Transform(new CircleTransformation()) 				// transform the image to a circle
 				//		.IntoAsync(ProfilePhotoImageView); 					// load the image into the UIImageView
-		
+
 
 				// The FFImageLoading library has nicely transformed the image to a circle, but we need to use some iOS UIKit and CoreGraphics API calls to give it a colored border.
 				double min = Math.Min(ProfilePhotoImageView.Frame.Height, ProfilePhotoImageView.Frame.Height);
@@ -107,9 +109,11 @@ namespace Acquaint.Native.iOS
 						MapView.Region = new MKCoordinateRegion(coord, span);
 
 						// create a new pin for the map
-						var pin = new MKPointAnnotation() {
+						var pin = new MKPointAnnotation()
+						{
 							Title = Acquaintance.DisplayName,
-							Coordinate = new CLLocationCoordinate2D() {
+							Coordinate = new CLLocationCoordinate2D()
+							{
 								Latitude = coord.Latitude,
 								Longitude = coord.Longitude
 							}
@@ -119,7 +123,8 @@ namespace Acquaint.Native.iOS
 						MapView.AddAnnotation(pin);
 
 						// add a top border to the MapView
-						MapView.Layer.AddSublayer(new CALayer() {
+						MapView.Layer.AddSublayer(new CALayer()
+						{
 							BackgroundColor = UIColor.LightGray.CGColor,
 							Frame = new CGRect(0, 0, MapView.Frame.Width, 1)
 						});
@@ -127,27 +132,57 @@ namespace Acquaint.Native.iOS
 						// setup fhe action for getting navigation directions
 						SetupGetDirectionsAction(coord.Latitude, coord.Longitude);
 					}
-				} catch
+				}
+				catch
 				{
-					//DisplayErrorAlertView("Geocoding Error", "Please make sure the address is valid and that you have a network connection.");
+					DisplayErrorAlertView("Geocoding Error", "Please make sure the address is valid and that you have a network connection.");
 				}
 			}
 		}
 
-		public override void ViewDidLoad ()
+		public override void ViewDidLoad()
 		{
-			base.ViewDidLoad ();
+			base.ViewDidLoad();
 
 			// override the back button text for AcquaintanceEditViewController (the navigated-to view controller)
-			NavigationItem.BackBarButtonItem = new UIBarButtonItem ("Details", UIBarButtonItemStyle.Plain, null);
+			NavigationItem.BackBarButtonItem = new UIBarButtonItem("Details", UIBarButtonItemStyle.Plain, null);
+
+			DeleteBarButtonItem = NavigationItem.RightBarButtonItems[1];
+
+			DeleteBarButtonItem.Clicked += DeleteBarButtonItemClicked;
 		}
 
-		public override void PrepareForSegue (UIStoryboardSegue segue, Foundation.NSObject sender)
+		void DeleteBarButtonItemClicked(object sender, EventArgs ea)
+		{
+			UIAlertController alert =
+				UIAlertController.Create(
+					"Delete?",
+					$"Are you sure you want to delete {Acquaintance.FirstName} {Acquaintance.LastName}?",
+					UIAlertControllerStyle.Alert);
+
+			// cancel button
+			alert.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, null));
+
+			// delete button
+			alert.AddAction(UIAlertAction.Create("Delete", UIAlertActionStyle.Destructive, async (action) => {
+				if (action != null)
+				{
+					if (_ListViewController != null)
+						await _ListViewController.DeleteAcquaintance(Acquaintance);
+
+					NavigationController.PopViewController(true);
+				}
+			}));
+
+			UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+		}
+
+		public override void PrepareForSegue(UIStoryboardSegue segue, Foundation.NSObject sender)
 		{
 			// get the destination viewcontroller from the segue
 			var acquaintanceEditViewController = segue.DestinationViewController as AcquaintanceEditViewController;
 
-			acquaintanceEditViewController.SetAcquaintance (this.Acquaintance, this, _ListViewController);
+			acquaintanceEditViewController.SetAcquaintance(this.Acquaintance, _ListViewController);
 		}
 
 		void SetupGetDirectionsAction(double lat, double lon)
@@ -260,15 +295,5 @@ namespace Acquaint.Native.iOS
 		}
 
 		bool IsRealDevice => Runtime.Arch == Arch.DEVICE;
-
-		public void SaveAcquaintance (Acquaintance acquaintance)
-		{
-			Acquaintance = acquaintance;
-		}
-
-		public void DeleteAcquaintance ()
-		{
-			NavigationController.PopViewController (true);
-		}
 	}
 }
