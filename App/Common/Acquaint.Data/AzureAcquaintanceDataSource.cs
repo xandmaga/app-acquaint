@@ -121,6 +121,10 @@ namespace Acquaint.Data
             }, false).ConfigureAwait(false);
         }
 
+		/// <summary>
+		/// Syncs the items.
+		/// </summary>
+		/// <returns>The items are synced.</returns>
         async Task<bool> SyncItemsAsync()
         {
             return await Execute(async () =>
@@ -139,7 +143,6 @@ namespace Acquaint.Data
         /// <summary>
         /// Ensures the data is seeded.
         /// </summary>
-        /// <returns>The data is seeded.</returns>
         async Task EnsureDataIsSeededAsync()
         {
             if (Settings.DataIsSeeded)
@@ -169,7 +172,6 @@ namespace Acquaint.Data
         /// <summary>
         /// Resets the local store.
         /// </summary>
-        /// <returns>The local store.</returns>
         async Task ResetLocalStoreAsync()
         {
             _AcquaintanceTable = null;
@@ -190,10 +192,11 @@ namespace Acquaint.Data
         /// <summary>
         /// Deletes the old local database.
         /// </summary>
-        /// <returns>The old local database.</returns>
         async Task DeleteOldLocalDatabase()
         {
-            var databaseFolder = await FileSystem.Current.GetFolderFromPathAsync(ServiceLocator.Current.GetInstance<IDatastoreFolderPathProvider>().GetPath()).ConfigureAwait(false);
+			var datastoreFolderPathProvider = ServiceLocator.Current.GetInstance<IDatastoreFolderPathProvider>();
+			var databaseFolderPath = datastoreFolderPathProvider.GetPath();
+			var databaseFolder = await FileSystem.Current.GetFolderFromPathAsync(databaseFolderPath).ConfigureAwait(false);
             var dbFile = await databaseFolder.GetFileAsync(_LocalDbName, CancellationToken.None).ConfigureAwait(false);
 
             if (dbFile != null)
