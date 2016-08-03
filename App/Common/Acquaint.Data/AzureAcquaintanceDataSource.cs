@@ -134,7 +134,7 @@ namespace Acquaint.Data
 
                 await Initialize().ConfigureAwait(false);
                 await EnsureDataIsSeededAsync().ConfigureAwait(false);
-                // PushAsync() has been omitted here because the _MobileService.SyncContext automatically calls PushAsync() before PullAsync() if it sees pending changes in the queue.
+				// PushAsync() has been omitted here because the _MobileService.SyncContext automatically calls PushAsync() before PullAsync() if it sees pending changes in the context. (Frequently misunderstood feature of the Azure App Service SDK)
                 await _AcquaintanceTable.PullAsync($"getAll{typeof(Acquaintance).Name}", _AcquaintanceTable.Where(x => x.DataPartitionId == _DataPartitionId)).ConfigureAwait(false);
                 return true;
             }, false);
