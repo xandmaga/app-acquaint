@@ -1,9 +1,9 @@
-﻿
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
+using Android.Views;
 
 namespace Acquaint.Native.Droid
 {
@@ -16,6 +16,9 @@ namespace Acquaint.Native.Droid
 		protected override async void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
+
+			// ensure that the system bar color gets drawn
+			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
 			// await a new task
 			await Task.Factory.StartNew(async () => {

@@ -8,7 +8,7 @@ namespace Acquaint.Native.Droid
 {
 	public static class ViewExtensions
 	{
-		public static TextView InflateAndBindTextView(this View parentView, int textViewResourceId, string text)
+		public static TextView InflateAndBindTextView(this View parentView, int textViewResourceId, string text = null)
 		{
 			TextView textView = null;
 
@@ -16,7 +16,7 @@ namespace Acquaint.Native.Droid
 			{
 				textView = parentView.FindViewById<TextView>(textViewResourceId);
 
-				if (textView != null)
+				if (textView != null && text != null)
 				{
 					textView.Text = text;
 				}
@@ -25,7 +25,7 @@ namespace Acquaint.Native.Droid
 			return textView;
 		}
 
-		public static EditText InflateAndBindEditText(this View parentView, int textViewResourceId, string text)
+		public static EditText InflateAndBindEditText(this View parentView, int textViewResourceId, string text = null)
 		{
 			EditText editText = null;
 
@@ -33,7 +33,7 @@ namespace Acquaint.Native.Droid
 			{
 				editText = parentView.FindViewById<EditText>(textViewResourceId);
 
-				if (editText != null)
+				if (editText != null && text != null)
 				{
 					editText.Text = text;
 				}
@@ -42,7 +42,7 @@ namespace Acquaint.Native.Droid
 			return editText;
 		}
 
-		public static ImageViewAsync InflateAndBindRemoteImageView(this View parentView, int imageViewResourceId, string imageUrl)
+		public static ImageViewAsync InflateAndBindRemoteImageView(this View parentView, int imageViewResourceId, string imageUrl, bool async = true)
 		{
 			ImageViewAsync imageView = null;
 
@@ -52,7 +52,10 @@ namespace Acquaint.Native.Droid
 
 				if (imageView != null)
 				{
-					ImageService.Instance.LoadUrl(imageUrl).Transform(new CircleTransformation()).Into(imageView);
+					if (async)
+						ImageService.Instance.LoadUrl(imageUrl).Transform(new CircleTransformation()).IntoAsync(imageView);
+					else
+						ImageService.Instance.LoadUrl(imageUrl).Transform(new CircleTransformation()).Into(imageView);
 				}
 			}
 
@@ -71,6 +74,40 @@ namespace Acquaint.Native.Droid
 			}
 
 			return imageView;
+		}
+
+		public static Switch InflateAndBindSwitch(this View parentView, int switchResourceId, bool value)
+		{
+			Switch _switch = null;
+
+			if (parentView != null)
+			{
+				_switch = parentView.FindViewById<Switch>(switchResourceId);
+
+				if (_switch != null)
+				{
+					_switch.Checked = value;
+				}
+			}
+
+			return _switch;
+		}
+
+		public static Button InflateAndBindButton(this View parentView, int buttonResourceId, string text = null)
+		{
+			Button button = null;
+
+			if (parentView != null)
+			{
+				button = parentView.FindViewById<Button>(buttonResourceId);
+
+				if (button != null && text != null)
+				{
+					button.Text = text;
+				}
+			}
+
+			return button;
 		}
 	}
 }

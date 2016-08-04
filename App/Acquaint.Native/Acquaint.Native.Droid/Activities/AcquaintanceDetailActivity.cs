@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Acquaint.Abstractions;
 using Acquaint.Data;
-using Acquaint.Models;
 using Acquaint.Util;
 using Android.App;
 using Android.Content;
@@ -18,6 +18,7 @@ using Android.Widget;
 using FFImageLoading;
 using FFImageLoading.Transformations;
 using FFImageLoading.Views;
+using Microsoft.Practices.ServiceLocation;
 using Plugin.ExternalMaps;
 using Plugin.ExternalMaps.Abstractions;
 using Plugin.Messaging;
@@ -31,6 +32,7 @@ namespace Acquaint.Native.Droid
 	[Activity]
 	public class AcquaintanceDetailActivity : AppCompatActivity, IOnMapReadyCallback
 	{
+		IDataSource<Acquaintance> _DataSource;
 		Acquaintance _Acquaintance;
 		string _AcquaintanceId;
 		ImageView _GetDirectionsActionImageView;
@@ -43,6 +45,8 @@ namespace Acquaint.Native.Droid
 		{
 			base.OnCreate(savedInstanceState);
 
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
+
 			_SavedInstanceState = savedInstanceState;
 
 			_MainLayout = LayoutInflater.Inflate(Resource.Layout.AcquaintanceDetail, null);
@@ -50,6 +54,8 @@ namespace Acquaint.Native.Droid
 			SetContentView(_MainLayout);
 
 			SetSupportActionBar(FindViewById<Toolbar>(Resource.Id.toolbar));
+
+			Title = SupportActionBar.Title = "";
 
 			// ensure that the system bar color gets drawn
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
@@ -62,39 +68,37 @@ namespace Acquaint.Native.Droid
 			_AcquaintanceId = Intent.GetStringExtra(GetString(Resource.String.acquaintanceDetailIntentKey));
 		}
 
-		async protected override void OnResume()
+		protected override async void OnStart()
 		{
-			base.OnResume();
+			base.OnStart();
 
 			// fetch the acquaintance based on the id
-			_Acquaintance = await MainApplication.DataSource.GetItem(_AcquaintanceId);
+			_Acquaintance = await _DataSource.GetItem(_AcquaintanceId);
 
 			// set the activity title and action bar title
 			Title = SupportActionBar.Title = _Acquaintance.DisplayName;
 
-			SetupViews(_MainLayout, _SavedInstanceState);
+			SetupViews();
 
 			SetupAnimations();
 		}
 
-
-		void SetupViews(View layout, Bundle savedInstanceState)
+		void SetupViews()
 		{
-			_SavedInstanceState = savedInstanceState;
-
 			// inflate the content layout
-			var contentLayout = layout.FindViewById<LinearLayout>(Resource.Id.acquaintanceDetailContentLayout);
+			var contentLayout = _MainLayout.FindViewById<LinearLayout>(Resource.Id.acquaintanceDetailContentLayout);
 
 			// inflate and set the profile image view
 			var profilePhotoImageView = contentLayout.FindViewById<ImageViewAsync>(Resource.Id.profilePhotoImageView);
 
 			if (profilePhotoImageView != null)
 			{
-				// use FFImageLoading library to load an android asset image into the imageview
-				ImageService.Instance.LoadFileFromApplicationBundle(_Acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(profilePhotoImageView);
-
-				// use FFImageLoading library to asynchonously load the image into the imageview
-				// ImageService.LoadUrl(_Acquaintance.PhotoUrl).Transform(new CircleTransformation()).Into(profilePhotoImageView);
+				// use FFImageLoading library to asynchronously:
+				ImageService.Instance
+					.LoadUrl(_Acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours)) // get the image from a URL
+					.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
+					.Transform(new CircleTransformation())                                                      // transform the image to a circle
+					.Into(profilePhotoImageView);                                               				// load the image into the ImageView
 			}
 
 			// inflate and set the name text view
@@ -152,7 +156,7 @@ namespace Acquaint.Native.Droid
 			var mapview = FindViewById<MapView>(Resource.Id.map);
 
 			// create the map view with the context
-			mapview.OnCreate(savedInstanceState);
+			mapview.OnCreate(_SavedInstanceState);
 
 			// get the map, which calls the OnMapReady() method below (by virtue of the IOnMapReadyCallback interface that this class implements)
 			mapview.GetMapAsync(this);
@@ -288,6 +292,34 @@ namespace Acquaint.Native.Droid
 			}
 		}
 
+		void ShowDeleteConfirmationAlert()
+		{
+			// as long as this activity is not yet destroyed, show an alert for confirming the delete action
+			if (!IsDestroyed)
+			{
+				//set alert for executing the task
+				var alert = new Android.App.AlertDialog.Builder(this);
+
+				alert.SetTitle("Delete?");
+
+				alert.SetMessage($"Are you sure you want to delete {_Acquaintance.FirstName} {_Acquaintance.LastName}?");
+
+				alert.SetPositiveButton("Delete", async (senderAlert, args) => {
+					await _DataSource.RemoveItem(_Acquaintance);
+					OnBackPressed();
+				});
+
+				alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+					// an empty delegate body, because we just want to close the dialog and not take any other action
+				});
+
+				//run the alert in UI thread to display in the screen
+				RunOnUiThread(() => {
+					alert.Show();
+				});
+			}
+		}
+
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
 			MenuInflater.Inflate(Resource.Menu.AcquaintanceDetailMenu, menu);
@@ -295,7 +327,6 @@ namespace Acquaint.Native.Droid
 			return base.OnCreateOptionsMenu(menu);
 		}
 
-		// this override is called when the back button is tapped
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
 			if (item != null)
@@ -308,6 +339,9 @@ namespace Acquaint.Native.Droid
 					break;
 				case Resource.Id.acquaintanceEditButton:
 					StartActivity(GetEditIntent());
+					break;
+				case Resource.Id.acquaintanceDeleteButton:
+					ShowDeleteConfirmationAlert();
 					break;
 				}
 			}

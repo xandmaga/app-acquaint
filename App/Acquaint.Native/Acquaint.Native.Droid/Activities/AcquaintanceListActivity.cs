@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Acquaint.Abstractions;
+using Acquaint.Data;
+using Acquaint.Util;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -11,11 +15,8 @@ using Android.Widget;
 using FFImageLoading;
 using FFImageLoading.Transformations;
 using FFImageLoading.Views;
+using Microsoft.Practices.ServiceLocation;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
-using Acquaint.Data;
-using Acquaint.Models;
-using Acquaint.Util;
-using System;
 
 namespace Acquaint.Native.Droid
 {
@@ -28,15 +29,12 @@ namespace Acquaint.Native.Droid
 		AcquaintanceCollectionAdapter _Adapter;
 
 		// This override is called only once during the activity's lifecycle, when it is created.
-		protected override async void OnCreate(Bundle savedInstanceState)
+		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
 			// instantiate adapter
 			_Adapter = new AcquaintanceCollectionAdapter();
-
-			// load the items
-			await _Adapter.LoadAcquaintances();
 
 			// instantiate the layout manager
 			var layoutManager = new LinearLayoutManager(this);
@@ -63,18 +61,41 @@ namespace Acquaint.Native.Droid
 			recyclerView.SetAdapter(_Adapter);
 		}
 
-		async protected override void OnRestart()
+		protected override async void OnStart()
 		{
-			base.OnRestart();
+			base.OnStart();
 
-			await _Adapter.LoadAcquaintances();
+			if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
+			{
+				StartActivity(new Intent(this, typeof(SetupActivity)));
+			}
+			else
+			{
+				// load the items
+				await _Adapter.LoadAcquaintances();
+			}
 		}
 
-		protected override void OnResume()
+		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			base.OnResume();
+			MenuInflater.Inflate(Resource.Menu.AcquaintanceListMenu, menu);
 
-			_Adapter.Update();
+			return base.OnCreateOptionsMenu(menu);
+		}
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			if (item != null)
+			{
+				switch (item.ItemId)
+				{
+					case Resource.Id.settingsButton:
+					StartActivity(new Intent(this, typeof(SettingsActivity)));
+					break;
+				}
+			}
+
+			return base.OnOptionsItemSelected(item);
 		}
 	}
 
@@ -109,8 +130,17 @@ namespace Acquaint.Native.Droid
 	/// </summary>
 	internal class AcquaintanceCollectionAdapter : RecyclerView.Adapter, View.IOnClickListener
 	{
+		IDataSource<Acquaintance> _DataSource;
+
 		// the list of items that this adapter uses
 		public List<Acquaintance> Acquaintances { get; private set; }
+
+		public AcquaintanceCollectionAdapter()
+		{
+			Acquaintances = new List<Acquaintance>();
+
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
+		}
 
 		/// <summary>
 		/// Loads the acquaintances.
@@ -118,12 +148,11 @@ namespace Acquaint.Native.Droid
 		/// <returns>Task.</returns>
 		public async Task LoadAcquaintances()
 		{
-			Acquaintances = (await MainApplication.DataSource.GetItems()).ToList();
-		}
+			Acquaintances = (await _DataSource.GetItems()).ToList();
 
-		public void Update()
-		{
 			NotifyDataSetChanged();
+
+			Settings.ClearImageCacheIsRequested = false;
 		}
 
 		// when a RecyclerView itemView is requested, the OnCreateViewHolder() is called
@@ -149,24 +178,24 @@ namespace Acquaint.Native.Droid
 			var acquaintance = Acquaintances[position];
 
 			// assign values to the views' text properties
-		    if (viewHolder == null) return;
+			if (viewHolder == null) return;
 
 			viewHolder.NameTextView.Text = acquaintance.DisplayLastNameFirst;
-		    viewHolder.CompanyTextView.Text = acquaintance.Company;
-		    viewHolder.JobTitleTextView.Text = acquaintance.JobTitle;
+			viewHolder.CompanyTextView.Text = acquaintance.Company;
+			viewHolder.JobTitleTextView.Text = acquaintance.JobTitle;
 
 			// use FFImageLoading library to asynchronously:
 			ImageService.Instance
-				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))	// get the image from a URL
-				.LoadingPlaceholder("placeholderProfileImage.png")  				// specify a placeholder image
-				.Transform(new CircleTransformation())              				// transform the image to a circle
-				.IntoAsync(viewHolder.ProfilePhotoImageView);            			// load the image into the ImageView
+				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))  // get the image from a URL
+				.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
+				.Transform(new CircleTransformation())                                                      // transform the image to a circle
+				.IntoAsync(viewHolder.ProfilePhotoImageView);                                               // load the image into the ImageView
 
 			// set the Tag property of the AcquaintanceRow view to the position (index) of the item that is currently being bound. We'll need it later in the OnLick() implementation.
 			viewHolder.AcquaintanceRow.Tag = position;
 
-		    // set OnClickListener of AcquaintanceRow
-		    viewHolder.AcquaintanceRow.SetOnClickListener(this);
+			// set OnClickListener of AcquaintanceRow
+			viewHolder.AcquaintanceRow.SetOnClickListener(this);
 		}
 
 		public void OnClick(View v)

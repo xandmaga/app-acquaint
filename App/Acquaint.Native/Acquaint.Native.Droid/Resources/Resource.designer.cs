@@ -2193,11 +2193,14 @@ namespace Acquaint.Native.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f0c00e0
+			public const int acquaintanceDeleteButton = 2131493088;
+			
 			// aapt resource value: 0x7f0c0075
 			public const int acquaintanceDetailContentLayout = 2131492981;
 			
-			// aapt resource value: 0x7f0c00d3
-			public const int acquaintanceEditButton = 2131493075;
+			// aapt resource value: 0x7f0c00e1
+			public const int acquaintanceEditButton = 2131493089;
 			
 			// aapt resource value: 0x7f0c0087
 			public const int acquaintanceEditContentLayout = 2131492999;
@@ -2208,8 +2211,8 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c00a1
 			public const int acquaintanceRow = 2131493025;
 			
-			// aapt resource value: 0x7f0c00d4
-			public const int acquaintanceSaveButton = 2131493076;
+			// aapt resource value: 0x7f0c00e2
+			public const int acquaintanceSaveButton = 2131493090;
 			
 			// aapt resource value: 0x7f0c00c6
 			public const int action0 = 2131493062;
@@ -2685,6 +2688,54 @@ namespace Acquaint.Native.Droid
 			// aapt resource value: 0x7f0c0073
 			public const int select_dialog_listview = 2131492979;
 			
+			// aapt resource value: 0x7f0c00d7
+			public const int settingsBackendUrlField = 2131493079;
+			
+			// aapt resource value: 0x7f0c00d6
+			public const int settingsBackendUrlSectionTitleTextView = 2131493078;
+			
+			// aapt resource value: 0x7f0c00e3
+			public const int settingsButton = 2131493091;
+			
+			// aapt resource value: 0x7f0c00e4
+			public const int settingsCancelButton = 2131493092;
+			
+			// aapt resource value: 0x7f0c00da
+			public const int settingsClearImageCacheSwitch = 2131493082;
+			
+			// aapt resource value: 0x7f0c00d3
+			public const int settingsContentLayout = 2131493075;
+			
+			// aapt resource value: 0x7f0c00d5
+			public const int settingsDataPartitionPhraseField = 2131493077;
+			
+			// aapt resource value: 0x7f0c00d4
+			public const int settingsDataPartitionPhraseSectionTitleTextView = 2131493076;
+			
+			// aapt resource value: 0x7f0c00d9
+			public const int settingsImageCacheDurationField = 2131493081;
+			
+			// aapt resource value: 0x7f0c00d8
+			public const int settingsImageCacheDurationSectionTitleTextView = 2131493080;
+			
+			// aapt resource value: 0x7f0c00db
+			public const int settingsResetToDefaultsSwitch = 2131493083;
+			
+			// aapt resource value: 0x7f0c00e5
+			public const int settingsSaveButton = 2131493093;
+			
+			// aapt resource value: 0x7f0c00dc
+			public const int setupContentLayout = 2131493084;
+			
+			// aapt resource value: 0x7f0c00de
+			public const int setupContinueButton = 2131493086;
+			
+			// aapt resource value: 0x7f0c00dd
+			public const int setupDataPartitionPhraseField = 2131493085;
+			
+			// aapt resource value: 0x7f0c00df
+			public const int setupInstructionsTextView = 2131493087;
+			
 			// aapt resource value: 0x7f0c005e
 			public const int shortcut = 2131492958;
 			
@@ -3051,10 +3102,16 @@ namespace Acquaint.Native.Droid
 			public const int select_dialog_singlechoice_material = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int support_simple_spinner_dropdown_item = 2130968633;
+			public const int Settings = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int toolbar = 2130968634;
+			public const int Setup = 2130968634;
+			
+			// aapt resource value: 0x7f04003b
+			public const int support_simple_spinner_dropdown_item = 2130968635;
+			
+			// aapt resource value: 0x7f04003c
+			public const int toolbar = 2130968636;
 			
 			static Layout()
 			{
@@ -3074,6 +3131,12 @@ namespace Acquaint.Native.Droid
 			
 			// aapt resource value: 0x7f0e0001
 			public const int AcquaintanceEditMenu = 2131623937;
+			
+			// aapt resource value: 0x7f0e0002
+			public const int AcquaintanceListMenu = 2131623938;
+			
+			// aapt resource value: 0x7f0e0003
+			public const int SettingsMenu = 2131623939;
 			
 			static Menu()
 			{

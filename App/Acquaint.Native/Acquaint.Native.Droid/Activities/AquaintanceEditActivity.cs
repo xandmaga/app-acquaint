@@ -1,10 +1,11 @@
-﻿using Acquaint.Data;
-using Acquaint.Models;
+﻿using Acquaint.Abstractions;
+using Acquaint.Data;
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Microsoft.Practices.ServiceLocation;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Acquaint.Native.Droid
@@ -12,10 +13,12 @@ namespace Acquaint.Native.Droid
 	[Activity]
 	public class AquaintanceEditActivity : AppCompatActivity
 	{
+		IDataSource<Acquaintance> _DataSource;
 		Acquaintance _Acquaintance;
 
 		bool _IsNewAcquaintance;
 
+		View _MainLayout;
 		View _ContentLayout;
 
 		EditText _FirstNameField;
@@ -33,6 +36,8 @@ namespace Acquaint.Native.Droid
 		{
 			base.OnCreate(savedInstanceState);
 
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
+
 			var acquaintanceEditLayout = LayoutInflater.Inflate(Resource.Layout.AcquaintanceEdit, null);
 
 			SetContentView(acquaintanceEditLayout);
@@ -46,6 +51,8 @@ namespace Acquaint.Native.Droid
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			SupportActionBar.SetHomeButtonEnabled(true);
 
+			Title = SupportActionBar.Title = "";
+
 			// extract the acquaintance id from the intent
 			var acquaintanceId = Intent.GetStringExtra(GetString(Resource.String.acquaintanceEditIntentKey));
 
@@ -57,15 +64,13 @@ namespace Acquaint.Native.Droid
 			else
 			{
 				// fetch the acquaintance based on the id
-				_Acquaintance = await MainApplication.DataSource.GetItem(acquaintanceId);
+				_Acquaintance = await _DataSource.GetItem(acquaintanceId);
 			}
 
-			Title = SupportActionBar.Title = "";
-
-			SetupViews(acquaintanceEditLayout, savedInstanceState);
+			SetupViews(acquaintanceEditLayout);
 		}
 
-		void SetupViews(View layout, Bundle savedInstanceState)
+		void SetupViews(View layout)
 		{
 			_ContentLayout = layout.FindViewById<LinearLayout>(Resource.Id.acquaintanceEditContentLayout);
 
@@ -150,11 +155,11 @@ namespace Acquaint.Native.Droid
 
 			if (_IsNewAcquaintance)
 			{
-				MainApplication.DataSource.AddItem(_Acquaintance);
+				_DataSource.AddItem(_Acquaintance);
 			}
 			else
 			{
-				MainApplication.DataSource.UpdateItem(_Acquaintance);
+				_DataSource.UpdateItem(_Acquaintance);
 			}
 		}
 	}

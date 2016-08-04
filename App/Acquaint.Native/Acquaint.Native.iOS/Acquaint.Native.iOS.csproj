@@ -230,7 +230,6 @@
     <Compile Include="AcquaintanceEditViewController.designer.cs">
       <DependentUpon>AcquaintanceEditViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="SettingsViewController.cs" />
     <Compile Include="SettingsViewController.designer.cs">
       <DependentUpon>SettingsViewController.cs</DependentUpon>

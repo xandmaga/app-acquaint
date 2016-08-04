@@ -20,7 +20,7 @@ namespace Acquaint.Native.Droid
     {
 		public static IContainer Container { get; set; }
 
-		public static IDataSource<Acquaintance> DataSource { get; private set; }
+		//public static IDataSource<Acquaintance> DataSource { get; private set; }
 
         public MainApplication(IntPtr handle, JniHandleOwnership transer) :base(handle, transer) { }
 
@@ -37,7 +37,7 @@ namespace Acquaint.Native.Droid
 
             RegisterActivityLifecycleCallbacks(this);
 
-			DataSource = new AzureAcquaintanceSource();
+			//DataSource = new AzureAcquaintanceSource();
         }
 
 		/// <summary>
@@ -52,7 +52,9 @@ namespace Acquaint.Native.Droid
 			var builder = new ContainerBuilder();
 
 			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+			builder.RegisterInstance(new AzureAcquaintanceSource()).As<IDataSource<Acquaintance>>();
 			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+			builder.RegisterInstance(new DatastoreFolderPathProvider()).As<IDatastoreFolderPathProvider>();
 
 			var container = builder.Build();
 
