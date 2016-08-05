@@ -68,29 +68,12 @@ namespace Acquaint.Native.iOS
 				SetupDialNumberAction();
 				SetupSendEmailAction();
 
-				// use FFImageLoading library to asynchronously:
+				 // use FFImageLoading library to asynchronously:
 				await ImageService.Instance
-					.LoadFileFromApplicationBundle(String.Format(Acquaintance.PhotoUrl))    // get the image from the app bundle
-					.LoadingPlaceholder("placeholderProfileImage.png")                      // specify a placeholder image
-					.Transform(new CircleTransformation())                                  // transform the image to a circle
-					.IntoAsync(ProfilePhotoImageView);                                      // load the image into the UIImageView
-
-				// use FFImageLoading library to asynchronously:
-				//	await ImageService
-				//		.LoadUrl(Acquaintance.PhotoUrl) 					// get the image from a URL
-				//		.LoadingPlaceholder("placeholderProfileImage.png") 	// specify a placeholder image
-				//		.Transform(new CircleTransformation()) 				// transform the image to a circle
-				//		.IntoAsync(ProfilePhotoImageView); 					// load the image into the UIImageView
-
-
-				// The FFImageLoading library has nicely transformed the image to a circle, but we need to use some iOS UIKit and CoreGraphics API calls to give it a colored border.
-				double min = Math.Min(ProfilePhotoImageView.Frame.Height, ProfilePhotoImageView.Frame.Height);
-				ProfilePhotoImageView.Layer.CornerRadius = (float)(min / 2.0);
-				ProfilePhotoImageView.Layer.MasksToBounds = false;
-				ProfilePhotoImageView.Layer.BorderColor = UIColor.FromRGB(84, 119, 153).CGColor;
-				ProfilePhotoImageView.Layer.BorderWidth = 5;
-				ProfilePhotoImageView.BackgroundColor = UIColor.Clear;
-				ProfilePhotoImageView.ClipsToBounds = true;
+					.LoadUrl(Acquaintance.PhotoUrl) 					// get the image from a URL
+					.LoadingPlaceholder("placeholderProfileImage.png") 	// specify a placeholder image
+					.Transform(new CircleTransformation()) 				// transform the image to a circle
+					.IntoAsync(ProfilePhotoImageView); 					// load the image into the UIImageView
 
 				try
 				{
