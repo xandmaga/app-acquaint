@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Acquaint.Data;
 using Acquaint.Util;
+using CoreGraphics;
 using Foundation;
 using UIKit;
 
@@ -21,6 +22,8 @@ namespace Acquaint.Native.iOS
 		public AcquaintanceTableViewController(IntPtr handle) : base(handle)
 		{
 			_AcquaintanceTableViewSource = new AcquaintanceTableViewSource();
+
+			RefreshControl = new UIRefreshControl();
 		}
 
 		// The ViewDidLoad() method is called when the view is first requested by the application.
@@ -33,6 +36,10 @@ namespace Acquaint.Native.iOS
 
 			// override the back button text for AcquaintanceDetailViewController (the navigated-to view controller)
 			NavigationItem.BackBarButtonItem = new UIBarButtonItem("List", UIBarButtonItemStyle.Plain, null);
+
+			RefreshControl.ValueChanged += async (sender, e) => await RefreshAcquaintances();
+
+			TableView.AddSubview(RefreshControl);
 		}
 
 		// The ViewDidAppear() override is called after the view has appeared on the screen.
@@ -47,10 +54,55 @@ namespace Acquaint.Native.iOS
 				return;
 			}
 
-			// tell the table view source to load the data
-			await _AcquaintanceTableViewSource.LoadAcquaintances();
+			await RefreshAcquaintances();
+		}
 
-			TableView.ReloadData();
+		async Task RefreshAcquaintances()
+		{
+			// ! flag to indicate how this refresh command was instantiated.
+			bool triggeredByPullToRefresh = false;
+
+			// Store the original offset of the TableView.
+			var originalOffset = new CGPoint(TableView.ContentOffset.X, TableView.ContentOffset.Y);
+
+			// If
+			if (RefreshControl.Refreshing)
+				triggeredByPullToRefresh = true;
+
+			try
+			{
+				// If this refresh has not been started by a pull-to-refresh UI action, then we need to manually set the tableview offset to SHOW the refresh indicator.
+				if (!triggeredByPullToRefresh)
+					TableView.SetContentOffset(new CGPoint(originalOffset.X, originalOffset.Y - RefreshControl.Frame.Size.Height), true);
+
+				// Starts animating the refreshing indicator, and sets its Refreshing property to true.
+				RefreshControl.BeginRefreshing();
+
+				// request the TableViewSource to load acquaintances
+				await _AcquaintanceTableViewSource.LoadAcquaintances();
+
+				// Tell the TableView to update its UI (reload the cells) because the TableViewSource has updated.
+				TableView.ReloadData();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine($"Error getting acquaintances: {ex.Message}");
+
+				// present an alert about the failure
+				using (var alert = new UIAlertView("Error getting acquaintances", "Ensure you have a network connection, and that a valid backend service URL is present in the app settings.", null, "OK"))
+				{
+					alert.Show();
+				}
+			}
+			finally
+			{
+				// Starts animating the refreshing indicator, and sets its Refreshing property to false.
+				RefreshControl.EndRefreshing();
+
+				// If this refresh has not been started by a pull-to-refresh UI action, then we need to manually set the tableview offset to HIDE the refresh indicator.
+				if (!triggeredByPullToRefresh)
+					TableView.SetContentOffset(originalOffset, true);
+			}
 		}
 
 		/// <summary>

@@ -56,9 +56,9 @@ namespace Acquaint.Native.iOS
 			ResetToDefaultsSwitch.On = false;
 		}
 
-		public override void ViewDidAppear(bool animated)
+		public override void ViewWillAppear(bool animated)
 		{
-			base.ViewDidAppear(animated);
+			base.ViewWillAppear(animated);
 
 			TableView.BackgroundView = new UIView(TableView.Bounds) { BackgroundColor = UIColor.White };
 		}
@@ -99,9 +99,9 @@ namespace Acquaint.Native.iOS
 				Uri testUri;
 				if (!Uri.TryCreate(BackendUrlEntry.Text, UriKind.Absolute, out testUri))
 				{
-					//pop a UIAlert to indicate the URL is invalid
+					//pop an alert to indicate the URL is invalid
 					using (var alert =
-						new UIAlertView(
+					       new UIAlertView(
 							"Invalid URL",
 							"Please enter a valid URL",
 							null,
