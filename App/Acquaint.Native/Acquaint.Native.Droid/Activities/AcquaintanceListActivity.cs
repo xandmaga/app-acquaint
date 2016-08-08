@@ -8,6 +8,7 @@ using Acquaint.Util;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -27,6 +28,8 @@ namespace Acquaint.Native.Droid
 	public class AcquaintanceListActivity : AppCompatActivity
 	{
 		AcquaintanceCollectionAdapter _Adapter;
+
+		SwipeRefreshLayout _SwipeRefreshLayout;
 
 		// This override is called only once during the activity's lifecycle, when it is created.
 		protected override void OnCreate(Bundle savedInstanceState)
@@ -51,6 +54,12 @@ namespace Acquaint.Native.Droid
 			// set the title of both the activity and the action bar
 			Title = SupportActionBar.Title = "Acquaintances";
 
+			_SwipeRefreshLayout = (SwipeRefreshLayout)FindViewById(Resource.Id.acquaintanceListSwipeRefreshContainer);
+
+			_SwipeRefreshLayout.Refresh += async (sender, e) => { await LoadAcquaintances(); };
+
+			_SwipeRefreshLayout.Post(() => _SwipeRefreshLayout.Refreshing = true);
+
 			// instantiate/inflate the RecyclerView
 			var recyclerView = (RecyclerView)FindViewById(Resource.Id.acquaintanceRecyclerView);
 
@@ -71,8 +80,42 @@ namespace Acquaint.Native.Droid
 			}
 			else
 			{
+				await LoadAcquaintances();
+			}
+		}
+
+		async Task LoadAcquaintances()
+		{
+			_SwipeRefreshLayout.Refreshing = true;
+
+			try
+			{
 				// load the items
 				await _Adapter.LoadAcquaintances();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine($"Error getting acquaintances: {ex.Message}");
+
+				//set alert for executing the task
+				var alert = new Android.App.AlertDialog.Builder(this);
+
+				alert.SetTitle("Error getting acquaintances");
+
+				alert.SetMessage("Ensure you have a network connection, and that a valid backend service URL is present in the app settings.");
+
+				alert.SetNegativeButton("OK", (senderAlert, args) => {
+					// an empty delegate body, because we just want to close the dialog and not take any other action
+				});
+
+				//run the alert in UI thread to display in the screen
+				RunOnUiThread(() => {
+					alert.Show();
+				});
+			}
+			finally
+			{
+				_SwipeRefreshLayout.Refreshing = false;
 			}
 		}
 
