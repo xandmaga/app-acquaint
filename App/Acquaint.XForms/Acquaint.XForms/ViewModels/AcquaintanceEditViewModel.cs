@@ -44,11 +44,13 @@ namespace Acquaint.XForms
 				MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
 					{
 						Title = "Invalid name!", 
-						Message = "A acquaintance must have both a first and last name.",
+						Message = "An acquaintance must have both a first and last name.",
 						Cancel = "OK"
 					});
+				return;
 			}
-			else if (!RequiredAddressFieldCombinationIsFilled)
+
+			if (!RequiredAddressFieldCombinationIsFilled)
 			{
 				MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
 					{
@@ -56,34 +58,35 @@ namespace Acquaint.XForms
 						Message = "You must enter either a street, city, and state combination, or a postal code.",
 						Cancel = "OK"
 					});
+				return;
 			}
-			else
+
+			if (_IsNewAcquaintance)
 			{
-				if (_IsNewAcquaintance)
-				{
-					MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.AddAcquaintance, Acquaintance);
-				}
-				else 
-				{
-					MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.UpdateAcquaintance, Acquaintance);
-				}
-				await PopAsync();
+				MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.AddAcquaintance, Acquaintance);
 			}
+			else 
+			{
+				MessagingService.Current.SendMessage<Acquaintance>(MessageKeys.UpdateAcquaintance, Acquaintance);
+			}
+			await PopAsync();
 		}
 
 		bool RequiredAddressFieldCombinationIsFilled
 		{
 			get
 			{
-				if (Acquaintance.AddressString.IsNullOrWhiteSpace())
-				{
-					return true;
-				}
 				if (!Acquaintance.Street.IsNullOrWhiteSpace() && !Acquaintance.City.IsNullOrWhiteSpace() && !Acquaintance.State.IsNullOrWhiteSpace())
 				{
 					return true;
 				}
+
 				if (!Acquaintance.PostalCode.IsNullOrWhiteSpace() && (Acquaintance.Street.IsNullOrWhiteSpace() || Acquaintance.City.IsNullOrWhiteSpace() || Acquaintance.State.IsNullOrWhiteSpace()))
+				{
+					return true;
+				}
+
+				if (Acquaintance.AddressString.IsNullOrWhiteSpace())
 				{
 					return true;
 				}

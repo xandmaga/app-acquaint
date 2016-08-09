@@ -305,6 +305,7 @@
     <AndroidResource Include="Resources\layout\Settings.axml" />
     <AndroidResource Include="Resources\menu\AcquaintanceListMenu.axml" />
     <AndroidResource Include="Resources\menu\SettingsMenu.axml" />
+    <AndroidResource Include="Resources\drawable\fab_add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

@@ -38,9 +38,9 @@ namespace Acquaint.Native.Droid
 
 			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 
-			var acquaintanceEditLayout = LayoutInflater.Inflate(Resource.Layout.AcquaintanceEdit, null);
+			_MainLayout = LayoutInflater.Inflate(Resource.Layout.AcquaintanceEdit, null);
 
-			SetContentView(acquaintanceEditLayout);
+			SetContentView(_MainLayout);
 
 			SetSupportActionBar(FindViewById<Toolbar>(Resource.Id.toolbar));
 
@@ -67,12 +67,12 @@ namespace Acquaint.Native.Droid
 				_Acquaintance = await _DataSource.GetItem(acquaintanceId);
 			}
 
-			SetupViews(acquaintanceEditLayout);
+			SetupViews();
 		}
 
-		void SetupViews(View layout)
+		void SetupViews()
 		{
-			_ContentLayout = layout.FindViewById<LinearLayout>(Resource.Id.acquaintanceEditContentLayout);
+			_ContentLayout = _MainLayout.FindViewById<LinearLayout>(Resource.Id.acquaintanceEditContentLayout);
 
 
 			_ContentLayout.InflateAndBindTextView(Resource.Id.nameSectionTitleTextView, "Name");
@@ -133,15 +133,56 @@ namespace Acquaint.Native.Droid
 				break;
 			case Resource.Id.acquaintanceSaveButton:
 				Save();
-				OnBackPressed();
 				break;
 			}
 
 			return base.OnOptionsItemSelected(item);
 		}
 
-		void Save() 
+		void Save()
 		{
+			if (string.IsNullOrWhiteSpace(_FirstNameField.Text) || string.IsNullOrWhiteSpace(_LastNameField.Text))
+			{
+				//set alert for executing the task
+				var alert = new Android.App.AlertDialog.Builder(this);
+
+				alert.SetTitle("Invalid name!");
+
+				alert.SetMessage("An acquaintance must have both a first and last name.");
+
+				alert.SetNegativeButton("OK", (senderAlert, args) => {
+					// an empty delegate body, because we just want to close the dialog and not take any other action
+				});
+
+				//run the alert in UI thread to display in the screen
+				RunOnUiThread(() => {
+					alert.Show();
+				});
+
+				return;
+			}
+
+			if (!RequiredAddressFieldCombinationIsFilled)
+			{
+				//set alert for executing the task
+				var alert = new Android.App.AlertDialog.Builder(this);
+
+				alert.SetTitle("Invalid address!");
+
+				alert.SetMessage("You must enter either a street, city, and state combination, or a postal code.");
+
+				alert.SetNegativeButton("OK", (senderAlert, args) => {
+					// an empty delegate body, because we just want to close the dialog and not take any other action
+				});
+
+				//run the alert in UI thread to display in the screen
+				RunOnUiThread(() => {
+					alert.Show();
+				});
+
+				return;
+			}
+
 			_Acquaintance.FirstName = _FirstNameField.Text;
 			_Acquaintance.LastName = _LastNameField.Text;
 			_Acquaintance.Company = _CompanyField.Text;
@@ -161,7 +202,40 @@ namespace Acquaint.Native.Droid
 			{
 				_DataSource.UpdateItem(_Acquaintance);
 			}
+
+			OnBackPressed();
 		}
+
+		bool RequiredAddressFieldCombinationIsFilled
+		{
+			get
+			{
+				if (!string.IsNullOrWhiteSpace(_StreetField.Text) && !string.IsNullOrWhiteSpace(_CityField.Text) && !string.IsNullOrWhiteSpace(_StateField.Text))
+				{
+					return true;
+				}
+
+				if (!string.IsNullOrWhiteSpace(_ZipField.Text) && string.IsNullOrWhiteSpace(_StreetField.Text) || string.IsNullOrWhiteSpace(_CityField.Text) || string.IsNullOrWhiteSpace(_StateField.Text))
+				{
+					return true;
+				}
+
+				if (string.IsNullOrWhiteSpace(AddressString))
+				{
+					return true;
+				}
+
+				return false;
+			}
+		}
+
+		string AddressString => 
+			string.Format(
+				"{0} {1} {2} {3}",
+				_StreetField.Text,
+				!string.IsNullOrWhiteSpace(_CityField.Text) ? _CityField.Text + "," : "",
+				_StateField.Text,
+				_ZipField.Text);
 	}
 }
 

@@ -8,6 +8,7 @@ using Acquaint.Util;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
@@ -68,6 +69,12 @@ namespace Acquaint.Native.Droid
 
 			// set RecyclerView's adapter
 			recyclerView.SetAdapter(_Adapter);
+
+			var addButton = (FloatingActionButton)FindViewById(Resource.Id.acquaintanceListFloatingActionButton);
+
+			addButton.Click += (sender, e) => {
+				StartActivity(new Intent(this, typeof(AquaintanceEditActivity)));
+			};
 		}
 
 		protected override async void OnStart()
@@ -227,6 +234,7 @@ namespace Acquaint.Native.Droid
 			viewHolder.CompanyTextView.Text = acquaintance.Company;
 			viewHolder.JobTitleTextView.Text = acquaintance.JobTitle;
 
+			if (!string.IsNullOrWhiteSpace(acquaintance.SmallPhotoUrl))
 			// use FFImageLoading library to asynchronously:
 			ImageService.Instance
 				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))  // get the image from a URL
@@ -241,37 +249,37 @@ namespace Acquaint.Native.Droid
 			viewHolder.AcquaintanceRow.SetOnClickListener(this);
 		}
 
-		public void OnClick(View v)
+		public void OnClick(View view)
 		{
 			// setup an intent
-			var detailIntent = new Intent(v.Context, typeof(AcquaintanceDetailActivity));
+			var detailIntent = new Intent(view.Context, typeof(AcquaintanceDetailActivity));
 
 			// get an item by position (index)
-			var acquaintance = Acquaintances[(int)v.Tag];
+			var acquaintance = Acquaintances[(int)view.Tag];
 
 			// Add some identifying item data to the intent. In this case, the id of the acquaintance for which we're about to display the detail screen.
-			detailIntent.PutExtra(v.Context.Resources.GetString(Resource.String.acquaintanceDetailIntentKey), acquaintance.Id);
+			detailIntent.PutExtra(view.Context.Resources.GetString(Resource.String.acquaintanceDetailIntentKey), acquaintance.Id);
 
 			// get a referecne to the profileImageView
-			var profileImageView = v.FindViewById(Resource.Id.profilePhotoImageView);
+			var profileImageView = view.FindViewById(Resource.Id.profilePhotoImageView);
 
 			// shared element transitions are only supported on Android 5.0+
 			if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
 			{
 				// define transitions 
 				var transitions = new List<Android.Util.Pair>() {
-					Android.Util.Pair.Create(profileImageView, v.Context.Resources.GetString(Resource.String.profilePhotoTransition)),
+					Android.Util.Pair.Create(profileImageView, view.Context.Resources.GetString(Resource.String.profilePhotoTransition)),
 				};
 
 				// create an activity options instance and bind the above-defined transitions to the current activity
-				var transistionOptions = ActivityOptions.MakeSceneTransitionAnimation(v.Context as Activity, transitions.ToArray());
+				var transistionOptions = ActivityOptions.MakeSceneTransitionAnimation(view.Context as Activity, transitions.ToArray());
 
 				// start (navigate to) the detail activity, passing in the activity transition options we just created
-				v.Context.StartActivity(detailIntent, transistionOptions.ToBundle());
+				view.Context.StartActivity(detailIntent, transistionOptions.ToBundle());
 			}
 			else
 			{
-				v.Context.StartActivity(detailIntent);
+				view.Context.StartActivity(detailIntent);
 			}
 		}
 
