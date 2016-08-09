@@ -219,7 +219,7 @@ namespace Acquaint.Native.Droid
 		}
 
 		// populates the properties of the child views of the itemView
-		public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+		public override async void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
 		{
 			// instantiate a new view holder
 			var viewHolder = holder as AcquaintanceViewHolder;
@@ -234,13 +234,17 @@ namespace Acquaint.Native.Droid
 			viewHolder.CompanyTextView.Text = acquaintance.Company;
 			viewHolder.JobTitleTextView.Text = acquaintance.JobTitle;
 
-			if (!string.IsNullOrWhiteSpace(acquaintance.SmallPhotoUrl))
-			// use FFImageLoading library to asynchronously:
-			ImageService.Instance
-				.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))  // get the image from a URL
-				.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
-				.Transform(new CircleTransformation())                                                      // transform the image to a circle
-				.IntoAsync(viewHolder.ProfilePhotoImageView);                                               // load the image into the ImageView
+			if (string.IsNullOrWhiteSpace(acquaintance.SmallPhotoUrl))
+				viewHolder.ProfilePhotoImageView.SetImageBitmap(null);
+			else
+				// use FFImageLoading library to asynchronously:
+				await ImageService.Instance
+					.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))  // get the image from a URL
+					.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
+					.Transform(new CircleTransformation())                                                      // transform the image to a circle
+					.Error(e => System.Diagnostics.Debug.WriteLine(e.Message))
+					.Success((info, result) => System.Diagnostics.Debug.WriteLine(result))
+					.IntoAsync(viewHolder.ProfilePhotoImageView);                                               // load the image into the ImageView
 
 			// set the Tag property of the AcquaintanceRow view to the position (index) of the item that is currently being bound. We'll need it later in the OnLick() implementation.
 			viewHolder.AcquaintanceRow.Tag = position;
