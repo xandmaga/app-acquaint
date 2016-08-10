@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
+using Acquaint.Models;
 using Acquaint.Util;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.WindowsAzure.MobileServices;
@@ -16,13 +17,16 @@ namespace Acquaint.Data
 {
     public class AzureAcquaintanceSource : IDataSource<Acquaintance>
     {
-        string _ServiceUrl => Settings.AzureAppServiceUrl;
+		public AzureAcquaintanceSource()
+		{
+			OnDataSyncError += (object sender, DataSyncErrorEventArgs<Acquaintance> e) => {
+				ServiceLocator.Current.GetInstance<IDataSyncConflictMessagePresenter>().PresentConflictMessage();
+			};
+		}
 
-        string _DataPartitionId => GuidUtility.Create(Settings.DataPartitionPhrase).ToString().ToUpper();
+		MobileServiceClient _MobileService { get; set; }
 
-        MobileServiceClient _MobileService { get; set; }
-
-        private IMobileServiceSyncHandler _SyncHandler;
+		private AcquaintanceSyncHandler _SyncHandler;
 
         IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
 
@@ -30,7 +34,26 @@ namespace Acquaint.Data
 
         bool _IsInitialized;
 
+		string _DataPartitionId => GuidUtility.Create(Settings.DataPartitionPhrase).ToString().ToUpper();
+
         const string _LocalDbName = "acquaintances.db";
+
+		/// <summary>
+		/// An event that is fired when a data sync error occurs.
+		/// </summary>
+		public event DataSyncErrorEventHandler<Acquaintance> OnDataSyncError;
+
+		/// <summary>
+		/// Raises the data sync error event.
+		/// </summary>
+		/// <param name="e">A DataSyncErrorEventArgs or type T.</param>
+		protected virtual void RaiseDataSyncErrorEvent(DataSyncErrorEventArgs<Acquaintance> e)
+		{
+			DataSyncErrorEventHandler<Acquaintance> handler = OnDataSyncError;
+
+			if (handler != null)
+				handler(this, e);
+		}
 
         #region Data Access
 
@@ -103,9 +126,7 @@ namespace Acquaint.Data
                     return true;
 
                 // We're passing in a handler here for the sole purpose of inspecting outbound HTTP requests with Charles Web Debugging Proxy on OS X. Only in debug builds.
-                _MobileService = new MobileServiceClient(_ServiceUrl, GetHttpClientHandler());
-
-                _SyncHandler = new AcquaintanceSyncHandler(_MobileService);
+				_MobileService = new MobileServiceClient(Settings.AzureAppServiceUrl, GetHttpClientHandler());
 
                 _MobileServiceSQLiteStore = new MobileServiceSQLiteStore(_LocalDbName);
 
@@ -113,7 +134,13 @@ namespace Acquaint.Data
 
                 _AcquaintanceTable = _MobileService.GetSyncTable<Acquaintance>();
 
-                await _MobileService.SyncContext.InitializeAsync(_MobileServiceSQLiteStore, _SyncHandler).ConfigureAwait(false);
+				_SyncHandler = new AcquaintanceSyncHandler();
+
+				_SyncHandler.OnDataSyncError += (object sender, DataSyncErrorEventArgs<Acquaintance> e) => {
+					RaiseDataSyncErrorEvent(e);
+				};
+
+				await _MobileService.SyncContext.InitializeAsync(_MobileServiceSQLiteStore, _SyncHandler).ConfigureAwait(false);
 
                 _IsInitialized = true;
 

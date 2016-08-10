@@ -41,6 +41,9 @@ namespace Acquaint.Abstractions
 		/// <returns>A bool representing whether or not the operation succeeded.</returns>
 		/// <param name="item">An item.</param>
 		Task<bool> RemoveItem(T item);
+
+		event DataSyncErrorEventHandler<T> OnDataSyncError;
+
 	}
 }
 

@@ -60,6 +60,7 @@
     <Compile Include="EnvironmentService.cs" />
     <Compile Include="HttpClientHandlerFactory.cs" />
     <Compile Include="DatastoreFolderPathProvider.cs" />
+    <Compile Include="DataSyncConflictMessagePresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">

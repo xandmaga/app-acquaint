@@ -1,15 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
-using Acquaint.Data;
 using Acquaint.Util;
+using Acquaint.Models;
 
 namespace Acquaint.XForms
 {
 	public partial class AcquaintanceListPage : ContentPage
 	{
 		protected AcquaintanceListViewModel ViewModel => BindingContext as AcquaintanceListViewModel;
-
-		bool _SetupPageIsPresented;
 
 		public AcquaintanceListPage()
 		{

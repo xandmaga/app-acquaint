@@ -1,7 +1,7 @@
-﻿using Acquaint.Models;
+﻿using Acquaint.ModelContracts;
 using Newtonsoft.Json;
 
-namespace Acquaint.Data
+namespace Acquaint.Models
 {
 	public class Acquaintance : ObservableEntityData, IAcquaintance
     {

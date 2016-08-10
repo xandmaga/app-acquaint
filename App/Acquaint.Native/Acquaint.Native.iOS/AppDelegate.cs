@@ -1,5 +1,7 @@
 ﻿using Acquaint.Abstractions;
 using Acquaint.Common.iOS;
+using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
@@ -70,10 +72,16 @@ namespace Acquaint.Native.iOS
 			var builder = new ContainerBuilder();
 
 			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+
 			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+
 			builder.RegisterInstance(new DatastoreFolderPathProvider()).As<IDatastoreFolderPathProvider>();
 
-			var container = builder.Build();
+			builder.RegisterInstance(new DataSyncConflictMessagePresenter()).As<IDataSyncConflictMessagePresenter>();
+
+			builder.RegisterInstance(new AzureAcquaintanceSource()).As<IDataSource<Acquaintance>>();
+
+ 			var container = builder.Build();
 
 			var csl = new AutofacServiceLocator(container);
 			ServiceLocator.SetLocatorProvider(() => csl);

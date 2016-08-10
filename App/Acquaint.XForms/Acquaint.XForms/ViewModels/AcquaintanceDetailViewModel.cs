@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
-using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using FormsToolkit;
 using Plugin.ExternalMaps;
@@ -13,7 +13,7 @@ using Xamarin.Forms.Maps;
 
 namespace Acquaint.XForms
 {
-    public class AcquaintanceDetailViewModel : BaseNavigationViewModel
+	public class AcquaintanceDetailViewModel : BaseNavigationViewModel
     {
 		public AcquaintanceDetailViewModel(Acquaintance acquaintance)
 		{

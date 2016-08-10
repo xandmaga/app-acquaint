@@ -20,6 +20,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -222,6 +223,9 @@
     <Reference Include="PCLCrypto">
       <HintPath>..\..\packages\PCLCrypto.2.0.147\lib\MonoAndroid23\PCLCrypto.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.CurrentActivity">
+      <HintPath>..\..\packages\Plugin.CurrentActivity.1.0.1\lib\MonoAndroid10\Plugin.CurrentActivity.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="Renderers\FloatingActionButtonViewRenderer.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Renderers\StandardTableViewRenderer.cs" />
+    <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -360,6 +365,14 @@
     <ProjectReference Include="..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
       <Project>{0B984675-688B-41C6-BEB7-D104DE9158C3}</Project>
       <Name>Acquaint.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Acquaint.ModelContracts\Acquaint.ModelContracts.csproj">
+      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
+      <Name>Acquaint.ModelContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
+      <Project>{2C4B0766-DF89-4466-B841-0BA58FD9D19B}</Project>
+      <Name>Acquaint.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

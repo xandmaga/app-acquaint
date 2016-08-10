@@ -4,7 +4,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using MvvmHelpers;
 using Newtonsoft.Json;
 
-namespace Acquaint.Data
+namespace Acquaint.Models
 {
 	/// <summary>
 	/// A type that mirrors the properties of Microsoft.Azure.Mobile.Server.EntityData, and is also observable.
@@ -26,7 +26,7 @@ namespace Acquaint.Data
 		public DateTimeOffset UpdatedAt { get; set; }
 
 		[Version]
-		public string Version { get; set; }
+		public byte[] Version { get; set; }
 	}
 }
 

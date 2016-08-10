@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
 using Acquaint.Data;
+using Acquaint.Models;
 using Foundation;
+using Microsoft.Practices.ServiceLocation;
 using UIKit;
 
 namespace Acquaint.Native.iOS
@@ -24,7 +26,7 @@ namespace Acquaint.Native.iOS
 
 		public AcquaintanceTableViewSource()
 		{
-			_DataSource = new AzureAcquaintanceSource();
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 		}
 
 		// <summary>
@@ -34,21 +36,6 @@ namespace Acquaint.Native.iOS
 		public async Task LoadAcquaintances()
 		{
 			Acquaintances = (await _DataSource.GetItems()).ToList();
-		}
-
-		public async Task AddAcquaintance(Acquaintance acquaintance)
-		{
-			await _DataSource.AddItem(acquaintance);
-		}
-
-		public async Task UpdateAcquaintance(Acquaintance acquaintance)
-		{ 
-			await _DataSource.UpdateItem(acquaintance);
-		}
-
-		public async Task DeleteAcquaintance(Acquaintance acquaintance)
-		{
-			await _DataSource.RemoveItem(acquaintance);
 		}
 
 		#region implemented abstract members of UITableViewSource

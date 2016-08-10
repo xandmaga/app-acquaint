@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
-using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using Android.App;
 using Android.Content;

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
 using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using FormsToolkit;
 using MvvmHelpers;

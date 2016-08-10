@@ -295,10 +295,6 @@
       <Project>{5A3530AB-4053-4CF3-BEDE-A3E04C45D255}</Project>
       <Name>Acquaint.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
-      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
-      <Name>Acquaint.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Acquaint.Util\Acquaint.Util.csproj">
       <Project>{1D18D929-1B53-4AF9-9499-14ABB26D257F}</Project>
       <Name>Acquaint.Util</Name>
@@ -310,6 +306,14 @@
     <ProjectReference Include="..\..\Common\Acquaint.Common.iOS\Acquaint.Common.iOS.csproj">
       <Project>{D480A440-318D-4CD2-A662-17D6179B14DE}</Project>
       <Name>Acquaint.Common.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\Acquaint.ModelContracts\Acquaint.ModelContracts.csproj">
+      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
+      <Name>Acquaint.ModelContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
+      <Project>{2C4B0766-DF89-4466-B841-0BA58FD9D19B}</Project>
+      <Name>Acquaint.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

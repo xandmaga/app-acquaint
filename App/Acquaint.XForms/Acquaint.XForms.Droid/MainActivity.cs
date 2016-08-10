@@ -1,5 +1,7 @@
 using Acquaint.Abstractions;
 using Acquaint.Common.Droid;
+using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using Android.App;
 using Android.Content.PM;
@@ -9,6 +11,7 @@ using Autofac.Extras.CommonServiceLocator;
 using FFImageLoading.Forms.Droid;
 using HockeyApp.Android;
 using Microsoft.Practices.ServiceLocation;
+using Plugin.CurrentActivity;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -50,13 +53,19 @@ namespace Acquaint.XForms.Droid
 		/// Since some of our libraries are shared between the Forms and Native versions 
 		/// of this app, we're using an IoC/DI framework to provide access across implementations.
 		/// </remarks>
-		static void RegisterDependencies()
+		void RegisterDependencies()
 		{
 			var builder = new ContainerBuilder();
 
 			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
+
 			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+
 			builder.RegisterInstance(new DatastoreFolderPathProvider()).As<IDatastoreFolderPathProvider>();
+
+			builder.RegisterInstance(new DataSyncConflictMessagePresenter()).As<IDataSyncConflictMessagePresenter>();
+
+			builder.RegisterInstance(new AzureAcquaintanceSource()).As<IDataSource<Acquaintance>>();
 
 			var container = builder.Build();
 

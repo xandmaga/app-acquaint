@@ -1,5 +1,6 @@
 using System;
-using Acquaint.Data;
+using Acquaint.Abstractions;
+using Acquaint.Models;
 using Acquaint.Util;
 using CoreAnimation;
 using CoreGraphics;
@@ -7,6 +8,7 @@ using CoreLocation;
 using FFImageLoading;
 using FFImageLoading.Transformations;
 using MapKit;
+using Microsoft.Practices.ServiceLocation;
 using ObjCRuntime;
 using Plugin.ExternalMaps;
 using Plugin.ExternalMaps.Abstractions;
@@ -21,28 +23,20 @@ namespace Acquaint.Native.iOS
 	public partial class AcquaintanceDetailViewController : UIViewController
 	{
 		/// <summary>
-		/// Gets or sets the acquaintance.
+		/// The data source.
 		/// </summary>
-		/// <value>The acquaintance.</value>
-		public Acquaintance Acquaintance { get; private set; }
+		IDataSource<Acquaintance> _DataSource;
 
-		AcquaintanceTableViewController _ListViewController;
+		public Acquaintance Acquaintance { get; set; }
 
 		UIBarButtonItem DeleteBarButtonItem;
-
-		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceTableViewController listViewController = null)
-		{
-			Acquaintance = acquaintance;
-
-			if (listViewController != null)
-				_ListViewController = listViewController;
-		}
 
 		readonly CLGeocoder _Geocoder;
 
 		// This constructor signature is required, for marshalling between the managed and native instances of this class.
 		public AcquaintanceDetailViewController(IntPtr handle) : base(handle)
 		{
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 			_Geocoder = new CLGeocoder();
 		}
 
@@ -152,8 +146,7 @@ namespace Acquaint.Native.iOS
 			alert.AddAction(UIAlertAction.Create("Delete", UIAlertActionStyle.Destructive, async (action) => {
 				if (action != null)
 				{
-					if (_ListViewController != null)
-						await _ListViewController.DeleteAcquaintance(Acquaintance);
+					await _DataSource.RemoveItem(Acquaintance);
 
 					NavigationController.PopViewController(true);
 				}
@@ -167,7 +160,7 @@ namespace Acquaint.Native.iOS
 			// get the destination viewcontroller from the segue
 			var acquaintanceEditViewController = segue.DestinationViewController as AcquaintanceEditViewController;
 
-			acquaintanceEditViewController.SetAcquaintance(this.Acquaintance, _ListViewController);
+			acquaintanceEditViewController.Acquaintance = Acquaintance;
 		}
 
 		void SetupGetDirectionsAction(double lat, double lon)

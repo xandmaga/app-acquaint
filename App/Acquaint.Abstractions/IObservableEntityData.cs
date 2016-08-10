@@ -13,7 +13,7 @@ namespace Acquaint.Abstractions
 
 		DateTimeOffset UpdatedAt { get; set; }
 
-		string Version { get; set; }
+		byte[] Version { get; set; }
 	}
 }
 

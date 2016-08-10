@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Acquaint.Models;
 
 namespace Acquaint.Data
 {

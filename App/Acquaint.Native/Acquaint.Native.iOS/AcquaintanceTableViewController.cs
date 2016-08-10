@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using CoreGraphics;
 using Foundation;
@@ -128,7 +129,7 @@ namespace Acquaint.Native.iOS
 				// get the destination viewcontroller from the segue
 				var acquaintanceEditViewController = segue.DestinationViewController as AcquaintanceEditViewController;
 				// instantiate new Acquaintance and assign to viewcontroller
-				acquaintanceEditViewController.SetAcquaintance(null, this);
+				acquaintanceEditViewController.Acquaintance = null;
 				break;
 			case "AcquaintanceDetailSegue":
 				// the selected index path
@@ -141,7 +142,7 @@ namespace Acquaint.Native.iOS
 				if (acquaintanceDetailViewController != null && TableView.Source != null)
 				{
 					// set the acquaintance on the view controller
-					acquaintanceDetailViewController.SetAcquaintance(((AcquaintanceTableViewSource)TableView.Source).Acquaintances[itemIndex], this);
+					acquaintanceDetailViewController.Acquaintance = ((AcquaintanceTableViewSource)TableView.Source).Acquaintances[itemIndex];
 				}
 				break;
 			}
@@ -190,7 +191,7 @@ namespace Acquaint.Native.iOS
 				return null;
 
 			// set the acquaintance on the view controller
-			detailViewController.SetAcquaintance(_AcquaintanceTableViewSource.Acquaintances[indexPath.Row], this);
+			detailViewController.Acquaintance = _AcquaintanceTableViewSource.Acquaintances[indexPath.Row];
 
 			// set the frame on the screen that will NOT be blurred out during the preview "peek"
 			previewingContext.SourceRect = cell.Frame;
@@ -208,27 +209,6 @@ namespace Acquaint.Native.iOS
 			// Show the view controller that is being preview "peeked".
 			// Instead, you could do whatever you want here, such as commit some other view controller than the one that is being "peeked".
 			ShowViewController(viewControllerToCommit, this);
-		}
-
-		public async Task AddAcquaintance(Acquaintance acquaintance)
-		{
-			await _AcquaintanceTableViewSource.AddAcquaintance(acquaintance);
-
-			await _AcquaintanceTableViewSource.LoadAcquaintances();
-		}
-
-		public async Task UpdateAcquaintance(Acquaintance acquaintance)
-		{
-			await _AcquaintanceTableViewSource.UpdateAcquaintance(acquaintance);
-
-			await _AcquaintanceTableViewSource.LoadAcquaintances();
-		}
-
-		public async Task DeleteAcquaintance(Acquaintance acquaintance)
-		{
-			await _AcquaintanceTableViewSource.DeleteAcquaintance(acquaintance);
-
-			await _AcquaintanceTableViewSource.LoadAcquaintances();
 		}
 	}
 }

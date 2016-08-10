@@ -1,5 +1,8 @@
 ﻿using System;
+using Acquaint.Abstractions;
 using Acquaint.Data;
+using Acquaint.Models;
+using Microsoft.Practices.ServiceLocation;
 using UIKit;
 
 namespace Acquaint.Native.iOS
@@ -7,30 +10,30 @@ namespace Acquaint.Native.iOS
 	public partial class AcquaintanceEditViewController : UITableViewController
 	{
 		/// <summary>
-		/// Gets or sets the acquaintance.
+		/// The data source.
 		/// </summary>
-		/// <value>The acquaintance.</value>
-		public Acquaintance Acquaintance { get; private set; }
+		IDataSource<Acquaintance> _DataSource;
 
-		bool _IsNewAcquaintance;
+		/// <summary>
+		/// A flag indicating that we're editing a new Acquaintance.
+		/// </summary>
+		bool _IsNew;
 
-		AcquaintanceTableViewController _ListViewController;
-
-		public void SetAcquaintance(Acquaintance acquaintance, AcquaintanceTableViewController listViewController = null)
+		Acquaintance _Acquaintance;
+		public Acquaintance Acquaintance
 		{
-			Acquaintance = acquaintance;
-
-			if (Acquaintance == null)
+			get { return _Acquaintance; }
+			set 
 			{
-				Acquaintance = new Acquaintance();
-				_IsNewAcquaintance = true;
+				_Acquaintance = value;
+				_IsNew |= _Acquaintance == null;
 			}
-
-			if (listViewController != null)
-				_ListViewController = listViewController;
 		}
 
-		public AcquaintanceEditViewController(IntPtr handle) : base(handle) { }
+		public AcquaintanceEditViewController(IntPtr handle) : base(handle) 
+		{
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
+		}
 
 		public override void ViewWillAppear(bool animated)
 		{
@@ -49,24 +52,24 @@ namespace Acquaint.Native.iOS
 
 			NavigationItem.RightBarButtonItem.Clicked += async (sender, e) => {
 
-				if (string.IsNullOrWhiteSpace(Acquaintance.LastName) || string.IsNullOrWhiteSpace(Acquaintance.FirstName))
+				if (string.IsNullOrWhiteSpace(_FirstNameField.Text) || string.IsNullOrWhiteSpace(_LastNameField.Text))
 				{
-
 					UIAlertController alert = UIAlertController.Create("Invalid name!", "A acquaintance must have both a first and last name.", UIAlertControllerStyle.Alert);
 
 					// cancel button
-					alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Cancel, null));
+					alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
 					UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
 
 				}
 				else if (!RequiredAddressFieldCombinationIsFilled)
 				{
-
 					UIAlertController alert = UIAlertController.Create("Invalid address!", "You must enter either a street, city, and state combination, or a postal code.", UIAlertControllerStyle.Alert);
 
 					// cancel button
-					alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Cancel, null));
+					alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+
+					UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
 				}
 				else {
 
@@ -81,17 +84,11 @@ namespace Acquaint.Native.iOS
 					Acquaintance.State = _StateField.Text;
 					Acquaintance.PostalCode = _ZipField.Text;
 
-					if (_ListViewController != null)
-					{
-						if (_IsNewAcquaintance)
-						{
-							await _ListViewController.AddAcquaintance(Acquaintance);
-						}
-						else
-						{
-							await _ListViewController.UpdateAcquaintance(Acquaintance);
-						}
-					};
+
+					if (_IsNew)
+						await _DataSource.AddItem(Acquaintance);
+					else
+						await _DataSource.UpdateItem(Acquaintance);
 
 					NavigationController.PopViewController(true);
 				}

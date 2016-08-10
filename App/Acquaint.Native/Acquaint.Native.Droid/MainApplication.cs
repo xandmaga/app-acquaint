@@ -2,6 +2,7 @@ using System;
 using Acquaint.Abstractions;
 using Acquaint.Common.Droid;
 using Acquaint.Data;
+using Acquaint.Models;
 using Acquaint.Util;
 using Android.App;
 using Android.OS;
@@ -36,8 +37,6 @@ namespace Acquaint.Native.Droid
             base.OnCreate();
 
             RegisterActivityLifecycleCallbacks(this);
-
-			//DataSource = new AzureAcquaintanceSource();
         }
 
 		/// <summary>
@@ -52,9 +51,14 @@ namespace Acquaint.Native.Droid
 			var builder = new ContainerBuilder();
 
 			builder.RegisterInstance(new EnvironmentService()).As<IEnvironmentService>();
-			builder.RegisterInstance(new AzureAcquaintanceSource()).As<IDataSource<Acquaintance>>();
+
 			builder.RegisterInstance(new HttpClientHandlerFactory()).As<IHttpClientHandlerFactory>();
+
 			builder.RegisterInstance(new DatastoreFolderPathProvider()).As<IDatastoreFolderPathProvider>();
+
+			builder.RegisterInstance(new DataSyncConflictMessagePresenter()).As<IDataSyncConflictMessagePresenter>();
+
+			builder.RegisterInstance(new AzureAcquaintanceSource()).As<IDataSource<Acquaintance>>();
 
 			var container = builder.Build();
 
