@@ -88,22 +88,7 @@ namespace Acquaint.Native.Droid
 			// inflate the content layout
 			var contentLayout = _MainLayout.FindViewById<LinearLayout>(Resource.Id.acquaintanceDetailContentLayout);
 
-			// inflate and set the profile image view
-			var profilePhotoImageView = contentLayout.FindViewById<ImageViewAsync>(Resource.Id.profilePhotoImageView);
-
-			if (profilePhotoImageView != null)
-			{
-				RunOnUiThread(async () => {
-					// use FFImageLoading library to asynchronously:
-					await ImageService
-						.Instance
-						.LoadUrl(_Acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours)) // get the image from a URL
-						.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
-						.Transform(new CircleTransformation())                                                      // transform the image to a circle
-						.Error(e => System.Diagnostics.Debug.WriteLine(e.Message))
-						.IntoAsync(profilePhotoImageView);                                                          // load the image into the ImageView
-				});                                          				
-			}
+			contentLayout.InflateAndBindRemoteImageView(Resource.Id.profilePhotoImageView, _Acquaintance.SmallPhotoUrl);
 
 			// inflate and set the name text view
 			contentLayout.InflateAndBindTextView(Resource.Id.nameTextView, _Acquaintance.DisplayName);

@@ -1,5 +1,6 @@
 using System;
 using Acquaint.Data;
+using Acquaint.Util;
 using CoreAnimation;
 using CoreGraphics;
 using CoreLocation;
@@ -71,7 +72,7 @@ namespace Acquaint.Native.iOS
 				 // use FFImageLoading library to asynchronously:
 				await ImageService
 					.Instance
-					.LoadUrl(Acquaintance.PhotoUrl) 					// get the image from a URL
+					.LoadUrl(Acquaintance.PhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours)) 					// get the image from a URL
 					.LoadingPlaceholder("placeholderProfileImage.png") 	// specify a placeholder image
 					.Transform(new CircleTransformation()) 				// transform the image to a circle
 					.Error(e => System.Diagnostics.Debug.WriteLine(e.Message))
