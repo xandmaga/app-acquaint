@@ -23,7 +23,7 @@ namespace Acquaint.Common.Droid
 
 				alert.SetTitle("Data Sync Conflict");
 
-				alert.SetMessage("One or more of your local data updates is conflict with data in the cloud, likely because someone else was editing the same data. Reset your local data and try again.");
+				alert.SetMessage("One or more of your local data updates is in conflict with data in the cloud, likely because someone else was editing the same data. Reset your local data and try again.");
 
 				alert.SetPositiveButton("OK", (senderAlert, args) => {
 					_IsPresenting = false;
