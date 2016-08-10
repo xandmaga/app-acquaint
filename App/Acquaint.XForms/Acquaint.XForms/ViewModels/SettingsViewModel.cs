@@ -132,7 +132,9 @@ namespace Acquaint.XForms
 			if (Settings.ClearImageCacheIsRequested)
 			{
 				// clear image cache
-				await ImageService.Instance.InvalidateCacheAsync(CacheType.All);
+				await ImageService
+					.Instance
+					.InvalidateCacheAsync(CacheType.All);
 			}
 
 			// modally pop the page

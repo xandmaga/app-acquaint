@@ -238,12 +238,12 @@ namespace Acquaint.Native.Droid
 				viewHolder.ProfilePhotoImageView.SetImageBitmap(null);
 			else
 				// use FFImageLoading library to asynchronously:
-				await ImageService.Instance
+				await ImageService
+					.Instance
 					.LoadUrl(acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))  // get the image from a URL
 					.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
 					.Transform(new CircleTransformation())                                                      // transform the image to a circle
 					.Error(e => System.Diagnostics.Debug.WriteLine(e.Message))
-					.Success((info, result) => System.Diagnostics.Debug.WriteLine(result))
 					.IntoAsync(viewHolder.ProfilePhotoImageView);                                               // load the image into the ImageView
 
 			// set the Tag property of the AcquaintanceRow view to the position (index) of the item that is currently being bound. We'll need it later in the OnLick() implementation.

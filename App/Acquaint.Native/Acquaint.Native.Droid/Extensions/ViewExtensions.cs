@@ -3,6 +3,9 @@ using Android.Widget;
 using FFImageLoading.Views;
 using FFImageLoading;
 using FFImageLoading.Transformations;
+using Android.App;
+using Acquaint.Util;
+using System;
 
 namespace Acquaint.Native.Droid
 {
@@ -53,7 +56,16 @@ namespace Acquaint.Native.Droid
 				if (imageView != null)
 				{
 					if (async)
-						ImageService.Instance.LoadUrl(imageUrl).Transform(new CircleTransformation()).IntoAsync(imageView);
+						((Activity)parentView.Context).RunOnUiThread(async () => 
+						{
+							await ImageService
+								.Instance
+								.LoadUrl(imageUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours))
+								.LoadingPlaceholder("placeholderProfileImage.png")
+								.Transform(new CircleTransformation())
+								.Error(e => System.Diagnostics.Debug.WriteLine(e.Message))
+								.IntoAsync(imageView);
+						});
 					else
 						ImageService.Instance.LoadUrl(imageUrl).Transform(new CircleTransformation()).Into(imageView);
 				}

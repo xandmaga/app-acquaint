@@ -153,7 +153,9 @@ namespace Acquaint.Native.iOS
 			if (Settings.ClearImageCacheIsRequested)
 			{
 				// clear image cache
-				await ImageService.Instance.InvalidateCacheAsync(CacheType.All);
+				await ImageService
+					.Instance
+					.InvalidateCacheAsync(CacheType.All);
 			}
 
 			// dismiss the view controller

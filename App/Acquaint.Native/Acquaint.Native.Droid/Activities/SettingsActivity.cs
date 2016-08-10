@@ -199,7 +199,9 @@ namespace Acquaint.Native.Droid
 				if (Settings.ClearImageCacheIsRequested)
 				{
 					// clear image cache
-					await ImageService.Instance.InvalidateCacheAsync(CacheType.All);
+					await ImageService
+						.Instance
+						.InvalidateCacheAsync(CacheType.All);
 				}
 
 				// We're on a background thread, so make sure to call OnBackPressed() with RunOnUiThread()

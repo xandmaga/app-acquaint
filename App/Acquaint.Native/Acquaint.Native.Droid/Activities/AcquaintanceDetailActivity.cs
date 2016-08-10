@@ -93,12 +93,16 @@ namespace Acquaint.Native.Droid
 
 			if (profilePhotoImageView != null)
 			{
-				// use FFImageLoading library to asynchronously:
-				ImageService.Instance
-					.LoadUrl(_Acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours)) // get the image from a URL
-					.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
-					.Transform(new CircleTransformation())                                                      // transform the image to a circle
-					.Into(profilePhotoImageView);                                               				// load the image into the ImageView
+				RunOnUiThread(async () => {
+					// use FFImageLoading library to asynchronously:
+					await ImageService
+						.Instance
+						.LoadUrl(_Acquaintance.SmallPhotoUrl, TimeSpan.FromHours(Settings.ImageCacheDurationHours)) // get the image from a URL
+						.LoadingPlaceholder("placeholderProfileImage.png")                                          // specify a placeholder image
+						.Transform(new CircleTransformation())                                                      // transform the image to a circle
+						.Error(e => System.Diagnostics.Debug.WriteLine(e.Message))
+						.IntoAsync(profilePhotoImageView);                                                          // load the image into the ImageView
+				});                                          				
 			}
 
 			// inflate and set the name text view
