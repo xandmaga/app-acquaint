@@ -26,7 +26,7 @@ namespace Acquaint.Data
 
 		MobileServiceClient _MobileService { get; set; }
 
-		private AcquaintanceSyncHandler _SyncHandler;
+		private SyncHandler<Acquaintance> _SyncHandler;
 
         IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
 
@@ -134,7 +134,7 @@ namespace Acquaint.Data
 
                 _AcquaintanceTable = _MobileService.GetSyncTable<Acquaintance>();
 
-				_SyncHandler = new AcquaintanceSyncHandler();
+				_SyncHandler = new SyncHandler<Acquaintance>();
 
 				_SyncHandler.OnDataSyncError += (object sender, DataSyncErrorEventArgs<Acquaintance> e) => {
 					RaiseDataSyncErrorEvent(e);
