@@ -206,17 +206,13 @@
       <Project>{1D18D929-1B53-4AF9-9499-14ABB26D257F}</Project>
       <Name>Acquaint.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
-      <Project>{0B984675-688B-41C6-BEB7-D104DE9158C3}</Project>
-      <Name>Acquaint.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Common\Acquaint.ModelContracts\Acquaint.ModelContracts.csproj">
-      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
-      <Name>Acquaint.ModelContracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
       <Project>{2C4B0766-DF89-4466-B841-0BA58FD9D19B}</Project>
       <Name>Acquaint.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
+      <Project>{0B984675-688B-41C6-BEB7-D104DE9158C3}</Project>
+      <Name>Acquaint.Abstractions</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

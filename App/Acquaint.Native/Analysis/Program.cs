@@ -16,22 +16,24 @@ namespace Analysis
 			try
 			{
 				var path = Environment.CurrentDirectory;
-				for (int i = 0; i < 3; i++)
+				for (int i = 0; i < 2; i++)
 				{
 					path = Path.Combine(Path.GetDirectoryName(path), string.Empty);
 				}
 				var projects = new List<Solution>
 				{
-
-
 					new Solution
 					{
 						Name = "Android",
 						ProjectFiles = new List<string>
 						{
-							Path.Combine(path, "../Acquaint.Native/Acquaint.Native.Droid/Acquaint.Native.Droid.csproj"),
-							Path.Combine(path, "../Acquaint.Data/Acquaint.Data.csproj"),
-							Path.Combine(path, "../Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../Acquaint.Native.Droid/Acquaint.Native.Droid.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Abstractions/Acquaint.Abstractions.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Common.Droid/Acquaint.Common.Droid.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Data/Acquaint.Data.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Models/Acquaint.Models.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../../../Common/Acquaint.ModelContracts/Acquaint.ModelContracts.csproj"),
 						},
 					},
 
@@ -40,9 +42,13 @@ namespace Analysis
 						Name = "iOS",
 						ProjectFiles = new List<string>
 						{
-							Path.Combine(path, "../Acquaint.Native/Acquaint.Native.iOS/Acquaint.Native.iOS.csproj"),
-							Path.Combine(path, "../Acquaint.Data/Acquaint.Data.csproj"),
-							Path.Combine(path, "../Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../Acquaint.Native.iOS/Acquaint.Native.iOS.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Abstractions/Acquaint.Abstractions.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Common.iOS/Acquaint.Common.iOS.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Data/Acquaint.Data.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Models/Acquaint.Models.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../../../Common/Acquaint.ModelContracts/Acquaint.ModelContracts.csproj"),
 						},
 					},
 				};

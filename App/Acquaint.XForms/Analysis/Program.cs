@@ -16,23 +16,25 @@ namespace Analysis
 			try
 			{
 				var path = Environment.CurrentDirectory;
-				for (int i = 0; i < 3; i++)
+				for (int i = 0; i < 2; i++)
 				{
 					path = Path.Combine(Path.GetDirectoryName(path), string.Empty);
 				}
 				var projects = new List<Solution>
 				{
-
-
 					new Solution
 					{
 						Name = "Android",
 						ProjectFiles = new List<string>
 						{
-							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms.Droid/Acquaint.XForms.Droid.csproj"),
-							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms/Acquaint.XForms.csproj"),
-							Path.Combine(path, "../Acquaint.Data/Acquaint.Data.csproj"),
-							Path.Combine(path, "../Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../Acquaint.XForms.Droid/Acquaint.XForms.Droid.csproj"),
+							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Abstractions/Acquaint.Abstractions.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Common.Droid/Acquaint.Common.Droid.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Data/Acquaint.Data.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Models/Acquaint.Models.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../../../Common/Acquaint.ModelContracts/Acquaint.ModelContracts.csproj"),
 						},
 					},
 
@@ -41,10 +43,14 @@ namespace Analysis
 						Name = "iOS",
 						ProjectFiles = new List<string>
 						{
-							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms.iOS/Acquaint.XForms.iOS.csproj"),
-							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms/Acquaint.XForms.csproj"),
-							Path.Combine(path, "../Acquaint.Data/Acquaint.Data.csproj"),
-							Path.Combine(path, "../Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../Acquaint.XForms.iOS/Acquaint.XForms.iOS.csproj"),
+							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Abstractions/Acquaint.Abstractions.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Common.iOS/Acquaint.Common.iOS.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Data/Acquaint.Data.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Models/Acquaint.Models.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../../../Common/Acquaint.ModelContracts/Acquaint.ModelContracts.csproj"),
 						},
 					},
 
@@ -53,10 +59,10 @@ namespace Analysis
 						Name = "UWP",
 						ProjectFiles = new List<string>
 						{
-							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms.UWP/Acquaint.XForms.UWP.csproj"),
-							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms/Acquaint.XForms.csproj"),
-							Path.Combine(path, "../Acquaint.Data/Acquaint.Data.csproj"),
-							Path.Combine(path, "../Acquaint.Util/Acquaint.Util.csproj"),
+							Path.Combine(path, "../Acquaint.XForms.UWP/Acquaint.XForms.UWP.csproj"),
+							Path.Combine(path, "../Acquaint.XForms/Acquaint.XForms.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Data/Acquaint.Data.csproj"),
+							Path.Combine(path, "../../Common/Acquaint.Util/Acquaint.Util.csproj"),
 						},
 					},
 				};
@@ -88,8 +94,8 @@ namespace Analysis
 				get
 				{
 					return (from f in CodeFiles
-						where f.Solutions.Count == 1
-						select f.LinesOfCode).Sum();
+							where f.Solutions.Count == 1
+							select f.LinesOfCode).Sum();
 				}
 			}
 
@@ -98,8 +104,8 @@ namespace Analysis
 				get
 				{
 					return (from f in CodeFiles
-						where f.Solutions.Count > 1
-						select f.LinesOfCode).Sum();
+							where f.Solutions.Count > 1
+							select f.LinesOfCode).Sum();
 				}
 			}
 
@@ -108,7 +114,7 @@ namespace Analysis
 				get
 				{
 					return (from f in CodeFiles
-						select f.LinesOfCode).Sum();
+							select f.LinesOfCode).Sum();
 				}
 			}
 		}
@@ -156,11 +162,11 @@ namespace Analysis
 					var dir = Path.GetDirectoryName(projectFile);
 					var doc = XDocument.Load(projectFile);
 					var q = from x in doc.Descendants()
-						let e = x as XElement
+							let e = x as XElement
 							where e != null
 							where e.Name.LocalName == "Compile"
 							where e.Attributes().Any(a => a.Name.LocalName == "Include")
-						select e.Attribute("Include").Value;
+							select e.Attribute("Include").Value;
 					foreach (var inc in q)
 					{
 						//skip over some things that are added automatically

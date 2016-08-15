@@ -43,7 +43,7 @@
     <Compile Include="DataSyncErrorEventHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Acquaint.ModelContracts\Acquaint.ModelContracts.csproj">
+    <ProjectReference Include="..\..\..\Common\Acquaint.ModelContracts\Acquaint.ModelContracts.csproj">
       <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
       <Name>Acquaint.ModelContracts</Name>
     </ProjectReference>

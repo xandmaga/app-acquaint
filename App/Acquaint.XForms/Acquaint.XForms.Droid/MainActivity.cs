@@ -11,7 +11,6 @@ using Autofac.Extras.CommonServiceLocator;
 using FFImageLoading.Forms.Droid;
 using HockeyApp.Android;
 using Microsoft.Practices.ServiceLocation;
-using Plugin.CurrentActivity;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
