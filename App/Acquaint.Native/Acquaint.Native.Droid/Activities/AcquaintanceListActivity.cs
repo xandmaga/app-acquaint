@@ -77,9 +77,9 @@ namespace Acquaint.Native.Droid
 			};
 		}
 
-		protected override async void OnStart()
+		protected override async void OnResume()
 		{
-			base.OnStart();
+			base.OnResume();
 
 			if (string.IsNullOrWhiteSpace(Settings.DataPartitionPhrase))
 			{
@@ -189,6 +189,11 @@ namespace Acquaint.Native.Droid
 		{
 			Acquaintances = new List<Acquaintance>();
 
+			SetDataSource();
+		}
+
+		void SetDataSource()
+		{
 			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 		}
 
@@ -198,6 +203,8 @@ namespace Acquaint.Native.Droid
 		/// <returns>Task.</returns>
 		public async Task LoadAcquaintances()
 		{
+			SetDataSource();
+
 			Acquaintances = (await _DataSource.GetItems()).ToList();
 
 			NotifyDataSetChanged();

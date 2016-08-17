@@ -15,7 +15,7 @@ namespace Acquaint.Native.iOS
 		/// <summary>
 		/// The acquaintance data source.
 		/// </summary>
-		readonly IDataSource<Acquaintance> _DataSource;
+		IDataSource<Acquaintance> _DataSource;
 
 		/// <summary>
 		/// Gets the acquaintances.
@@ -24,6 +24,11 @@ namespace Acquaint.Native.iOS
 		public List<Acquaintance> Acquaintances { get; private set; }
 
 		public AcquaintanceTableViewSource()
+		{
+			SetDataSource();
+		}
+
+		void SetDataSource()
 		{
 			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 		}
@@ -34,6 +39,8 @@ namespace Acquaint.Native.iOS
 		// <returns>The acquaintances.</returns>
 		public async Task LoadAcquaintances()
 		{
+			SetDataSource();
+
 			Acquaintances = (await _DataSource.GetItems()).ToList();
 		}
 

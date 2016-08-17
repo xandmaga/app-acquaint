@@ -36,8 +36,6 @@ namespace Acquaint.Native.Droid
 		{
 			base.OnCreate(savedInstanceState);
 
-			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
-
 			_MainLayout = LayoutInflater.Inflate(Resource.Layout.AcquaintanceEdit, null);
 
 			SetContentView(_MainLayout);
@@ -52,9 +50,16 @@ namespace Acquaint.Native.Droid
 			SupportActionBar.SetHomeButtonEnabled(true);
 
 			Title = SupportActionBar.Title = "";
+		}
+
+		protected override async void OnResume()
+		{
+			base.OnResume();
 
 			// extract the acquaintance id from the intent
 			var acquaintanceId = Intent.GetStringExtra(GetString(Resource.String.acquaintanceEditIntentKey));
+
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 
 			if (acquaintanceId == null)
 			{

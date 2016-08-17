@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Acquaint.Abstractions;
-using Acquaint.Data;
 using Acquaint.Models;
 using Acquaint.Util;
 using FormsToolkit;
+using Microsoft.Practices.ServiceLocation;
 using MvvmHelpers;
 using Plugin.Messaging;
 using Xamarin.Forms;
@@ -17,19 +17,19 @@ namespace Acquaint.XForms
         {
             _CapabilityService = DependencyService.Get<ICapabilityService>();
 
-            DataSource = new AzureAcquaintanceSource();
-
             SubscribeToAddAcquaintanceMessages();
 
             SubscribeToUpdateAcquaintanceMessages();
 
             SubscribeToDeleteAcquaintanceMessages();
+
+			SetDataSource();
         }
 
         // this is just a utility service that we're using in this demo app to mitigate some limitations of the iOS simulator
         readonly ICapabilityService _CapabilityService;
 
-        readonly IDataSource<Acquaintance> DataSource;
+		IDataSource<Acquaintance> _DataSource;
 
         ObservableRangeCollection<Acquaintance> _Acquaintances;
 
@@ -40,6 +40,11 @@ namespace Acquaint.XForms
         Command _NewAcquaintanceCommand;
 
         Command _ShowSettingsCommand;
+
+		void SetDataSource()
+		{
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
+		}
 
         public ObservableRangeCollection<Acquaintance> Acquaintances
         {
@@ -62,6 +67,9 @@ namespace Acquaint.XForms
         public async Task ExecuteLoadAcquaintancesCommand()
         {
             LoadAcquaintancesCommand.ChangeCanExecute();
+
+			// set the data source on each load, because we don't know if the data source may have been updated between page loads
+			SetDataSource();
 
             if (Settings.LocalDataResetIsRequested)
                 _Acquaintances.Clear();
@@ -93,7 +101,7 @@ namespace Acquaint.XForms
         {
             IsBusy = true;
 
-            Acquaintances = new ObservableRangeCollection<Acquaintance>(await DataSource.GetItems());
+            Acquaintances = new ObservableRangeCollection<Acquaintance>(await _DataSource.GetItems());
 
             // ensuring that this flag is reset
             Settings.ClearImageCacheIsRequested = false;
@@ -278,7 +286,7 @@ namespace Acquaint.XForms
             {
                 IsBusy = true;
 
-                await DataSource.AddItem(acquaintance);
+                await _DataSource.AddItem(acquaintance);
 
                 await FetchAcquaintances();
 
@@ -295,7 +303,7 @@ namespace Acquaint.XForms
             {
                 IsBusy = true;
 
-                await DataSource.UpdateItem(acquaintance);
+                await _DataSource.UpdateItem(acquaintance);
 
                 await FetchAcquaintances();
 
@@ -312,7 +320,7 @@ namespace Acquaint.XForms
             {
                 IsBusy = true;
 
-                await DataSource.RemoveItem(acquaintance);
+                await _DataSource.RemoveItem(acquaintance);
 
                 await FetchAcquaintances();
 

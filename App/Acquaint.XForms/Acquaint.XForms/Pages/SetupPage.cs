@@ -32,33 +32,7 @@ namespace Acquaint.XForms
 
             Settings.DataPartitionPhrase = DataPartitionPhraseEntry.Text;
 
-            // The navigation logic startup needs to diverge per platform in order to meet the UX design requirements
-            if (Device.OS != TargetPlatform.Android)
-            {
-                await Navigation.PopModalAsync();
-
-                var navPage = new NavigationPage(
-                    new AcquaintanceListPage()
-                    {
-                        Title = "Acquaintances",
-                        BindingContext = new AcquaintanceListViewModel()
-                    })
-                {
-                    BarBackgroundColor = Color.FromHex("547799")
-                };
-
-                navPage.BarTextColor = Color.White;
-
-                // on the main UI thread, set the MainPage to the navPage
-                Device.BeginInvokeOnMainThread(() =>
-                    Application.Current.MainPage = navPage );
-            }
-            else
-            {
-                await Navigation.PopModalAsync();
-
-                await Navigation.PushAsync(new AcquaintanceListPage() { Title = "Acquaintances", BindingContext = new AcquaintanceListViewModel() });
-            }
+			await Navigation.PopModalAsync();
         }
 
         protected override bool OnBackButtonPressed()

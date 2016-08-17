@@ -42,8 +42,6 @@ namespace Acquaint.Native.Droid
 		{
 			base.OnCreate(savedInstanceState);
 
-			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
-
 			_SavedInstanceState = savedInstanceState;
 
 			_MainLayout = LayoutInflater.Inflate(Resource.Layout.AcquaintanceDetail, null);
@@ -60,14 +58,16 @@ namespace Acquaint.Native.Droid
 			// enable the back button in the action bar
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			SupportActionBar.SetHomeButtonEnabled(true);
+		}
+
+		protected override async void OnResume()
+		{
+			base.OnResume();
+
+			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 
 			// extract the acquaintance id from the intent
 			_AcquaintanceId = Intent.GetStringExtra(GetString(Resource.String.acquaintanceDetailIntentKey));
-		}
-
-		protected override async void OnStart()
-		{
-			base.OnStart();
 
 			// fetch the acquaintance based on the id
 			_Acquaintance = await _DataSource.GetItem(_AcquaintanceId);

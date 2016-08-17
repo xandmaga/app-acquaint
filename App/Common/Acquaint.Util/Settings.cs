@@ -7,7 +7,7 @@ namespace Acquaint.Util
 	/// <summary>
 	/// This class uses the Xamarin settings plugin (Plugins.Settings) to implement cross-platform storing of settings.
 	/// </summary>
-	public class Settings
+	public static class Settings
 	{
 		private static ISettings AppSettings
 		{
@@ -20,6 +20,22 @@ namespace Acquaint.Util
 			LocalDataResetIsRequested = true;
 			AzureAppServiceUrl = AzureAppServiceUrlDefault;
 			ImageCacheDurationHours = ImageCacheDurationHoursDefault;
+		}
+
+		public static bool IsUsingLocalDataSource => DataPartitionPhrase == "UseLocalDataSource";
+
+		public static event EventHandler OnDataPartitionPhraseChanged;
+
+		/// <summary>
+		/// Raises the data parition phrase changed event.
+		/// </summary>
+		/// <param name="e">E.</param>
+		static void RaiseDataParitionPhraseChangedEvent(EventArgs e)
+		{
+			var handler = OnDataPartitionPhraseChanged;
+
+			if (handler != null)
+				handler(null, e);
 		}
 
 		#region user-configurable
@@ -42,7 +58,11 @@ namespace Acquaint.Util
 		public static string DataPartitionPhrase
 		{
 			get { return AppSettings.GetValueOrDefault<string>(DataPartitionPhraseKey, DataSeedPhraseDefault); }
-			set { AppSettings.AddOrUpdateValue<string>(DataPartitionPhraseKey, value); }
+			set
+			{ 
+				AppSettings.AddOrUpdateValue<string>(DataPartitionPhraseKey, value);
+				RaiseDataParitionPhraseChangedEvent(null);
+			}
 		}
 
 		public static int ImageCacheDurationHours
