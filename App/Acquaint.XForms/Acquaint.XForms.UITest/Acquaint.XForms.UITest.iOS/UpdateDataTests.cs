@@ -42,11 +42,11 @@ namespace Acquaint.XForms.UITest.iOS
 		[Test]
 		public void UpdateFirstName() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("UITextField"), "DataParitionPhrasePlaceholder");
+			app.EnterText(x => x.Class("UITextField"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -74,11 +74,11 @@ namespace Acquaint.XForms.UITest.iOS
 		[Test]
 		public void UpdateLastName() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("UITextField"), "DataParitionPhrasePlaceholder");
+			app.EnterText(x => x.Class("UITextField"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -106,11 +106,11 @@ namespace Acquaint.XForms.UITest.iOS
 		[Test]
 		public void UpdateCompanyName() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("UITextField"), "DataParitionPhrasePlaceholder");
+			app.EnterText(x => x.Class("UITextField"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -138,11 +138,11 @@ namespace Acquaint.XForms.UITest.iOS
 		[Test]
 		public void UpdateTitle() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("UITextField"), "DataParitionPhrasePlaceholder");
+			app.EnterText(x => x.Class("UITextField"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -167,11 +167,11 @@ namespace Acquaint.XForms.UITest.iOS
 		[Test]
 		public void UpdatePhoneNumber() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("UITextField"), "DataParitionPhrasePlaceholder");
+			app.EnterText(x => x.Class("UITextField"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -196,11 +196,11 @@ namespace Acquaint.XForms.UITest.iOS
 		[Test]
 		public void UpdateEmailAddress() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("UITextField"), "DataParitionPhrasePlaceholder");
+			app.EnterText(x => x.Class("UITextField"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -225,11 +225,11 @@ namespace Acquaint.XForms.UITest.iOS
 		[Test]
 		public void UpdateMailingAddress() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("UITextField"), "DataParitionPhrasePlaceholder");
+			app.EnterText(x => x.Class("UITextField"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));

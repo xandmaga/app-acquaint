@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Android;
-using Xamarin.UITest.Queries;
 
 namespace Acquaint.Native.UITest.Android
 {
@@ -37,8 +33,13 @@ namespace Acquaint.Native.UITest.Android
 		[Test]
 		public void UpdateFirstName ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Id("setupDataPartitionPhraseField"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -64,8 +65,13 @@ namespace Acquaint.Native.UITest.Android
 		[Test]
 		public void UpdateLastName ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Id("setupDataPartitionPhraseField"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -91,8 +97,13 @@ namespace Acquaint.Native.UITest.Android
 		[Test]
 		public void UpdateCompanyName ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Id("setupDataPartitionPhraseField"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
-			app.Screenshot ("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot ("Scrolled to Monica Green");
 			app.Tap (x => x.Marked ("Green, Monica"));
@@ -118,8 +129,13 @@ namespace Acquaint.Native.UITest.Android
 		[Test]
 		public void UpdateTitle ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Id("setupDataPartitionPhraseField"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -142,8 +158,13 @@ namespace Acquaint.Native.UITest.Android
 		[Test]
 		public void UpdatePhoneNumber ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Id("setupDataPartitionPhraseField"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -166,8 +187,13 @@ namespace Acquaint.Native.UITest.Android
 		[Test]
 		public void UpdateEmailAddress ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Id("setupDataPartitionPhraseField"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
@@ -190,8 +216,13 @@ namespace Acquaint.Native.UITest.Android
 		[Test]
 		public void UpdateMailingAddress ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Id("setupDataPartitionPhraseField"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));

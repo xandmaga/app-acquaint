@@ -1,11 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.iOS;
-using Xamarin.UITest.Queries;
 
 namespace Acquaint.Native.UITest.iOS
 {
@@ -45,6 +42,11 @@ namespace Acquaint.Native.UITest.iOS
 		[Test]
 		public void UpdateFirstName ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Marked("Enter a unique phrase"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Marked("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan(0,0,10)); // wait for the list to appear
 			app.Screenshot ("App start, display list");
 			app.ScrollDownTo ("Green, Monica");
@@ -68,13 +70,17 @@ namespace Acquaint.Native.UITest.iOS
 			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, first name updated");
 			app.Tap (x => x.Marked ("List"));
-			app.ScrollDownTo ("Green, Erica");
 			app.Screenshot ("First name updated on list screen, first name updated");
 		}
 
 		[Test]
 		public void UpdateLastName ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Marked("Enter a unique phrase"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Marked("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 10)); // wait for the list to appear
 			app.Screenshot ("App start, display list");
 			app.ScrollDownTo ("Green, Monica");
@@ -98,13 +104,17 @@ namespace Acquaint.Native.UITest.iOS
 			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, last name updated");
 			app.Tap (x => x.Marked ("List"));
-			app.ScrollDownTo ("Johnson, Monica");
 			app.Screenshot ("First name updated on list screen, last name updated");
 		}
 
 		[Test]
 		public void UpdateCompanyName ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Marked("Enter a unique phrase"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Marked("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 10)); // wait for the list to appear
 			app.Screenshot ("App start, display list");
 			app.ScrollDownTo ("Green, Monica");
@@ -128,13 +138,17 @@ namespace Acquaint.Native.UITest.iOS
 			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, company updated");
 			app.Tap (x => x.Marked ("List"));
-			app.ScrollDownTo ("Green, Monica");
 			app.Screenshot ("Company name updated on list screen, company updated");
 		}
 
 		[Test]
 		public void UpdateTitle ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Marked("Enter a unique phrase"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Marked("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 10)); // wait for the list to appear
 			app.Screenshot ("App start, display list");
 			app.ScrollDownTo ("Green, Monica");
@@ -161,6 +175,11 @@ namespace Acquaint.Native.UITest.iOS
 		[Test]
 		public void UpdatePhoneNumber ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Marked("Enter a unique phrase"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Marked("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 10)); // wait for the list to appear
 			app.Screenshot ("App start, display list");
 			app.ScrollDownTo ("Green, Monica");
@@ -188,6 +207,11 @@ namespace Acquaint.Native.UITest.iOS
 		[Test]
 		public void UpdateEmailAddress ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Marked("Enter a unique phrase"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Marked("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 10)); // wait for the list to appear
 			app.Screenshot ("App start, display list");
 			app.ScrollDownTo ("Green, Monica");
@@ -214,6 +238,11 @@ namespace Acquaint.Native.UITest.iOS
 		[Test]
 		public void UpdateMailingAddress ()
 		{
+			app.Screenshot("App Started");
+			app.Tap(x => x.Marked("Enter a unique phrase"));
+			app.EnterText("UseLocalDataSource");
+			app.Screenshot("Entered data parition phrase");
+			app.Tap(x => x.Marked("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 10)); // wait for the list to appear
 			app.Screenshot ("App start, display list");
 			app.ScrollDownTo ("Green, Monica");

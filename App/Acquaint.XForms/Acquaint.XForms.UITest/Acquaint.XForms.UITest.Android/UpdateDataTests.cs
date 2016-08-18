@@ -32,18 +32,18 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdateFirstName() {
+		public void UpdateFirstName() 
+		{
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("EntryEditText"), "DataParitionIdPlaceholder");
+			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Text("Green, Monica"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Marked("Edit"));
 			app.Screenshot("Edit screen");
@@ -55,8 +55,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of company name field");
 			app.Tap(x => x.Marked("Save"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, first name updated");
 			app.Tap(x => x.Class("ImageButton"));
 			app.ScrollDownTo("Green, Erica");
@@ -66,16 +65,15 @@ namespace Acquaint.XForms.UITest.Android
 		[Test]
 		public void UpdateLastName() {
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("EntryEditText"), "DataParitionIdPlaceholder");
+			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Marked("Edit"));
 			app.Screenshot("Edit screen");
@@ -87,8 +85,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of last name field");
 			app.Tap(x => x.Marked("Save"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, last name updated");
 			app.Tap(x => x.Class("ImageButton"));
 			app.ScrollDownTo("Johnson, Monica");
@@ -96,18 +93,18 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdateCompanyName() {
+		public void UpdateCompanyName() 
+		{
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("EntryEditText"), "DataParitionIdPlaceholder");
+			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Marked("Edit"));
 			app.Screenshot("Edit screen");
@@ -119,8 +116,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of company name field");
 			app.Tap(x => x.Marked("Save"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, company updated");
 			app.Tap(x => x.Class("ImageButton"));
 			app.ScrollDownTo("Green, Monica");
@@ -128,18 +124,18 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdateTitle() {
+		public void UpdateTitle() 
+		{
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("EntryEditText"), "DataParitionIdPlaceholder");
+			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Marked("Edit"));
 			app.Screenshot("Edit screen");
@@ -151,24 +147,23 @@ namespace Acquaint.XForms.UITest.Android
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of title field");
 			app.Tap(x => x.Marked("Save"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, title updated");
 		}
 
 		[Test]
-		public void UpdatePhoneNumber() {
+		public void UpdatePhoneNumber() 
+		{
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("EntryEditText"), "DataParitionIdPlaceholder");
+			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Marked("Edit"));
 			app.Screenshot("Edit screen");
@@ -180,24 +175,23 @@ namespace Acquaint.XForms.UITest.Android
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of phone number field");
 			app.Tap(x => x.Marked("Save"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, phone updated");
 		}
 
 		[Test]
-		public void UpdateEmailAddress() {
+		public void UpdateEmailAddress() 
+		{
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("EntryEditText"), "DataParitionIdPlaceholder");
+			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Marked("Edit"));
 			app.Screenshot("Edit screen");
@@ -209,24 +203,23 @@ namespace Acquaint.XForms.UITest.Android
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of email field");
 			app.Tap(x => x.Marked("Save"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, email updated");
 		}
 
 		[Test]
-		public void UpdateMailingAddress() {
+		public void UpdateMailingAddress() 
+		{
 			app.Screenshot("App Started");
-			app.EnterText(x => x.Class("EntryEditText"), "DataParitionIdPlaceholder");
+			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
-			app.Screenshot("App start, display list");
+			app.Screenshot("Display list");
 			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Marked("Edit"));
 			app.Screenshot("Edit screen");
@@ -256,8 +249,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Screenshot("Altered value of ZIP field");
 
 			app.Tap(x => x.Marked("Save"));
-			app.WaitForElement(x => x.Marked("Zoom out")); // wait for the map to appear
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, address updated");
 		}
 	}
