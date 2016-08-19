@@ -43,7 +43,7 @@ namespace Acquaint.Native.UITest.Android
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
 			app.Screenshot("Edit screen");
@@ -55,7 +55,7 @@ namespace Acquaint.Native.UITest.Android
 			app.DismissKeyboard ();
 			app.Screenshot ("Altered value of company name field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, first name updated");
 			app.Tap(x => x.Marked("Navigate up"));
 			app.ScrollDownTo ("Green, Erica");
@@ -75,7 +75,7 @@ namespace Acquaint.Native.UITest.Android
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
 			app.Screenshot("Edit screen");
@@ -87,7 +87,7 @@ namespace Acquaint.Native.UITest.Android
 			app.DismissKeyboard ();
 			app.Screenshot ("Altered value of last name field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, last name updated");
 			app.Tap(x => x.Marked("Navigate up"));
 			app.ScrollDownTo ("Johnson, Monica");
@@ -107,7 +107,7 @@ namespace Acquaint.Native.UITest.Android
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot ("Scrolled to Monica Green");
 			app.Tap (x => x.Marked ("Green, Monica"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
 			app.Screenshot ("Edit screen");
@@ -119,7 +119,7 @@ namespace Acquaint.Native.UITest.Android
 			app.DismissKeyboard ();
 			app.Screenshot ("Altered value of company name field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, company updated");
 			app.Tap(x => x.Marked("Navigate up"));
 			app.ScrollDownTo ("Green, Monica");
@@ -139,7 +139,7 @@ namespace Acquaint.Native.UITest.Android
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
 			app.Screenshot("Edit screen");
@@ -151,7 +151,7 @@ namespace Acquaint.Native.UITest.Android
 			app.DismissKeyboard ();
 			app.Screenshot ("Altered value of title field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, title updated");
 		}
 
@@ -168,7 +168,7 @@ namespace Acquaint.Native.UITest.Android
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
 			app.Screenshot("Edit screen");
@@ -180,7 +180,7 @@ namespace Acquaint.Native.UITest.Android
 			app.DismissKeyboard ();
 			app.Screenshot ("Altered value of phone number field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, phone updated");
 		}
 
@@ -197,7 +197,7 @@ namespace Acquaint.Native.UITest.Android
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
 			app.Screenshot("Edit screen");
@@ -209,7 +209,7 @@ namespace Acquaint.Native.UITest.Android
 			app.DismissKeyboard ();
 			app.Screenshot ("Altered value of email field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, email updated");
 		}
 
@@ -226,7 +226,7 @@ namespace Acquaint.Native.UITest.Android
 			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
-			Thread.Sleep(2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
 			app.Screenshot("Edit screen");
@@ -256,7 +256,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Screenshot ("Altered value of ZIP field");
 
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
-			Thread.Sleep (2000); // wait 2 seconds to give map time to fully render
+			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot ("Saved changes, navigated to detail screen, address updated");
 		}
 	}
