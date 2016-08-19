@@ -84,6 +84,8 @@ namespace Acquaint.Native.iOS
 
 			builder.RegisterInstance(new DataSyncConflictMessagePresenter()).As<IDataSyncConflictMessagePresenter>();
 
+			// Set the data source dependent on whether or not the data parition phrase is "UseLocalDataSource".
+			// The local data source is mainly for use in TextCloud test runs, but the app can be used in local-only data mode if desired.
 			if (Settings.IsUsingLocalDataSource)
 				builder.RegisterInstance(new FilesystemOnlyAcquaintanceDataSource()).As<IDataSource<Acquaintance>>();
 			else
@@ -101,6 +103,9 @@ namespace Acquaint.Native.iOS
 		void UpdateDataSourceIfNecessary()
 		{
 			var dataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
+
+			// Set the data source dependent on whether or not the data parition phrase is "UseLocalDataSource".
+			// The local data source is mainly for use in TextCloud test runs, but the app can be used in local-only data mode if desired.
 
 			// if the settings dictate that a local data source should be used, then register the local data provider and update the IoC container
 			if (Settings.IsUsingLocalDataSource && !(dataSource is FilesystemOnlyAcquaintanceDataSource))
