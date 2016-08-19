@@ -40,7 +40,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
+			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -72,7 +72,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
+			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -104,7 +104,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
+			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot ("Scrolled to Monica Green");
 			app.Tap (x => x.Marked ("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -136,7 +136,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
+			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -165,7 +165,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
+			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -194,7 +194,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
+			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -223,7 +223,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("setupContinueButton"));
 			app.WaitForElement(x => x.Id("nameTextView")); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView");
+			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render

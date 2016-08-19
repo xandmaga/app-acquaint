@@ -40,7 +40,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Text("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -70,7 +70,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -101,7 +101,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -119,7 +119,7 @@ namespace Acquaint.XForms.UITest.Android
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, company updated");
 			app.Tap(x => x.Class("ImageButton"));
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Company name updated on list screen, company updated");
 		}
 
@@ -132,7 +132,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -160,7 +160,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -188,7 +188,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -216,7 +216,7 @@ namespace Acquaint.XForms.UITest.Android
 			app.Tap(x => x.Text("Continue"));
 			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
