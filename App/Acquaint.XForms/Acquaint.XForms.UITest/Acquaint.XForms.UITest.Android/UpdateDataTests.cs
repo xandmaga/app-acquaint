@@ -23,24 +23,24 @@ namespace Acquaint.XForms.UITest.Android
 			app = ConfigureApp
 				.Android
 
-			// TODO: Update this path to point to your Android app and uncomment the
-			// code if the app is not included in the solution.
-			//.ApkFile ("../../../Android/bin/Debug/UITestsAndroid.apk")
-			//
-			// ^^^ THIS IS *NOT* THE WAY THE ACQUAINT APP IS SETUP FOR UITESTS ^^^
+				// TODO: Update this path to point to your Android app and uncomment the
+				// code if the app is not included in the solution.
+				//.ApkFile ("../../../Android/bin/Debug/UITestsAndroid.apk")
+				//
+				// ^^^ THIS IS *NOT* THE WAY THE ACQUAINT APP IS SETUP FOR UITESTS ^^^
 				.StartApp();
 		}
 
 		[Test]
-		public void UpdateFirstName() 
+		public void UpdateFirstName()
 		{
 			app.Screenshot("App Started");
 			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
-			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
+			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Text("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -63,14 +63,15 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdateLastName() {
+		public void UpdateLastName()
+		{
 			app.Screenshot("App Started");
 			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
-			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
+			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -93,15 +94,15 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdateCompanyName() 
+		public void UpdateCompanyName()
 		{
 			app.Screenshot("App Started");
 			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
-			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
+			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -119,20 +120,20 @@ namespace Acquaint.XForms.UITest.Android
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, company updated");
 			app.Tap(x => x.Class("ImageButton"));
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Company name updated on list screen, company updated");
 		}
 
 		[Test]
-		public void UpdateTitle() 
+		public void UpdateTitle()
 		{
 			app.Screenshot("App Started");
 			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
-			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
+			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -152,15 +153,15 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdatePhoneNumber() 
+		public void UpdatePhoneNumber()
 		{
 			app.Screenshot("App Started");
 			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
-			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
+			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -180,15 +181,15 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdateEmailAddress() 
+		public void UpdateEmailAddress()
 		{
 			app.Screenshot("App Started");
 			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
-			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
+			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
@@ -208,15 +209,15 @@ namespace Acquaint.XForms.UITest.Android
 		}
 
 		[Test]
-		public void UpdateMailingAddress() 
+		public void UpdateMailingAddress()
 		{
 			app.Screenshot("App Started");
 			app.EnterText(x => x.Class("EntryEditText"), "UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Text("Continue"));
-			app.WaitForElement (x => x.Marked ("Armstead, Evan"), "timed out waiting for list to load", new TimeSpan (0, 0, 30)); // wait for the list to appear
+			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica");
+			app.ScrollDownTo("Green, Monica", swipePercentage: 0.5, swipeSpeed: 200);
 			app.Screenshot("Scrolled to Monica Green");
 			app.Tap(x => x.Marked("Green, Monica"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render

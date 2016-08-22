@@ -23,14 +23,14 @@ namespace Acquaint.Native.iOS
 		public Acquaintance Acquaintance
 		{
 			get { return _Acquaintance; }
-			set 
+			set
 			{
 				_Acquaintance = value;
 				_IsNew |= _Acquaintance == null;
 			}
 		}
 
-		public AcquaintanceEditViewController(IntPtr handle) : base(handle) 
+		public AcquaintanceEditViewController(IntPtr handle) : base(handle)
 		{
 			_DataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 		}
@@ -39,16 +39,16 @@ namespace Acquaint.Native.iOS
 		{
 			base.ViewWillAppear(animated);
 
-			_FirstNameField.Text = Acquaintance.FirstName;
-			_LastNameField.Text = Acquaintance.LastName;
-			_CompanyNameField.Text = Acquaintance.Company;
-			_JobTitleField.Text = Acquaintance.JobTitle;
-			_PhoneNumberField.Text = Acquaintance.Phone;
-			_EmailAddressField.Text = Acquaintance.Email;
-			_StreetField.Text = Acquaintance.Street;
-			_CityField.Text = Acquaintance.City;
-			_StateField.Text = Acquaintance.State;
-			_ZipField.Text = Acquaintance.PostalCode;
+			_FirstNameField.Text = _Acquaintance?.FirstName;
+			_LastNameField.Text = _Acquaintance?.LastName;
+			_CompanyNameField.Text = _Acquaintance?.Company;
+			_JobTitleField.Text = _Acquaintance?.JobTitle;
+			_PhoneNumberField.Text = _Acquaintance?.Phone;
+			_EmailAddressField.Text = _Acquaintance?.Email;
+			_StreetField.Text = _Acquaintance?.Street;
+			_CityField.Text = _Acquaintance?.City;
+			_StateField.Text = _Acquaintance?.State;
+			_ZipField.Text = _Acquaintance?.PostalCode;
 
 			NavigationItem.RightBarButtonItem.Clicked += async (sender, e) => {
 
@@ -73,22 +73,25 @@ namespace Acquaint.Native.iOS
 				}
 				else {
 
-					Acquaintance.FirstName = _FirstNameField.Text;
-					Acquaintance.LastName = _LastNameField.Text;
-					Acquaintance.Company = _CompanyNameField.Text;
-					Acquaintance.JobTitle = _JobTitleField.Text;
-					Acquaintance.Phone = _PhoneNumberField.Text;
-					Acquaintance.Email = _EmailAddressField.Text;
-					Acquaintance.Street = _StreetField.Text;
-					Acquaintance.City = _CityField.Text;
-					Acquaintance.State = _StateField.Text;
-					Acquaintance.PostalCode = _ZipField.Text;
+					if (_Acquaintance == null)
+						_Acquaintance = new Acquaintance();
+
+					_Acquaintance.FirstName = _FirstNameField.Text;
+					_Acquaintance.LastName = _LastNameField.Text;
+					_Acquaintance.Company = _CompanyNameField.Text;
+					_Acquaintance.JobTitle = _JobTitleField.Text;
+					_Acquaintance.Phone = _PhoneNumberField.Text;
+					_Acquaintance.Email = _EmailAddressField.Text;
+					_Acquaintance.Street = _StreetField.Text;
+					_Acquaintance.City = _CityField.Text;
+					_Acquaintance.State = _StateField.Text;
+					_Acquaintance.PostalCode = _ZipField.Text;
 
 
 					if (_IsNew)
-						await _DataSource.AddItem(Acquaintance);
+						await _DataSource.AddItem(_Acquaintance);
 					else
-						await _DataSource.UpdateItem(Acquaintance);
+						await _DataSource.UpdateItem(_Acquaintance);
 
 					NavigationController.PopViewController(true);
 				}
