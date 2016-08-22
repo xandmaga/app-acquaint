@@ -9,7 +9,7 @@ A simple Xamarin app named *Acquaint*. The app is a simple list of contacts, eac
 |-----------------------|------------------------------------------------------------------------------------------------------------|---|
 | Acquaint.XForms.Droid | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/7/badge" /> | |
 | Acquaint.XForms.iOS   | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/6/badge" /> | |
-| Acquaint.XForms.UWP   | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/5/badge" /> |The Azure App Service client for UWP requires a dependency on a specific SQLite Visual Studio extension. This extension is unavailable to MSBuild at compile time. A solution is being researched.|
+| Acquaint.XForms.UWP   | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/5/badge" /> |The Azure App Service client for UWP requires a dependency on a specific SQLite Visual Studio extension. This extension is unavailable to MSBuild at compile time in our CI process. A solution is being researched.|
 | Acquaint.Native.Droid | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/9/badge" /> | |
 | Acquaint.Native.iOS   | <img src="https://josau.visualstudio.com/_apis/public/build/definitions/ff9dfce3-f143-428a-9694-2fa649920fc5/8/badge" /> | |
 
