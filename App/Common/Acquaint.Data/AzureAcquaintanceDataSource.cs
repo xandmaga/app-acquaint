@@ -20,7 +20,8 @@ namespace Acquaint.Data
 		public AzureAcquaintanceSource()
 		{
 			OnDataSyncError += (object sender, DataSyncErrorEventArgs<Acquaintance> e) => {
-				ServiceLocator.Current.GetInstance<IDataSyncConflictMessagePresenter>().PresentConflictMessage();
+                // In and old version of Acquaint, we were presenting an error message instead of auto-handling. This is where you could wire up a message to show to the user.
+				// ServiceLocator.Current.GetInstance<IDataSyncConflictMessagePresenter>().PresentConflictMessage();
 			};
 		}
 

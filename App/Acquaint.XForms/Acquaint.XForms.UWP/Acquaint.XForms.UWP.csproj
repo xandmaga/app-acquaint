@@ -184,17 +184,21 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
+    <ProjectReference Include="..\..\..\Common\Acquaint.ModelContracts\Acquaint.ModelContracts.csproj">
+      <Project>{ED10B823-AA77-4142-919F-6A42C4D087A9}</Project>
+      <Name>Acquaint.ModelContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Acquaint.Abstractions\Acquaint.Abstractions.csproj">
       <Project>{0b984675-688b-41c6-beb7-d104de9158c3}</Project>
       <Name>Acquaint.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
-      <Project>{ed10b823-aa77-4142-919f-6a42c4d087a9}</Project>
-      <Name>Acquaint.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Acquaint.Data\Acquaint.Data.csproj">
       <Project>{5a3530ab-4053-4cf3-bede-a3e04c45d255}</Project>
       <Name>Acquaint.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Acquaint.Models\Acquaint.Models.csproj">
+      <Project>{2c4b0766-df89-4466-b841-0ba58fd9d19b}</Project>
+      <Name>Acquaint.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Acquaint.Util\Acquaint.Util.csproj">
       <Project>{1d18d929-1b53-4af9-9499-14abb26d257f}</Project>
