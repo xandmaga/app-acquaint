@@ -27,11 +27,11 @@ namespace Acquaint.Data
 
 		MobileServiceClient _MobileService { get; set; }
 
-		private SyncHandler<Acquaintance> _SyncHandler;
+		SyncHandler<Acquaintance> _SyncHandler;
 
         IMobileServiceSyncTable<Acquaintance> _AcquaintanceTable;
 
-        private MobileServiceSQLiteStore _MobileServiceSQLiteStore;
+        MobileServiceSQLiteStore _MobileServiceSQLiteStore;
 
         bool _IsInitialized;
 
