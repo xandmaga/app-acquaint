@@ -61,9 +61,9 @@ namespace Acquaint.Native.Droid
 
             builder.RegisterInstance(new DatastoreFolderPathProvider()).As<IDatastoreFolderPathProvider>();
 
-            // Set the data source dependent on whether or not the data parition phrase is "UseLocalDataSource".
-            // The local data source is mainly for use in TextCloud test runs, but the app can be used in local-only data mode if desired.
-            if (Settings.IsUsingLocalDataSource)
+			// Set the data source dependent on whether or not the data parition phrase is "UseLocalDataSource".
+			// The local data source is mainly for use in TestCloud test runs, but the app can be used in local-only data mode if desired.
+			if (Settings.IsUsingLocalDataSource)
                 builder.RegisterInstance(_LazyFilesystemOnlyAcquaintanceDataSource.Value).As<IDataSource<Acquaintance>>();
             else
                 builder.RegisterInstance(_LazyAzureAcquaintanceSource.Value).As<IDataSource<Acquaintance>>();
@@ -81,11 +81,11 @@ namespace Acquaint.Native.Droid
         {
             var dataSource = ServiceLocator.Current.GetInstance<IDataSource<Acquaintance>>();
 
-            // Set the data source dependent on whether or not the data parition phrase is "UseLocalDataSource".
-            // The local data source is mainly for use in TextCloud test runs, but the app can be used in local-only data mode if desired.
+			// Set the data source dependent on whether or not the data parition phrase is "UseLocalDataSource".
+			// The local data source is mainly for use in TestCloud test runs, but the app can be used in local-only data mode if desired.
 
-            // if the settings dictate that a local data source should be used, then register the local data provider and update the IoC container
-            if (Settings.IsUsingLocalDataSource && !(dataSource is FilesystemOnlyAcquaintanceDataSource))
+			// if the settings dictate that a local data source should be used, then register the local data provider and update the IoC container
+			if (Settings.IsUsingLocalDataSource && !(dataSource is FilesystemOnlyAcquaintanceDataSource))
             {
                 var builder = new ContainerBuilder();
                 builder.RegisterInstance(_LazyFilesystemOnlyAcquaintanceDataSource.Value).As<IDataSource<Acquaintance>>();
