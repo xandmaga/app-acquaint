@@ -22,8 +22,6 @@ namespace Acquaint.Native.Droid
 		// an IoC Container
 		IContainer _IoCContainer;
 
-		//public static IDataSource<Acquaintance> DataSource { get; private set; }
-
         public MainApplication(IntPtr handle, JniHandleOwnership transer) :base(handle, transer) { }
 
         public override void OnCreate()
@@ -102,7 +100,8 @@ namespace Acquaint.Native.Droid
             }
         }
 
-        // we need lazy loaded instances of these two types hanging around because if the registration on IoC container changes at runtime, we want the same instances
+        // We need lazy-loaded instances of these two types hanging around because if the registration on IoC container changes at runtime, we want the same instances.
+		// Using a static Lazy<T> is a nice way to create the instances only if and when we need them.
         static Lazy<FilesystemOnlyAcquaintanceDataSource> _LazyFilesystemOnlyAcquaintanceDataSource = new Lazy<FilesystemOnlyAcquaintanceDataSource>(() => new FilesystemOnlyAcquaintanceDataSource());
         static Lazy<AzureAcquaintanceSource> _LazyAzureAcquaintanceSource = new Lazy<AzureAcquaintanceSource>(() => new AzureAcquaintanceSource());
 
