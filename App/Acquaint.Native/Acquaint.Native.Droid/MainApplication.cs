@@ -26,8 +26,6 @@ namespace Acquaint.Native.Droid
 
         public override void OnCreate()
         {
-			CrashManager.Register(this, Settings.HockeyAppId);
-
 			RegisterDependencies();
 
 			Settings.OnDataPartitionPhraseChanged += (sender, e) => {
@@ -38,6 +36,8 @@ namespace Acquaint.Native.Droid
 			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             base.OnCreate();
+
+			CrashManager.Register(this, Settings.HockeyAppId);
 
             RegisterActivityLifecycleCallbacks(this);
         }

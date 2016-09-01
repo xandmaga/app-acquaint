@@ -27,9 +27,6 @@ namespace Acquaint.XForms.Droid
 
 		protected override void OnCreate (Bundle bundle)
 		{
-			// register HockeyApp as the crash reporter
-			CrashManager.Register(this, Settings.HockeyAppId);
-
 			RegisterDependencies();
 
 			Settings.OnDataPartitionPhraseChanged += (sender, e) => {
@@ -45,6 +42,9 @@ namespace Acquaint.XForms.Droid
 			FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
 
 			base.OnCreate (bundle);
+
+			// register HockeyApp as the crash reporter
+			CrashManager.Register(this, Settings.HockeyAppId);
 
 			Forms.Init (this, bundle);
 
