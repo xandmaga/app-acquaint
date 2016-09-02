@@ -39,11 +39,10 @@ namespace Acquaint.Native.UITest.Android
 			app.EnterText("UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Id("setupContinueButton"));
-			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
+			app.WaitForElement(x => x.Marked("Armstead, Evan"));
+			Thread.Sleep(3000); // wait a few seconds for list images to fully load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
-			app.Screenshot("Scrolled to Monica Green");
-			app.Tap(x => x.Marked("Green, Monica"));
+			app.Tap(x => x.Marked("Armstead, Evan"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
@@ -52,15 +51,14 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("firstNameField"));
 			app.ClearText();
 			app.Screenshot("Cleared first name field");
-			app.EnterText("Erica");
+			app.EnterText("Jonathan");
 			app.DismissKeyboard();
-			app.Screenshot("Altered value of company name field");
+			app.Screenshot("Altered value of first name field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, first name updated");
 			app.Tap(x => x.Marked("Navigate up"));
-			app.ScrollDownTo("Green, Erica");
-			app.Screenshot("First name updated on list screen, first name updated");
+			app.Screenshot("First name updated on list screen");
 		}
 
 		[Test]
@@ -71,11 +69,10 @@ namespace Acquaint.Native.UITest.Android
 			app.EnterText("UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Id("setupContinueButton"));
-			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
+			app.WaitForElement(x => x.Marked("Armstead, Evan"));
+			Thread.Sleep(3000); // wait a few seconds for list images to fully load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
-			app.Screenshot("Scrolled to Monica Green");
-			app.Tap(x => x.Marked("Green, Monica"));
+			app.Tap(x => x.Marked("Armstead, Evan"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
@@ -84,15 +81,14 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("lastNameField"));
 			app.ClearText();
 			app.Screenshot("Cleared last name field");
-			app.EnterText("Johnson");
+			app.EnterText("DuBois");
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of last name field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, last name updated");
 			app.Tap(x => x.Marked("Navigate up"));
-			app.ScrollDownTo("Johnson, Monica");
-			app.Screenshot("First name updated on list screen, last name updated");
+			app.Screenshot("Last name updated on list screen, last name updated");
 		}
 
 		[Test]
@@ -103,14 +99,14 @@ namespace Acquaint.Native.UITest.Android
 			app.EnterText("UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Id("setupContinueButton"));
-			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
+			app.WaitForElement(x => x.Marked("Armstead, Evan"));
+			Thread.Sleep(3000); // wait a few seconds for list images to fully load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
-			app.Screenshot("Scrolled to Monica Green");
-			app.Tap(x => x.Marked("Green, Monica"));
+			app.Tap(x => x.Marked("Armstead, Evan"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
+			app.Screenshot("Edit screen");
 			app.Screenshot("Edit screen");
 			app.ScrollDownTo("Company");
 			app.Tap(x => x.Id("companyField"));
@@ -123,7 +119,6 @@ namespace Acquaint.Native.UITest.Android
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Saved changes, navigated to detail screen, company updated");
 			app.Tap(x => x.Marked("Navigate up"));
-			app.ScrollDownTo("Green, Monica");
 			app.Screenshot("Company name updated on list screen, company updated");
 		}
 
@@ -135,11 +130,10 @@ namespace Acquaint.Native.UITest.Android
 			app.EnterText("UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Id("setupContinueButton"));
-			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
+			app.WaitForElement(x => x.Marked("Armstead, Evan"));
+			Thread.Sleep(3000); // wait a few seconds for list images to fully load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
-			app.Screenshot("Scrolled to Monica Green");
-			app.Tap(x => x.Marked("Green, Monica"));
+			app.Tap(x => x.Marked("Armstead, Evan"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
@@ -164,11 +158,10 @@ namespace Acquaint.Native.UITest.Android
 			app.EnterText("UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Id("setupContinueButton"));
-			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
+			app.WaitForElement(x => x.Marked("Armstead, Evan"));
+			Thread.Sleep(3000); // wait a few seconds for list images to fully load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
-			app.Screenshot("Scrolled to Monica Green");
-			app.Tap(x => x.Marked("Green, Monica"));
+			app.Tap(x => x.Marked("Armstead, Evan"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
@@ -193,11 +186,10 @@ namespace Acquaint.Native.UITest.Android
 			app.EnterText("UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Id("setupContinueButton"));
-			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
+			app.WaitForElement(x => x.Marked("Armstead, Evan"));
+			Thread.Sleep(3000); // wait a few seconds for list images to fully load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
-			app.Screenshot("Scrolled to Monica Green");
-			app.Tap(x => x.Marked("Green, Monica"));
+			app.Tap(x => x.Marked("Armstead, Evan"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
@@ -206,7 +198,7 @@ namespace Acquaint.Native.UITest.Android
 			app.Tap(x => x.Id("emailField"));
 			app.ClearText();
 			app.Screenshot("Cleared email field");
-			app.EnterText("mgreen@bayshipping.com");
+			app.EnterText("earmstead@bayshipping.com");
 			app.DismissKeyboard();
 			app.Screenshot("Altered value of email field");
 			app.Tap(x => x.Id("acquaintanceSaveButton"));
@@ -222,11 +214,10 @@ namespace Acquaint.Native.UITest.Android
 			app.EnterText("UseLocalDataSource");
 			app.Screenshot("Entered data parition phrase");
 			app.Tap(x => x.Id("setupContinueButton"));
-			Thread.Sleep(10000); // wait 10 seconds to let list and all images load
+			app.WaitForElement(x => x.Marked("Armstead, Evan"));
+			Thread.Sleep(3000); // wait a few seconds for list images to fully load
 			app.Screenshot("Display list");
-			app.ScrollDownTo("Green, Monica", withinMarked: "acquaintanceRecyclerView", swipePercentage: 0.5, swipeSpeed: 200);
-			app.Screenshot("Scrolled to Monica Green");
-			app.Tap(x => x.Marked("Green, Monica"));
+			app.Tap(x => x.Marked("Armstead, Evan"));
 			Thread.Sleep(3000); // wait 3 seconds to give map time to fully render
 			app.Screenshot("Detail screen");
 			app.Tap(x => x.Id("acquaintanceEditButton"));
