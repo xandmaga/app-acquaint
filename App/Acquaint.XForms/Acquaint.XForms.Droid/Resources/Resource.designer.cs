@@ -63,7 +63,6 @@ namespace Acquaint.XForms.Droid
 			global::com.refractored.fab.Resource.Styleable.RecyclerView_reverseLayout = global::Acquaint.XForms.Droid.Resource.Styleable.RecyclerView_reverseLayout;
 			global::com.refractored.fab.Resource.Styleable.RecyclerView_spanCount = global::Acquaint.XForms.Droid.Resource.Styleable.RecyclerView_spanCount;
 			global::com.refractored.fab.Resource.Styleable.RecyclerView_stackFromEnd = global::Acquaint.XForms.Droid.Resource.Styleable.RecyclerView_stackFromEnd;
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Acquaint.XForms.Droid.Resource.Attribute.actionBarSize;
 			global::HockeyApp.Resource.Color.hockeyapp_background_header = global::Acquaint.XForms.Droid.Resource.Color.hockeyapp_background_header;
 			global::HockeyApp.Resource.Color.hockeyapp_background_light = global::Acquaint.XForms.Droid.Resource.Color.hockeyapp_background_light;
 			global::HockeyApp.Resource.Color.hockeyapp_background_white = global::Acquaint.XForms.Droid.Resource.Color.hockeyapp_background_white;
@@ -186,6 +185,7 @@ namespace Acquaint.XForms.Droid
 			global::HockeyApp.Resource.Style.HockeyApp_SingleLineInputStyle = global::Acquaint.XForms.Droid.Resource.Style.HockeyApp_SingleLineInputStyle;
 			global::PCLCrypto.Resource.String.ApplicationName = global::Acquaint.XForms.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::Acquaint.XForms.Droid.Resource.String.Hello;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Acquaint.XForms.Droid.Resource.Attribute.actionBarSize;
 			global::Acquaint.Common.Droid.Resource.String.library_name = global::Acquaint.XForms.Droid.Resource.String.library_name;
 		}
 		
