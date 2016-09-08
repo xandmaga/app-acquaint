@@ -129,9 +129,6 @@
     <Reference Include="Plugin.Messaging">
       <HintPath>..\..\packages\Xam.Plugins.Messaging.3.2.1\lib\Xamarin.iOS10\Plugin.Messaging.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper">
-      <HintPath>..\..\packages\AutoMapper.4.2.1\lib\portable-net45+win+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SQLitePCL">
       <HintPath>..\..\packages\SQLitePCL.3.8.7.2\lib\Xamarin.iOS10\SQLitePCL.dll</HintPath>
@@ -242,6 +239,9 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.4.1.0\lib\netstandard1.1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.5.1.1\lib\netstandard1.3\AutoMapper.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
