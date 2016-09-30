@@ -78,6 +78,9 @@ The app has three main screens:
 * a read-only detail screen
 * an editable detail screen
 
-##People
+## People
 
 All images of people in the app come from [UIFaces.com](http://uifaces.com/authorized). In accordance with the guidelines, fictitious names have been provided. 
+
+## Clean and Rebuild
+If you see build issues when pulling updates from the repo, try cleaning and rebuilding the solution.
