@@ -1,7 +1,7 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
-using Acquaint.Models;
+using Acquaint.ModelContracts;
 using Newtonsoft.Json;
 
 namespace Acquaint.Service.DataObjects
